@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 
 //import clientes
 import ClienteRegister from './routes/Cliente/ClienteRegister';
-import ClienteGet from './routes/Cliente/ClienteGet';
 import ClienteLogin from "./routes/Cliente/ClienteLogin";
 
 //import producto
@@ -33,7 +32,6 @@ const app = express().use(bodyParser.json());
 
 //rutas cliente
 app.use('/ClienteRegister', ClienteRegister);
-app.use('/ClienteGet', ClienteGet)
 app.use('/ClienteLogin', ClienteLogin);
 
 //rutas producto
