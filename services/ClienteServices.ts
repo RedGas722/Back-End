@@ -11,10 +11,6 @@ class ClienteServices {
         return await ClienteRepository.add(cliente);
     }
 
-    static async ClienteGet(correo_cliente: string) {
-        return await ClienteRepository.getByEmail(correo_cliente);
-    }
-
     static async ClienteLogin(auth: AuthCliente) {
         return await ClienteRepository.login(auth);
     }

@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 
 //import clientes
 import ClienteRegister from './routes/Cliente/ClienteRegister';
-import ClienteGet from './routes/Cliente/ClienteGet';
 import ClienteLogin from "./routes/Cliente/ClienteLogin";
 
 //import producto
@@ -33,7 +32,6 @@ const app = express().use(bodyParser.json());
 
 //rutas cliente
 app.use('/ClienteRegister', ClienteRegister);
-app.use('/ClienteGet', ClienteGet)
 app.use('/ClienteLogin', ClienteLogin);
 
 //rutas producto
@@ -54,7 +52,7 @@ app.use('/PedidoRegister', PedidoRegister);
 // rutas factura
 app.use('/FacturaRegister', FacturaRegister);
 
-app.use('/profile', profile);
+app.use('/Profile', profile);
 
 const PORT = process.env.PORT || 10101;
 
