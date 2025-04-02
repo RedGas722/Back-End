@@ -1,23 +1,20 @@
 import { Request, Response } from "express";
-import AuthTecnico from "../../Dto/TecnicoDto/authTecnicoDto";
+import AuthTecnico from "../../Dto/TecnicoDto/TecnicoAuthDto";
 import TecnicoServices from "../../services/TecnicoServices";
+import generateToken from "../../Helpers/generateToken";
 
-let login = async (req: Request, res: Response) => {
+let TecnicoLogin = async (req: Request, res: Response) => {
   try {
-    const { correo, contraseña_tecnico } = req.body;
+    const { correo_tecnico, contraseña_tecnico } = req.body;
+    
+    const loginTecnico = await TecnicoServices.login(new AuthTecnico(correo_tecnico, contraseña_tecnico));
 
-    // Create an instance of AuthTecnico with the request data
-    const loginTecnico = await TecnicoServices.login(new AuthTecnico(correo, contraseña_tecnico));
-
-    // Check if the login was successful
     if (loginTecnico.logged) {
       return res.status(200).json({
         status: 'login ok',
-        data: loginTecnico,
+        token: generateToken({id: loginTecnico.id}, process.env.KEY_TOKEN, 5)
       });
     }
-
-    // If the credentials are incorrect
     return res.status(401).json({
       status: 'Invalid credentials',
     });
@@ -32,4 +29,4 @@ let login = async (req: Request, res: Response) => {
   }
 };
 
-export default login;
+export default TecnicoLogin;

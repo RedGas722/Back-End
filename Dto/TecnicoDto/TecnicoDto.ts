@@ -1,23 +1,23 @@
 class Tecnico {
 
     private _nombre_tecnico: string;
-    private _correo: string;
-    private _telefono: string;
-    private _direccion_tecnico: string;
+    private _correo_tecnico: string;
+    private _telefono_tecnico: string;
     private _contraseña_tecnico: string;
+    private _imagen: Buffer;
 
     constructor(
         nombre_tecnico: string,
-        correo: string,
-        telefono: string,
-        direccion_tecnico: string,
-        contraseña_tecnico: string
+        correo_tecnico: string,
+        telefono_tecnico: string,
+        contraseña_tecnico: string,
+        imagen: Buffer
     ) {
         this._nombre_tecnico = nombre_tecnico;
-        this._correo = correo;
-        this._telefono = telefono;
-        this._direccion_tecnico = direccion_tecnico;
+        this._correo_tecnico = correo_tecnico;
+        this._telefono_tecnico = telefono_tecnico;
         this._contraseña_tecnico = contraseña_tecnico;
+        this._imagen = imagen;
     }
 
     // Getters
@@ -25,20 +25,20 @@ class Tecnico {
         return this._nombre_tecnico;
     }
 
-    get correo(): string {
-        return this._correo;
+    get correo_tecnico(): string {
+        return this._correo_tecnico;
     }
 
-    get telefono(): string {
-        return this._telefono;
-    }
-
-    get direccion_tecnico(): string {
-        return this._direccion_tecnico;
+    get telefono_tecnico(): string {
+        return this._telefono_tecnico;
     }
 
     get contraseña_tecnico(): string {
         return this._contraseña_tecnico;
+    }
+
+    get imagen():Buffer {
+        return this._imagen;
     }
 
     // Setters
@@ -46,22 +46,21 @@ class Tecnico {
         this._nombre_tecnico = nombre_tecnico;
     }
 
-    set correo(correo: string) {
-        this._correo = correo;
+    set correo_tecnico(correo_tecnico: string) {
+        this._correo_tecnico = correo_tecnico;
     }
 
-    set telefono(telefono: string) {
-        this._telefono = telefono;
-    }
-
-    set direccion_tecnico(direccion_tecnico: string) {
-        this._direccion_tecnico = direccion_tecnico;
+    set telefono_tecnico(telefono_tecnico: string) {
+        this._telefono_tecnico = telefono_tecnico;
     }
 
     set contraseña_tecnico(contraseña_tecnico: string) {
         this._contraseña_tecnico = contraseña_tecnico;
     }
 
+    set imagen(imagen: Buffer) {
+        this._imagen = imagen;
+    }
 }
 
 export default Tecnico;

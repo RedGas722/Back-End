@@ -1,8 +1,7 @@
 import express from "express";
-import TecnicoRegisterController from '../../controllers/TecnicoController/TecnicoRegisterController';
+import TecnicoRegister from '../../controllers/TecnicoController/TecnicoRegisterController';
 const router = express.Router();
 
-// Route for registering an employee
-router.post('/', TecnicoRegisterController);
+router.post('/', TecnicoRegister);
 
 export default router;

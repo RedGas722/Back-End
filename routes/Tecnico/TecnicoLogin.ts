@@ -1,7 +1,7 @@
 import express from "express";
-import TecnicoLoginController from '../../controllers/TecnicoController/TecnicoLoginController';
+import TecnicoLogin from '../../controllers/TecnicoController/TecnicoLoginController';
 const router = express.Router();
 
+router.post('/', TecnicoLogin);
 
-router.post('/', TecnicoLoginController);
 export default router;

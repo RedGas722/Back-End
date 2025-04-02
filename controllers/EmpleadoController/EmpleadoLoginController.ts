@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import AuthEmpleado from "../../Dto/EmpleadoDto/authEmpleadoDto";
+import AuthEmpleado from "../../Dto/EmpleadoDto/EmpleadoAuthDto";
 import EmpleadoServices from "../../services/EmpleadoServices";
+import generateToken from "../../Helpers/generateToken";
 
-let login = async (req: Request, res: Response) => {
+let EmpleadoLogin = async (req: Request, res: Response) => {
   try {
     const { correo_empleado, contraseña_empleado } = req.body;
 
@@ -12,7 +13,7 @@ let login = async (req: Request, res: Response) => {
     if (loginEmpleado.logged) {
       return res.status(200).json({
         status: 'login ok',
-        data: loginEmpleado,
+        token: generateToken({id: loginEmpleado.id}, process.env.KEY_TOKEN, 5)
       });
     }
 
@@ -31,5 +32,5 @@ let login = async (req: Request, res: Response) => {
   }
 };
 
-export default login;
+export default EmpleadoLogin;
 

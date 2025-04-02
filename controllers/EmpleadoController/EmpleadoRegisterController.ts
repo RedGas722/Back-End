@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Empleado from "../../Dto/EmpleadoDto/EmpleadoDto";
 import EmpleadoServices from "../../services/EmpleadoServices";
 
-let register = async (req: Request, res: Response) => {
+let EmpleadoRegister = async (req: Request, res: Response) => {
   try {
     const {
         nombre_empleado,
@@ -17,7 +17,7 @@ let register = async (req: Request, res: Response) => {
       return res.status(400).json({ status: 'Missing required fields' });
     }
 
-    const registerEmpleado = await EmpleadoServices.register(
+    const registerEmpleado = await EmpleadoServices.EmpleadoRegister(
       new Empleado(
         nombre_empleado,
         correo_empleado,
@@ -37,5 +37,5 @@ let register = async (req: Request, res: Response) => {
   }
 };
 
-export default register;
+export default EmpleadoRegister;
 

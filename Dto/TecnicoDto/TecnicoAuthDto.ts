@@ -1,15 +1,15 @@
 class AuthTecnico {
-    private _correo: string;
+    private _correo_tecnico: string;
     private _contraseña_tecnico: string;
 
-    constructor(correo: string, contraseña_tecnico: string) {
-        this._correo = correo;
+    constructor(correo_tecnico: string, contraseña_tecnico: string) {
+        this._correo_tecnico = correo_tecnico;
         this._contraseña_tecnico = contraseña_tecnico;
     }
 
     // Getters
-    get correo(): string {
-        return this._correo;
+    get correo_tecnico(): string {
+        return this._correo_tecnico;
     }
 
     get contraseña_tecnico(): string {
@@ -17,8 +17,8 @@ class AuthTecnico {
     }
 
     // Setters
-    set correo(correo: string) {
-        this._correo = correo;
+    set correo_tecnico(correo_tecnico: string) {
+        this._correo_tecnico = correo_tecnico;
     }
 
     set contraseña_tecnico(contraseña_tecnico: string) {
