@@ -11,6 +11,11 @@ let ClienteRegister = async (req: Request, res: Response) => {
       telefono_cliente,
       contraseña_cliente
     } = req.body;
+
+    if (!nombre_cliente || !correo_cliente || !telefono_cliente || !contraseña_cliente) {
+      return res.status(400).json({ status: 'Missing required fields' });
+    }
+    
     const registerCliente = await ClienteServices.ClienteRegister(new Cliente(nombre_cliente, correo_cliente, telefono_cliente, contraseña_cliente))
     return res.status(201).json(
       { status: 'register ok'}

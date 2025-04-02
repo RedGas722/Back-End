@@ -1,9 +1,9 @@
 import express from "express";
-import ClienteRegister from '../../controllers/ClienteControllers/ClienteRegisterController';
+import ClienteRegisterController from '../../controllers/ClienteControllers/ClienteRegisterController';
 const router = express.Router();
 
 
-router.post('/', ClienteRegister);
+router.post('/', ClienteRegisterController);
 
 
 export default router;
