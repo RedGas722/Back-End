@@ -32,6 +32,11 @@ import EmpleadoLogin from './routes/Empleado/EmpleadoLogin';
 import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
 import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
 
+//import admin
+import AdministradorRegister from './routes/Administrador/AdministradorRegister'
+import AdministradorLogin from './routes/Administrador/AdministradorLogin';
+
+//import profile
 import profile from './routes/profile';
 
 
@@ -76,6 +81,11 @@ app.use('/EmpleadoLogin', EmpleadoLogin);
 app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoLogin', TecnicoLogin);
 
+//rutas admin
+app.use('/AdminRegister', AdministradorRegister);
+app.use('/AdminLogin', AdministradorLogin);
+
+
 app.use('/Profile', profile);
 
 const PORT = process.env.PORT || 10101;
@@ -85,4 +95,3 @@ app.listen(PORT, () => {
 }).on("error", (error) => {
   throw new Error(error.message);
 });
-
