@@ -1,9 +1,8 @@
 import express from "express";
 import bodyParser from 'body-parser';
-import profile from './routes/profile';
 import dotenv from "dotenv";
 
-//import clientes
+//import cliente
 import ClienteRegister from './routes/Cliente/ClienteRegister';
 import ClienteLogin from "./routes/Cliente/ClienteLogin";
 
@@ -25,9 +24,18 @@ import PedidoRegister from './routes/Pedido/PedidoRegister';
 //import factura
 import FacturaRegister from './routes/Factura/FacturaRegister';
 
+//import empleado
+import EmpleadoRegister from './routes/Empleado/EmpleadoRegister';
+import EmpleadoLogin from './routes/Empleado/EmpleadoLogin';
+
+//import tecnico
+import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
+import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
+
+import profile from './routes/profile';
+
 
 dotenv.config();
-
 const app = express().use(bodyParser.json());
 
 //rutas cliente
@@ -49,8 +57,24 @@ app.use('/CategoriaRegister', CategoriaRegister);
 //rutas pedido
 app.use('/PedidoRegister', PedidoRegister);
 
-// rutas factura
+//rutas factura
 app.use('/FacturaRegister', FacturaRegister);
+
+//rutas empleado
+app.use('/EmpleadoRegister', EmpleadoRegister);
+app.use('/EmpleadoLogin', EmpleadoLogin);
+
+//rutas tecnico
+app.use('/TecnicoRegister', TecnicoRegister);
+app.use('/TecnicoLogin', TecnicoLogin);
+
+//rutas empleado
+app.use('/EmpleadoRegister', EmpleadoRegister);
+app.use('/EmpleadoLogin', EmpleadoLogin);
+
+//rutas tecnico
+app.use('/TecnicoRegister', TecnicoRegister);
+app.use('/TecnicoLogin', TecnicoLogin);
 
 app.use('/Profile', profile);
 
@@ -61,3 +85,4 @@ app.listen(PORT, () => {
 }).on("error", (error) => {
   throw new Error(error.message);
 });
+

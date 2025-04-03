@@ -6,7 +6,7 @@ import generateToken from "../../Helpers/generateToken";
 dotenv.config();
 
 
-let ClienteLoginController = async (req: Request, res: Response) => {
+let ClienteLogin = async (req: Request, res: Response) => {
   try {
     const { correo_cliente, contraseña_cliente } = req.body;
     const login = await ClienteServices.ClienteLogin(new AuthCliente(correo_cliente, contraseña_cliente));
@@ -25,4 +25,4 @@ let ClienteLoginController = async (req: Request, res: Response) => {
 }
 
 
-export default ClienteLoginController;
+export default ClienteLogin;
