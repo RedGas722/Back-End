@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 
 class TecnicoRepository {
 
+    // Insert Tecnico
     static async add(tecnico: Tecnico) {
         const sql = `
             INSERT INTO tecnico 
@@ -22,6 +23,18 @@ class TecnicoRepository {
         return db.execute(sql, values);
     }
 
+    // Get Tecnico by email
+
+        static async getByEmail(correo_tecnico: string){
+            const sql = 'SELECT * FROM tecnico WHERE correo_tecnico = ?';
+            const values = [correo_tecnico];
+            const [rows] = await db.execute(sql, values);
+            console.log(rows); 
+            return rows; 
+    
+        }
+
+    // Get Tecnico
     static async login(auth: AuthTecnico) {
         const sql = 'SELECT id_tecnico, contraseña_tecnico FROM tecnico WHERE correo_tecnico=?';
         const values = [auth.correo_tecnico];
@@ -37,5 +50,6 @@ class TecnicoRepository {
         return { logged: false, status: "Invalid username or password" };
     }
 }
+
 
 export default TecnicoRepository;

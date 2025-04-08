@@ -18,6 +18,12 @@ class TecnicoServices {
     static async login(auth: AuthTecnico) {
         return await TecnicoRepository.login(auth); 
     }
+
+    static async getbyEmail(correo_tecnico: string) {
+        return await TecnicoRepository.getByEmail(correo_tecnico);
+    }
+    
 }
+
 
 export default TecnicoServices;

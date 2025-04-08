@@ -22,6 +22,14 @@ class ServicioRepository {
         return db.execute(sql, values);
     }
 
+    static async getByName(nombre_servicio: string) {
+        const sql = 'SELECT * FROM servicio WHERE nombre_servicio = ?';
+        const values = [nombre_servicio];
+        const [rows] = await db.execute(sql, values);
+        console.log(rows);
+        return rows;
+    }
+
     // Update Servicio
     static async update(servicio: Servicio) {
         const sql = 'UPDATE servicio SET nombre_servicio = ?, descripcion_servicio = ?, precio_servicio = ?, precio_total = ? WHERE nombre_servicio = ?';

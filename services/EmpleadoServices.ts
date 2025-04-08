@@ -18,6 +18,14 @@ class EmpleadoServices {
     static async login(auth: AuthEmpleado) {
         return await EmpleadoRepository.login(auth);
     }
+    static async getByEmail(correo_empleado: string) {
+        try {
+        return await EmpleadoRepository.getByEmail(correo_empleado);
+        }catch (error) {
+            console.error("Error en el servicio de obtener empleado por correo:", error);
+            throw error;
+        }
+    }
 }
 
 export default EmpleadoServices;

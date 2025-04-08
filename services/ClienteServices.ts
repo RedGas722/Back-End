@@ -14,6 +14,11 @@ class ClienteServices {
     static async ClienteLogin(auth: AuthCliente) {
         return await ClienteRepository.login(auth);
     }
+
+    static async ClienteGet(correo_cliente: string) {
+        return await ClienteRepository.getByEmail(correo_cliente);
+    }
 }
+
 
 export default ClienteServices;
