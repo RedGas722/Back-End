@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 
 class TecnicoRepository {
 
+    // Insert Tecnico
     static async add(tecnico: Tecnico) {
         const sql = `
             INSERT INTO tecnico 
@@ -22,6 +23,21 @@ class TecnicoRepository {
         return db.execute(sql, values);
     }
 
+    // Update Tecnico
+    static async update(tecnico: Tecnico) {
+        const sql = 'UPDATE tecnico SET nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ?, contraseña_tecnico = ? WHERE correo_tecnico = ?';
+        const values = [tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, tecnico.contraseña_tecnico, tecnico.correo_tecnico];
+        return db.execute(sql, values);
+    }
+
+    // Delete Tecnico
+    static async delete(correo_tecnico: string) {
+        const sql = 'DELETE FROM tecnico WHERE correo_tecnico = ?';
+        const values = [correo_tecnico];
+        return db.execute(sql, values);
+    }
+
+    // Login Tecnico
     static async login(auth: AuthTecnico) {
         const sql = 'SELECT id_tecnico, contraseña_tecnico FROM tecnico WHERE correo_tecnico=?';
         const values = [auth.correo_tecnico];

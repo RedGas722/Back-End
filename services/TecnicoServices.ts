@@ -18,6 +18,10 @@ class TecnicoServices {
     static async login(auth: AuthTecnico) {
         return await TecnicoRepository.login(auth); 
     }
+
+    static async TecnicoDelete(correo_tecnico : string) {
+        return await TecnicoRepository.delete(correo_tecnico); 
+    }
 }
 
 export default TecnicoServices;

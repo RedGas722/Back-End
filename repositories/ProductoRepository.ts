@@ -16,10 +16,11 @@ class ProductoRepository {
         return db.execute(sql);
     }
 
-    static async getById(id_producto: number) {
-        const sql = 'SELECT * FROM producto WHERE id_producto = ?';
-        const values = [id_producto];
-        return db.execute(sql, values);
+    static async getByName(nombre_producto: string) {
+        const sql = 'SELECT * FROM producto WHERE nombre_producto = ?';
+        const values = [nombre_producto];
+        const [rows] = await db.execute(sql, values);
+        return rows;
     }
 
     // Update Producto

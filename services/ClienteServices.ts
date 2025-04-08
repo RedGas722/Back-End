@@ -14,6 +14,10 @@ class ClienteServices {
     static async ClienteLogin(auth: AuthCliente) {
         return await ClienteRepository.login(auth);
     }
+
+    static async ClienteDelete(correo_cliente : string) {
+        return await ClienteRepository.delete(correo_cliente);
+    }
 }
 
 export default ClienteServices;

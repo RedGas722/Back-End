@@ -8,6 +8,10 @@ class ProductoServices {
         return await ProductoRepository.add(producto);
     }
 
+    static async ProductoGet(nombre_producto: string) {
+        return await ProductoRepository.getByName(nombre_producto);
+    }
+
 }
 
 export default ProductoServices;
