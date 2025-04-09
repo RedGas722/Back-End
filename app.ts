@@ -10,9 +10,11 @@ import ClienteDelete from './routes/Cliente/ClienteDelete';
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
 import ProductoGet from './routes/Producto/ProductoGet';
+import ProductoDelete from './routes/Producto/ProductoDelete';
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
+import ServicioDelete from './routes/Servicio/ServicioDelete';
 
 //import contrato
 import ContratoRegister from './routes/Contrato/ContratoRegister';
@@ -41,7 +43,6 @@ import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
 
 import profile from './routes/profile';
 
-
 dotenv.config();
 const app = express().use(bodyParser.json());
 
@@ -53,9 +54,11 @@ app.use('/CLienteDelete', ClienteDelete)
 //rutas producto
 app.use('/ProductoRegister', ProductoRegister)
 app.use('/ProductoGet', ProductoGet)
+app.use('/ProductoDelete', ProductoDelete)
 
 //rutas servicio
 app.use('/ServicioRegister', ServicioRegister);
+app.use('/ServicioDelete', ServicioDelete);
 
 //rutas contrato
 app.use('/ContratoRegister', ContratoRegister);

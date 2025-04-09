@@ -12,6 +12,10 @@ class ProductoServices {
         return await ProductoRepository.getByName(nombre_producto);
     }
 
+    static async ProductoDelete(nombre_producto: string) {
+        return await ProductoRepository.delete(nombre_producto);
+    }
+
 }
 
 export default ProductoServices;

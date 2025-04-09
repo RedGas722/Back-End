@@ -9,6 +9,10 @@ class ServicioServices {
         return await ServicioRepository.add(servicio);
     }
 
+    static async ServicioDelete(nombre_servicio: string) {
+        return await ServicioRepository.delete(nombre_servicio);
+    }
+
 }
 
 export default ServicioServices;
