@@ -3,7 +3,7 @@ import AdministradorUpdate from '../../controllers/AdministradorControllers/Admi
 const router = express.Router();
 
 
-router.post('/', AdministradorUpdate);
+router.put('/', AdministradorUpdate);
 
 
 export default router;

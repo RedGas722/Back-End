@@ -6,17 +6,18 @@ let AdministradorUpdate = async (req: Request, res: Response) => {
    try{
       const {
          nombre_admin,
-         correo_admin,
+         new_correo_admin,
          telefono_admin,
-         contraseña_admin
+         contraseña_admin,
+         correo_admin
        } = req.body;
 
-      if(!nombre_admin || !correo_admin || !telefono_admin || !contraseña_admin)
+      if(!nombre_admin || !new_correo_admin || !telefono_admin || !contraseña_admin || !correo_admin)
       {
         return res.status(400).json({ status: 'Missing required fields' });
       }
 
-      const UpdateAdministrador = await AdministradorServices.AdministradorUpdate( new Administrador(nombre_admin, correo_admin, telefono_admin, contraseña_admin))
+      const UpdateAdministrador = await AdministradorServices.AdministradorUpdate( new Administrador(nombre_admin, correo_admin, telefono_admin, contraseña_admin), new_correo_admin as string);
       {
          return res.status(200).json(
             { status: 'resgister ok' }

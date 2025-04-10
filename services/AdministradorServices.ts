@@ -13,8 +13,9 @@ class AdministradorServices {
     }
 
     //UPDATE
-    static async AdministradorUpdate(administrador: Administrador){
-        return await AdministradorRepository.update(administrador);
+    static async AdministradorUpdate(administrador: Administrador, new_correo_admin: string){
+        administrador.contraseña_admin = await generateHash(administrador.contraseña_admin);
+        return await AdministradorRepository.update(administrador, new_correo_admin);
     }
 
     //LOGIN
