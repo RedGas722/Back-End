@@ -9,6 +9,10 @@ class CategoriaServices {
         return await CategoriaRepository.add(categoria);
     }
 
+    static async CategoriaDelete(nombre_categoria: string) {
+        return await CategoriaRepository.delete(nombre_categoria);
+    }
+
 }
 
 export default CategoriaServices;

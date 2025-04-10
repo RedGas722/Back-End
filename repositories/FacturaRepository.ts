@@ -5,8 +5,8 @@ class FacturaRepository {
 
     // Insert Factura
     static async add(factura: Factura) {
-        const sql = 'INSERT INTO factura (fecha_factura, estado_factura, total, id_pedido, id_empleado) VALUES (?, ?, ?, ?, ?)';
-        const values = [factura.fecha_factura, factura.estado_factura, factura.total, factura.id_pedido, factura.id_empleado];
+        const sql = 'INSERT INTO factura (fecha_factura, estado_factura, total, id_cliente, id_empleado) VALUES (?, ?, ?, ?, ?)';
+        const values = [factura.fecha_factura, factura.estado_factura, factura.total, factura.id_cliente, factura.id_empleado];
         return db.execute(sql, values);
     }
 
@@ -24,8 +24,8 @@ class FacturaRepository {
 
     // Update Factura
     static async update(factura: Factura) {
-        const sql = 'UPDATE factura SET estado_factura = ?, total = ?, id_pedido = ?, id_empleado = ? WHERE fecha_factura = ?';
-        const values = [factura.estado_factura, factura.total, factura.id_pedido, factura.id_empleado, factura.fecha_factura,];
+        const sql = 'UPDATE factura SET estado_factura = ?, total = ?, id_cliente = ?, id_empleado = ? WHERE fecha_factura = ?';
+        const values = [factura.estado_factura, factura.total, factura.id_cliente, factura.id_empleado, factura.fecha_factura,];
         return db.execute(sql, values);
     }
 

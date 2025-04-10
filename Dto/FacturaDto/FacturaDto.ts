@@ -2,20 +2,20 @@ class Factura {
     private _fecha_factura: Date | null;
     private _estado_factura: string | null;
     private _total: number | null;
-    private _id_pedido: number | null;
+    private _id_cliente: number | null;
     private _id_empleado: number | null;
 
     constructor(
         fecha_factura: Date | null,
         estado_factura: string | null,
         total: number | null,
-        id_pedido: number | null,
+        id_cliente: number | null,
         id_empleado: number | null
     ) {
         this._fecha_factura = fecha_factura;
         this._estado_factura = estado_factura;
         this._total = total;
-        this._id_pedido = id_pedido;
+        this._id_cliente = id_cliente;
         this._id_empleado = id_empleado;
     }
 
@@ -32,8 +32,8 @@ class Factura {
         return this._total;
     }
 
-    get id_pedido(): number | null {
-        return this._id_pedido;
+    get id_cliente(): number | null {
+        return this._id_cliente;
     }
 
     get id_empleado(): number | null {
@@ -53,8 +53,8 @@ class Factura {
         this._total = total;
     }
 
-    set id_pedido(id_pedido: number | null) {
-        this._id_pedido = id_pedido;
+    set id_cliente(id_cliente: number | null) {
+        this._id_cliente = id_cliente;
     }
 
     set id_empleado(id_empleado: number | null) {

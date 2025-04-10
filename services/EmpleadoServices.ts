@@ -18,6 +18,10 @@ class EmpleadoServices {
     static async login(auth: AuthEmpleado) {
         return await EmpleadoRepository.login(auth);
     }
+
+    static async EmpleadoDelete(correo_empleado: string) {
+        return await EmpleadoRepository.delete(correo_empleado);
+    }
 }
 
 export default EmpleadoServices;
