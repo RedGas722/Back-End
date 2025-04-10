@@ -18,6 +18,12 @@ class ClienteServices {
     static async ClienteDelete(correo_cliente : string) {
         return await ClienteRepository.delete(correo_cliente);
     }
+
+    static async ClienteUpdate(cliente : Cliente, nuevo_correo_cliente: string) {
+        cliente.contraseña_cliente = await generateHash(cliente.contraseña_cliente);
+        return await ClienteRepository.update(cliente, nuevo_correo_cliente);
+    }
 }
+
 
 export default ClienteServices;

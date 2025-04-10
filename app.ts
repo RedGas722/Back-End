@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import ClienteRegister from './routes/Cliente/ClienteRegister';
 import ClienteLogin from "./routes/Cliente/ClienteLogin";
 import ClienteDelete from './routes/Cliente/ClienteDelete';
+import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
 
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
@@ -54,12 +55,13 @@ const app = express().use(bodyParser.json());
 //rutas cliente
 app.use('/ClienteRegister', ClienteRegister);
 app.use('/ClienteLogin', ClienteLogin);
-app.use('/CLienteDelete', ClienteDelete)
+app.use('/CLienteDelete', ClienteDelete);
+app.use('/ClienteUpdate', ClienteUpdate);
 
 //rutas producto
-app.use('/ProductoRegister', ProductoRegister)
-app.use('/ProductoGet', ProductoGet)
-app.use('/ProductoDelete', ProductoDelete)
+app.use('/ProductoRegister', ProductoRegister);
+app.use('/ProductoGet', ProductoGet);
+app.use('/ProductoDelete', ProductoDelete);
 
 //rutas servicio
 app.use('/ServicioRegister', ServicioRegister);
