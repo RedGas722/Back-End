@@ -27,9 +27,10 @@ class ClienteRepository{
 
     // Update Cliente
 
-    static async update(cliente: Cliente){
+    static async update(cliente: Cliente, nuevo_correo_cliente: string){
+        console.log(nuevo_correo_cliente)
         const sql = 'UPDATE cliente SET nombre_cliente = ?, correo_cliente = ?, telefono_cliente = ?, contraseña_cliente = ? WHERE correo_cliente = ?';
-        const values = [cliente.nombre_cliente, cliente.telefono_cliente, cliente.contraseña_cliente, cliente.correo_cliente];
+        const values = [cliente.nombre_cliente, nuevo_correo_cliente, cliente.telefono_cliente, cliente.contraseña_cliente, cliente.correo_cliente];
         return db.execute(sql, values);
     }
     // Delete Cliente

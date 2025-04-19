@@ -10,6 +10,10 @@ class ContratoServices {
         return await ContratoRepository.add(contrato);
     }
 
+    static async ContratoDelete(id_contrato: number) {
+        return await ContratoRepository.delete(id_contrato);
+    }
+
 }
 
 export default ContratoServices;

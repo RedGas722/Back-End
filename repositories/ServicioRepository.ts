@@ -30,9 +30,9 @@ class ServicioRepository {
     }
 
     // Delete Servicio
-    static async delete(id_servicio: number) {
-        const sql = 'DELETE FROM servicio WHERE id_servicio = ?';
-        const values = [id_servicio];
+    static async delete(nombre_servicio: string) {
+        const sql = 'DELETE FROM servicio WHERE nombre_servicio = ?';
+        const values = [nombre_servicio];
         return db.execute(sql, values);
     }
 }
