@@ -5,8 +5,8 @@ class PedidoProductoRepository {
 
     // Insert Pedido
     static async add(pedidoProducto: PedidoProducto) {
-        const sql = 'INSERT INTO pedido_producto (id_producto, id_factura, cantidad_producto, informacion_pedido, estado_pedido) VALUES (?, ?, ?, ?, ?)';
-        const values = [pedidoProducto.id_producto, pedidoProducto.id_factura, pedidoProducto.cantidad_producto, pedidoProducto.informacion_pedido, pedidoProducto.estado_pedido];
+        const sql = 'INSERT INTO pedido_producto (id_producto, id_factura, cantidad_producto, estado_pedido) VALUES (?, ?, ?, ?)';
+        const values = [pedidoProducto.id_producto, pedidoProducto.id_factura, pedidoProducto.cantidad_producto, pedidoProducto.estado_pedido];
         return db.execute(sql, values);
     }
 
@@ -24,8 +24,8 @@ class PedidoProductoRepository {
 
     // Update Pedido
     static async update(pedidoProducto: PedidoProducto) {
-        const sql = 'UPDATE pedido_producto SET informacion_pedido = ?, cantidad_producto = ?, estado_pedido = ?, id_producto = ? WHERE id_factura = ?';
-        const values = [pedidoProducto.informacion_pedido, pedidoProducto.cantidad_producto, pedidoProducto.estado_pedido, pedidoProducto.id_producto, pedidoProducto.id_factura];
+        const sql = 'UPDATE pedido_producto SET  cantidad_producto = ?, estado_pedido = ?, id_producto = ? WHERE id_factura = ?';
+        const values = [pedidoProducto.cantidad_producto, pedidoProducto.estado_pedido, pedidoProducto.id_producto, pedidoProducto.id_factura];
         return db.execute(sql, values);
     }
 

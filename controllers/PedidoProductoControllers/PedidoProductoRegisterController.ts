@@ -9,10 +9,9 @@ let PedidoProductoRegister = async (req: Request, res: Response) => {
       id_producto,
       id_factura,
       cantidad_producto,
-      informacion_pedido,
       estado_pedido
     } = req.body;
-    const registerPedidoProducto = await PedidoProductoServices.PedidoProductoRegister(new PedidoProducto(id_producto, id_factura, cantidad_producto, informacion_pedido,  estado_pedido))
+    const registerPedidoProducto = await PedidoProductoServices.PedidoProductoRegister(new PedidoProducto(id_producto, id_factura, cantidad_producto, estado_pedido))
     return res.status(201).json(
       { status: 'register ok'}
     );

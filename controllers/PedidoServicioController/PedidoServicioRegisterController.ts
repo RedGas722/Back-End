@@ -8,10 +8,9 @@ let PedidoServicioRegister = async (req: Request, res: Response) => {
     const {
       id_servicio,
       id_factura,
-      informacion_pedido,
       estado_pedido
     } = req.body;
-    const registerPedidoServicio = await PedidoServicioServices.PedidoServicioRegister(new PedidoServicio(id_servicio, id_factura, informacion_pedido,  estado_pedido))
+    const registerPedidoServicio = await PedidoServicioServices.PedidoServicioRegister(new PedidoServicio(id_servicio, id_factura, estado_pedido))
     return res.status(201).json(
       { status: 'register ok'}
     );
