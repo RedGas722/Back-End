@@ -1,9 +1,9 @@
 import express from "express";
-import AdministradorRegisterController from '../../controllers/AdministradorControllers/AdministradorRegisterController';
+import AdministradorRegister from '../../controllers/AdministradorControllers/AdministradorRegisterController';
 const router = express.Router();
 
 
-router.post('/', AdministradorRegisterController);
+router.post('/', AdministradorRegister);
 
 
 export default router;

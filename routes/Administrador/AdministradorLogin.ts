@@ -1,10 +1,10 @@
 import express from "express";
-import AdministradorLoginController from '../../controllers/AdministradorControllers/AdministradorLoginController';
+import AdministradorLogin from '../../controllers/AdministradorControllers/AdministradorLoginController';
 const router = express.Router();
 
 
 
-router.post('/', AdministradorLoginController);
+router.post('/', AdministradorLogin);
 
 
 export default router;

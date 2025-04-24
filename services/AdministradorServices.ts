@@ -22,7 +22,10 @@ class AdministradorServices {
     static async AdministradorLogin(auth: AuthAdministrador) {
         return await AdministradorRepository.login(auth);
     }
-    
+
+    static async AdministradorDelete(correo_admin: string) {
+        return await AdministradorRepository.delete(correo_admin);
+    }
 }
 
 export default AdministradorServices;

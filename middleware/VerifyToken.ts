@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
-import { log } from 'console';
 dotenv.config();
 
 
@@ -24,7 +23,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
         try {
             let decoded = jwt.verify(token, process.env.KEY_TOKEN as string) as JwtPayload;            
             req.body.id = decoded.data.id;
-            next()
+            return next()
         } catch (error) {
             return res.status(403).json(
                 { status: 'Unauthorized' }
