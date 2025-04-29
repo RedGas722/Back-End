@@ -17,17 +17,17 @@ class CarritoServicioRepository{
         return db.execute(sql);
     }
 
-    static async getById(id_servicio: number){
-        const sql = 'SELECT * FROM carrito_servicio WHERE id_servicio = ?';
-        const values = [id_servicio];
+    static async getById(carritoServicio: CarritoServicio){
+        const sql = 'SELECT * FROM carrito_servicio WHERE id_carrito = ? AND id_servicio = ?';
+        const values = [carritoServicio.id_carrito, carritoServicio.id_servicio];
         return db.execute(sql, values);
     }
 
     // Delete CarritoServicio
 
-    static async delete(id_carritoServicio: number){
+    static async delete(id_carrito_servicio: number){
         const sql = 'DELETE FROM carrito_servicio WHERE id_carrito_servicio = ?';
-        const values = [id_carritoServicio];
+        const values = [id_carrito_servicio];
         return db.execute(sql, values);
     }
 }

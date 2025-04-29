@@ -26,9 +26,11 @@ import CategoriaRegister from './routes/Categoria/CategoriaRegister';
 
 //import carritoProducto
 import CarritoProductoRegister from './routes/CarritoProducto/CarritoProductoRegister';
+import CarritoProductoDelete from './routes/CarritoProducto/CarritoProductoDelete';
 
 //import carritoServicio
 import CarritoServicioRegister from './routes/CarritoServicio/CarritoServicioRegister';
+import CarritoServicioDelete from './routes/CarritoServicio/CarritoServicioDelete';
 
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
@@ -84,9 +86,11 @@ app.use('/CategoriaRegister', CategoriaRegister);
 
 //rutas carritoProducto
 app.use('/CarritoProductoRegister', CarritoProductoRegister);
+app.use('/CarritoProductoDelete', CarritoProductoDelete);
 
 //rutas carritoServicio
 app.use('/CarritoServicioRegister', CarritoServicioRegister);
+app.use('/CarritoServicioDelete', CarritoServicioDelete);
 
 //rutas pedidoProducto
 app.use('/PedidoProductoRegister', PedidoProductoRegister);

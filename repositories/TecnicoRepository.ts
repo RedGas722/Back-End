@@ -39,14 +39,14 @@ class TecnicoRepository {
 
     // Login Tecnico
     static async login(auth: AuthTecnico) {
-        const sql = 'SELECT id_tecnico, contraseña_tecnico FROM tecnico WHERE correo_tecnico=?';
+        const sql = 'SELECT * FROM tecnico WHERE correo_tecnico=?';
         const values = [auth.correo_tecnico];
         const result: any = await db.execute(sql, values);
 
         if (result[0].length > 0) {
             const isPasswordValid = await bcrypt.compare(auth.contraseña_tecnico, result[0][0].contraseña_tecnico);
             if (isPasswordValid) {
-                return { logged: true, status: "Successful authentication", id: result[0][0].id_tecnico};
+                return { logged: true, status: "Successful authentication", id: result[0][0].id_tecnico, name: result[0][0].nombre_tecnico, email: result[0][0].correo_tecnico, telefono: result[0][0].telefono_tecnico};
             }
             return { logged: false, status: "Invalid username or password" };
         }

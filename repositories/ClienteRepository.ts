@@ -44,13 +44,13 @@ class ClienteRepository{
     // login
 
     static async login(auth: AuthCliente){
-        const sql = 'SELECT id_cliente, contraseña_cliente FROM cliente WHERE correo_cliente=?';
+        const sql = 'SELECT * FROM cliente WHERE correo_cliente=?';
         const values = [auth.correo_cliente];
         const result: any = await db.execute(sql, values);
         if (result[0].length > 0){
           const isPasswordValid = await bcrypt.compare(auth.contraseña_cliente, result[0][0].contraseña_cliente);
           if (isPasswordValid){
-            return {logged: true, status: "Successful authentication", id: result[0][0].id_cliente}
+            return {logged: true, status: "Successful authentication", id: result[0][0].id_cliente, name: result[0][0].nombre_cliente, email: result[0][0].correo_cliente, telefono: result[0][0].telefono_cliente};
           }
           return {logged: false, status: "Invalid username or password" };
         }

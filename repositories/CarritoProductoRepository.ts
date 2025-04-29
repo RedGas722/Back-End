@@ -17,17 +17,17 @@ class CarritoProductoRepository{
         return db.execute(sql);
     }
 
-    static async getById(id_producto: number){
-        const sql = 'SELECT * FROM carrito_producto WHERE id_producto = ?';
-        const values = [id_producto];
+    static async getById(carritoProducto: CarritoProducto){
+        const sql = 'SELECT * FROM carrito_producto WHERE id_carrito = ? AND id_producto = ?';
+        const values = [carritoProducto.id_carrito, carritoProducto.id_producto];
         return db.execute(sql, values);
     }
 
     // Delete CarritoProducto
 
-    static async delete(id_carritoProducto: number){
+    static async delete(id_carrito_producto: number){
         const sql = 'DELETE FROM carrito_producto WHERE id_carrito_producto = ?';
-        const values = [id_carritoProducto];
+        const values = [id_carrito_producto];
         return db.execute(sql, values);
     }
 }
