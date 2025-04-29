@@ -120,6 +120,7 @@ app.use('/EmpleadoGetAll', EmpleadogetAll)
 app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoLogin', TecnicoLogin);
 app.use('/TecnicoDelete', TecnicoDelete);
+//
 
 //rutas admin
 app.use('/AdminRegister', AdministradorRegister);
