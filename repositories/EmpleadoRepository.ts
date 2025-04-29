@@ -64,6 +64,15 @@ class EmpleadoRepository {
         }
         return { logged: false, status: "Invalid username or password" };
     }
+        // Get Tecnico by email
+    
+            static async getByEmail(correo_empleado: string){
+                const sql = 'SELECT * FROM empleado WHERE correo_empleado = ?';
+                const values = [correo_empleado];
+                const [rows] = await db.execute(sql, values);
+                console.log(rows); 
+                return rows; 
+            }
 }
 
 export default EmpleadoRepository;
