@@ -15,12 +15,19 @@ class EmpleadoServices {
         }
     }
 
+    static async GetEmpleado(empleado: Empleado) {
+        return await EmpleadoRepository.getByCorreo(empleado.correo_empleado);
+    }
+
     static async login(auth: AuthEmpleado) {
         return await EmpleadoRepository.login(auth);
     }
 
     static async EmpleadoDelete(correo_empleado: string) {
         return await EmpleadoRepository.delete(correo_empleado);
+    }
+    static async EmpleadoGetAll(){
+        return await EmpleadoRepository.ClienteGetAll();
     }
 }
 

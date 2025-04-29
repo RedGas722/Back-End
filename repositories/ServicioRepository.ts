@@ -16,9 +16,9 @@ class ServicioRepository {
         return db.execute(sql);
     }
 
-    static async getById(id_servicio: number) {
-        const sql = 'SELECT * FROM servicio WHERE id_servicio = ?';
-        const values = [id_servicio];
+    static async getByName(nombre_servicio: string) {
+        const sql = 'SELECT * FROM servicio WHERE nombre_servicio = ?';
+        const values = [nombre_servicio];
         return db.execute(sql, values);
     }
 

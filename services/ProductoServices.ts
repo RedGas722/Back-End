@@ -16,6 +16,10 @@ class ProductoServices {
         return await ProductoRepository.delete(nombre_producto);
     }
 
+    static async ProductoGetAll() {
+        return await ProductoRepository.getAll();
+    }
+
 }
 
 export default ProductoServices;

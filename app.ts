@@ -7,15 +7,20 @@ import ClienteRegister from './routes/Cliente/ClienteRegister';
 import ClienteLogin from "./routes/Cliente/ClienteLogin";
 import ClienteDelete from './routes/Cliente/ClienteDelete';
 import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
+import ClienteGet from "./routes/Cliente/ClienteGet";
+import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
 
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoDelete from './routes/Producto/ProductoDelete';
+import ProductoGetAll from './routes/Producto/ProductoGetAll';
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
 import ServicioDelete from './routes/Servicio/ServicioDelete';
+import ServicioGet from './routes/Servicio/ServicioGet';
+import ServicioGetAll from './routes/Servicio/ServicioGetAll';
 
 //import contrato
 import ContratoRegister from './routes/Contrato/ContratoRegister';
@@ -43,6 +48,8 @@ import FacturaRegister from './routes/Factura/FacturaRegister';
 import EmpleadoRegister from './routes/Empleado/EmpleadoRegister';
 import EmpleadoLogin from './routes/Empleado/EmpleadoLogin';
 import EmpleadoDelete from './routes/Empleado/EmpleadoDelete';
+import EmpleadoGet from "./routes/Empleado/EmpleadoGet";
+import EmpleadogetAll from "./routes/Empleado/EmpleadoGetAll"
 
 //import tecnico
 import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
@@ -53,6 +60,7 @@ import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
 import AdministradorRegister from './routes/Administrador/AdministradorRegister'
 import AdministradorLogin from './routes/Administrador/AdministradorLogin';
 import AdministradorDelete from "./routes/Administrador/AdministradorDelete";
+import AdministradorGet from "./routes/Administrador/AdministradorGet"
 
 //import profile
 import profile from './routes/profile';
@@ -65,15 +73,19 @@ app.use('/ClienteRegister', ClienteRegister);
 app.use('/ClienteLogin', ClienteLogin);
 app.use('/CLienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
-
+app.use('/ClienteGet', ClienteGet);
+app.use('/ClienteGetAll', ClienteGetAll);
 //rutas producto
 app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoGet', ProductoGet);
 app.use('/ProductoDelete', ProductoDelete);
+app.use('/ProductoGetAll', ProductoGetAll);
 
 //rutas servicio
 app.use('/ServicioRegister', ServicioRegister);
 app.use('/ServicioDelete', ServicioDelete);
+app.use('/ServicioGet', ServicioGet);
+app.use('/ServicioGetAll', ServicioGetAll);
 
 //rutas contrato
 app.use('/ContratoRegister', ContratoRegister);
@@ -100,7 +112,9 @@ app.use('/FacturaRegister', FacturaRegister);
 //rutas empleado
 app.use('/EmpleadoRegister', EmpleadoRegister);
 app.use('/EmpleadoLogin', EmpleadoLogin);
-app.use('/EmpleadoDelete', EmpleadoDelete)
+app.use('/EmpleadoDelete', EmpleadoDelete);
+app.use('/EmpleadoGet', EmpleadoGet);
+app.use('/EmpleadoGetAll', EmpleadogetAll)
 
 //rutas tecnico
 app.use('/TecnicoRegister', TecnicoRegister);
@@ -111,6 +125,7 @@ app.use('/TecnicoDelete', TecnicoDelete);
 app.use('/AdminRegister', AdministradorRegister);
 app.use('/AdminLogin', AdministradorLogin);
 app.use('/AdminDelete', AdministradorDelete);
+app.use('/AdminGet', AdministradorGet)
 
 app.use('/Profile', profile);
 

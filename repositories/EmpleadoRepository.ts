@@ -23,6 +23,19 @@ class EmpleadoRepository {
             return db.execute(sql,values);
     }
 
+        //Get Empleado 
+
+        static async getByCorreo(correo_empleado: string) {
+            const sql = 'SELECT * FROM empleado WHERE correo_empleado = ?';
+            const values = [correo_empleado];
+            return db.execute(sql, values);
+        }
+
+        static async ClienteGetAll(){
+            const sql = 'SELECT * FROM empleado';
+            return db.execute(sql)
+        }
+
     // Update Empleado
     static async update(empleado: Empleado) {
         const sql = 'UPDATE empleado SET nombre_empleado = ?, correo_empleado = ?, telefono_empleado = ?, direccion_empleado = ?, contraseña_empleado = ? WHERE correo_empleado = ?';
