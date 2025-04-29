@@ -7,13 +7,14 @@ import Producto from "../../Dto/ProductoDto/ProductoDto";
 const storage = multer.memoryStorage(); 
 const upload = multer({ storage: storage }) 
 
-let ProductoRegister = async (req: Request, res: Response) => {
+let ProductoUpdate = async (req: Request, res: Response) => {
   try {
     const {
-      nombre_producto,
-      descripcion_producto,
-      precio_producto,
-      stock
+       nuevo_nombre_producto,
+       descripcion_producto,
+       precio_producto,
+       stock,
+       nombre_producto
     } = req.body;
 
     if (!req.file) {
@@ -21,8 +22,7 @@ let ProductoRegister = async (req: Request, res: Response) => {
     }
 
     const imagenBuffer = req.file.buffer;
-
-    const registerProducto = await ProductoServices.ProductoRegister(new Producto(nombre_producto, descripcion_producto, precio_producto, stock, imagenBuffer));
+    const updateProducto = await ProductoServices.ProductoUpdate(new Producto(nuevo_nombre_producto, descripcion_producto, precio_producto, stock, imagenBuffer ), nombre_producto as string);
 
     return res.status(201).json(
         { status: 'register ok'}
@@ -35,4 +35,4 @@ let ProductoRegister = async (req: Request, res: Response) => {
     }
 }
 
-export default [upload.single("imagen"), ProductoRegister];
+export default [upload.single("imagen"), ProductoUpdate];

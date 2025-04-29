@@ -12,6 +12,7 @@ import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
 import ProductoRegister from './routes/Producto/ProductoRegister';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoDelete from './routes/Producto/ProductoDelete';
+import ProductoUpdate from './routes/Producto/ProductoUpdate';
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
@@ -70,6 +71,7 @@ app.use('/ClienteUpdate', ClienteUpdate);
 app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoGet', ProductoGet);
 app.use('/ProductoDelete', ProductoDelete);
+app.use('/ProductoUpdate', ProductoUpdate);
 
 //rutas servicio
 app.use('/ServicioRegister', ServicioRegister);

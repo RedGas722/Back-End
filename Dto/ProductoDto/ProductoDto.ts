@@ -2,17 +2,20 @@ class Producto {
     private _nombre_producto: string;
     private _descripcion_producto: string;
     private _precio_producto: number;
+    private _stock: number;
     private _imagen: Buffer;
 
     constructor(
         nombre_producto: string,
         descripcion_producto: string,
         precio_producto: number,
+        stock: number,
         imagen: Buffer
     ) {
         this._nombre_producto = nombre_producto;
         this._descripcion_producto = descripcion_producto;
         this._precio_producto = precio_producto;
+        this._stock = stock;
         this._imagen = imagen;
     }
 
@@ -27,6 +30,10 @@ class Producto {
 
     get precio_producto(): number {
         return this._precio_producto;
+    }
+
+    get stock(): number {
+        return this._stock
     }
 
     get imagen(): Buffer {
@@ -44,6 +51,10 @@ class Producto {
 
     set precio_producto(precio_producto: number) {
         this._precio_producto = precio_producto;
+    }
+
+    set stock(stock: number) {
+        this._stock = stock;
     }
 
     set imagen(imagen: Buffer) {
