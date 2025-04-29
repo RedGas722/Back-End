@@ -24,6 +24,12 @@ import ContratoDelete from "./routes/Contrato/ContratoDelete";
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
 
+//import carritoProducto
+import CarritoProductoRegister from './routes/CarritoProducto/CarritoProductoRegister';
+
+//import carritoServicio
+import CarritoServicioRegister from './routes/CarritoServicio/CarritoServicioRegister';
+
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
 
@@ -76,6 +82,12 @@ app.use('/ContratoDelete', ContratoDelete);
 //rutas categoria
 app.use('/CategoriaRegister', CategoriaRegister);
 
+//rutas carritoProducto
+app.use('/CarritoProductoRegister', CarritoProductoRegister);
+
+//rutas carritoServicio
+app.use('/CarritoServicioRegister', CarritoServicioRegister);
+
 //rutas pedidoProducto
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
 
@@ -99,7 +111,6 @@ app.use('/TecnicoDelete', TecnicoDelete);
 app.use('/AdminRegister', AdministradorRegister);
 app.use('/AdminLogin', AdministradorLogin);
 app.use('/AdminDelete', AdministradorDelete);
-
 
 app.use('/Profile', profile);
 
