@@ -11,7 +11,6 @@ class CarritoServicioRepository{
     }
 
     // Get CarritoServicio
-
     static async getAll(){
         const sql = 'SELECT * FROM carrito_servicio';
         return db.execute(sql);
@@ -23,8 +22,14 @@ class CarritoServicioRepository{
         return db.execute(sql, values);
     }
 
-    // Delete CarritoServicio
+    // // Update CarritoServicio
+    // static async update(carritoServicio: CarritoServicio, id_carritoServicio: number){
+    //     const sql = 'UPDATE carrito_servicio SET id_carrito = ?, id_servicio = ? WHERE id_carrito_servicio = ?';
+    //     const values = [carritoServicio.id_carrito, carritoServicio.id_servicio, id_carritoServicio];
+    //     return db.execute(sql, values);
+    // }
 
+    // Delete CarritoServicio
     static async delete(id_carritoServicio: number){
         const sql = 'DELETE FROM carrito_servicio WHERE id_carrito_servicio = ?';
         const values = [id_carritoServicio];

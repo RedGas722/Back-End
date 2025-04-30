@@ -13,7 +13,6 @@ class AdministradorRepository {
     }
 
     // Get Administrador
-
     static async getAll() {
         const sql = 'SELECT * FROM administrador';
         return db.execute(sql);
@@ -26,14 +25,13 @@ class AdministradorRepository {
     }
 
     // Update Administrador
-
     static async update(administrador: Administrador, new_correo_admin: string) {
         const sql = 'UPDATE administrador SET nombre_admin = ?, correo_admin = ?, telefono_admin = ?, contraseña_admin = ? WHERE correo_admin = ?';
-        const values = [administrador.nombre_admin, administrador.correo_admin, administrador.telefono_admin, administrador.contraseña_admin, administrador.correo_admin];
+        const values = [administrador.nombre_admin, new_correo_admin, administrador.telefono_admin, administrador.contraseña_admin, administrador.correo_admin];
         return db.execute(sql, values);
     }
-    // Delete Administrador
 
+    // Delete Administrador
     static async delete(correo_admin: string) {
         const sql = 'DELETE FROM administrador WHERE correo_admin = ?';
         const values = [correo_admin];
