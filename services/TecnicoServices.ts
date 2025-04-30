@@ -5,6 +5,7 @@ import AuthTecnico from '../Dto/TecnicoDto/TecnicoAuthDto';
 
 class TecnicoServices {
 
+    // Tecnico Register
     static async TecnicoRegister(tecnico: Tecnico) {
         try {
             tecnico.contraseña_tecnico = await generateHash(tecnico.contraseña_tecnico);
@@ -15,10 +16,17 @@ class TecnicoServices {
         }
     }
 
+    // Tecnico Login
     static async login(auth: AuthTecnico) {
         return await TecnicoRepository.login(auth); 
     }
 
+    // Tecnico Update
+    static async TecnicoUpdate(tecnico: Tecnico, nuevo_correo_tecnico: string) { 
+        return await TecnicoRepository.update(tecnico, nuevo_correo_tecnico); 
+    }
+
+    // Tecnico Delete
     static async TecnicoDelete(correo_tecnico : string) {
         return await TecnicoRepository.delete(correo_tecnico); 
     }

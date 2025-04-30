@@ -54,11 +54,13 @@ import ProductoUpdate from './routes/Producto/ProductoUpdate';
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
+import ServicioUpdate from './routes/Servicio/ServicioUpdate';
 import ServicioDelete from './routes/Servicio/ServicioDelete';
 
 //import tecnico
 import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
 import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
+import TecnicoUpdate from './routes/Tecnico/TecnicoUpdate';
 import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
 
 //import profile
@@ -120,11 +122,13 @@ app.use('/ProductoDelete', ProductoDelete);
 
 //SERVICIO
 app.use('/ServicioRegister', ServicioRegister);
+app.use('/ServicioUpdate', ServicioUpdate);
 app.use('/ServicioDelete', ServicioDelete);
 
 //TECNICO
 app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoLogin', TecnicoLogin);
+app.use('/TecnicoUpdate', TecnicoUpdate);
 app.use('/TecnicoDelete', TecnicoDelete);
 
 app.use('/Profile', profile);

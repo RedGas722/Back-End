@@ -12,8 +12,8 @@ class FacturaServices {
     }
 
     //Factura Update
-    static async FacturaUpdate(factura: Factura, id_factura: number) {
-        return await FacturaRepository.update(factura, id_factura);
+    static async FacturaUpdate(estado_factura: string, id_factura: number) {
+        return await FacturaRepository.update(estado_factura, id_factura);
     }
 
 }
