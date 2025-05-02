@@ -25,6 +25,9 @@ class TecnicoServices {
     static async getbyEmail(correo_tecnico: string) {
         return await TecnicoRepository.getByEmail(correo_tecnico);
     }
+    static async getAllTecnicos() {
+        return await TecnicoRepository.getAll(); 
+    }
     
 }
 

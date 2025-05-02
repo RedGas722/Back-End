@@ -3,14 +3,14 @@ import AdministradorServices from "../../services/AdministradorServices";
 
 let AdministradorGet = async (req: Request, res: Response) => {
     try {
-        const { correo_admin } = req.body;
+        const { correo_admin } = req.query;
     
         // Verifica que los campos requeridos no estén vacíos
         if (!correo_admin) {
         return res.status(400).json({ status: 'Missing required fields' });
         }
     
-        const cliente = await AdministradorServices.AdministradorGet(correo_admin);
+        const cliente = await AdministradorServices.AdministradorGet(correo_admin as string);
     
         if (!cliente) {
         return res.status(404).json({ status: 'Empleado not found' });

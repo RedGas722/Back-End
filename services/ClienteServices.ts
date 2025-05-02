@@ -23,8 +23,8 @@ class ClienteServices {
         cliente.contraseña_cliente = await generateHash(cliente.contraseña_cliente);
         return await ClienteRepository.update(cliente, nuevo_correo_cliente);
     }
-    static async GetCliente(cliente: Cliente) {
-        return await ClienteRepository.getByEmail(cliente.correo_cliente);
+    static async GetCliente(correo_cliente: string) {
+        return await ClienteRepository.getByEmail(correo_cliente);
     }
     static async GetAllClientes() {
         return await ClienteRepository.getAll();

@@ -10,7 +10,7 @@ let EmpleadoGet = async (req: Request, res: Response) => {
         return res.status(400).json({ status: 'Missing required fields' });
         }
     
-        const empleado = await EmpleadoServices.GetEmpleado(correo_empleado);
+        const empleado = await EmpleadoServices.GetEmpleado(correo_empleado as string);
     
         if (!empleado) {
         return res.status(404).json({ status: 'Empleado not found' });

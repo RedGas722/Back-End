@@ -15,8 +15,8 @@ class EmpleadoServices {
         }
     }
 
-    static async GetEmpleado(empleado: Empleado) {
-        return await EmpleadoRepository.getByCorreo(empleado.correo_empleado);
+    static async GetEmpleado(correo_empleado: string) {
+        return await EmpleadoRepository.getByCorreo(correo_empleado);
     }
 
     static async login(auth: AuthEmpleado) {

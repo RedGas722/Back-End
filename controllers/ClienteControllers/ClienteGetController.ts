@@ -3,14 +3,14 @@ import ClienteServices from "../../services/ClienteServices";
 
 let ClienteGet = async (req: Request, res: Response) => {
     try {
-        const { correo_cliente } = req.body;
+        const { correo_cliente } = req.query;
     
         // Verifica que los campos requeridos no estén vacíos
         if (!correo_cliente) {
         return res.status(400).json({ status: 'Missing required fields' });
         }
     
-        const cliente = await ClienteServices.GetCliente(correo_cliente);
+        const cliente = await ClienteServices.GetCliente(correo_cliente as string);
     
         if (!cliente) {
         return res.status(404).json({ status: 'Empleado not found' });

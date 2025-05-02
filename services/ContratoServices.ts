@@ -14,6 +14,13 @@ class ContratoServices {
         return await ContratoRepository.delete(id_contrato);
     }
 
+    static async ContratoGet(id_empleado: number) {
+        return await ContratoRepository.getById(id_empleado);
+    }
+    static async ContratoGetAll() {
+        return await ContratoRepository.getAll();
+    }
+
 }
 
 export default ContratoServices;

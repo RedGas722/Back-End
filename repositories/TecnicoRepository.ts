@@ -37,8 +37,7 @@ class TecnicoRepository {
         return db.execute(sql, values);
     }
 
-    // Login Tecnico
-    // Get Tecnico by email
+    // Get Tecnico 
 
         static async getByEmail(correo_tecnico: string){
             const sql = 'SELECT * FROM tecnico WHERE correo_tecnico = ?';
@@ -46,7 +45,11 @@ class TecnicoRepository {
             const [rows] = await db.execute(sql, values);
             console.log(rows); 
             return rows; 
-    
+        }
+
+        static async getAll() {
+            const sql = 'SELECT * FROM tecnico';
+            return db.execute(sql);
         }
 
     // Get Tecnico

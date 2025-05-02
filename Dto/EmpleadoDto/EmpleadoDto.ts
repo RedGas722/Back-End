@@ -1,5 +1,4 @@
 class Empleado {
-   
     private _nombre_empleado: string;
     private _correo_empleado: string;
     private _telefono_empleado: string;

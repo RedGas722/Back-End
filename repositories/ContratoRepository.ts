@@ -16,9 +16,9 @@ class ContratoRepository {
         return db.execute(sql);
     }
 
-    static async getById(id_contrato: number) {
-        const sql = 'SELECT * FROM contrato WHERE id_contrato = ?';
-        const values = [id_contrato];
+    static async getById(id_empleado: number) {
+        const sql = 'SELECT * FROM contrato WHERE id_empleado = ?';
+        const values = [id_empleado];
         return db.execute(sql, values);
     }
 

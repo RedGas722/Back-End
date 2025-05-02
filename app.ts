@@ -25,6 +25,8 @@ import ServicioGetAll from './routes/Servicio/ServicioGetAll';
 //import contrato
 import ContratoRegister from './routes/Contrato/ContratoRegister';
 import ContratoDelete from "./routes/Contrato/ContratoDelete";
+import ContratoGet from "./routes/Contrato/ContratoGet";
+import ContratoGetAll from "./routes/Contrato/ContratoGetAll";
 
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
@@ -43,6 +45,8 @@ import PedidoServicioRegister from './routes/PedidoServicio/PedidoServicioRegist
 
 //import factura
 import FacturaRegister from './routes/Factura/FacturaRegister';
+import FacturaGet from './routes/Factura/FacturaGet';
+import FacturaGetAll from './routes/Factura/FacturaGetAll';
 
 //import empleado
 import EmpleadoRegister from './routes/Empleado/EmpleadoRegister';
@@ -55,6 +59,8 @@ import EmpleadogetAll from "./routes/Empleado/EmpleadoGetAll"
 import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
 import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
 import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
+import TecnicoGet from './routes/Tecnico/TecnicoGet';
+import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 
 //import admin
 import AdministradorRegister from './routes/Administrador/AdministradorRegister'
@@ -64,6 +70,7 @@ import AdministradorGet from "./routes/Administrador/AdministradorGet"
 
 //import profile
 import profile from './routes/profile';
+
 
 dotenv.config();
 const app = express().use(bodyParser.json());
@@ -90,6 +97,8 @@ app.use('/ServicioGetAll', ServicioGetAll);
 //rutas contrato
 app.use('/ContratoRegister', ContratoRegister);
 app.use('/ContratoDelete', ContratoDelete);
+app.use('/ContratoGet', ContratoGet);
+app.use('/ContratoGetAll', ContratoGetAll);
 
 //rutas categoria
 app.use('/CategoriaRegister', CategoriaRegister);
@@ -108,6 +117,10 @@ app.use('/PedidoServicioRegister', PedidoServicioRegister);
 
 //rutas factura
 app.use('/FacturaRegister', FacturaRegister);
+app.use('/FacturaGet', FacturaGet);
+app.use('/FacturaGetAll', FacturaGetAll);
+
+
 
 //rutas empleado
 app.use('/EmpleadoRegister', EmpleadoRegister);
@@ -120,6 +133,10 @@ app.use('/EmpleadoGetAll', EmpleadogetAll)
 app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoLogin', TecnicoLogin);
 app.use('/TecnicoDelete', TecnicoDelete);
+app.use('/TecnicoGet', TecnicoGet);
+app.use('/TecnicoGetAll', TecnicoGetAll);
+
+
 //
 
 //rutas admin

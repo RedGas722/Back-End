@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import ServicioServices from "../../services/ServicioServices";
+import TecnicoServices from "../../services/TecnicoServices";
 
-let ServicioGetAll = async (req: Request, res: Response) => {
+let TecnicoGetAll = async (req: Request, res: Response) => {
   try {
     const {
     
     } = req.query;
     
-    const getServicioAll = await ServicioServices.ServicioGetAll();
+    const TecnicoGetAll = await TecnicoServices.getAllTecnicos();
     return res.status(201).json(
-        { status: 'Consult ok', data: getServicioAll}
+        { status: 'Consult ok', data: TecnicoGetAll}
     )
     } catch (error: any) {
       if (error && error.code == "ER_DUP_ENTRY") {
@@ -19,4 +19,4 @@ let ServicioGetAll = async (req: Request, res: Response) => {
     }
 }
 
-export default ServicioGetAll;  
+export default TecnicoGetAll;  
