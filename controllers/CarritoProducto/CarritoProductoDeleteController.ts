@@ -6,8 +6,11 @@ let CarritoProductoDelete = async (req: Request, res: Response) => {
   try {
     const {
       id_carrito_producto,
-    } = req.body;
-    const deleteCarritoProducto = await CarritoProductoServices.CarritoProductoDelete(id_carrito_producto)
+    } = req.query;
+
+    const idCarritoProducto = parseInt(id_carrito_producto as string , 10);
+
+    const deleteCarritoProducto = await CarritoProductoServices.CarritoProductoDelete(idCarritoProducto);
     return res.status(201).json(
       { status: 'delete ok'}
     );

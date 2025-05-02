@@ -12,7 +12,8 @@ let ProductoRegister = async (req: Request, res: Response) => {
     const {
       nombre_producto,
       descripcion_producto,
-      precio_producto
+      precio_producto,
+      stock
     } = req.body;
 
     if (!req.file) {
@@ -21,7 +22,7 @@ let ProductoRegister = async (req: Request, res: Response) => {
 
     const imagenBuffer = req.file.buffer;
 
-    const registerProducto = await ProductoServices.ProductoRegister(new Producto(nombre_producto, descripcion_producto, precio_producto, imagenBuffer));
+    const registerProducto = await ProductoServices.ProductoRegister(new Producto(nombre_producto, descripcion_producto, precio_producto, stock, imagenBuffer));
 
     return res.status(201).json(
         { status: 'register ok'}

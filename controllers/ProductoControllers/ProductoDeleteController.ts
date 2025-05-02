@@ -5,7 +5,7 @@ let ProductoDelete = async (req: Request, res: Response) => {
   try {
     const {
       nombre_producto
-    } = req.body;
+    } = req.query;
     
     const deleteProducto = await ProductoServices.ProductoDelete(nombre_producto as string);
     return res.status(201).json(

@@ -19,9 +19,9 @@ class ClienteServices {
         return await ClienteRepository.delete(correo_cliente);
     }
 
-    static async ClienteUpdate(cliente : Cliente, nuevo_correo_cliente: string) {
+    static async ClienteUpdate(cliente : Cliente, correo_cliente: string) {
         cliente.contraseña_cliente = await generateHash(cliente.contraseña_cliente);
-        return await ClienteRepository.update(cliente, nuevo_correo_cliente);
+        return await ClienteRepository.update(cliente, correo_cliente);
     }
 }
 

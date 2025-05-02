@@ -6,7 +6,7 @@ let CategoriaDelete = async (req: Request, res: Response) => {
   try {
     const {
       nombre_categoria,
-    } = req.body;
+    } = req.query;
     const deleteCategoria = await CategoriaServices.CategoriaDelete(nombre_categoria as string)
     return res.status(201).json(
       { status: 'delete ok'}
