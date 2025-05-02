@@ -19,10 +19,16 @@ class ClienteRepository{
         return db.execute(sql);
     }
 
+    // Get Cliente by email
     static async getByEmail(correo_cliente: string){
         const sql = 'SELECT * FROM cliente WHERE correo_cliente = ?';
         const values = [correo_cliente];
-        return db.execute(sql, values);
+
+        const [rows] = await db.execute(sql, values);
+        
+        console.log(rows); 
+        return rows; 
+
     }
 
     // Update Cliente

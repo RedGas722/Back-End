@@ -37,7 +37,22 @@ class TecnicoRepository {
         return db.execute(sql, values);
     }
 
-    // Login Tecnico
+    // Get Tecnico 
+
+        static async getByEmail(correo_tecnico: string){
+            const sql = 'SELECT * FROM tecnico WHERE correo_tecnico = ?';
+            const values = [correo_tecnico];
+            const [rows] = await db.execute(sql, values);
+            console.log(rows); 
+            return rows; 
+        }
+
+        static async getAll() {
+            const sql = 'SELECT * FROM tecnico';
+            return db.execute(sql);
+        }
+
+    // Get Tecnico
     static async login(auth: AuthTecnico) {
         const sql = 'SELECT * FROM tecnico WHERE correo_tecnico=?';
         const values = [auth.correo_tecnico];
@@ -53,5 +68,6 @@ class TecnicoRepository {
         return { logged: false, status: "Invalid username or password" };
     }
 }
+
 
 export default TecnicoRepository;

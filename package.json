@@ -13,10 +13,14 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
+<<<<<<< HEAD
+=======
+    "express-typescript": "file:",
+>>>>>>> b09339cf4f17a075dff7580487a9226d278a6e5a
     "express-validator": "^7.2.1",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.2",
-    "mysql2": "^3.9.6"
+    "mysql2": "^3.9.7"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
