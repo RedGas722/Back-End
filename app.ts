@@ -31,14 +31,6 @@ import ContratoGetAll from "./routes/Contrato/ContratoGetAll";
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
 
-//import carritoProducto
-import CarritoProductoRegister from './routes/CarritoProducto/CarritoProductoRegister';
-import CarritoProductoDelete from './routes/CarritoProducto/CarritoProductoDelete';
-
-//import carritoServicio
-import CarritoServicioRegister from './routes/CarritoServicio/CarritoServicioRegister';
-import CarritoServicioDelete from './routes/CarritoServicio/CarritoServicioDelete';
-
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
 
@@ -70,9 +62,11 @@ import AdministradorLogin from './routes/Administrador/AdministradorLogin';
 import AdministradorDelete from "./routes/Administrador/AdministradorDelete";
 import AdministradorGet from "./routes/Administrador/AdministradorGet"
 
+//import pago
+import PagoPaypal from './routes/Pagos/PagoPaypal'; 
+
 //import profile
 import profile from './routes/profile';
-
 
 dotenv.config();
 const app = express().use(bodyParser.json());
@@ -105,14 +99,6 @@ app.use('/ContratoGetAll', ContratoGetAll);
 //rutas categoria
 app.use('/CategoriaRegister', CategoriaRegister);
 
-//rutas carritoProducto
-app.use('/CarritoProductoRegister', CarritoProductoRegister);
-app.use('/CarritoProductoDelete', CarritoProductoDelete);
-
-//rutas carritoServicio
-app.use('/CarritoServicioRegister', CarritoServicioRegister);
-app.use('/CarritoServicioDelete', CarritoServicioDelete);
-
 //rutas pedidoProducto
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
 
@@ -140,8 +126,8 @@ app.use('/TecnicoDelete', TecnicoDelete);
 app.use('/TecnicoGet', TecnicoGet);
 app.use('/TecnicoGetAll', TecnicoGetAll);
 
-
-//
+//pagos
+app.use('/PagoPaypal', PagoPaypal);
 
 //rutas admin
 app.use('/AdminRegister', AdministradorRegister);
