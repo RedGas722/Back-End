@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from 'body-parser';
 import dotenv from "dotenv";
-
+import cors from 'cors';
 
 //import admin
 import AdministradorRegister from './routes/Administrador/AdministradorRegister'
@@ -69,6 +69,8 @@ import profile from './routes/profile';
 dotenv.config();
 const app = express().use(bodyParser.json());
 
+app.use(cors({origin: 'http://localhost:5173', credentials: true,}));
+
 //--------------- RUTAS -------------------//
 
 //ADMINISTRADOR
@@ -132,6 +134,9 @@ app.use('/TecnicoUpdate', TecnicoUpdate);
 app.use('/TecnicoDelete', TecnicoDelete);
 
 app.use('/Profile', profile);
+
+
+//--------------- INICIALIZAR SERVIDOR -------------------//
 
 const PORT = process.env.PORT || 10101;
 
