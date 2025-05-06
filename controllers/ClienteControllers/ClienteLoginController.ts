@@ -19,7 +19,7 @@ let ClienteLogin = async (req: Request, res: Response) => {
       return res.status(200).json({
         status: 'login ok',
         data: login,
-        token: generateToken({ id: login.id }, process.env.KEY_TOKEN, 5)
+        token: generateToken({ id: login.id  }, process.env.KEY_TOKEN, 5)
       });
     }
 
