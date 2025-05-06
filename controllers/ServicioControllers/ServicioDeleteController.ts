@@ -5,7 +5,7 @@ let ServicioDelete = async (req: Request, res: Response) => {
   try {
     const {
       nombre_servicio
-    } = req.body;
+    } = req.query;
     const deleteServicio = await ServicioServices.ServicioDelete(nombre_servicio as string);
     return res.status(201).json(
         { status: 'delete ok'}

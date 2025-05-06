@@ -13,22 +13,19 @@ let AdministradorLoginController = async (req: Request, res: Response) => {
       } = req.body;
    
    const login = await AdministradorServices.AdministradorLogin(new AuthAdministrador(correo_admin, contraseña_admin));
-   // Verifica si el login fue exitoso
    if (login.logged) {
       return res.status(200).json({
         status: 'login ok',
-        data: login,
+        token: generateToken({id: login.id, name: login.name, email: login.email, telefono: login.telefono}, process.env.KEY_TOKEN, 5)
       });
     }
 
-    // Si las credenciales son incorrectas
     return res.status(401).json({
       status: 'Invalid credentials',
     });
   } catch (error: any) {
     console.error("Error en el login:", error);
 
-    // Responde con un error genérico si ocurre algo inesperado
     return res.status(500).json({
       status: 'Internal server error',
       error: error.message,

@@ -15,7 +15,7 @@ class EmpleadoServices {
             throw error;
         }
     }
-
+    
     //Empleado Login
     static async login(auth: AuthEmpleado) {
         return await EmpleadoRepository.login(auth);
@@ -30,6 +30,14 @@ class EmpleadoServices {
     // Empleado Delete  
     static async EmpleadoDelete(correo_empleado: string) {
         return await EmpleadoRepository.delete(correo_empleado);
+    }
+    
+    static async EmpleadoGetAll(){
+        return await EmpleadoRepository.ClienteGetAll();
+    }
+
+    static async GetEmpleado(correo_empleado: string) {
+        return await EmpleadoRepository.getByCorreo(correo_empleado);
     }
 }
 

@@ -37,21 +37,37 @@ class TecnicoRepository {
         return db.execute(sql, values);
     }
 
-    // Login Tecnico
+    // Get Tecnico 
+
+        static async getByEmail(correo_tecnico: string){
+            const sql = 'SELECT * FROM tecnico WHERE correo_tecnico = ?';
+            const values = [correo_tecnico];
+            const [rows] = await db.execute(sql, values);
+            console.log(rows); 
+            return rows; 
+        }
+
+        static async getAll() {
+            const sql = 'SELECT * FROM tecnico';
+            return db.execute(sql);
+        }
+
+    // Get Tecnico
     static async login(auth: AuthTecnico) {
-        const sql = 'SELECT id_tecnico, contraseña_tecnico FROM tecnico WHERE correo_tecnico=?';
+        const sql = 'SELECT * FROM tecnico WHERE correo_tecnico=?';
         const values = [auth.correo_tecnico];
         const result: any = await db.execute(sql, values);
 
         if (result[0].length > 0) {
             const isPasswordValid = await bcrypt.compare(auth.contraseña_tecnico, result[0][0].contraseña_tecnico);
             if (isPasswordValid) {
-                return { logged: true, status: "Successful authentication", id: result[0][0].id_tecnico};
+                return { logged: true, status: "Successful authentication", id: result[0][0].id_tecnico, name: result[0][0].nombre_tecnico, email: result[0][0].correo_tecnico, telefono: result[0][0].telefono_tecnico};
             }
             return { logged: false, status: "Invalid username or password" };
         }
         return { logged: false, status: "Invalid username or password" };
     }
 }
+
 
 export default TecnicoRepository;

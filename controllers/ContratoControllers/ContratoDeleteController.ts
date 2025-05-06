@@ -5,10 +5,12 @@ import ContratoServices from "../../services/ContratoServices";
 let ContratoDelete = async (req: Request, res: Response) => {
   try {
     const {
-      id_contrato
-    } = req.body;
-    
-    const deleteContrato = await ContratoServices.ContratoDelete(id_contrato);
+      id_empleado
+    } = req.query;
+
+    const idEmpleado = parseInt(id_empleado as string , 10);
+
+    const deleteContrato = await ContratoServices.ContratoDelete(idEmpleado);
     return res.status(201).json(
         { status: 'delete ok'}
     )

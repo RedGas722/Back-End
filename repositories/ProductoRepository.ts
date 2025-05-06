@@ -5,7 +5,7 @@ class ProductoRepository {
 
     // Insert Producto
     static async add(producto: Producto) {
-        const sql = 'INSERT INTO producto (nombre_producto, descripcion_producto, precio_producto, stcok, imagen) VALUES (?, ?, ?, ?, ?)';
+        const sql = 'INSERT INTO producto (nombre_producto, descripcion_producto, precio_producto, stock, imagen) VALUES (?, ?, ?, ?, ?)';
         const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.imagen];
         return db.execute(sql, values);
     }

@@ -9,12 +9,6 @@ import AdministradorLogin from './routes/Administrador/AdministradorLogin';
 import AdministradorUpdate from './routes/Administrador/AdministradorUpdate';
 import AdministradorDelete from "./routes/Administrador/AdministradorDelete";
 
-//import carritoProducto
-import CarritoProductoRegister from './routes/CarritoProducto/CarritoProductoRegister';
-
-//import carritoServicio
-import CarritoServicioRegister from './routes/CarritoServicio/CarritoServicioRegister';
-
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
 import CategoriaUpdate from './routes/Categoria/CategoriaUpdate';
@@ -29,6 +23,8 @@ import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
 import ContratoRegister from './routes/Contrato/ContratoRegister';
 import ContratoUpdate from './routes/Contrato/ContratoUpdate';
 import ContratoDelete from "./routes/Contrato/ContratoDelete";
+import ContratoGet from "./routes/Contrato/ContratoGet";
+import ContratoGetAll from "./routes/Contrato/ContratoGetAll";
 
 //import empleado
 import EmpleadoRegister from './routes/Empleado/EmpleadoRegister';
@@ -49,11 +45,14 @@ import PedidoServicioRegister from './routes/PedidoServicio/PedidoServicioRegist
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
 import ProductoGet from './routes/Producto/ProductoGet';
+import ProductoGetAll from './routes/Producto/ProductoGetAll';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoUpdate from './routes/Producto/ProductoUpdate';
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
+import ServicioGet from './routes/Servicio/ServicioGet';
+import ServicioGetAll from './routes/Servicio/ServicioGetAll';
 import ServicioUpdate from './routes/Servicio/ServicioUpdate';
 import ServicioDelete from './routes/Servicio/ServicioDelete';
 
@@ -65,6 +64,7 @@ import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
 
 //import profile
 import profile from './routes/profile';
+
 
 dotenv.config();
 const app = express().use(bodyParser.json());
@@ -78,12 +78,6 @@ app.use('/AdminRegister', AdministradorRegister);
 app.use('/AdminLogin', AdministradorLogin);
 app.use('/AdminUpdate', AdministradorUpdate);
 app.use('/AdminDelete', AdministradorDelete);
-
-//CARRITO PRODUCTO
-app.use('/CarritoProductoRegister', CarritoProductoRegister);
-
-//CARRITO SERVICIO
-app.use('/CarritoServicioRegister', CarritoServicioRegister);
 
 //CATEGORIA
 app.use('/CategoriaRegister', CategoriaRegister);
@@ -121,11 +115,14 @@ app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoGet', ProductoGet);
 app.use('/ProductoUpdate', ProductoUpdate);
 app.use('/ProductoDelete', ProductoDelete);
+app.use('/ProductoGetAll', ProductoGetAll);
 
 //SERVICIO
 app.use('/ServicioRegister', ServicioRegister);
 app.use('/ServicioUpdate', ServicioUpdate);
 app.use('/ServicioDelete', ServicioDelete);
+app.use('/ServicioGet', ServicioGet);
+app.use('/ServicioGetAll', ServicioGetAll);
 
 //TECNICO
 app.use('/TecnicoRegister', TecnicoRegister);

@@ -5,13 +5,13 @@ let AdministradorDelete = async (req: Request, res: Response) => {
   try {
     const {
       correo_admin
-    } = req.body;
+    } = req.query;
 
     if(!correo_admin)
       {
         return res.status(400).json({ status: 'Missing required fields' });
       }
-    const deleteAdministrador = await AdministradorServices.AdministradorDelete(correo_admin)
+    const deleteAdministrador = await AdministradorServices.AdministradorDelete(correo_admin as string);
     return res.status(201).json(
       { status: 'delete ok' }
     );

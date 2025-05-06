@@ -5,14 +5,14 @@ let EmpleadoDelete = async (req: Request, res: Response) => {
   try {
     const {
         correo_empleado
-    } = req.body;
+    } = req.query;
 
     // Verifica que los campos requeridos no estén vacíos
     if (!correo_empleado) {
       return res.status(400).json({ status: 'Missing required fields' });
     }
 
-    const deleteEmpleado = await EmpleadoServices.EmpleadoDelete(correo_empleado);
+    const deleteEmpleado = await EmpleadoServices.EmpleadoDelete(correo_empleado as string);
 
     return res.status(201).json({ status: 'delete ok'});
   } catch (error: any) {

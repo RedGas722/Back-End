@@ -5,9 +5,9 @@ let TecnicoDelete = async (req: Request, res: Response) => {
   try {
     const {
         correo_tecnico,
-    } = req.body;
+    } = req.query;
 
-    const deleteTecnico = await TecnicoServices.TecnicoDelete(correo_tecnico)
+    const deleteTecnico = await TecnicoServices.TecnicoDelete(correo_tecnico as string);
 
     return res.status(201).json({ status: 'delete ok'});
     } catch (error: any) {

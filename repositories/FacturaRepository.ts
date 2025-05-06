@@ -16,9 +16,9 @@ class FacturaRepository {
         return db.execute(sql);
     }
 
-    static async getById(id_factura: number) {
-        const sql = 'SELECT * FROM factura WHERE id_factura = ?';
-        const values = [id_factura];
+    static async getById(id_cliente: number) {
+        const sql = 'SELECT * FROM factura WHERE id_cliente = ?';
+        const values = [id_cliente];
         return db.execute(sql, values);
     }
 

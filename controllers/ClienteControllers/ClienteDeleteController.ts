@@ -6,8 +6,8 @@ let ClienteDelete = async (req: Request, res: Response) => {
   try {
     const {
       correo_cliente
-    } = req.body;
-    const deleteCliente = await ClienteServices.ClienteDelete(correo_cliente)
+    } = req.query;
+    const deleteCliente = await ClienteServices.ClienteDelete(correo_cliente as string)
     return res.status(201).json(
       { status: 'delete ok'}
     );

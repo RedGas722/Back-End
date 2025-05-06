@@ -26,6 +26,10 @@ class AdministradorServices {
     static async AdministradorDelete(correo_admin: string) {
         return await AdministradorRepository.delete(correo_admin);
     }
+    static async AdministradorGet(correo_admin: string){
+
+        return await AdministradorRepository.getByEmail(correo_admin);
+    }
 }
 
 export default AdministradorServices;
