@@ -132,6 +132,9 @@ app.use('/TecnicoLogin', TecnicoLogin);
 app.use('/TecnicoUpdate', TecnicoUpdate);
 app.use('/TecnicoDelete', TecnicoDelete);
 
+//PAGO
+app.use('/PagoPaypal', PagoPaypal);
+
 app.use('/Profile', profile);
 
 

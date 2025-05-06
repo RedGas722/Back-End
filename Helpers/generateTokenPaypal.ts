@@ -6,7 +6,7 @@ const getAccessToken = async () => {
     const res = await fetch("https://api-m.sandbox.paypal.com/v1/oauth2/token", {
       method: "POST",
       headers: {
-        "Authorization": `B ${credentials}`,
+        "Authorization": `Basic ${credentials}`,
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: "grant_type=client_credentials",

@@ -7,10 +7,9 @@ let ServicioRegister = async (req: Request, res: Response) => {
     const {
       nombre_servicio,
       descripcion_servicio,
-      precio_servicio,
-      precio_total
+      precio_servicio
     } = req.body;
-    const registerServicio = await ServicioServices.ServicioRegister(new Servicio(nombre_servicio, descripcion_servicio, precio_servicio, precio_total));
+    const registerServicio = await ServicioServices.ServicioRegister(new Servicio(nombre_servicio, descripcion_servicio, precio_servicio));
     return res.status(201).json(
         { status: 'register ok'}
     )

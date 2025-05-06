@@ -5,8 +5,8 @@ class ServicioRepository {
 
     // Insert Servicio
     static async add(servicio: Servicio) {
-        const sql = 'INSERT INTO servicio (nombre_servicio, descripcion_servicio, precio_servicio, precio_total) VALUES (?, ?, ?, ?)';
-        const values = [servicio.nombre_servicio, servicio.descripcion_servicio, servicio.precio_servicio, servicio.precio_total];
+        const sql = 'INSERT INTO servicio (nombre_servicio, descripcion_servicio, precio_servicio) VALUES (?, ?, ?)';
+        const values = [servicio.nombre_servicio, servicio.descripcion_servicio, servicio.precio_servicio];
         return db.execute(sql, values);
     }
 
