@@ -12,12 +12,15 @@ import AdministradorDelete from "./routes/Administrador/AdministradorDelete";
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
 import CategoriaUpdate from './routes/Categoria/CategoriaUpdate';
+import CategoriaDelete from './routes/Categoria/CategoriaDelete';
 
 //import cliente
 import ClienteRegister from './routes/Cliente/ClienteRegister';
 import ClienteLogin from "./routes/Cliente/ClienteLogin";
 import ClienteDelete from './routes/Cliente/ClienteDelete';
 import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
+import ClienteGet from "./routes/Cliente/ClienteGet";
+import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
 
 //import contrato
 import ContratoRegister from './routes/Contrato/ContratoRegister';
@@ -31,10 +34,13 @@ import EmpleadoRegister from './routes/Empleado/EmpleadoRegister';
 import EmpleadoLogin from './routes/Empleado/EmpleadoLogin';
 import EmpleadoUpdate from './routes/Empleado/EmpleadoUpdate';
 import EmpleadoDelete from './routes/Empleado/EmpleadoDelete';
+import EmpleadoGet from './routes/Empleado/EmpleadoGet';
+import EmpleadoGetAll from './routes/Empleado/EmpleadoGetAll';
 
 //import factura
 import FacturaRegister from './routes/Factura/FacturaRegister';
 import FacturaUpdate from './routes/Factura/FacturaUpdate';
+import FacturaGet from './routes/Factura/FacturaGet';
 
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
@@ -61,6 +67,8 @@ import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
 import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
 import TecnicoUpdate from './routes/Tecnico/TecnicoUpdate';
 import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
+import TecnicoGet from './routes/Tecnico/TecnicoGet';
+import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
@@ -84,27 +92,35 @@ app.use('/AdminDelete', AdministradorDelete);
 //CATEGORIA
 app.use('/CategoriaRegister', CategoriaRegister);
 app.use('/CategoriaUpdate', CategoriaUpdate);
+app.use('/CategoriaDelete', CategoriaDelete);
 
 //CLIENTE
 app.use('/ClienteRegister', ClienteRegister);
 app.use('/ClienteLogin', ClienteLogin);
 app.use('/CLienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
+app.use('/ClienteGet', ClienteGet);
+app.use('/ClienteGetAll', ClienteGetAll);
 
 //CONTRATO
 app.use('/ContratoRegister', ContratoRegister);
 app.use('/ContratoUpdate', ContratoUpdate);
 app.use('/ContratoDelete', ContratoDelete);
+app.use('/ContratoGet', ContratoGet)
+app.use('/ContratoGetAll', ContratoGetAll)
 
 //EMPLEADO
 app.use('/EmpleadoRegister', EmpleadoRegister);
 app.use('/EmpleadoLogin', EmpleadoLogin);
 app.use('/EmpleadoUpdate', EmpleadoUpdate);
 app.use('/EmpleadoDelete', EmpleadoDelete);
+app.use('/EmpleadoGet', EmpleadoGet);
+app.use('/EmpleadoGetAll', EmpleadoGetAll);
 
 //FACTURA
 app.use('/FacturaRegister', FacturaRegister);
 app.use('/FacturaUpdate', FacturaUpdate);
+app.use('/FacturaGet', FacturaGet);
 
 //PEDIDO PRODUCTO
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
@@ -131,6 +147,8 @@ app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoLogin', TecnicoLogin);
 app.use('/TecnicoUpdate', TecnicoUpdate);
 app.use('/TecnicoDelete', TecnicoDelete);
+app.use('/TecnicoGet', TecnicoGet);
+app.use('/TecnicoGetAll', TecnicoGetAll);
 
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
