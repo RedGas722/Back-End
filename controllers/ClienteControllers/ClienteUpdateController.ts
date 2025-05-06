@@ -9,10 +9,11 @@ let ClienteUpdate = async (req: Request, res: Response) => {
       nombre_cliente,
       nuevo_correo_cliente,
       telefono_cliente,
+      direccion_cliente,
       contraseña_cliente,
       correo_cliente
     } = req.body;
-    const updateCliente = await ClienteServices.ClienteUpdate(new Cliente(nombre_cliente, nuevo_correo_cliente, telefono_cliente, contraseña_cliente), correo_cliente as string);
+    const updateCliente = await ClienteServices.ClienteUpdate(new Cliente(nombre_cliente, nuevo_correo_cliente, telefono_cliente, direccion_cliente, contraseña_cliente), correo_cliente as string);
     return res.status(201).json(
       { status: 'update ok'}
     );
