@@ -16,15 +16,18 @@ import CategoriaUpdate from './routes/Categoria/CategoriaUpdate';
 //import cliente
 import ClienteRegister from './routes/Cliente/ClienteRegister';
 import ClienteLogin from "./routes/Cliente/ClienteLogin";
+import ClienteChangePassword from './routes/Cliente/ClienteChangePassword';
 import ClienteDelete from './routes/Cliente/ClienteDelete';
 import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
+import ClienteGet from "./routes/Cliente/ClienteGet";
+import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
 
 //import contrato
 import ContratoRegister from './routes/Contrato/ContratoRegister';
 import ContratoUpdate from './routes/Contrato/ContratoUpdate';
 import ContratoDelete from "./routes/Contrato/ContratoDelete";
-import ContratoGet from "./routes/Contrato/ContratoGet";
-import ContratoGetAll from "./routes/Contrato/ContratoGetAll";
+import ContratoGet from "./routes/Contrato/ContratoGet";  
+import ContratoGetAll from "./routes/Contrato/ContratoGetAll";    
 
 //import empleado
 import EmpleadoRegister from './routes/Empleado/EmpleadoRegister';
@@ -87,11 +90,16 @@ app.use('/CategoriaUpdate', CategoriaUpdate);
 //CLIENTE
 app.use('/ClienteRegister', ClienteRegister);
 app.use('/ClienteLogin', ClienteLogin);
+app.use('/ClienteChangePassword', ClienteChangePassword);
 app.use('/CLienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
+app.use('/ClienteGet', ClienteGet);
+app.use('/ClienteGetAll', ClienteGetAll);
 
 //CONTRATO
 app.use('/ContratoRegister', ContratoRegister);
+app.use('/ContratoGet', ContratoGet);
+app.use('/ContratoGetAll', ContratoGetAll);
 app.use('/ContratoUpdate', ContratoUpdate);
 app.use('/ContratoDelete', ContratoDelete);
 
