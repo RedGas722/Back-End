@@ -17,6 +17,7 @@ import CategoriaUpdate from './routes/Categoria/CategoriaUpdate';
 import ClienteRegister from './routes/Cliente/ClienteRegister';
 import ClienteLogin from "./routes/Cliente/ClienteLogin";
 import ClienteChangePassword from './routes/Cliente/ClienteChangePassword';
+import ClienteEmail from './routes/Cliente/ClienteEmail';
 import ClienteDelete from './routes/Cliente/ClienteDelete';
 import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
 import ClienteGet from "./routes/Cliente/ClienteGet";
@@ -89,6 +90,7 @@ app.use('/CategoriaUpdate', CategoriaUpdate);
 //CLIENTE
 app.use('/ClienteRegister', ClienteRegister);
 app.use('/ClienteLogin', ClienteLogin);
+app.use('/ClienteEmail', ClienteEmail);
 app.use('/ClienteChangePassword', ClienteChangePassword);
 app.use('/CLienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);

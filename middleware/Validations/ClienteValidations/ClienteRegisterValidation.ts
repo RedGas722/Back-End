@@ -1,7 +1,7 @@
 import { check, validationResult, ValidationChain } from 'express-validator';
-import { Request, Response, NextFunction } from 'express'; // Necesitas los tipos de Express
+import { Request, Response, NextFunction } from 'express'; 
 
-export const ClienteRegisterValidatorParams: ValidationChain[] = [
+export const clienteRegisterValidatorParams: ValidationChain[] = [
   check('nombre_cliente').isString(),
   check('correo_cliente').isEmail(),
   check('telefono_cliente').isString().isLength({ min: 10, max: 10 }),
