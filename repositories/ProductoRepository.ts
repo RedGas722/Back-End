@@ -5,7 +5,7 @@ class ProductoRepository {
 
     // Insert Producto
     static async add(producto: Producto) {
-        const sql = 'INSERT INTO producto (nombre_producto, descripcion_producto, precio_producto, stock, imagen) VALUES (?, ?, ?, ?)';
+        const sql = 'INSERT INTO producto (nombre_producto, descripcion_producto, precio_producto, stock, imagen) VALUES (?, ?, ?, ?, ?)';
         const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.imagen];
         return db.execute(sql, values);
     }
@@ -31,9 +31,11 @@ class ProductoRepository {
     }
 
     // Update Producto
-    static async update(producto: Producto) {
-        const sql = 'UPDATE producto SET nombre_producto = ?, desc_producto = ?, precio_producto = ?, stock = ?, imagen = ? WHERE nombre_producto = ?';
-        const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.imagen, producto.nombre_producto];
+    static async update(producto: Producto, nombre_producto: string) {
+        
+        const sql = 'UPDATE producto SET nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, stock = ?, imagen = ? WHERE nombre_producto = ?';
+        const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.imagen, nombre_producto];
+        console.log(values);
         return db.execute(sql, values);
     }
 

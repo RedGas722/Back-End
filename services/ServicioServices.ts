@@ -5,13 +5,17 @@ import ServicioRepository from "../repositories/ServicioRepository";
 
 class ServicioServices {
     
+    // Servicio Register
     static async ServicioRegister(servicio: Servicio) {
         return await ServicioRepository.add(servicio);
     }
-    static async getbyNombre(nombre_servicio: string) {
-        return await ServicioRepository.getByName(nombre_servicio);
+
+    // Servicio Update
+    static async ServicioUpdate(servicio: Servicio, nuevo_nombre_servicio: string) { 
+        return await ServicioRepository.update(servicio, nuevo_nombre_servicio);
     }
 
+    // Servicio Delete
     static async ServicioGet(nombre_servicio: string) {
         return await ServicioRepository.getByName(nombre_servicio);
     }

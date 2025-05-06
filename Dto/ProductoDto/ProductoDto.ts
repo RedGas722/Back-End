@@ -33,7 +33,7 @@ class Producto {
     }
 
     get stock(): number {
-        return this._stock;
+        return this._stock
     }
 
     get imagen(): Buffer {
