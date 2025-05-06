@@ -1,6 +1,6 @@
 import express from "express";
 import EmpleadoRegister from '../../controllers/EmpleadoController/EmpleadoRegisterController';
-import { empleadoRegisterValidation, validateEmpleadoRegister } from '../../middleware/Validations/EmpleaoValidations/EmpleadoRegisterValidation';
+import { empleadoRegisterValidation, validateEmpleadoRegister } from '../../middleware/Validations/EmpleadoValidations/EmpleadoRegisterValidation';
 
 const router = express.Router();
 

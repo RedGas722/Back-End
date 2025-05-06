@@ -16,7 +16,7 @@ class CategoriaRepository {
         return db.execute(sql);
     }
 
-    static async getByName(nombre_categoria: string) {
+    static async ygetByName(nombre_categoria: string) {
         const sql = 'SELECT * FROM categoria WHERE nombre_categoria = ?';
         const values = [nombre_categoria];
         return db.execute(sql, values);

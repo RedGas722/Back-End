@@ -20,6 +20,10 @@ class ProductoServices {
         return await ProductoRepository.getAll();
     }
 
+    static async ProductoFilterByName(nombre_producto: string) {
+        return await ProductoRepository.filterByName(nombre_producto);
+    }
+
 }
 
 export default ProductoServices;

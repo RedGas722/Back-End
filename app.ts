@@ -15,6 +15,7 @@ import ProductoRegister from './routes/Producto/ProductoRegister';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
+import ProductoFilterByName from './routes/Producto/ProductoFilterByName';
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
@@ -30,6 +31,7 @@ import ContratoGetAll from "./routes/Contrato/ContratoGetAll";
 
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
+import CategoriaFilterByCategory from './routes/Categoria/CategoriaFilterByName';
 
 //import carritoProducto
 import CarritoProductoRegister from './routes/CarritoProducto/CarritoProductoRegister';
@@ -89,6 +91,7 @@ app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoGet', ProductoGet);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoGetAll', ProductoGetAll);
+app.use('/ProductoFilterByName', ProductoFilterByName);
 
 //rutas servicio
 app.use('/ServicioRegister', ServicioRegister);
@@ -104,6 +107,8 @@ app.use('/ContratoGetAll', ContratoGetAll);
 
 //rutas categoria
 app.use('/CategoriaRegister', CategoriaRegister);
+app.use('/CategoriaFilterByCategory', CategoriaFilterByCategory);
+
 
 //rutas carritoProducto
 app.use('/CarritoProductoRegister', CarritoProductoRegister);
