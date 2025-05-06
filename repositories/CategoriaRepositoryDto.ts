@@ -23,9 +23,9 @@ class CategoriaRepository {
     }
 
     // Update Categoria
-    static async update(categoria: Categoria) {
+    static async update(categoria: Categoria, new_nombre_categoria: string) {
         const sql = 'UPDATE categoria SET nombre_categoria = ? WHERE nombre_categoria = ?';
-        const values = [categoria.nombre_categoria, categoria.nombre_categoria];
+        const values = [new_nombre_categoria, categoria.nombre_categoria];
         return db.execute(sql, values);
     }
 

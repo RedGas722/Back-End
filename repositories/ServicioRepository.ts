@@ -25,9 +25,9 @@ class ServicioRepository {
     }
 
     // Update Servicio
-    static async update(servicio: Servicio) {
-        const sql = 'UPDATE servicio SET nombre_servicio = ?, descripcion_servicio = ?, precio_servicio = ?, precio_total = ? WHERE nombre_servicio = ?';
-        const values = [servicio.nombre_servicio, servicio.descripcion_servicio, servicio.precio_servicio, servicio.precio_total, servicio.nombre_servicio];
+    static async update(servicio: Servicio, nuevo_nombre_servicio: string) {
+        const sql = 'UPDATE servicio SET nombre_servicio = ?, descripcion_servicio = ?, precio_servicio = ? WHERE nombre_servicio = ?';
+        const values = [nuevo_nombre_servicio, servicio.descripcion_servicio, servicio.precio_servicio, servicio.nombre_servicio];
         return db.execute(sql, values);
     }
 

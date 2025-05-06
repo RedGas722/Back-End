@@ -23,9 +23,9 @@ class FacturaRepository {
     }
 
     // Update Factura
-    static async update(factura: Factura) {
-        const sql = 'UPDATE factura SET id_cliente = ?, id_empleado = ? WHERE fecha_factura = ?';
-        const values = [factura.id_cliente, factura.id_empleado, factura.fecha_factura,];
+    static async update(estado_factura: string, id_factura: number) {
+        const sql = 'CALL actualizar_Estado(?)';
+        const values = [id_factura];
         return db.execute(sql, values);
     }
 
