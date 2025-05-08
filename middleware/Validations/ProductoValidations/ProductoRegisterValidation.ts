@@ -1,5 +1,5 @@
 import { check, validationResult, ValidationChain } from 'express-validator';
-import { Request, Response, NextFunction } from 'express'; // Necesitas los tipos de Express
+import { Request, Response, NextFunction } from 'express'; 
 
 export const ProductoRegisterValidatorParams: ValidationChain[] = [
   check('nombre_producto').isString(),

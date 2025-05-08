@@ -25,8 +25,6 @@ class ClienteRepository {
         const values = [correo_cliente];
 
         const [rows] = await db.execute(sql, values);
-        
-        console.log(rows); 
         return rows; 
 
     }
