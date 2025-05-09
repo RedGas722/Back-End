@@ -19,7 +19,6 @@ class TecnicoRepository {
             tecnico.contraseña_tecnico,
             tecnico.imagen
         ];
-
         return db.execute(sql, values);
     }
 

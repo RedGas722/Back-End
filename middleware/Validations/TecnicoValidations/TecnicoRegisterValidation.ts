@@ -14,7 +14,6 @@ export const tecnicoRegisterValidation: ValidationChain[] = [
   check('telefono_tecnico')
     .isLength({ min: 10, max: 15 })
     .withMessage('El campo "telefono_tecnico" debe tener entre 10 y 15 caracteres.'),
-
   check('contrasena_tecnico')
     .isLength({ min: 8, max: 15 })
     .withMessage('El campo "contrasena_tecnico" debe tener entre 8 y 15 caracteres.'),
