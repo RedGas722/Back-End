@@ -28,7 +28,6 @@ class ProductoRepository {
         
         const sql = 'UPDATE producto SET nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, stock = ?, imagen = ? WHERE nombre_producto = ?';
         const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.imagen, nombre_producto];
-        console.log(values);
         return db.execute(sql, values);
     }
 
