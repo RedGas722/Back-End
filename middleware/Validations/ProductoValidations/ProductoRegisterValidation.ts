@@ -1,24 +1,39 @@
 import { check, validationResult, ValidationChain } from 'express-validator';
-import { Request, Response, NextFunction } from 'express'; 
+import { Request, Response, NextFunction } from 'express';
 
 export const ProductoRegisterValidatorParams: ValidationChain[] = [
-  check('nombre_producto').isString(),
-  check('precio_producto').isDecimal().isLength({ min: 1, max: 15 }),
-  check('descripcion_producto').isString(),
-  check('stock').isInt({ gt: 0 }).isLength({ min: 1, max: 15 }),
-  check('imagen')
+  check('nombre_producto')
+    .isString().withMessage('El nombre debe ser una cadena.')
+    .isLength({ min: 1, max: 100 }).withMessage('El nombre debe tener entre 1 y 100 caracteres.'),
+  
+  check('precio_producto')
+    .isDecimal().withMessage('El precio debe ser un número decimal.'),
+
+  check('descripcion_producto')
+    .isString().withMessage('La descripción debe ser una cadena.'),
+
+  check('stock')
+    .isInt({ gt: 0 }).withMessage('El stock debe ser un número entero mayor que 0.'),
+
+    check('imagen')
     .custom((value, { req }) => {
       if (!req.file) {
         throw new Error('La imagen es obligatoria.');
       }
-
+  
       const tiposPermitidos = ['image/jpeg', 'image/png', 'image/webp'];
       if (!tiposPermitidos.includes(req.file.mimetype)) {
         throw new Error('Tipo de imagen no permitido. Solo JPG, PNG o WEBP.');
       }
-
+  
+      const maxSizeInBytes = 64 * 1024; 
+      if (req.file.size > maxSizeInBytes) {
+        throw new Error('La imagen no debe superar los 64KB.');
+      }
+  
       return true;
-    }),
+    })
+  
 ];
 
 export function ProductoRegisterValidator(req: Request, res: Response, next: NextFunction) {
