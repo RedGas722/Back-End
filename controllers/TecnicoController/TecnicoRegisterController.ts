@@ -43,4 +43,4 @@ let TecnicoRegister = async (req: Request, res: Response) => {
   }
 };
 
-export default [upload.single("imagen"), TecnicoRegister];
+export default TecnicoRegister;

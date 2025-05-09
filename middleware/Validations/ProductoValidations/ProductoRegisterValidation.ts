@@ -33,7 +33,6 @@ export const ProductoRegisterValidatorParams: ValidationChain[] = [
   
       return true;
     })
-  
 ];
 
 export function ProductoRegisterValidator(req: Request, res: Response, next: NextFunction) {
