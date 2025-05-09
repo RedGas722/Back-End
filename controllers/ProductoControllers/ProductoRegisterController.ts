@@ -1,4 +1,3 @@
-// src/controllers/ProductoControllers/ProductoRegisterController.ts
 import { Request, Response } from "express";
 import ProductoServices from "../../services/ProductoServices";
 import Producto from "../../Dto/ProductoDto/ProductoDto";

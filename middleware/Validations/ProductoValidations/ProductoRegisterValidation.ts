@@ -26,7 +26,7 @@ export const ProductoRegisterValidatorParams: ValidationChain[] = [
         throw new Error('Tipo de imagen no permitido. Solo JPG, PNG o WEBP.');
       }
   
-      const maxSizeInBytes = 64 * 1024; 
+      const maxSizeInBytes = 8 * 1024 * 1024 ; 
       if (req.file.size > maxSizeInBytes) {
         throw new Error('La imagen no debe superar los 64KB.');
       }
