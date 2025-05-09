@@ -35,4 +35,4 @@ let ProductoUpdate = async (req: Request, res: Response) => {
     }
 }
 
-export default [upload.single("imagen"), ProductoUpdate];
+export default ProductoUpdate;
