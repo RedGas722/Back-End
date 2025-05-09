@@ -23,6 +23,13 @@ class ProductoRepository {
         return rows;
     }
 
+    static async filterByName(nombre_producto: string) {
+        const sql = "SELECT * FROM producto WHERE nombre_producto LIKE ?";
+        const values = [`%${nombre_producto}%`];
+        const [rows] = await db.execute(sql, values);
+        return rows;
+    }
+
     // Update Producto
     static async update(producto: Producto, nombre_producto: string) {
         

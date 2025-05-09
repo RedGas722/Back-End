@@ -17,6 +17,7 @@ import CategoriaDelete from './routes/Categoria/CategoriaDelete';
 //import cliente
 import ClienteRegister from './routes/Cliente/ClienteRegister';
 import ClienteLogin from "./routes/Cliente/ClienteLogin";
+import ClienteChangePassword from './routes/Cliente/ClienteChangePassword';
 import ClienteDelete from './routes/Cliente/ClienteDelete';
 import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
 import ClienteGet from "./routes/Cliente/ClienteGet";
@@ -26,8 +27,8 @@ import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
 import ContratoRegister from './routes/Contrato/ContratoRegister';
 import ContratoUpdate from './routes/Contrato/ContratoUpdate';
 import ContratoDelete from "./routes/Contrato/ContratoDelete";
-import ContratoGet from "./routes/Contrato/ContratoGet";
-import ContratoGetAll from "./routes/Contrato/ContratoGetAll";
+import ContratoGet from "./routes/Contrato/ContratoGet";  
+import ContratoGetAll from "./routes/Contrato/ContratoGetAll";    
 
 //import empleado
 import EmpleadoRegister from './routes/Empleado/EmpleadoRegister';
@@ -50,6 +51,7 @@ import PedidoServicioRegister from './routes/PedidoServicio/PedidoServicioRegist
 
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
+import ProductoFilterByName from './routes/Producto/ProductoFilterByName';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
 import ProductoDelete from './routes/Producto/ProductoDelete';
@@ -97,6 +99,7 @@ app.use('/CategoriaDelete', CategoriaDelete);
 //CLIENTE
 app.use('/ClienteRegister', ClienteRegister);
 app.use('/ClienteLogin', ClienteLogin);
+app.use('/ClienteChangePassword', ClienteChangePassword);
 app.use('/CLienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
 app.use('/ClienteGet', ClienteGet);
@@ -104,6 +107,8 @@ app.use('/ClienteGetAll', ClienteGetAll);
 
 //CONTRATO
 app.use('/ContratoRegister', ContratoRegister);
+app.use('/ContratoGet', ContratoGet);
+app.use('/ContratoGetAll', ContratoGetAll);
 app.use('/ContratoUpdate', ContratoUpdate);
 app.use('/ContratoDelete', ContratoDelete);
 app.use('/ContratoGet', ContratoGet)
@@ -134,6 +139,7 @@ app.use('/ProductoGet', ProductoGet);
 app.use('/ProductoUpdate', ProductoUpdate);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoGetAll', ProductoGetAll);
+app.use('/ProductoFilterByName', ProductoFilterByName);
 
 //SERVICIO
 app.use('/ServicioRegister', ServicioRegister);
