@@ -3,7 +3,7 @@ import EmpleadoServices from "../../services/EmpleadoServices";
 
 let EmpleadoGet = async (req: Request, res: Response) => {
     try {
-        const { correo_empleado } = req.body;
+        const { correo_empleado } = req.query;
     
         // Verifica que los campos requeridos no estén vacíos
         if (!correo_empleado) {
