@@ -22,8 +22,8 @@ class TecnicoServices {
     }
 
     // Tecnico Update
-    static async TecnicoUpdate(tecnico: Tecnico, nuevo_correo_tecnico: string) { 
-        return await TecnicoRepository.update(tecnico, nuevo_correo_tecnico); 
+    static async TecnicoUpdate(tecnico: Tecnico, correo_tecnico: string) { 
+        return await TecnicoRepository.update(tecnico, correo_tecnico); 
     }
 
     // Tecnico Delete

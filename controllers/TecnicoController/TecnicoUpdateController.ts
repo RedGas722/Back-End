@@ -9,14 +9,12 @@ const upload = multer({ storage: storage })
 let TecnicoUpdate = async (req: Request, res: Response) => {
   try {
     const {
-        correo_tecnico, 
         nombre_tecnico,
         nuevo_correo_tecnico,
-        telefono_tecnico
+        contrasena_tecnico,
+        telefono_tecnico,
+        correo_tecnico
     } = req.body;
-
-    //por problemas de la ñ
-    const contraseña_tecnico = req.body['contraseÃ±a_tecnico'] || req.body.contraseña_tecnico;
     
     if (!req.file) {
       return res.status(400).json({ error: 'No se ha enviado ningún archivo de imagen.' })
@@ -26,12 +24,12 @@ let TecnicoUpdate = async (req: Request, res: Response) => {
     const updateTecnico = await TecnicoServices.TecnicoUpdate(
       new Tecnico(
         nombre_tecnico,
-        correo_tecnico,
+        nuevo_correo_tecnico,
         telefono_tecnico,
-        contraseña_tecnico,
+        contrasena_tecnico,
         imagenBuffer
       ),
-      nuevo_correo_tecnico as string
+      correo_tecnico as string
     );
 
     return res.status(201).json({ status: 'register ok'});
