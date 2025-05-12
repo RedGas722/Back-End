@@ -4,9 +4,9 @@ import { Request, Response, NextFunction } from 'express';
 
 // Validaciones para obtener una factura por ID de cliente
 export const facturaGetValidation: ValidationChain[] = [
-  check('id_cliente')
+  check('id_factura')
     .isInt({ gt: 0 })
-    .withMessage('El campo "id_cliente" debe ser un número entero positivo.')
+    .withMessage('El campo "id_factura" debe ser un número entero positivo.')
 ];
 
 

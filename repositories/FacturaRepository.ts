@@ -16,16 +16,17 @@ class FacturaRepository {
         return db.execute(sql);
     }
 
-    static async getById(id_cliente: number) {
-        const sql = 'SELECT * FROM factura WHERE id_cliente = ?';
-        const values = [id_cliente];
-        return db.execute(sql, values);
+    static async getById(id_factura: number) {
+        const sql = 'SELECT * FROM factura WHERE id_factura = ?';
+        const values = [id_factura];
+        const [rows] = await db.execute(sql, values);
+        return rows;
     }
 
     // Update Factura
     static async update(estado_factura: string, id_factura: number) {
-        const sql = 'CALL actualizar_Estado(?)';
-        const values = [id_factura];
+        const sql = 'UPDATE factura SET estado_factura = ? WHERE id_factura = ?';
+        const values = [estado_factura, id_factura];
         return db.execute(sql, values);
     }
 

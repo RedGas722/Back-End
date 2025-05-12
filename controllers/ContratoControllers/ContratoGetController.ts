@@ -9,7 +9,7 @@ let ContratoGet = async (req: Request, res: Response) => {
             return res.status(400).json({ status: 'Missing required fields' });
         }
 
-        const idEmpleado = parseInt(id_empleado as string, 11);
+        const idEmpleado = parseInt(id_empleado as string);
 
         const contrato = await ContratoServices.ContratoGet(idEmpleado);
 
