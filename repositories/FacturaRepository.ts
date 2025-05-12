@@ -5,7 +5,7 @@ class FacturaRepository {
 
     // Insert Factura
     static async add(factura: Factura) {
-        const sql = 'CALL registrar_Factura(?, ?, ?)';
+        const sql = 'INSERT INTO factura (id_cliente, id_empleado, fecha_factura) VALUES (?, ?, ?)';
         const values = [factura.id_cliente, factura.id_empleado, factura.fecha_factura];
         return db.execute(sql, values);
     }
