@@ -23,9 +23,9 @@ class TecnicoRepository {
     }
 
     // Update Tecnico
-    static async update(tecnico: Tecnico, nuevo_correo_tecnico: string) {
-        const sql = 'UPDATE tecnico SET nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ?, contraseña_tecnico = ? WHERE correo_tecnico = ?';
-        const values = [tecnico.nombre_tecnico, nuevo_correo_tecnico, tecnico.telefono_tecnico, tecnico.contraseña_tecnico, tecnico.correo_tecnico];
+    static async update(tecnico: Tecnico, correo_tecnico: string) {
+        const sql = 'UPDATE tecnico SET nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ?, contraseña_tecnico = ? , imagen = ? WHERE correo_tecnico = ?';
+        const values = [tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, tecnico.contraseña_tecnico, tecnico.imagen, correo_tecnico];
         return db.execute(sql, values);
     }
 
