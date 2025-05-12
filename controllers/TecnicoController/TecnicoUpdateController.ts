@@ -45,4 +45,4 @@ let TecnicoUpdate = async (req: Request, res: Response) => {
   }
 };
 
-export default [upload.single("imagen"), TecnicoUpdate];
+export default TecnicoUpdate;
