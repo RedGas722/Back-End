@@ -23,6 +23,7 @@ class TecnicoServices {
 
     // Tecnico Update
     static async TecnicoUpdate(tecnico: Tecnico, correo_tecnico: string) { 
+        tecnico.contraseña_tecnico = await generateHash(tecnico.contraseña_tecnico);
         return await TecnicoRepository.update(tecnico, correo_tecnico); 
     }
 
