@@ -23,6 +23,7 @@ import ClienteChangePassword from './routes/Cliente/ClienteChangePassword';
 import ClienteEmail from './routes/Cliente/ClienteEmail';
 import ClienteDelete from './routes/Cliente/ClienteDelete';
 import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
+import ClienteDataUpdate from "./routes/Cliente/ClienteDataUpdate";
 import ClienteGet from "./routes/Cliente/ClienteGet";
 import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
 
@@ -108,6 +109,7 @@ app.use('/ClienteEmail', ClienteEmail);
 app.use('/ClienteChangePassword', ClienteChangePassword);
 app.use('/CLienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
+app.use('/ClienteDataUpdate', ClienteDataUpdate);
 app.use('/ClienteGet', ClienteGet);
 app.use('/ClienteGetAll', ClienteGetAll);
 

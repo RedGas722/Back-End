@@ -2,6 +2,7 @@ import db from '../config/config-db';
 import Cliente from '../Dto/ClienteDto/ClienteDto';
 import bcrypt from 'bcryptjs';
 import AuthCliente from '../Dto/ClienteDto/ClienteAuthDto';
+import DataCliente from '../Dto/ClienteDto/DataClienteDto';
 
 class ClienteRepository {
 
@@ -31,6 +32,13 @@ class ClienteRepository {
     static async update(cliente: Cliente, correo_cliente: string){
         const sql = 'UPDATE cliente SET nombre_cliente = ?, correo_cliente = ?, telefono_cliente = ?, direccion_cliente = ?, contraseña_cliente = ? WHERE correo_cliente = ?';
         const values = [cliente.nombre_cliente, cliente.correo_cliente, cliente.telefono_cliente, cliente.direccion_cliente, cliente.contraseña_cliente, correo_cliente];
+        return db.execute(sql, values);
+    }
+
+    // Update DataCliente 
+    static async updateData(dataCliente: DataCliente, correo_cliente: string){
+        const sql = 'UPDATE cliente SET nombre_cliente = ?, correo_cliente = ?, telefono_cliente = ?, direccion_cliente = ? WHERE correo_cliente = ?';
+        const values = [dataCliente.nombre_cliente, dataCliente.correo_cliente, dataCliente.telefono_cliente, dataCliente.direccion_cliente, correo_cliente];
         return db.execute(sql, values);
     }
 
