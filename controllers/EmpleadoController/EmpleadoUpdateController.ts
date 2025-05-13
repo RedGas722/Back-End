@@ -5,12 +5,12 @@ import EmpleadoServices from "../../services/EmpleadoServices";
 let EmpleadoUpdate = async (req: Request, res: Response) => {
   try {
      const {
-        correo_empleado,
         nombre_empleado,
         nuevo_correo_empleado,
         telefono_empleado,
         direccion_empleado,
         contraseña_empleado,
+        correo_empleado
     } = req.body;
 
     // Verifica que los campos requeridos no estén vacíos
@@ -21,12 +21,12 @@ let EmpleadoUpdate = async (req: Request, res: Response) => {
     const updateEmpleado = await EmpleadoServices.EmpleadoUpdate(
       new Empleado(
         nombre_empleado,
-        correo_empleado,
+        nuevo_correo_empleado,
         telefono_empleado,
         direccion_empleado,
         contraseña_empleado
       ),
-      nuevo_correo_empleado as string
+      correo_empleado as string
     );
     return res.status(201).json(
       { status: 'register ok', data: updateEmpleado }

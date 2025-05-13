@@ -3,16 +3,16 @@ import FacturaServices from "../../services/FacturaServices";
 
 let FacturaGet = async (req: Request, res: Response) => {
     try {
-        const { id_cliente } = req.query;
+        const { id_factura } = req.query;
     
         // Verifica que los campos requeridos no estén vacíos
-        if (!id_cliente) {
+        if (!id_factura) {
             return res.status(400).json({ status: 'Missing required fields' });
         }
         
-        const idCliente = parseInt(id_cliente as string, 11);
+        const idFactura = parseInt(id_factura as string);
         
-        const factura = await FacturaServices.FacturaGet(idCliente);
+        const factura = await FacturaServices.FacturaGet(idFactura);
     
         if (!factura) {
             return res.status(404).json({ status: 'Factura not found' });

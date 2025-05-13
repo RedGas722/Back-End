@@ -42,7 +42,6 @@ class TecnicoRepository {
             const sql = 'SELECT * FROM tecnico WHERE correo_tecnico = ?';
             const values = [correo_tecnico];
             const [rows] = await db.execute(sql, values);
-            console.log(rows); 
             return rows; 
         }
 

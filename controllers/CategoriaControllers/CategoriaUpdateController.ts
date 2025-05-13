@@ -6,10 +6,10 @@ import CategoriaServices from "../../services/CategoriaServices";
 let CategoriaUpdate = async (req: Request, res: Response) => {
   try {
     const {
-      new_nombre_categoria,
+      nuevo_nombre_categoria,
       nombre_categoria
     } = req.body;
-    const updateCategoria = await CategoriaServices.CategoriaUpdate(new Categoria(nombre_categoria), new_nombre_categoria as string);
+    const updateCategoria = await CategoriaServices.CategoriaUpdate(new Categoria(nuevo_nombre_categoria), nombre_categoria as string);
     return res.status(201).json(
       { status: 'register ok'}
     );

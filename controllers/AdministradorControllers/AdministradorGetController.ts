@@ -10,15 +10,15 @@ let AdministradorGet = async (req: Request, res: Response) => {
         return res.status(400).json({ status: 'Missing required fields' });
         }
     
-        const cliente = await AdministradorServices.AdministradorGet(correo_admin as string);
+        const admin = await AdministradorServices.AdministradorGet(correo_admin as string);
     
-        if (!cliente) {
-        return res.status(404).json({ status: 'Empleado not found' });
+        if (!admin) {
+        return res.status(404).json({ status: 'Administrador not found' });
         }
     
-        return res.status(200).json({ status: 'get ok', data: cliente });
+        return res.status(200).json({ status: 'get ok', data: admin });
     } catch (error: any) {
-        console.error("Error en la obtención del empleado:", error);
+        console.error("Error en la obtención del administrador:", error);
         return res.status(500).json({ status: 'Internal server error', error: error.message });
     }
     }

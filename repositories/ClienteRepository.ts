@@ -23,7 +23,6 @@ class ClienteRepository {
     static async getByEmail(correo_cliente: string){
         const sql = 'SELECT * FROM cliente WHERE correo_cliente = ?';
         const values = [correo_cliente];
-
         const [rows] = await db.execute(sql, values);
         return rows; 
 
