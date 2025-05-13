@@ -1,7 +1,7 @@
 import { check, validationResult, ValidationChain } from 'express-validator';
-import { Request, Response, NextFunction } from 'express'; // Necesitas los tipos de Express
+import { Request, Response, NextFunction } from 'express'; 
 
-export const ClienteDeleteValidatorParams: ValidationChain[] = [
+export const clienteDeleteValidatorParams: ValidationChain[] = [
   check('correo_cliente').isEmail()
 ];
 

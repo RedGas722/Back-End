@@ -24,6 +24,8 @@ class CategoriaServices {
     static async CategoriaDelete(nombre_categoria: string) {
         return await CategoriaRepository.delete(nombre_categoria);
     }
+    
+    
 
     static async CategoriaByName(nombre_categoria: string) {
         return await CategoriaRepository.getByName(nombre_categoria);

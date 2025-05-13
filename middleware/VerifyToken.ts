@@ -12,7 +12,7 @@ interface JwtPayload {
 
 
 const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
-    let authorization = req.get('Authorization');    
+    let authorization = req.get('Authorization') || req.get('authorization');    
     if (authorization) {
         const token = authorization.split(' ')[1]        
         if (!token) {
