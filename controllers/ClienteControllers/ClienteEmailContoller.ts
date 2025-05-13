@@ -16,7 +16,7 @@ let ClienteEmail = async (req: Request, res: Response) => {
     if (email.logged) {
       return res.status(200).json({
         status: email.status,
-        token: generateToken({id: email.id, name: email.name, email: email.email, telefono: email.telefono}, process.env.KEY_TOKEN, 5)
+        token: generateToken({id: email.id, name: email.name, email: email.email, telefono: email.telefono}, process.env.KEY_TOKEN, 10)
       });
     }
 
