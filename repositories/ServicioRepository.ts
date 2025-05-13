@@ -20,7 +20,6 @@ class ServicioRepository {
         const sql = 'SELECT * FROM servicio WHERE nombre_servicio = ?';
         const values = [nombre_servicio];
         const [rows] = await db.execute(sql, values);
-        console.log(rows);
         return rows;
     }
 
