@@ -25,6 +25,11 @@ class CategoriaServices {
         return await CategoriaRepository.delete(nombre_categoria);
     }
 
+    static async CategoriaByName(nombre_categoria: string) {
+        return await CategoriaRepository.getByName(nombre_categoria);
+    }
+
+
 }
 
 export default CategoriaServices;

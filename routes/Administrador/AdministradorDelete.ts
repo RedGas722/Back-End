@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 
-router.delete('/',administradorDeleteValidation, validateAdministradorDelete, AdministradorDelete);
+router.delete('/', administradorDeleteValidation, validateAdministradorDelete, AdministradorDelete);
 
 
 export default router;
