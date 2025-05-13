@@ -83,7 +83,7 @@ import profile from './routes/profile';
 dotenv.config();
 const app = express().use(bodyParser.json());
 
-app.use(cors({origin: 'http://localhost:5173', credentials: true,}));
+app.use(cors({origin: 'http://localhost:5174', credentials: true,}));
 
 //--------------- RUTAS -------------------//
 
