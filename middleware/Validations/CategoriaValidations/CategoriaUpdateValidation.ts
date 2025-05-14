@@ -3,12 +3,12 @@ import { Request, Response, NextFunction } from 'express';
 
 // Validaciones para actualizar un categoria por correo
 export const categoriaUpdateValidation: ValidationChain[] = [
-    check('new_nombre_categoria')
-      .isLength({ min: 8, max: 15 })
-      .withMessage('El campo "new nombre categoria" debe ser un correo válido.'),
+    check('nuevo_nombre_categoria')
+      .isString()
+      .withMessage('El campo "new nombre categoria" debe ser de tipo texto correo válido.'),
     check('nombre_categoria')
-      .isLength({ min: 8, max: 15})
-      .withMessage('El campo "nombre categoria" debe ser un correo válido.'),
+      .isString()
+      .withMessage('El campo "nombre categoria" debe ser de tipo texto válido.'),
 
   ];
 

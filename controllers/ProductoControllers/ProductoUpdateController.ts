@@ -25,7 +25,7 @@ let ProductoUpdate = async (req: Request, res: Response) => {
     const updateProducto = await ProductoServices.ProductoUpdate(new Producto(nuevo_nombre_producto, descripcion_producto, precio_producto, stock, imagenBuffer ), nombre_producto as string);
 
     return res.status(201).json(
-        { status: 'register ok'}
+        { status: 'update ok'}
     )
     } catch (error: any) {
       if (error && error.code == "ER_DUP_ENTRY") {

@@ -60,6 +60,7 @@ import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoUpdate from './routes/Producto/ProductoUpdate';
+import ProductoUpdateNI from './routes/Producto/ProductoUpdateNI';
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
@@ -145,6 +146,7 @@ app.use('/PedidoServicioRegister', PedidoServicioRegister);
 app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoGet', ProductoGet);
 app.use('/ProductoUpdate', ProductoUpdate);
+app.use('/ProductoUpdateNI', ProductoUpdateNI);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoGetAll', ProductoGetAll);
 app.use('/ProductoFilterByName', ProductoFilterByName);
