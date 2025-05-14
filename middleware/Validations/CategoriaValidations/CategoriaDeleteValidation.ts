@@ -4,8 +4,8 @@ import { Request, Response, NextFunction } from 'express';
 // Validaciones para eliminar un administrador por correo
 export const categoriaDeleteValidation: ValidationChain[] = [
    check('nombre_categoria')
-    .isLength({ min: 8, max: 15 })
-    .withMessage('El campo "nombre categoria" debe ser un correo válido.'),
+    .isString()
+    .withMessage('El campo "nombre categoria" debe ser tipo texto válido.'),
 
 ];
 
