@@ -80,6 +80,13 @@ import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
 
+//import cart
+import CartAdd from './routes/Cart/CartAdd';
+import CartGet from './routes/Cart/CartGet';
+import CartRemove from './routes/Cart/CartRemove';
+import CartClear from './routes/Cart/CartClear';
+import CartTotal from './routes/Cart/CartTotal';
+
 //import profile
 import profile from './routes/profile';
 
@@ -169,6 +176,14 @@ app.use('/TecnicoGetAll', TecnicoGetAll);
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
 
+//CART
+app.use('/CartAdd', CartAdd);
+app.use('/CartGet', CartGet);
+app.use('/CartRemove', CartRemove);
+app.use('/CartClear', CartClear);
+app.use('/CartTotal', CartTotal)
+
+//PROFILE
 app.use('/Profile', profile);
 
 
