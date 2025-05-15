@@ -13,9 +13,10 @@ class ProductoRepository {
 
     // Get Producto
     static async getAll() {
-        const sql = 'SELECT * FROM producto';
-        return db.execute(sql);
+        const [rows] = await db.execute('SELECT * FROM producto');
+        return rows; 
     }
+
 
     static async getByName(nombre_producto: string) {
         const sql = 'SELECT * FROM producto WHERE nombre_producto = ?';
