@@ -6,7 +6,6 @@ let ProductoGetAll = async (req: Request, res: Response) => {
 
   try {
     const productos = await ProductoServices.ProductoGetAll();
-    console.log(productos)
     return res.json({
       status: "Consult ok",
       data: productos

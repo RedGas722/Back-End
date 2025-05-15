@@ -3,10 +3,6 @@ import ClienteServices from "../../services/ClienteServices";
 
 let ClienteGetAll = async (req: Request, res: Response) => {
   try {
-    const {
-    
-    } = req.query;
-    
     const GetClienteAll = await ClienteServices.GetAllClientes();
     return res.status(201).json(
         { status: 'Consult ok', data: GetClienteAll}
