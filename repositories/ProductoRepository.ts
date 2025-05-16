@@ -13,8 +13,18 @@ class ProductoRepository {
 
     // Get Producto
     static async getAll() {
-        const [rows] = await db.execute('SELECT * FROM producto');
-        return rows; 
+    const [rows] = await db.execute('SELECT * FROM producto');
+    const productos = rows as any[];
+
+    // Convertir buffer a base64
+    const productosConImagenBase64 = productos.map((producto) => {
+    if (producto.imagen && producto.imagen instanceof Buffer) {
+      producto.imagen = producto.imagen.toString('base64');
+    }
+        return producto;
+    });
+
+        return productosConImagenBase64;
     }
 
 
