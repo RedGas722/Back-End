@@ -2,11 +2,9 @@ import { Request, Response } from "express";
 import ProductoServices from "../../services/ProductoServices";
 
 let ProductoGetAll = async (req: Request, res: Response) => {
-    console.log("Entrando a ProductoGetAll");  // <-- para confirmar que entra
 
   try {
     const productos = await ProductoServices.ProductoGetAll();
-    console.log(productos)
     return res.json({
       status: "Consult ok",
       data: productos
