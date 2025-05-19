@@ -15,6 +15,7 @@ import CategoriaRegister from './routes/Categoria/CategoriaRegister';
 import CategoriaUpdate from './routes/Categoria/CategoriaUpdate';
 import CategoriaDelete from './routes/Categoria/CategoriaDelete';
 import CategoriaGet from './routes/Categoria/CategoriaGet';
+import CategoriaGetAll from './routes/Categoria/CategoriaGetAll';
 
 //import cliente
 import ClienteRegister from './routes/Cliente/ClienteRegister';
@@ -107,6 +108,7 @@ app.use('/AdminDelete', AdministradorDelete);
 //CATEGORIA
 app.use('/CategoriaRegister', CategoriaRegister);
 app.use('/CategoriaGet', CategoriaGet);
+app.use('/CategoriaGetAll', CategoriaGetAll)
 app.use('/CategoriaUpdate', CategoriaUpdate);
 app.use('/CategoriaDelete', CategoriaDelete);
 

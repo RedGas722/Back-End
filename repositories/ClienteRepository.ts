@@ -15,8 +15,8 @@ class ClienteRepository {
 
     // Get Cliente
     static async getAll() {
-        const sql = 'SELECT * FROM cliente';
-        return db.execute(sql);
+        const [rows] = await db.query('SELECT * FROM cliente');
+        return rows;
     }
 
     // Get Cliente by email
