@@ -47,6 +47,7 @@ import EmpleadoGetAll from './routes/Empleado/EmpleadoGetAll';
 import FacturaRegister from './routes/Factura/FacturaRegister';
 import FacturaUpdate from './routes/Factura/FacturaUpdate';
 import FacturaGet from './routes/Factura/FacturaGet';
+import FacturaGetAll from "./routes/Factura/FacturaGetAll";
 
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
@@ -144,6 +145,8 @@ app.use('/EmpleadoGetAll', EmpleadoGetAll);
 app.use('/FacturaRegister', FacturaRegister);
 app.use('/FacturaUpdate', FacturaUpdate);
 app.use('/FacturaGet', FacturaGet);
+app.use('/FacturaGetAll', FacturaGetAll);
+
 
 //PEDIDO PRODUCTO
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
