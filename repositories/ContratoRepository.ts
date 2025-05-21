@@ -32,9 +32,9 @@ class ContratoRepository {
     }
 
     // Delete Contrato
-    static async delete(id_contrato: number) {
-        const sql = 'DELETE FROM contrato WHERE id_contrato = ?';
-        const values = [id_contrato];
+    static async delete(id_empleado: number) {
+        const sql = 'DELETE FROM contrato WHERE id_empleado = ?';
+        const values = [id_empleado];
         return db.execute(sql, values);
     }
 }

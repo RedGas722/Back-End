@@ -8,6 +8,7 @@ const upload = multer({ storage: storage })
 
 let TecnicoUpdate = async (req: Request, res: Response) => {
   try {
+
     const {
         nombre_tecnico,
         nuevo_correo_tecnico,

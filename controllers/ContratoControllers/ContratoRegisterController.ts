@@ -18,12 +18,14 @@ let ContratoRegister = async (req: Request, res: Response) => {
     return res.status(201).json(
         { status: 'register ok'}
     )
-    } catch (error: any) {
-        if (error && error.code == "ER_DUP_ENTRY") {
-          return res.status(500).json({ errorInfo: error.sqlMessage }
-          )
-        }
-      }
+  } catch (error: any) {
+    console.error('Error en ContratoRegister:', error); // Log para depuración
+    if (error && error.code == "ER_DUP_ENTRY") {
+      return res.status(500).json({ errorInfo: error.sqlMessage }
+      )
+    }
+    return res.status(500).json({ status: 'Internal server error', error: error.message });
+  }
 }
 
 export default ContratoRegister;

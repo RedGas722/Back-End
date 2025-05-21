@@ -3,8 +3,7 @@ import ContratoDelete from "../../controllers/ContratoControllers/ContratoDelete
 import { ContratoDeleteValidator, ContratoDeleteValidatorParams } from "../../middleware/Validations/ContratoValidations/ContratoDeleteValidation";
 const router = express.Router();
 
-
 router.delete('/', ContratoDeleteValidatorParams, ContratoDeleteValidator, ContratoDelete);
-
+ 
 
 export default router;

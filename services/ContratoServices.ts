@@ -17,8 +17,8 @@ class ContratoServices {
     }
 
     //Contrato Delete
-    static async ContratoDelete(id_contrato: number) {
-        return await ContratoRepository.delete(id_contrato);
+    static async ContratoDelete(id_empleado: number) {
+        return await ContratoRepository.delete(id_empleado);
     }
 
     static async ContratoGet(id_empleado: number) {
