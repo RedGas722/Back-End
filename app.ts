@@ -60,6 +60,7 @@ import ProductoRegister from './routes/Producto/ProductoRegister';
 import ProductoFilterByName from './routes/Producto/ProductoFilterByName';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
+import ProductoGetAllCategoria from './routes/Producto/ProductoGetAllCategoria';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoUpdate from './routes/Producto/ProductoUpdate';
 import ProductoUpdateNI from './routes/Producto/ProductoUpdateNI';
@@ -81,6 +82,10 @@ import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
+
+//import se encuentra
+import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
+import SeEncuentraUpdate from './routes/SeEncuentra/SeEncuentraUpdate';
 
 //import cart
 import CartAdd from './routes/Cart/CartAdd';
@@ -118,7 +123,7 @@ app.use('/ClienteRegister', ClienteRegister);
 app.use('/ClienteLogin', ClienteLogin);
 app.use('/ClienteEmail', ClienteEmail);
 app.use('/ClienteChangePassword', ClienteChangePassword);
-app.use('/CLienteDelete', ClienteDelete);
+app.use('/ClienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
 app.use('/ClienteDataUpdate', ClienteDataUpdate);
 app.use('/ClienteGet', ClienteGet);
@@ -161,6 +166,7 @@ app.use('/ProductoUpdate', ProductoUpdate);
 app.use('/ProductoUpdateNI', ProductoUpdateNI);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoGetAll', ProductoGetAll);
+app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
 app.use('/ProductoFilterByName', ProductoFilterByName);
 
 //SERVICIO
@@ -180,6 +186,10 @@ app.use('/TecnicoGetAll', TecnicoGetAll);
 
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
+
+//SE ENCUENTRA
+app.use('/SeEncuentraRegister', SeEncuentraRegister);
+app.use('/SeEncuentraUpdate', SeEncuentraUpdate);
 
 //CART
 app.use('/CartAdd', CartAdd);
