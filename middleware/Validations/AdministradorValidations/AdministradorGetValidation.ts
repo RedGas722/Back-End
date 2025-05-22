@@ -4,9 +4,9 @@ import { Request, Response, NextFunction } from 'express';
 
 // Validaciones para obtener un administrador por correo
 export const administradorGetValidation: ValidationChain[] = [
-    check('correo_administrador')
+    check('correo_admin')
       .isEmail()
-      .withMessage('El campo "correo_administrador" debe ser un correo válido.')
+      .withMessage('El campo "correo_admin" debe ser un correo válido.')
   ];
   
   // Middleware para manejar errores de validación

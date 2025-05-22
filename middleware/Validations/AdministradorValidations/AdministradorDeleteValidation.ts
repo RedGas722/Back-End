@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 
 // Validaciones para eliminar un administrador por correo
 export const administradorDeleteValidation: ValidationChain[] = [
-    check('correo_administrador')
+    check('correo_admin')
       .isEmail()
       .withMessage('El campo "correo_administrador" debe ser un correo válido.')
   ];

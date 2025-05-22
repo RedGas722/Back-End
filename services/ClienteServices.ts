@@ -2,6 +2,7 @@ import ClienteRepository from '../repositories/ClienteRepository';
 import Cliente from '../Dto/ClienteDto/ClienteDto';
 import generateHash from '../Helpers/generateHash';
 import AuthCliente from '../Dto/ClienteDto/ClienteAuthDto';
+import DataCliente from '../Dto/ClienteDto/DataClienteDto';
 
 
 class ClienteServices {
@@ -28,6 +29,12 @@ class ClienteServices {
         return await ClienteRepository.update(cliente, correo_cliente);
     }
 
+    //Cliente Data Update
+    static async ClienteDataUpdate(dataCliente: DataCliente, correo_cliente: string) {
+        return await ClienteRepository.updateData(dataCliente, correo_cliente);
+    }
+
+    /////////
     static async ClienteEmail(correo_cliente: string) {
         return await ClienteRepository.email(correo_cliente);
     }

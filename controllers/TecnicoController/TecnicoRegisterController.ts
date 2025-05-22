@@ -11,11 +11,9 @@ let TecnicoRegister = async (req: Request, res: Response) => {
     const {
         nombre_tecnico,
         correo_tecnico,
-        telefono_tecnico
+        telefono_tecnico,
+        contrasena_tecnico
     } = req.body;
-
-    //por problemas de la ñ
-    const contraseña_tecnico = req.body['contraseÃ±a_tecnico'] || req.body.contraseña_tecnico;
     
     if (!req.file) {
       return res.status(400).json({ error: 'No se ha enviado ningún archivo de imagen.' })
@@ -27,7 +25,7 @@ let TecnicoRegister = async (req: Request, res: Response) => {
         nombre_tecnico,
         correo_tecnico,
         telefono_tecnico,
-        contraseña_tecnico,
+        contrasena_tecnico,
         imagenBuffer
       ) 
     );
@@ -43,4 +41,4 @@ let TecnicoRegister = async (req: Request, res: Response) => {
   }
 };
 
-export default [upload.single("imagen"), TecnicoRegister];
+export default TecnicoRegister;

@@ -22,9 +22,9 @@ class EmpleadoServices {
     }
 
     //Empleado Update
-    static async EmpleadoUpdate(empleado: Empleado,  nuevo_correo_empleado: string) {
+    static async EmpleadoUpdate(empleado: Empleado,  correo_empleado: string) {
         empleado.contraseña_empleado = await generateHash(empleado.contraseña_empleado);
-        return await EmpleadoRepository.update(empleado,  nuevo_correo_empleado);
+        return await EmpleadoRepository.update(empleado,  correo_empleado);
     }
 
     // Empleado Delete  

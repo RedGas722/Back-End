@@ -2,17 +2,20 @@ class Cliente {
     private _nombre_cliente: string;
     private _correo_cliente: string;
     private _telefono_cliente: string;
+    private _direccion_cliente: string;
     private _contraseña_cliente: string;
 
     constructor(
         nombre_cliente: string,
         correo_cliente: string,
         telefono_cliente: string,
+        direccion_cliente: string,
         contraseña_cliente: string
     ) {
         this._nombre_cliente = nombre_cliente;
         this._correo_cliente = correo_cliente;
         this._telefono_cliente = telefono_cliente;
+        this._direccion_cliente = direccion_cliente;
         this._contraseña_cliente = contraseña_cliente;
     }
 
@@ -27,6 +30,10 @@ class Cliente {
 
     get telefono_cliente(): string {
         return this._telefono_cliente;
+    }
+
+    get direccion_cliente(): string {
+        return this._direccion_cliente;
     }
 
     get contraseña_cliente(): string {
@@ -44,6 +51,10 @@ class Cliente {
 
     set telefono_cliente(telefono_cliente: string) {
         this._telefono_cliente = telefono_cliente;
+    }
+
+    set direccion_cliente(direccion_cliente: string) {
+        this._direccion_cliente = direccion_cliente;
     }
 
     set contraseña_cliente(contraseña_cliente: string) {

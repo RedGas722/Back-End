@@ -4,6 +4,7 @@ import { Request, Response, NextFunction } from 'express'; // Necesitas los tipo
 export const ContratoRegisterValidatorParams: ValidationChain[] = [
   check('fecha_contrato').isDate(),
   check('duracion_contrato').isString(),
+  check('tipo_contrato').isString(),
   check('salario').isDecimal().isLength({ min: 1, max: 15 }),
   check('id_admin').isInt(),
   check('id_empleado').isInt()

@@ -9,14 +9,12 @@ let ServicioUpdate = async (req: Request, res: Response) => {
       nuevo_nombre_servicio,
       descripcion_servicio,
       precio_servicio,
-      precio_total
     } = req.body;
-    const registerUpdate = await ServicioServices.ServicioUpdate(
+    const updateServicio = await ServicioServices.ServicioUpdate(
       new Servicio(
          nombre_servicio, 
          descripcion_servicio, 
          precio_servicio, 
-         precio_total
         ),
          nuevo_nombre_servicio as string
       );

@@ -7,11 +7,14 @@ import cors from 'cors';
 import AdministradorRegister from './routes/Administrador/AdministradorRegister'
 import AdministradorLogin from './routes/Administrador/AdministradorLogin';
 import AdministradorUpdate from './routes/Administrador/AdministradorUpdate';
+import AdministradorGet from "./routes/Administrador/AdministradorGet";
 import AdministradorDelete from "./routes/Administrador/AdministradorDelete";
 
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
 import CategoriaUpdate from './routes/Categoria/CategoriaUpdate';
+import CategoriaDelete from './routes/Categoria/CategoriaDelete';
+import CategoriaGet from './routes/Categoria/CategoriaGet';
 
 //import cliente
 import ClienteRegister from './routes/Cliente/ClienteRegister';
@@ -20,6 +23,7 @@ import ClienteChangePassword from './routes/Cliente/ClienteChangePassword';
 import ClienteEmail from './routes/Cliente/ClienteEmail';
 import ClienteDelete from './routes/Cliente/ClienteDelete';
 import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
+import ClienteDataUpdate from "./routes/Cliente/ClienteDataUpdate";
 import ClienteGet from "./routes/Cliente/ClienteGet";
 import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
 
@@ -38,10 +42,13 @@ import EmpleadoRegister from './routes/Empleado/EmpleadoRegister';
 import EmpleadoLogin from './routes/Empleado/EmpleadoLogin';
 import EmpleadoUpdate from './routes/Empleado/EmpleadoUpdate';
 import EmpleadoDelete from './routes/Empleado/EmpleadoDelete';
+import EmpleadoGet from './routes/Empleado/EmpleadoGet';
+import EmpleadoGetAll from './routes/Empleado/EmpleadoGetAll';
 
 //import factura
 import FacturaRegister from './routes/Factura/FacturaRegister';
 import FacturaUpdate from './routes/Factura/FacturaUpdate';
+import FacturaGet from './routes/Factura/FacturaGet';
 
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
@@ -51,10 +58,12 @@ import PedidoServicioRegister from './routes/PedidoServicio/PedidoServicioRegist
 
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
+import ProductoFilterByName from './routes/Producto/ProductoFilterByName';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoUpdate from './routes/Producto/ProductoUpdate';
+import ProductoUpdateNI from './routes/Producto/ProductoUpdateNI';
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
@@ -68,10 +77,21 @@ import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
 import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
 import TecnicoUpdate from './routes/Tecnico/TecnicoUpdate';
 import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
+import TecnicoGet from './routes/Tecnico/TecnicoGet';
+import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
+
+//import pago
+import PagoPaypal from './routes/Pagos/PagoPaypal'; 
+
+//import cart
+import CartAdd from './routes/Cart/CartAdd';
+import CartGet from './routes/Cart/CartGet';
+import CartRemove from './routes/Cart/CartRemove';
+import CartClear from './routes/Cart/CartClear';
+import CartTotal from './routes/Cart/CartTotal';
 
 //import profile
 import profile from './routes/profile';
-
 
 dotenv.config();
 const app = express().use(bodyParser.json());
@@ -83,12 +103,15 @@ app.use(cors({origin: 'http://localhost:5173', credentials: true,}));
 //ADMINISTRADOR
 app.use('/AdminRegister', AdministradorRegister);
 app.use('/AdminLogin', AdministradorLogin);
+app.use('/AdminGet', AdministradorGet);
 app.use('/AdminUpdate', AdministradorUpdate);
 app.use('/AdminDelete', AdministradorDelete);
 
 //CATEGORIA
 app.use('/CategoriaRegister', CategoriaRegister);
+app.use('/CategoriaGet', CategoriaGet);
 app.use('/CategoriaUpdate', CategoriaUpdate);
+app.use('/CategoriaDelete', CategoriaDelete);
 
 //CLIENTE
 app.use('/ClienteRegister', ClienteRegister);
@@ -97,6 +120,7 @@ app.use('/ClienteEmail', ClienteEmail);
 app.use('/ClienteChangePassword', ClienteChangePassword);
 app.use('/CLienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
+app.use('/ClienteDataUpdate', ClienteDataUpdate);
 app.use('/ClienteGet', ClienteGet);
 app.use('/ClienteGetAll', ClienteGetAll);
 
@@ -106,6 +130,8 @@ app.use('/ContratoGet', ContratoGet);
 app.use('/ContratoGetAll', ContratoGetAll);
 app.use('/ContratoUpdate', ContratoUpdate);
 app.use('/ContratoDelete', ContratoDelete);
+app.use('/ContratoGet', ContratoGet)
+app.use('/ContratoGetAll', ContratoGetAll)
 
 //IA
 app.use('/Diagnostic', Diagnostic);
@@ -115,10 +141,13 @@ app.use('/EmpleadoRegister', EmpleadoRegister);
 app.use('/EmpleadoLogin', EmpleadoLogin);
 app.use('/EmpleadoUpdate', EmpleadoUpdate);
 app.use('/EmpleadoDelete', EmpleadoDelete);
+app.use('/EmpleadoGet', EmpleadoGet);
+app.use('/EmpleadoGetAll', EmpleadoGetAll);
 
 //FACTURA
 app.use('/FacturaRegister', FacturaRegister);
 app.use('/FacturaUpdate', FacturaUpdate);
+app.use('/FacturaGet', FacturaGet);
 
 //PEDIDO PRODUCTO
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
@@ -130,8 +159,10 @@ app.use('/PedidoServicioRegister', PedidoServicioRegister);
 app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoGet', ProductoGet);
 app.use('/ProductoUpdate', ProductoUpdate);
+app.use('/ProductoUpdateNI', ProductoUpdateNI);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoGetAll', ProductoGetAll);
+app.use('/ProductoFilterByName', ProductoFilterByName);
 
 //SERVICIO
 app.use('/ServicioRegister', ServicioRegister);
@@ -145,7 +176,20 @@ app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoLogin', TecnicoLogin);
 app.use('/TecnicoUpdate', TecnicoUpdate);
 app.use('/TecnicoDelete', TecnicoDelete);
+app.use('/TecnicoGet', TecnicoGet);
+app.use('/TecnicoGetAll', TecnicoGetAll);
 
+//PAGO
+app.use('/PagoPaypal', PagoPaypal);
+
+//CART
+app.use('/CartAdd', CartAdd);
+app.use('/CartGet', CartGet);
+app.use('/CartRemove', CartRemove);
+app.use('/CartClear', CartClear);
+app.use('/CartTotal', CartTotal)
+
+//PROFILE
 app.use('/Profile', profile);
 
 //--------------- INICIALIZAR SERVIDOR -------------------//

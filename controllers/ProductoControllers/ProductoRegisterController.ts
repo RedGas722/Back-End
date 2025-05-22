@@ -1,13 +1,8 @@
 import { Request, Response } from "express";
-import multer from "multer";
 import ProductoServices from "../../services/ProductoServices";
 import Producto from "../../Dto/ProductoDto/ProductoDto";
 
-
-const storage = multer.memoryStorage(); 
-const upload = multer({ storage: storage }) 
-
-let ProductoRegister = async (req: Request, res: Response) => {
+const ProductoRegister = async (req: Request, res: Response) => {
   try {
     const {
       nombre_producto,
@@ -17,22 +12,29 @@ let ProductoRegister = async (req: Request, res: Response) => {
     } = req.body;
 
     if (!req.file) {
-      return res.status(400).json({ error: 'No se ha enviado ningún archivo de imagen.' })
+      return res.status(400).json({ error: 'No se ha enviado ningún archivo de imagen.' });
     }
 
     const imagenBuffer = req.file.buffer;
 
-    const registerProducto = await ProductoServices.ProductoRegister(new Producto(nombre_producto, descripcion_producto, precio_producto, stock, imagenBuffer));
+    const producto = new Producto(
+      nombre_producto,
+      descripcion_producto,
+      parseFloat(precio_producto),
+      parseInt(stock),
+      imagenBuffer
+    );
 
-    return res.status(201).json(
-        { status: 'register ok'}
-    )
-    } catch (error: any) {
-      if (error && error.code == "ER_DUP_ENTRY") {
-        return res.status(500).json({ errorInfo: error.sqlMessage }
-        )
-      }
+    await ProductoServices.ProductoRegister(producto);
+
+    return res.status(201).json({ status: 'register ok' });
+
+  } catch (error: any) {
+    if (error.code === "ER_DUP_ENTRY") {
+      return res.status(500).json({ errorInfo: error.sqlMessage });
     }
-}
+    return res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
 
-export default [upload.single("imagen"), ProductoRegister];
+export default ProductoRegister;

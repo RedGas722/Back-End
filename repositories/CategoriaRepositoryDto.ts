@@ -19,13 +19,14 @@ class CategoriaRepository {
     static async getByName(nombre_categoria: string) {
         const sql = 'SELECT * FROM categoria WHERE nombre_categoria = ?';
         const values = [nombre_categoria];
-        return db.execute(sql, values);
+        const [rows] = await db.execute(sql, values);
+        return rows; 
     }
 
     // Update Categoria
-    static async update(categoria: Categoria, new_nombre_categoria: string) {
+    static async update(categoria: Categoria, nombre_categoria: string) {
         const sql = 'UPDATE categoria SET nombre_categoria = ? WHERE nombre_categoria = ?';
-        const values = [new_nombre_categoria, categoria.nombre_categoria];
+        const values = [categoria.nombre_categoria, nombre_categoria];
         return db.execute(sql, values);
     }
 

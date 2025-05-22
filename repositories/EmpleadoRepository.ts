@@ -28,7 +28,8 @@ class EmpleadoRepository {
         static async getByCorreo(correo_empleado: string) {
             const sql = 'SELECT * FROM empleado WHERE correo_empleado = ?';
             const values = [correo_empleado];
-            return db.execute(sql, values);
+            const [rows] = await db.execute(sql, values);
+            return rows;
         }
 
         static async ClienteGetAll(){
@@ -37,9 +38,9 @@ class EmpleadoRepository {
         }
 
     // Update Empleado
-    static async update(empleado: Empleado, nuevo_correo_empleado: string) {
+    static async update(empleado: Empleado, correo_empleado: string) {
         const sql = 'UPDATE empleado SET nombre_empleado = ?, correo_empleado = ?, telefono_empleado = ?, direccion_empleado = ?, contraseña_empleado = ? WHERE correo_empleado = ?';
-        const values = [empleado.nombre_empleado, nuevo_correo_empleado, empleado.telefono_empleado, empleado.direccion_empleado, empleado.contraseña_empleado, empleado.correo_empleado];
+        const values = [empleado.nombre_empleado, empleado.correo_empleado, empleado.telefono_empleado, empleado.direccion_empleado, empleado.contraseña_empleado, correo_empleado];
         return db.execute(sql, values);
     }
 

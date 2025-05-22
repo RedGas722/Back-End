@@ -3,9 +3,8 @@ import { Request, Response, NextFunction } from 'express'; // Necesitas los tipo
 
 // Validaciones para eliminar un empleado por ID
 export const empleadoDeleteValidation: ValidationChain[] = [
-    check('id_empleado')
-      .isInt({ gt: 0 })
-      .withMessage('El ID del empleado debe ser un número entero positivo.')
+    check('correo_empleado')
+      .isEmail()
   ];
   
   export function validateEmpleadoDelete(req: Request, res: Response, next: NextFunction) {

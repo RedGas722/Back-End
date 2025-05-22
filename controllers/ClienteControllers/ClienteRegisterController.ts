@@ -9,9 +9,10 @@ let ClienteRegister = async (req: Request, res: Response) => {
       nombre_cliente,
       correo_cliente,
       telefono_cliente,
+      direccion_cliente,
       contraseña_cliente
     } = req.body;
-    const registerCliente = await ClienteServices.ClienteRegister(new Cliente(nombre_cliente, correo_cliente, telefono_cliente, contraseña_cliente))
+    const registerCliente = await ClienteServices.ClienteRegister(new Cliente(nombre_cliente, correo_cliente, telefono_cliente, direccion_cliente, contraseña_cliente))
     return res.status(201).json(
       { status: 'register ok'}
     );
