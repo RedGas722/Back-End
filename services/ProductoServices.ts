@@ -1,4 +1,5 @@
 import Producto from "../Dto/ProductoDto/ProductoDto";
+import ProductoNI from "../Dto/ProductoDto/ProductoNIDto";
 import ProductoRepository from "../repositories/ProductoRepository";
 
 
@@ -16,6 +17,11 @@ class ProductoServices {
     // Update Producto
     static async ProductoUpdate(producto: Producto, nombre_producto: string) {
         return await ProductoRepository.update(producto, nombre_producto);
+    }
+
+    // Update ProductoNI
+    static async ProductoUpdateNI(productoNI: ProductoNI, nombre_producto: string) {
+        return await ProductoRepository.updateNI(productoNI, nombre_producto);
     }
 
     // Delete Producto

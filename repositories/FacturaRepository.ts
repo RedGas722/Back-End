@@ -12,8 +12,8 @@ class FacturaRepository {
 
     // Get Factura
     static async getAll() {
-        const sql = 'SELECT * FROM factura';
-        return db.execute(sql);
+        const [rows] = await db.query('SELECT * FROM factura');
+        return rows;
     }
 
     static async getById(id_factura: number) {

@@ -15,13 +15,16 @@ import CategoriaRegister from './routes/Categoria/CategoriaRegister';
 import CategoriaUpdate from './routes/Categoria/CategoriaUpdate';
 import CategoriaDelete from './routes/Categoria/CategoriaDelete';
 import CategoriaGet from './routes/Categoria/CategoriaGet';
+import CategoriaGetAll from './routes/Categoria/CategoriaGetAll';
 
 //import cliente
 import ClienteRegister from './routes/Cliente/ClienteRegister';
 import ClienteLogin from "./routes/Cliente/ClienteLogin";
 import ClienteChangePassword from './routes/Cliente/ClienteChangePassword';
+import ClienteEmail from './routes/Cliente/ClienteEmail';
 import ClienteDelete from './routes/Cliente/ClienteDelete';
 import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
+import ClienteDataUpdate from "./routes/Cliente/ClienteDataUpdate";
 import ClienteGet from "./routes/Cliente/ClienteGet";
 import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
 
@@ -44,6 +47,7 @@ import EmpleadoGetAll from './routes/Empleado/EmpleadoGetAll';
 import FacturaRegister from './routes/Factura/FacturaRegister';
 import FacturaUpdate from './routes/Factura/FacturaUpdate';
 import FacturaGet from './routes/Factura/FacturaGet';
+import FacturaGetAll from "./routes/Factura/FacturaGetAll";
 
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
@@ -58,6 +62,7 @@ import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoUpdate from './routes/Producto/ProductoUpdate';
+import ProductoUpdateNI from './routes/Producto/ProductoUpdateNI';
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
@@ -76,6 +81,13 @@ import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
+
+//import cart
+import CartAdd from './routes/Cart/CartAdd';
+import CartGet from './routes/Cart/CartGet';
+import CartRemove from './routes/Cart/CartRemove';
+import CartClear from './routes/Cart/CartClear';
+import CartTotal from './routes/Cart/CartTotal';
 
 //import profile
 import profile from './routes/profile';
@@ -97,15 +109,18 @@ app.use('/AdminDelete', AdministradorDelete);
 //CATEGORIA
 app.use('/CategoriaRegister', CategoriaRegister);
 app.use('/CategoriaGet', CategoriaGet);
+app.use('/CategoriaGetAll', CategoriaGetAll)
 app.use('/CategoriaUpdate', CategoriaUpdate);
 app.use('/CategoriaDelete', CategoriaDelete);
 
 //CLIENTE
 app.use('/ClienteRegister', ClienteRegister);
 app.use('/ClienteLogin', ClienteLogin);
+app.use('/ClienteEmail', ClienteEmail);
 app.use('/ClienteChangePassword', ClienteChangePassword);
 app.use('/CLienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
+app.use('/ClienteDataUpdate', ClienteDataUpdate);
 app.use('/ClienteGet', ClienteGet);
 app.use('/ClienteGetAll', ClienteGetAll);
 
@@ -130,6 +145,8 @@ app.use('/EmpleadoGetAll', EmpleadoGetAll);
 app.use('/FacturaRegister', FacturaRegister);
 app.use('/FacturaUpdate', FacturaUpdate);
 app.use('/FacturaGet', FacturaGet);
+app.use('/FacturaGetAll', FacturaGetAll);
+
 
 //PEDIDO PRODUCTO
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
@@ -141,6 +158,7 @@ app.use('/PedidoServicioRegister', PedidoServicioRegister);
 app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoGet', ProductoGet);
 app.use('/ProductoUpdate', ProductoUpdate);
+app.use('/ProductoUpdateNI', ProductoUpdateNI);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoGetAll', ProductoGetAll);
 app.use('/ProductoFilterByName', ProductoFilterByName);
@@ -163,6 +181,14 @@ app.use('/TecnicoGetAll', TecnicoGetAll);
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
 
+//CART
+app.use('/CartAdd', CartAdd);
+app.use('/CartGet', CartGet);
+app.use('/CartRemove', CartRemove);
+app.use('/CartClear', CartClear);
+app.use('/CartTotal', CartTotal)
+
+//PROFILE
 app.use('/Profile', profile);
 
 

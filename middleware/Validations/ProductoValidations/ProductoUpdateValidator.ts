@@ -6,8 +6,8 @@ export const ProductoUpdateValidatorParams: ValidationChain[] = [
   check('precio_producto').isDecimal().isLength({ min: 1, max: 15 }),
   check('descripcion_producto').isString(),
   check('stock').isInt({ gt: 0 }).isLength({ min: 1, max: 15 }),
-  check('imagen'),
-  check('nombre_producto').isString()
+  check('nombre_producto').isString(),
+  check('imagen')
     .custom((value, { req }) => {
       if (!req.file) {
         throw new Error('La imagen es obligatoria.');

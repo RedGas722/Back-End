@@ -1,9 +1,9 @@
 import { check, validationResult, ValidationChain } from 'express-validator';
-import { Request, Response, NextFunction } from 'express'; // Necesitas los tipos de Express
+import { Request, Response, NextFunction } from 'express'; 
 
-export const ClienteLoginValidatorParams: ValidationChain[] = [
+export const clienteLoginValidatorParams: ValidationChain[] = [
   check('correo_cliente').isEmail(),
-  check('contraseña_cliente').isLength({ min: 8, max: 15 })
+  check('contraseña_cliente').isLength({ min: 6, max: 15 })
 ];
 
 export function ClienteLoginValidator(req: Request, res: Response, next: NextFunction) {

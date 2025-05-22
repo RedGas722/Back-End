@@ -14,6 +14,10 @@ class CategoriaServices {
     static async CategoriaGet(nombre_categoria: string) {
         return await CategoriaRepository.getByName(nombre_categoria);
     }
+
+    static async GetAllCategorias() {
+        return await CategoriaRepository.getAll();
+    }
     
     //Categoria Update
     static async CategoriaUpdate(categoria: Categoria, nombre_categoria: string) {

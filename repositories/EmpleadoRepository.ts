@@ -33,8 +33,8 @@ class EmpleadoRepository {
         }
 
         static async ClienteGetAll(){
-            const sql = 'SELECT * FROM empleado';
-            return db.execute(sql)
+            const [rows] = await db.query('SELECT * FROM empleado');
+            return rows;
         }
 
     // Update Empleado

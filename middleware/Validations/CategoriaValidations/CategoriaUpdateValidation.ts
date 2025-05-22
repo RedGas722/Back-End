@@ -1,18 +1,18 @@
 import { check, validationResult, ValidationChain } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 
-// Validaciones para el registro de un administrador
+// Validaciones para actualizar un categoria por correo
 export const categoriaUpdateValidation: ValidationChain[] = [
-  check('new_nombre_categoria')
-    .isLength({ min: 1, max: 255 })
-    .withMessage('El campo "nuevo nombre categoria" es obligatorio y debe tener entre 1 y 255 caracteres.'),
-  check('nombre_categoria')
-    .isLength({ min: 1, max: 255 })
-    .withMessage('El campo "nombre categoria" es obligatorio y debe tener entre 1 y 255 caracteres.'),
-];
+    check('nuevo_nombre_categoria')
+      .isString()
+      .withMessage('El campo "new nombre categoria" debe ser de tipo texto correo válido.'),
+    check('nombre_categoria')
+      .isString()
+      .withMessage('El campo "nombre categoria" debe ser de tipo texto válido.'),
 
+  ];
 
-// Middleware para manejar errores de validación
+  // Middleware para manejar errores de validación
 export function validateCategoriaUpdate(req: Request, res: Response, next: NextFunction) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
