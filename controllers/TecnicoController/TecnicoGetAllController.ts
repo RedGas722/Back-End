@@ -8,6 +8,7 @@ let TecnicoGetAll = async (req: Request, res: Response) => {
     } = req.query;
     
     const TecnicoGetAll = await TecnicoServices.getAllTecnicos();
+    console.log('Datos devueltos por getAllTecnicos:', TecnicoGetAll);
     return res.status(201).json(
         { status: 'Consult ok', data: TecnicoGetAll}
     )
@@ -19,4 +20,4 @@ let TecnicoGetAll = async (req: Request, res: Response) => {
     }
 }
 
-export default TecnicoGetAll;  
+export default TecnicoGetAll;

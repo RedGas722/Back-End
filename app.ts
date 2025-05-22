@@ -75,6 +75,9 @@ import ServicioDelete from './routes/Servicio/ServicioDelete';
 import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
 import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
 import TecnicoUpdate from './routes/Tecnico/TecnicoUpdate';
+import TecnicoDataUpdate from './routes/Tecnico/TecnicoDataUpdate';
+import TecnicoUpdateNI from './routes/Tecnico/TecnicoDataUpdateNI';
+
 import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
 import TecnicoGet from './routes/Tecnico/TecnicoGet';
 import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
@@ -174,6 +177,8 @@ app.use('/ServicioGetAll', ServicioGetAll);
 app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoLogin', TecnicoLogin);
 app.use('/TecnicoUpdate', TecnicoUpdate);
+app.use('/TecnicoDataUpdate', TecnicoDataUpdate);
+app.use('/TecnicoUpdateNI', TecnicoUpdateNI);
 app.use('/TecnicoDelete', TecnicoDelete);
 app.use('/TecnicoGet', TecnicoGet);
 app.use('/TecnicoGetAll', TecnicoGetAll);
