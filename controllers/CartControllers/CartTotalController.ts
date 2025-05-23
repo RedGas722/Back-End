@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { cartServices } from "../../services/Cart/CartServices";
+import  cartServices  from "../../services/Cart/CartServices";
 import ClienteServices from "../../services/ClienteServices";
 
 const CartTotalController = async (req: Request, res: Response) => {
