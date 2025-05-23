@@ -3,26 +3,31 @@ import { cartServices } from "../../services/Cart/CartServices";
 import ClienteServices from "../../services/ClienteServices";
 
 export const CartAddController = async (req: Request, res: Response) => {
-  const cliente = req.cliente; 
-
-  if (!cliente) {
-    return res.status(401).json({ message: "Cliente no autenticado" });
-  }
-
   try {
-    const clienteDB = await ClienteServices.GetCliente(cliente.correo_cliente);
+    const clienteEmail = req.body.email;
+    if (!clienteEmail) {
+      return res.status(401).json({ message: "Cliente no autenticado" });
+    }
+
+    const clienteDB = await ClienteServices.GetCliente(clienteEmail);
     if (!clienteDB) {
       return res.status(404).json({ message: "Cliente no encontrado" });
     }
 
-    const clienteId = clienteDB.id_cliente; 
+    const clienteId = clienteDB.id_cliente;
 
-    const item = req.body;
-    const cart = await cartServices.addToCart(clienteId, item);
+    const { productId, productName, quantity, price } = req.body;
 
-    res.status(200).json(cart);
+    if (!productId || !productName || !quantity || !price) {
+      return res.status(400).json({ message: "Datos del producto incompletos" });
+    }
+
+    // Llama a servicio para agregar al carrito con productName incluido
+    const cart = await cartServices.addToCart(clienteId, { productId, productName, quantity, price });
+
+    return res.status(200).json(cart);
   } catch (error) {
     console.error("Error al agregar al carrito:", error);
-    res.status(500).json({ message: "Error interno del servidor" });
+    return res.status(500).json({ message: "Error interno del servidor" });
   }
 };

@@ -1,7 +1,7 @@
 import Producto from "../Dto/ProductoDto/ProductoDto";
 import ProductoNI from "../Dto/ProductoDto/ProductoNIDto";
 import ProductoRepository from "../repositories/ProductoRepository";
-
+import { redis } from "../config/redis";
 
 class ProductoServices {
     // Register Producto
@@ -44,6 +44,16 @@ class ProductoServices {
         return await ProductoRepository.filterByName(nombre_producto);
     }
 
+    static async getProductsFromRedis() {
+        const data = await redis.get("productNames"); 
+        if (!data) return [];
+        const productNames: string[] = JSON.parse(data);
+        const products = await Promise.all(
+        productNames.map((name) => ProductoRepository.getByName(name))
+        );
+        const flattened = products.flat();
+    return flattened;
+  }
 }
 
 export default ProductoServices;
