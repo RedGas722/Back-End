@@ -64,7 +64,6 @@ import ProductoGetAllCategoria from './routes/Producto/ProductoGetAllCategoria';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoUpdate from './routes/Producto/ProductoUpdate';
 import ProductoUpdateNI from './routes/Producto/ProductoUpdateNI';
-import ProductoFromRedis from "./routes/Producto/ProductoFromRedis";
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
@@ -169,7 +168,6 @@ app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoGetAll', ProductoGetAll);
 app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
 app.use('/ProductoFilterByName', ProductoFilterByName);
-app.use('/ProductoGetFromRedis', ProductoFromRedis);
 
 //SERVICIO
 app.use('/ServicioRegister', ServicioRegister);
