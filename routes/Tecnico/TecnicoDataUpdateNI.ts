@@ -1,5 +1,5 @@
 import express from "express";
-import TecnicoDataUpdateNI from '../../controllers/TecnicoController/TecnicoDataUpdateNiController';
+import TecnicoDataUpdateNI from '../../controllers/TecnicoController/TecnicoDataUpdateNIController';
 
 const router = express.Router();
 
