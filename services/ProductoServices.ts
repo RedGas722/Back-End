@@ -1,7 +1,7 @@
 import Producto from "../Dto/ProductoDto/ProductoDto";
 import ProductoNI from "../Dto/ProductoDto/ProductoNIDto";
 import ProductoRepository from "../repositories/ProductoRepository";
-
+import { redis } from "../config/redis";
 
 class ProductoServices {
     // Register Producto
@@ -29,8 +29,15 @@ class ProductoServices {
         return await ProductoRepository.delete(nombre_producto);
     }
 
+    // Otros Get
+
     static async ProductoGetAll() {
         return await ProductoRepository.getAll();
+    }
+
+    static async getAllProductoCategoria(nombre_categoria: string) {
+        return await ProductoRepository.getAllProductoCategoria(nombre_categoria);
+
     }
 
     static async ProductoFilterByName(nombre_producto: string) {

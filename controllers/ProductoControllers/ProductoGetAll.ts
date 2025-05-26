@@ -1,18 +1,20 @@
 import { Request, Response } from "express";
 import ProductoServices from "../../services/ProductoServices";
+import CategoriaServices from "../../services/CategoriaServices";
 
 let ProductoGetAll = async (req: Request, res: Response) => {
-
   try {
     const productos = await ProductoServices.ProductoGetAll();
+    const categorias = await CategoriaServices.GetAllCategorias();
+
     return res.json({
       status: "Consult ok",
-      data: productos
+      data: {
+        productos,
+        categorias
+      }
     });
   } catch (error: any) {
-    if (error && error.code === "ER_DUP_ENTRY") {
-      return res.status(500).json({ errorInfo: error.sqlMessage });
-    }
     return res.status(500).json({ error: error.message || "Error inesperado" });
   }
 };
