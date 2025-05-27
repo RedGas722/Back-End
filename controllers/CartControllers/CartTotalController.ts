@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { cartServices } from "../../services/Cart/CartServices";
+import  cartServices  from "../../services/Cart/CartServices";
 import ClienteServices from "../../services/ClienteServices";
 
-export const CartTotalController = async (req: Request, res: Response) => {
+const CartTotalController = async (req: Request, res: Response) => {
   const cliente = req.cliente;
 
   if (!cliente) {
@@ -25,3 +25,5 @@ export const CartTotalController = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error interno del servidor" });
   }
 };
+
+export default CartTotalController;

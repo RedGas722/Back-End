@@ -35,6 +35,9 @@ import ContratoDelete from "./routes/Contrato/ContratoDelete";
 import ContratoGet from "./routes/Contrato/ContratoGet";  
 import ContratoGetAll from "./routes/Contrato/ContratoGetAll";    
 
+//import ia
+import Diagnostic from "./routes/IA/Diagnostic";
+
 //import empleado
 import EmpleadoRegister from './routes/Empleado/EmpleadoRegister';
 import EmpleadoLogin from './routes/Empleado/EmpleadoLogin';
@@ -138,6 +141,9 @@ app.use('/ContratoDelete', ContratoDelete);
 app.use('/ContratoGet', ContratoGet)
 app.use('/ContratoGetAll', ContratoGetAll)
 
+//IA
+app.use('/Diagnostic', Diagnostic);
+
 //EMPLEADO
 app.use('/EmpleadoRegister', EmpleadoRegister);
 app.use('/EmpleadoLogin', EmpleadoLogin);
@@ -200,7 +206,6 @@ app.use('/CartTotal', CartTotal)
 
 //PROFILE
 app.use('/Profile', profile);
-
 
 //--------------- INICIALIZAR SERVIDOR -------------------//
 

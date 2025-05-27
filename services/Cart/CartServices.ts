@@ -1,4 +1,4 @@
-import { redis } from "../../config/redis";
+import redis from "../../config/redis";
 
 interface CartItem {
   productId: string;
@@ -51,3 +51,5 @@ export const cartServices = {
   clearCart,
   getTotal,
 };
+
+export default cartServices;

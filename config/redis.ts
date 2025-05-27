@@ -10,3 +10,5 @@ export const redis = new Redis({
 redis.on('error', (err) => {
   console.warn('[Redis]', err.message); // o simplemente suprime con un console.debug
 });
+
+export default redis;
