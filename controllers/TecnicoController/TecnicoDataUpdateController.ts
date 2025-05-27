@@ -12,7 +12,6 @@ let TecnicoUpdate = async (req: Request, res: Response) => {
     const {
         nombre_tecnico,
         nuevo_correo_tecnico,
-        contrasena_tecnico,
         telefono_tecnico,
         correo_tecnico
     } = req.body;
@@ -22,18 +21,18 @@ let TecnicoUpdate = async (req: Request, res: Response) => {
     }
     const imagenBuffer = req.file.buffer;
 
-    const updateTecnico = await TecnicoServices.TecnicoUpdate(
+    const updateTecnico = await TecnicoServices.TecnicoDataUpdate(
       new Tecnico(
         nombre_tecnico,
         nuevo_correo_tecnico,
         telefono_tecnico,
-        contrasena_tecnico,
+        correo_tecnico, 
         imagenBuffer
       ),
       correo_tecnico as string
     );
 
-    return res.status(201).json({ status: 'register ok'});
+    return res.status(201).json({ status: 'update ok'});
   } catch (error: any) {
     console.error("Error in registration:", error);
 

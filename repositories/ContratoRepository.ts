@@ -19,7 +19,9 @@ class ContratoRepository {
     static async getById(id_empleado: number) {
         const sql = 'SELECT * FROM contrato WHERE id_empleado = ?';
         const values = [id_empleado];
-        return db.execute(sql, values);
+        const [rows] = await db.execute(sql, values);
+        return rows;
+       
     }
 
     // Update Contrato
@@ -30,9 +32,9 @@ class ContratoRepository {
     }
 
     // Delete Contrato
-    static async delete(id_contrato: number) {
-        const sql = 'DELETE FROM contrato WHERE id_contrato = ?';
-        const values = [id_contrato];
+    static async delete(id_empleado: number) {
+        const sql = 'DELETE FROM contrato WHERE id_empleado = ?';
+        const values = [id_empleado];
         return db.execute(sql, values);
     }
 }

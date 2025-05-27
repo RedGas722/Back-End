@@ -1,5 +1,6 @@
 import db from '../config/config-db';
 import Tecnico from '../Dto/TecnicoDto/TecnicoDto';
+import TecnicoNI from '../Dto/TecnicoDto/TecnicoNIDto';
 import AuthTecnico from '../Dto/TecnicoDto/TecnicoAuthDto';
 import bcrypt from 'bcryptjs';
 
@@ -25,7 +26,22 @@ class TecnicoRepository {
     // Update Tecnico
     static async update(tecnico: Tecnico, correo_tecnico: string) {
         const sql = 'UPDATE tecnico SET nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ?, contraseña_tecnico = ? , imagen = ? WHERE correo_tecnico = ?';
-        const values = [tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, tecnico.contraseña_tecnico, tecnico.imagen, correo_tecnico];
+        const values = [tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, tecnico.imagen, correo_tecnico];
+        return db.execute(sql, values);
+    }
+
+    
+    // Update Tecnico sin contraseña (DataUpdate)
+    static async DataUpdate(tecnico: Tecnico, correo_tecnico: string) {
+        const sql = 'UPDATE tecnico SET nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ?, imagen = ? WHERE correo_tecnico = ?';
+        const values = [tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, tecnico.imagen, correo_tecnico];
+        return db.execute(sql, values);
+    }
+
+    // Update Tecnico sin Imagen (DataUpdateNI)
+    static async DataUpdateNI(tecnico: TecnicoNI, correo_tecnico: string) {
+        const sql = 'UPDATE tecnico SET nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ? WHERE correo_tecnico = ?';
+        const values = [tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, correo_tecnico];
         return db.execute(sql, values);
     }
 
@@ -47,7 +63,8 @@ class TecnicoRepository {
 
         static async getAll() {
             const sql = 'SELECT * FROM tecnico';
-            return db.execute(sql);
+            const [rows] = await db.execute(sql);
+            return rows; 
         }
 
     // Get Tecnico
