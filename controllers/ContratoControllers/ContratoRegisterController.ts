@@ -5,6 +5,7 @@ import ContratoServices from "../../services/ContratoServices";
 
 let ContratoRegister = async (req: Request, res: Response) => {
   try {
+    console.log('Body recibido en ContratoRegister:', req.body);
     const {
       fecha_contrato,
       duracion_contrato,

@@ -13,7 +13,8 @@ class ContratoRepository {
     // Get Contrato
     static async getAll() {
         const sql = 'SELECT * FROM contrato';
-        return db.execute(sql);
+        const [rows] = await db.execute(sql);
+        return rows;
     }
 
     static async getById(id_empleado: number) {
@@ -28,6 +29,19 @@ class ContratoRepository {
     static async update(contrato: Contrato, id_contrato: number) {
         const sql = 'UPDATE contrato SET fecha_contrato = ?, duracion_contrato = ?, tipo_contrato = ?, salario = ?, id_Admin = ?, id_empleado = ? WHERE id_contrato = ?';
         const values = [contrato.fecha_contrato, contrato.duracion_contrato, contrato.tipo_contrato, contrato.salario, contrato.id_admin, contrato.id_empleado, id_contrato];
+        return db.execute(sql, values);
+    }
+
+    // Data Update solo datos relevantes (sin id_admin ni id_empleado)
+    static async DataUpdate(contrato: any, id_empleado: number) {
+        const sql = 'UPDATE contrato SET fecha_contrato = ?, duracion_contrato = ?, tipo_contrato = ?, salario = ? WHERE id_empleado = ?';
+        const values = [
+            contrato.fecha_contrato,
+            contrato.duracion_contrato,
+            contrato.tipo_contrato,
+            contrato.salario,
+            id_empleado
+        ];
         return db.execute(sql, values);
     }
 

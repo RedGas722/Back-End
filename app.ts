@@ -33,6 +33,7 @@ import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
 //import contrato
 import ContratoRegister from './routes/Contrato/ContratoRegister';
 import ContratoUpdate from './routes/Contrato/ContratoUpdate';
+import ContratoDataUpdate from './routes/Contrato/ContratoDataUpdate';
 import ContratoDelete from "./routes/Contrato/ContratoDelete";
 import ContratoGet from "./routes/Contrato/ContratoGet";  
 import ContratoGetAll from "./routes/Contrato/ContratoGetAll";    
@@ -136,6 +137,7 @@ app.use('/ContratoRegister', ContratoRegister);
 app.use('/ContratoGet', ContratoGet);
 app.use('/ContratoGetAll', ContratoGetAll);
 app.use('/ContratoUpdate', ContratoUpdate);
+app.use('/ContratoDataUpdate', ContratoDataUpdate);
 app.use('/ContratoDelete', ContratoDelete);
 app.use('/ContratoGet', ContratoGet)
 app.use('/ContratoGetAll', ContratoGetAll)
