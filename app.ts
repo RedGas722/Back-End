@@ -7,7 +7,9 @@ import cors from 'cors';
 import AdministradorRegister from './routes/Administrador/AdministradorRegister'
 import AdministradorLogin from './routes/Administrador/AdministradorLogin';
 import AdministradorUpdate from './routes/Administrador/AdministradorUpdate';
+import AdministradorDataUpdate from './routes/Administrador/AdministradorDataUpdate'
 import AdministradorGet from "./routes/Administrador/AdministradorGet";
+import AdministradorGetAll from "./routes/Administrador/AdministradorGetAll";
 import AdministradorDelete from "./routes/Administrador/AdministradorDelete";
 
 //import categoria
@@ -106,7 +108,9 @@ app.use(cors({origin: 'http://localhost:5173', credentials: true,}));
 app.use('/AdminRegister', AdministradorRegister);
 app.use('/AdminLogin', AdministradorLogin);
 app.use('/AdminGet', AdministradorGet);
+app.use('/AdminGetAll', AdministradorGetAll);
 app.use('/AdminUpdate', AdministradorUpdate);
+app.use ('/AdminDataUpdate', AdministradorDataUpdate)
 app.use('/AdminDelete', AdministradorDelete);
 
 //CATEGORIA

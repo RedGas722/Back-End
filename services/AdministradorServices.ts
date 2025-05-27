@@ -2,6 +2,7 @@ import AdministradorRepository from '../repositories/AdministradorRepository';
 import Administrador from '../Dto/AdministradorDto/AdministradorDto';
 import generateHash from '../Helpers/generateHash';
 import AuthAdministrador from '../Dto/AdministradorDto/AdministradorAuthDto';
+import AdministradorDataDto from '../Dto/AdministradorDto/AdministradorDataDto';
 
 
 class AdministradorServices {
@@ -23,12 +24,21 @@ class AdministradorServices {
         return await AdministradorRepository.login(auth);
     }
 
+    // Data Update sin contraseña
+    static async AdministradorDataUpdate(administrador: AdministradorDataDto, correo_admin: string) {
+        return await AdministradorRepository.AdministradorDataUpdate(administrador, correo_admin);
+    }
+
     static async AdministradorDelete(correo_admin: string) {
         return await AdministradorRepository.delete(correo_admin);
     }
     static async AdministradorGet(correo_admin: string){
 
         return await AdministradorRepository.getByEmail(correo_admin);
+    }
+
+    static async AdministradorGetAll() {
+        return await AdministradorRepository.getAll();
     }
 }
 

@@ -1,4 +1,5 @@
 import Administrador from '../Dto/AdministradorDto/AdministradorDto';
+import AdministradorDataDto from '../Dto/AdministradorDto/AdministradorDataDto';
 import AuthAdministrador from '../Dto/AdministradorDto/AdministradorAuthDto';
 import db from '../config/config-db';
 import bcrypt from 'bcryptjs';
@@ -15,20 +16,28 @@ class AdministradorRepository {
     // Get Administrador
     static async getAll() {
         const sql = 'SELECT * FROM administrador';
-        return db.execute(sql);
+        const [rows] = await db.execute(sql);
+        return rows;
     }
 
     static async getByEmail(correo_admin: string) {
         const sql = 'SELECT * FROM administrador WHERE correo_admin = ?';
         const values = [correo_admin];
-        const [rows] = await db.execute(sql, values);
-        return rows; 
+        const [rows]:any = await db.execute(sql, values);
+        return rows[0]; 
     }
 
     // Update Administrador
     static async update(administrador: Administrador, new_correo_admin: string) {
         const sql = 'UPDATE administrador SET nombre_admin = ?, correo_admin = ?, telefono_admin = ?, contraseña_admin = ? WHERE correo_admin = ?';
         const values = [administrador.nombre_admin, new_correo_admin, administrador.telefono_admin, administrador.contraseña_admin, administrador.correo_admin];
+        return db.execute(sql, values);
+    }
+
+    // Update Administrador sin contraseña (DataUpdate)
+    static async DataUpdate(administrador: Administrador, correo_admin: string) {
+        const sql = 'UPDATE administrador SET nombre_admin = ?, correo_admin = ?, telefono_admin = ? WHERE correo_admin = ?';
+        const values = [administrador.nombre_admin, administrador.correo_admin, administrador.telefono_admin, correo_admin];
         return db.execute(sql, values);
     }
 
@@ -54,6 +63,13 @@ class AdministradorRepository {
             return { logged: false, status: "Invalid username or password" };
         }
         return { logged: false, status: "Invalid username or password" };
+    }
+
+    // Data Update sin contraseña
+ static async AdministradorDataUpdate(administrador: AdministradorDataDto, correo_admin: string) {
+        const sql = 'UPDATE administrador SET nombre_admin = ?, correo_admin = ?, telefono_admin = ? WHERE correo_admin = ?';
+        const values = [administrador.nombre_admin, administrador.correo_admin, administrador.telefono_admin, correo_admin];
+        return db.execute(sql, values);
     }
 }
 

@@ -11,7 +11,7 @@ let AdministradorUpdate = async (req: Request, res: Response) => {
          contraseña_admin,
          correo_admin
        } = req.body;
-
+       console.log(req.body)
       if(!nombre_admin || !new_correo_admin || !telefono_admin || !contraseña_admin || !correo_admin)
       {
         return res.status(400).json({ status: 'Missing required fields' });
