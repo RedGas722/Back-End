@@ -99,6 +99,7 @@ import CartGet from './routes/Cart/CartGet';
 import CartRemove from './routes/Cart/CartRemove';
 import CartClear from './routes/Cart/CartClear';
 import CartTotal from './routes/Cart/CartTotal';
+import CartUpdateQuantity from './routes/Cart/CartUpdateQuantity';
 
 //import profile
 import profile from './routes/profile';
@@ -205,6 +206,7 @@ app.use('/SeEncuentraUpdate', SeEncuentraUpdate);
 //CART
 app.use('/CartAdd', CartAdd);
 app.use('/CartGet', CartGet);
+app.use('/CartUpdateQuantity', CartUpdateQuantity);
 app.use('/CartRemove', CartRemove);
 app.use('/CartClear', CartClear);
 app.use('/CartTotal', CartTotal)

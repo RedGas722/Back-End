@@ -16,7 +16,6 @@ export const CartGetController = async (req: Request, res: Response) => {
 
     const clienteId = clienteDB.id_cliente;
 
-    // Llama a servicio para obtener el carrito
     const cart = await cartServices.getCart(clienteId);
 
     return res.status(200).json(cart);
