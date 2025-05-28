@@ -16,8 +16,8 @@ class ProductoRepository {
 
     // Insert Producto
     static async add(producto: Producto) {
-        const sql = 'INSERT INTO producto (nombre_producto, descripcion_producto, precio_producto, stock, imagen) VALUES (?, ?, ?, ?, ?)';
-        const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.imagen];
+        const sql = 'INSERT INTO producto (nombre_producto, descripcion_producto, precio_producto, stock, descuento, fecha_descuento, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.descuento, producto.fecha_descuento, producto.imagen];
         return db.execute(sql, values);
     }
 
@@ -68,15 +68,15 @@ class ProductoRepository {
 
     // Update Producto con imagen
     static async update(producto: Producto, nombre_producto: string) {
-        const sql = 'UPDATE producto SET nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, stock = ?, imagen = ? WHERE nombre_producto = ?';
-        const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.imagen, nombre_producto];
+        const sql = 'UPDATE producto SET nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, stock = ?, descuento = ?, fecha_descuento = ?, imagen = ? WHERE nombre_producto = ?';
+        const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.descuento, producto.fecha_descuento, producto.imagen, nombre_producto];
         return db.execute(sql, values);
     }
 
     // Update Producto sin imagen
     static async updateNI(productoNI: ProductoNI, nombre_producto: string) {
-        const sql = 'UPDATE producto SET nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, stock = ? WHERE nombre_producto = ?';
-        const values = [productoNI.nombre_producto, productoNI.descripcion_producto, productoNI.precio_producto, productoNI.stock, nombre_producto];
+        const sql = 'UPDATE producto SET nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, stock = ?, descuento = ?, fecha_descuento = ? WHERE nombre_producto = ?';
+        const values = [productoNI.nombre_producto, productoNI.descripcion_producto, productoNI.precio_producto, productoNI.stock, productoNI.descuento, productoNI.fecha_descuento, nombre_producto];
         return db.execute(sql, values);
     }
 

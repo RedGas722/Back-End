@@ -9,10 +9,12 @@ let ProductoUpdateNI = async (req: Request, res: Response) => {
        descripcion_producto,
        precio_producto,
        stock,
+       descuento,
+       fecha_descuento,
        nombre_producto
     } = req.body;
 
-    const updateProductoNI = await ProductoServices.ProductoUpdateNI(new ProductoNI(nuevo_nombre_producto, descripcion_producto, precio_producto, stock), nombre_producto as string);
+    const updateProductoNI = await ProductoServices.ProductoUpdateNI(new ProductoNI(nuevo_nombre_producto, descripcion_producto, precio_producto, stock, descuento, fecha_descuento), nombre_producto as string);
 
     return res.status(201).json(
         { status: 'update ok'}
