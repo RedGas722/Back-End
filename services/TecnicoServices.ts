@@ -2,6 +2,7 @@ import TecnicoRepository from '../repositories/TecnicoRepository';
 import Tecnico from '../Dto/TecnicoDto/TecnicoDto';
 import generateHash from '../Helpers/generateHash';
 import AuthTecnico from '../Dto/TecnicoDto/TecnicoAuthDto';
+import TecnicoNI from '../Dto/TecnicoDto/TecnicoNIDto';
 
 class TecnicoServices {
 
@@ -25,6 +26,16 @@ class TecnicoServices {
     static async TecnicoUpdate(tecnico: Tecnico, correo_tecnico: string) { 
         tecnico.contraseña_tecnico = await generateHash(tecnico.contraseña_tecnico);
         return await TecnicoRepository.update(tecnico, correo_tecnico); 
+    }
+
+    // Tecnico Data Update
+    static async TecnicoDataUpdate(tecnico: Tecnico, correo_tecnico: string) { 
+        return await TecnicoRepository.DataUpdate(tecnico, correo_tecnico); 
+    }
+
+    // Tecnico Data Update NI
+    static async TecnicoDataUpdateNI(tecnico: TecnicoNI, correo_tecnico: string) { 
+        return await TecnicoRepository.DataUpdateNI(tecnico, correo_tecnico); 
     }
 
     // Tecnico Delete

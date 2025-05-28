@@ -7,10 +7,16 @@ let TecnicoDelete = async (req: Request, res: Response) => {
         correo_tecnico,
     } = req.query;
 
-    const deleteTecnico = await TecnicoServices.TecnicoDelete(correo_tecnico as string);
+    // Verificar si el correo existe antes de eliminar
+    const tecnico = await TecnicoServices.getbyEmail(correo_tecnico as string);
+    if (!tecnico || !Array.isArray(tecnico) || tecnico.length === 0) {
+      return res.status(404).json({ status: 'El correo ingresado no existe' });
+    }
+
+    await TecnicoServices.TecnicoDelete(correo_tecnico as string);
 
     return res.status(201).json({ status: 'delete ok'});
-    } catch (error: any) {
+  } catch (error: any) {
     console.error("Error en delete:", error);
 
     if (error && error.code == "ER_DUP_ENTRY") {

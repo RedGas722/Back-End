@@ -19,4 +19,4 @@ let TecnicoGetAll = async (req: Request, res: Response) => {
     }
 }
 
-export default TecnicoGetAll;  
+export default TecnicoGetAll;

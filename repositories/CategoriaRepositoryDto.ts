@@ -12,8 +12,8 @@ class CategoriaRepository {
 
     // Get Categoria
     static async getAll() {
-        const sql = 'SELECT * FROM categoria';
-        return db.execute(sql);
+        const [rows] = await db.query('SELECT * FROM categoria');
+        return rows;
     }
 
     static async getByName(nombre_categoria: string) {
