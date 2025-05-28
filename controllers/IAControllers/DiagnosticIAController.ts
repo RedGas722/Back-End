@@ -22,7 +22,7 @@ const diagnosticar = async (req: Request, res: Response) => {
     res.status(200).json({ resultado: respuesta });
   } catch (error: any) {
     console.error('Error al obtener diagnóstico:', error);
-    res.status(500).json({ error: error.message || 'Error interno' });
+    res.status(500).json({ error: error.message || 'Error interno.' });
   }
 };
 
