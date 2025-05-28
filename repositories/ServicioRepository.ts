@@ -13,7 +13,8 @@ class ServicioRepository {
     // Get Servicio
     static async getAll() {
         const sql = 'SELECT * FROM servicio';
-        return db.execute(sql);
+        const [rows] = await db.execute(sql);
+        return rows;
     }
 
     static async getByName(nombre_servicio: string) {
