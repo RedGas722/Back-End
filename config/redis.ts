@@ -1,12 +1,7 @@
 import Redis from 'ioredis';
 
-export const redis = new Redis({
-  host: 'localhost',
-  port: 6379,
-  retryStrategy: () => null // Desactiva reconexión automática
-});
+export const redis = new Redis(process.env.REDIS_URL!);
 
-// Maneja el error para que no quede sin capturar
 redis.on('error', (err) => {
-  console.warn('[Redis]', err.message); // o simplemente suprime con un console.debug
+  console.warn('[Redis]', err.message);
 });

@@ -8,7 +8,9 @@ const ProductoRegister = async (req: Request, res: Response) => {
       nombre_producto,
       descripcion_producto,
       precio_producto,
-      stock
+      stock,
+      descuento,
+      fecha_descuento
     } = req.body;
 
     if (!req.file) {
@@ -21,7 +23,9 @@ const ProductoRegister = async (req: Request, res: Response) => {
       nombre_producto,
       descripcion_producto,
       parseFloat(precio_producto),
-      parseInt(stock),
+      parseInt(stock), 
+      parseInt(descuento),
+      fecha_descuento,
       imagenBuffer
     );
 

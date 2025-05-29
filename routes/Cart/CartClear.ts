@@ -3,8 +3,6 @@ import { CartClearController } from "../../controllers/CartControllers/CartClear
 import verifyToken from "../../middleware/VerifyToken";
 const router = Router();
 
-router.use(verifyToken);
-
-router.delete("/", CartClearController);
+router.delete("/", verifyToken, CartClearController);
 
 export default router;

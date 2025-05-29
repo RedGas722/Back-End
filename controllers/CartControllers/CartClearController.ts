@@ -1,27 +1,26 @@
 import { Request, Response } from "express";
-import { cartServices } from "../../services/Cart/CartServices";
+import cartServices from "../../services/Cart/CartServices";
 import ClienteServices from "../../services/ClienteServices";
 
 export const CartClearController = async (req: Request, res: Response) => {
-  const cliente = req.cliente; 
-
-  if (!cliente) {
-    return res.status(401).json({ message: "Cliente no autenticado" });
-  }
-
   try {
-    const clienteDB = await ClienteServices.GetCliente(cliente.correo_cliente);
+    const clienteEmail = req.body.email;  // email viene del token
+    if (!clienteEmail) {
+      return res.status(401).json({ message: "Cliente no autenticado" });
+    }
+
+    const clienteDB = await ClienteServices.GetCliente(clienteEmail);
     if (!clienteDB) {
       return res.status(404).json({ message: "Cliente no encontrado" });
     }
 
-    const clienteId = clienteDB.id_cliente; 
+    const clienteId = clienteDB.id_cliente;
 
-    const cart = await cartServices.clearCart(clienteId);
+    await cartServices.clearCart(clienteId);
 
-    res.status(200).json(cart);
+    return res.status(200).json({ message: "Carrito limpiado correctamente" });
   } catch (error) {
     console.error("Error al limpiar el carrito:", error);
-    res.status(500).json({ message: "Error interno del servidor" });
+    return res.status(500).json({ message: "Error interno del servidor" });
   }
 };

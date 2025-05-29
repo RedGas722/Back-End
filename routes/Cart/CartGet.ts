@@ -3,8 +3,6 @@ import { CartGetController } from "../../controllers/CartControllers/CartGetCont
 import verifyToken from "../../middleware/VerifyToken";
 const router = Router();
 
-router.use(verifyToken);
-
-router.get("/", CartGetController);
+router.get("/", verifyToken, CartGetController);
 
 export default router;

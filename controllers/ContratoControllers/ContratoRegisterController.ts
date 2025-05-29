@@ -20,7 +20,7 @@ let ContratoRegister = async (req: Request, res: Response) => {
         { status: 'register ok'}
     )
   } catch (error: any) {
-    console.error('Error en ContratoRegister:', error); // Log para depuración
+    console.error('Error en ContratoRegister:', error); 
     if (error && error.code == "ER_DUP_ENTRY") {
       return res.status(500).json({ errorInfo: error.sqlMessage }
       )

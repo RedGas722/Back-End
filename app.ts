@@ -38,6 +38,9 @@ import ContratoDelete from "./routes/Contrato/ContratoDelete";
 import ContratoGet from "./routes/Contrato/ContratoGet";  
 import ContratoGetAll from "./routes/Contrato/ContratoGetAll";    
 
+//import ia
+import Diagnostic from "./routes/IA/Diagnostic";
+
 //import empleado
 import EmpleadoRegister from './routes/Empleado/EmpleadoRegister';
 import EmpleadoLogin from './routes/Empleado/EmpleadoLogin';
@@ -63,6 +66,7 @@ import ProductoRegister from './routes/Producto/ProductoRegister';
 import ProductoFilterByName from './routes/Producto/ProductoFilterByName';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
+import ProductoGetAllCategoria from './routes/Producto/ProductoGetAllCategoria';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoUpdate from './routes/Producto/ProductoUpdate';
 import ProductoUpdateNI from './routes/Producto/ProductoUpdateNI';
@@ -79,7 +83,7 @@ import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
 import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
 import TecnicoUpdate from './routes/Tecnico/TecnicoUpdate';
 import TecnicoDataUpdate from './routes/Tecnico/TecnicoDataUpdate';
-import TecnicoUpdateNI from './routes/Tecnico/TecnicoDataUpdateNI';
+import TecnicoDataUpdateNI from './routes/Tecnico/TecnicoDataUpdateNI';
 
 import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
 import TecnicoGet from './routes/Tecnico/TecnicoGet';
@@ -88,12 +92,17 @@ import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
 
+//import se encuentra
+import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
+import SeEncuentraUpdate from './routes/SeEncuentra/SeEncuentraUpdate';
+
 //import cart
 import CartAdd from './routes/Cart/CartAdd';
 import CartGet from './routes/Cart/CartGet';
 import CartRemove from './routes/Cart/CartRemove';
 import CartClear from './routes/Cart/CartClear';
 import CartTotal from './routes/Cart/CartTotal';
+import CartUpdateQuantity from './routes/Cart/CartUpdateQuantity';
 
 //import profile
 import profile from './routes/profile';
@@ -126,7 +135,7 @@ app.use('/ClienteRegister', ClienteRegister);
 app.use('/ClienteLogin', ClienteLogin);
 app.use('/ClienteEmail', ClienteEmail);
 app.use('/ClienteChangePassword', ClienteChangePassword);
-app.use('/CLienteDelete', ClienteDelete);
+app.use('/ClienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
 app.use('/ClienteDataUpdate', ClienteDataUpdate);
 app.use('/ClienteGet', ClienteGet);
@@ -141,6 +150,9 @@ app.use('/ContratoDataUpdate', ContratoDataUpdate);
 app.use('/ContratoDelete', ContratoDelete);
 app.use('/ContratoGet', ContratoGet)
 app.use('/ContratoGetAll', ContratoGetAll)
+
+//IA
+app.use('/Diagnostic', Diagnostic);
 
 //EMPLEADO
 app.use('/EmpleadoRegister', EmpleadoRegister);
@@ -170,6 +182,7 @@ app.use('/ProductoUpdate', ProductoUpdate);
 app.use('/ProductoUpdateNI', ProductoUpdateNI);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoGetAll', ProductoGetAll);
+app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
 app.use('/ProductoFilterByName', ProductoFilterByName);
 
 //SERVICIO
@@ -184,7 +197,7 @@ app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoLogin', TecnicoLogin);
 app.use('/TecnicoUpdate', TecnicoUpdate);
 app.use('/TecnicoDataUpdate', TecnicoDataUpdate);
-app.use('/TecnicoUpdateNI', TecnicoUpdateNI);
+app.use('/TecnicoDataUpdateNI', TecnicoDataUpdateNI);
 app.use('/TecnicoDelete', TecnicoDelete);
 app.use('/TecnicoGet', TecnicoGet);
 app.use('/TecnicoGetAll', TecnicoGetAll);
@@ -192,16 +205,20 @@ app.use('/TecnicoGetAll', TecnicoGetAll);
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
 
+//SE ENCUENTRA
+app.use('/SeEncuentraRegister', SeEncuentraRegister);
+app.use('/SeEncuentraUpdate', SeEncuentraUpdate);
+
 //CART
 app.use('/CartAdd', CartAdd);
 app.use('/CartGet', CartGet);
+app.use('/CartUpdateQuantity', CartUpdateQuantity);
 app.use('/CartRemove', CartRemove);
 app.use('/CartClear', CartClear);
 app.use('/CartTotal', CartTotal)
 
 //PROFILE
 app.use('/Profile', profile);
-
 
 //--------------- INICIALIZAR SERVIDOR -------------------//
 

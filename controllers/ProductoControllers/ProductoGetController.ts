@@ -13,7 +13,7 @@ let ProductoGet = async (req: Request, res: Response) => {
         status: 'Consult ok',
         data: {
           ...producto,
-          imagen: producto.imagen.toString('base64'), // conversión directa
+          imagen: producto.imagen.toString('base64'), 
         },
       });
     } else {

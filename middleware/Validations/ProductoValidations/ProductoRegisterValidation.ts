@@ -15,6 +15,14 @@ export const ProductoRegisterValidatorParams: ValidationChain[] = [
   check('stock')
     .isInt({ gt: 0 }).withMessage('El stock debe ser un número entero mayor que 0.'),
 
+  check('descuento')
+  .optional()
+  .isInt({ min: 0, max: 100 }).withMessage('El descuento debe ser un número entero entre 0 y 100.'),
+
+  check('fecha_descuento')
+    .optional()
+    .isDate().withMessage('La fecha de descuento debe ser una fecha válida.'),
+
     check('imagen')
     .custom((value, { req }) => {
       if (!req.file) {
