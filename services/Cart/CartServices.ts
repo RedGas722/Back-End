@@ -5,6 +5,7 @@ interface CartItem {
   productName: string; 
   quantity: number;
   price: number;
+  discount: number;
 }
 
 type Cart = CartItem[];
@@ -46,7 +47,13 @@ async function clearCart(userId: string): Promise<void> {
 // Obtener total del carrito
 async function getTotal(userId: string): Promise<number> {
   const cart = await getCart(userId);
-  return cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
+  return cart.reduce((sum, item) => {
+    const discountRate = item.discount ? item.discount / 100 : 0;
+    const priceWithDiscount = item.price * (1 - discountRate);
+
+    return sum + item.quantity * priceWithDiscount;
+  }, 0);
 }
 
 // Actualizar cantidad de un producto en el carrito

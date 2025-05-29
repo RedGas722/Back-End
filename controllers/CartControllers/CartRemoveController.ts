@@ -1,22 +1,15 @@
 import { Request, Response } from "express";
 import cartServices from "../../services/Cart/CartServices";
-import ClienteServices from "../../services/ClienteServices";
 
 export const CartRemoveController = async (req: Request, res: Response) => {
   try {
-    const { email, productId } = req.body;
+    const { id, productId } = req.body;
 
-    if (!email || !productId) {
+    if (!id || !productId) {
       return res.status(400).json({ message: "Faltan datos: email o productId" });
     }
 
-    const clienteDB = await ClienteServices.GetCliente(email);
-    if (!clienteDB) {
-      return res.status(404).json({ message: "Cliente no encontrado" });
-    }
-
-    const clienteId = clienteDB.id_cliente;
-    const updatedCart = await cartServices.removeFromCart(clienteId, productId);
+    const updatedCart = await cartServices.removeFromCart(id, productId);
 
     return res.status(200).json(updatedCart);
   } catch (error) {
