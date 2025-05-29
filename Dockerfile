@@ -3,12 +3,12 @@ FROM node:18-alpine
 WORKDIR /app
 
 COPY package*.json ./
-
-RUN npm install --production
+RUN npm install
 
 COPY . .
 
-# Exponemos el puerto que usa la app
+RUN npx tsc
+
 EXPOSE 10101
 
 CMD ["node", "dist/app.js"]
