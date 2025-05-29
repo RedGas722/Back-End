@@ -11,4 +11,6 @@ RUN npx tsc
 
 EXPOSE 10101
 
+RUN find dist/controllers/TecnicoController -type f
+
 CMD ["node", "dist/app.js"]
