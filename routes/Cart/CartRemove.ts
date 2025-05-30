@@ -3,8 +3,6 @@ import { CartRemoveController } from "../../controllers/CartControllers/CartRemo
 import verifyToken from "../../middleware/VerifyToken";
 const router = Router();
 
-router.use(verifyToken);
-
-router.delete("/", CartRemoveController);
+router.delete("/", verifyToken, CartRemoveController);
 
 export default router;

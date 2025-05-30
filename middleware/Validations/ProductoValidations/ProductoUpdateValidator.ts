@@ -6,6 +6,14 @@ export const ProductoUpdateValidatorParams: ValidationChain[] = [
   check('precio_producto').isDecimal().isLength({ min: 1, max: 15 }),
   check('descripcion_producto').isString(),
   check('stock').isInt({ gt: 0 }).isLength({ min: 1, max: 15 }),
+  check('descuento')
+  .optional()
+  .isInt({ min: 0, max: 100 }).withMessage('El descuento debe ser un número entero entre 0 y 100.'),
+
+  check('fecha_descuento')
+  .optional()
+  .isDate().withMessage('La fecha de descuento debe ser una fecha válida.'),
+
   check('nombre_producto').isString(),
   check('imagen')
     .custom((value, { req }) => {

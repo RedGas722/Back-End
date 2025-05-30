@@ -1,28 +1,19 @@
 import { Request, Response } from "express";
-import  cartServices  from "../../services/Cart/CartServices";
-import ClienteServices from "../../services/ClienteServices";
+import cartServices from "../../services/Cart/CartServices";
 
 export const CartRemoveController = async (req: Request, res: Response) => {
-  const cliente = req.cliente; 
-
-  if (!cliente) {
-    return res.status(401).json({ message: "Cliente no autenticado" });
-  }
-
   try {
-    const clienteDB = await ClienteServices.GetCliente(cliente.correo_cliente);
-    if (!clienteDB) {
-      return res.status(404).json({ message: "Cliente no encontrado" });
+    const { id, productId } = req.body;
+
+    if (!id || !productId) {
+      return res.status(400).json({ message: "Faltan datos: email o productId" });
     }
 
-    const clienteId = clienteDB.id_cliente; 
+    const updatedCart = await cartServices.removeFromCart(id, productId);
 
-    const item = req.body;
-    const cart = await cartServices.removeFromCart(clienteId, item);
-
-    res.status(200).json(cart);
+    return res.status(200).json(updatedCart);
   } catch (error) {
     console.error("Error al eliminar del carrito:", error);
-    res.status(500).json({ message: "Error interno del servidor" });
+    return res.status(500).json({ message: "Error interno del servidor" });
   }
 };

@@ -80,7 +80,7 @@ import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
 import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
 import TecnicoUpdate from './routes/Tecnico/TecnicoUpdate';
 import TecnicoDataUpdate from './routes/Tecnico/TecnicoDataUpdate';
-import TecnicoUpdateNI from './routes/Tecnico/TecnicoDataUpdateNI';
+import TecnicoDataUpdateNI from './routes/Tecnico/TecnicoDataUpdateNI';
 
 import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
 import TecnicoGet from './routes/Tecnico/TecnicoGet';
@@ -99,6 +99,7 @@ import CartGet from './routes/Cart/CartGet';
 import CartRemove from './routes/Cart/CartRemove';
 import CartClear from './routes/Cart/CartClear';
 import CartTotal from './routes/Cart/CartTotal';
+import CartUpdateQuantity from './routes/Cart/CartUpdateQuantity';
 
 //import profile
 import profile from './routes/profile';
@@ -106,7 +107,13 @@ import profile from './routes/profile';
 dotenv.config();
 const app = express().use(bodyParser.json());
 
-app.use(cors({origin: 'http://localhost:5173', credentials: true,}));
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://red-gas-kevins-projects-666a0731.vercel.app'
+  ],
+  credentials: true,
+}));
 
 //--------------- RUTAS -------------------//
 
@@ -190,7 +197,7 @@ app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoLogin', TecnicoLogin);
 app.use('/TecnicoUpdate', TecnicoUpdate);
 app.use('/TecnicoDataUpdate', TecnicoDataUpdate);
-app.use('/TecnicoUpdateNI', TecnicoUpdateNI);
+app.use('/TecnicoDataUpdateNI', TecnicoDataUpdateNI);
 app.use('/TecnicoDelete', TecnicoDelete);
 app.use('/TecnicoGet', TecnicoGet);
 app.use('/TecnicoGetAll', TecnicoGetAll);
@@ -205,6 +212,7 @@ app.use('/SeEncuentraUpdate', SeEncuentraUpdate);
 //CART
 app.use('/CartAdd', CartAdd);
 app.use('/CartGet', CartGet);
+app.use('/CartUpdateQuantity', CartUpdateQuantity);
 app.use('/CartRemove', CartRemove);
 app.use('/CartClear', CartClear);
 app.use('/CartTotal', CartTotal)

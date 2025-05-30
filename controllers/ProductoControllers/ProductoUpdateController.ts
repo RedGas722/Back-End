@@ -14,6 +14,8 @@ let ProductoUpdate = async (req: Request, res: Response) => {
        descripcion_producto,
        precio_producto,
        stock,
+       descuento,
+       fecha_descuento,
        nombre_producto
     } = req.body;
 
@@ -22,7 +24,7 @@ let ProductoUpdate = async (req: Request, res: Response) => {
     }
 
     const imagenBuffer = req.file.buffer;
-    const updateProducto = await ProductoServices.ProductoUpdate(new Producto(nuevo_nombre_producto, descripcion_producto, precio_producto, stock, imagenBuffer ), nombre_producto as string);
+    const updateProducto = await ProductoServices.ProductoUpdate(new Producto(nuevo_nombre_producto, descripcion_producto, precio_producto, stock, descuento, fecha_descuento, imagenBuffer), nombre_producto as string);
 
     return res.status(201).json(
         { status: 'update ok'}

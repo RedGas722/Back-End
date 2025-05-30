@@ -1,7 +1,6 @@
 import Producto from "../Dto/ProductoDto/ProductoDto";
 import ProductoNI from "../Dto/ProductoDto/ProductoNIDto";
 import ProductoRepository from "../repositories/ProductoRepository";
-import { redis } from "../config/redis";
 
 class ProductoServices {
     // Register Producto
