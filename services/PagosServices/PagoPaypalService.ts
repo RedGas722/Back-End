@@ -16,7 +16,7 @@ const PagoPaypal = async ({ cantidad, referencia, email }: PagoPaypalParams) => 
     purchase_units: [{
       reference_id: referencia,
       amount: {
-        currency_code: "USD",
+        currency_code: "COP",
         value: cantidad
       }
     }],
