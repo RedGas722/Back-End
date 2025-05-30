@@ -2,6 +2,7 @@ import EmpleadoRepository from '../repositories/EmpleadoRepository';
 import Empleado from '../Dto/EmpleadoDto/EmpleadoDto';
 import generateHash from '../Helpers/generateHash';
 import AuthEmpleado from '../Dto/EmpleadoDto/EmpleadoAuthDto';
+import DataEmpleado from '../Dto/EmpleadoDto/DataEmpleadoDto';
 
 class EmpleadoServices {
 
@@ -25,6 +26,10 @@ class EmpleadoServices {
     static async EmpleadoUpdate(empleado: Empleado,  correo_empleado: string) {
         empleado.contraseña_empleado = await generateHash(empleado.contraseña_empleado);
         return await EmpleadoRepository.update(empleado,  correo_empleado);
+    }
+
+    static async EmpleadoDataUpdate(dataEmpleado: DataEmpleado,  correo_empleado: string) {
+        return await EmpleadoRepository.dataUpdate(dataEmpleado,  correo_empleado);
     }
 
     // Empleado Delete  

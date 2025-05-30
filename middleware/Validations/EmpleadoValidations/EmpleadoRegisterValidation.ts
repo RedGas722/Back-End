@@ -12,6 +12,7 @@ export const empleadoRegisterValidation: ValidationChain[] = [
     .isLength({ min: 10, max: 10 })
     .withMessage('El campo "telefono_empleado" debe 10 caracteres.'),
   check('direccion_empleado')
+    .optional()  
     .isLength({ min: 1, max: 255 })
     .withMessage('El campo "direccion_empleado" es obligatorio y debe tener entre 1 y 255 caracteres.'),
   check('contraseña_empleado')

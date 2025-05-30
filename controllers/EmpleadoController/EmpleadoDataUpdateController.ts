@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import Empleado from "../../Dto/EmpleadoDto/EmpleadoDto";
 import EmpleadoServices from "../../services/EmpleadoServices";
+import DataEmpleado from "../../Dto/EmpleadoDto/DataEmpleadoDto";
 
-let EmpleadoUpdate = async (req: Request, res: Response) => {
+let EmpleadoDataUpdate = async (req: Request, res: Response) => {
   try {
      const {
         nombre_empleado,
@@ -14,17 +14,16 @@ let EmpleadoUpdate = async (req: Request, res: Response) => {
     } = req.body;
 
     // Verifica que los campos requeridos no estén vacíos
-    if (!nombre_empleado || !correo_empleado || !contraseña_empleado) {
+    if (!nombre_empleado || !nuevo_correo_empleado || !direccion_empleado || !telefono_empleado || !correo_empleado || !contraseña_empleado) {
       return res.status(400).json({ status: 'Missing required fields' });
     }
 
-    const updateEmpleado = await EmpleadoServices.EmpleadoUpdate(
-      new Empleado(
+    const updateEmpleado = await EmpleadoServices.EmpleadoDataUpdate(
+      new DataEmpleado(
         nombre_empleado,
         nuevo_correo_empleado,
         telefono_empleado,
-        direccion_empleado,
-        contraseña_empleado
+        direccion_empleado
       ),
       correo_empleado as string
     );
@@ -41,6 +40,6 @@ let EmpleadoUpdate = async (req: Request, res: Response) => {
   }
 };
 
-export default EmpleadoUpdate;
+export default EmpleadoDataUpdate;
 
 
