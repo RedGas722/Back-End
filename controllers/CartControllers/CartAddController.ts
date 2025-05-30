@@ -10,9 +10,9 @@ export const CartAddController = async (req: Request, res: Response) => {
 
     const { productId, productName, quantity, price, discount } = req.body;
 
-    if (!productId || !productName || !quantity || !price || !discount) {
-      return res.status(400).json({ message: "Datos del producto incompletos" });
-    }
+    if (!productId || !productName || !quantity || !price || discount === undefined || discount === null) {
+    return res.status(400).json({ message: "Datos del producto incompletos" });
+  }
 
     // Llama a servicio para agregar al carrito con productName incluido
     const cart = await cartServices.addToCart(clienteId, { productId, productName, quantity, price, discount});
