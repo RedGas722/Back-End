@@ -107,7 +107,13 @@ import profile from './routes/profile';
 dotenv.config();
 const app = express().use(bodyParser.json());
 
-app.use(cors({origin: 'http://localhost:5173', credentials: true,}));
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://red-gas-kevins-projects-666a0731.vercel.app'
+  ],
+  credentials: true,
+}));
 
 //--------------- RUTAS -------------------//
 
