@@ -1,4 +1,3 @@
-// services/PagosServices.ts
 import getAccessToken from "../../Helpers/generateTokenPaypal";
 
 interface PagoPaypalParams {
@@ -9,14 +8,13 @@ interface PagoPaypalParams {
 
 const PagoPaypal = async ({ cantidad, referencia, email }: PagoPaypalParams) => {
   const token = await getAccessToken();
-  console.log("ACCESS TOKEN:", token); /////// QUITAR!!!!!!!! solo prueba
 
   const body = {
     intent: "CAPTURE",
     purchase_units: [{
       reference_id: referencia,
       amount: {
-        currency_code: "COP",
+        currency_code: "USD",
         value: cantidad
       }
     }],
