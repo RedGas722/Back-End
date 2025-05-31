@@ -29,8 +29,8 @@ class EmpleadoRepository {
         static async getByCorreo(correo_empleado: string) {
             const sql = 'SELECT * FROM empleado WHERE correo_empleado = ?';
             const values = [correo_empleado];
-            const [rows] = await db.execute(sql, values);
-            return rows;
+            const [rows]:any = await db.execute(sql, values);
+            return rows[0];
         }
 
         static async ClienteGetAll(){
