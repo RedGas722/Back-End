@@ -89,6 +89,7 @@ import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
+import CapturarPago from './routes/Pagos/CapturarPago';
 
 //import se encuentra
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
@@ -206,6 +207,7 @@ app.use('/TecnicoGetAll', TecnicoGetAll);
 
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
+app.use('/CapturarPago', CapturarPago);
 
 //SE ENCUENTRA
 app.use('/SeEncuentraRegister', SeEncuentraRegister);

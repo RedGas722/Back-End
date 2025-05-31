@@ -22,8 +22,8 @@ const PagoPaypal = async ({ cantidad, referencia, email }: PagoPaypalParams) => 
       email_address: email
     },
     application_context: {
-        return_url: "http://localhost:3000/confirmacion",
-        cancel_url: "http://localhost:3000/cancelado"        
+      return_url: "http://localhost:5173/Shopping/Confirmacion",
+      cancel_url: "http://localhost:5173/Shopping/Cancelado"
     }
   };
 
@@ -45,4 +45,28 @@ const PagoPaypal = async ({ cantidad, referencia, email }: PagoPaypalParams) => 
   return data;
 };
 
-export default { PagoPaypal };
+const CapturarPago = async (orderID: string) => {
+  const token = await getAccessToken();
+
+  const response = await fetch(`https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderID}/capture`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    }
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error("Error al capturar pago:", data);
+    throw new Error(data.message || "No se pudo capturar el pago");
+  }
+
+  return data;
+};
+
+export default {
+  PagoPaypal,
+  CapturarPago
+};
