@@ -9,12 +9,11 @@ let EmpleadoDataUpdate = async (req: Request, res: Response) => {
         nuevo_correo_empleado,
         telefono_empleado,
         direccion_empleado,
-        contraseña_empleado,
         correo_empleado
     } = req.body;
 
     // Verifica que los campos requeridos no estén vacíos
-    if (!nombre_empleado || !nuevo_correo_empleado || !direccion_empleado || !telefono_empleado || !correo_empleado || !contraseña_empleado) {
+    if (!nombre_empleado || !nuevo_correo_empleado || !direccion_empleado || !telefono_empleado || !correo_empleado) {
       return res.status(400).json({ status: 'Missing required fields' });
     }
 
