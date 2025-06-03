@@ -6,7 +6,7 @@ export const clienteRegisterValidatorParams: ValidationChain[] = [
   check('correo_cliente').isEmail(),
   check('telefono_cliente').isString().isLength({ min: 10, max: 10 }),
   check('direccion_cliente').isString().optional(),
-  check('contraseña_cliente').isLength({ min: 8, max: 15 })
+  check('contraseña_cliente').isLength({ min: 8, max: 20 })
 ];
 
 export function ClienteRegisterValidator(req: Request, res: Response, next: NextFunction) {
