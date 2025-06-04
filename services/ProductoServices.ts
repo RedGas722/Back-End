@@ -46,7 +46,7 @@ class ProductoServices {
     // Resetear descuentos vencidos
     static async ProductoResetearDescuentos() {
         const hoy = new Date().toISOString().slice(0, 10); // formato YYYY-MM-DD
-        return await ProductoRepository.resetearDescuentos(hoy);
+        return await ProductoRepository.resetearDescuentos('2025-06-05');
     }
 
 }
