@@ -14,3 +14,5 @@ npm install @google/generative-ai
 - **DB_PASSWORD:** passwordDelUsuario
 ### Abra una terminal y ejecute tsc -w para el modo observador de Typescript
 ### Abra otra terminal y ejecute node ./dist/app para ejecutar el servidor
+### node-cron para gestionar el tiempo de los descuentos
+npm install node-cron

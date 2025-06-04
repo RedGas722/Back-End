@@ -43,6 +43,12 @@ class ProductoServices {
         return await ProductoRepository.filterByName(nombre_producto);
     }
 
+    // Resetear descuentos vencidos
+    static async ProductoResetearDescuentos() {
+        const hoy = new Date().toISOString().slice(0, 10); // formato YYYY-MM-DD
+        return await ProductoRepository.resetearDescuentos(hoy);
+    }
+
 }
 
 export default ProductoServices;

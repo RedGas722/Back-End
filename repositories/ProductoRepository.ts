@@ -86,6 +86,18 @@ class ProductoRepository {
         const values = [nombre_producto];
         return db.execute(sql, values);
     }
+
+    // Resetear descuentos cuyo plazo ha vencido
+    static async resetearDescuentos(fechaActual: string) {
+        const sql = `
+            UPDATE producto
+            SET descuento = 0
+            WHERE descuento > 0 AND fecha_descuento = ?
+        `;
+        const values = [fechaActual];
+        return db.execute(sql, values);
+    }
+
 }
 
 export default ProductoRepository;
