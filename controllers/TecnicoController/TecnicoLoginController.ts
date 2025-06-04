@@ -10,9 +10,17 @@ let TecnicoLogin = async (req: Request, res: Response) => {
     const loginTecnico = await TecnicoServices.login(new AuthTecnico(correo_tecnico, contraseña_tecnico));
 
     if (loginTecnico.logged) {
+      const tipo_usuario = "tecnico";
       return res.status(200).json({
         status: 'login ok',
-        token: generateToken({id: loginTecnico.id, name: loginTecnico.name, email: loginTecnico.email, telefono: loginTecnico.telefono}, process.env.KEY_TOKEN, 5)
+        tipo_usuario,
+        token: generateToken({
+          id: loginTecnico.id,
+          name: loginTecnico.name,
+          email: loginTecnico.email,
+          telefono: loginTecnico.telefono,
+          tipo_usuario // también en el payload del token
+        }, process.env.KEY_TOKEN, 5)
       });
     }
     return res.status(401).json({

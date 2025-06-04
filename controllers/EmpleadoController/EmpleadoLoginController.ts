@@ -11,9 +11,19 @@ let EmpleadoLogin = async (req: Request, res: Response) => {
 
     // Verifica si el login fue exitoso
     if (loginEmpleado.logged) {
+      const tipo_usuario = "empleado";
       return res.status(200).json({
         status: 'login ok',
-        token: generateToken({id: loginEmpleado.id, name: loginEmpleado.name, email: loginEmpleado.email, telefono: loginEmpleado.telefono, direccion:loginEmpleado.direccion}, process.env.KEY_TOKEN, 5)});
+        tipo_usuario,
+        token: generateToken({
+          id: loginEmpleado.id,
+          name: loginEmpleado.name,
+          email: loginEmpleado.email,
+          telefono: loginEmpleado.telefono,
+          direccion: loginEmpleado.direccion,
+          tipo_usuario // también en el payload del token
+        }, process.env.KEY_TOKEN, 5)
+      });
     }
 
     // Si las credenciales son incorrectas

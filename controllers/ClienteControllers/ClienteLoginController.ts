@@ -16,9 +16,18 @@ let ClienteLogin = async (req: Request, res: Response) => {
     const login = await ClienteServices.ClienteLogin(new AuthCliente(correo_cliente, contraseña_cliente));
     
     if (login.logged) {
+      const tipo_usuario = "cliente";
       return res.status(200).json({
         status: login.status,
-        token: generateToken({id: login.id, name: login.name, email: login.email, telefono: login.telefono, direccion: login.direccion}, process.env.KEY_TOKEN, 5)
+        tipo_usuario,
+        token: generateToken({
+          id: login.id,
+          name: login.name,
+          email: login.email,
+          telefono: login.telefono,
+          direccion: login.direccion,
+          tipo_usuario // también en el payload del token
+        }, process.env.KEY_TOKEN, 5)
       });
     }
 
@@ -28,8 +37,11 @@ let ClienteLogin = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      status: "Internal server error",
+      error: error instanceof Error ? error.message : String(error)
+    });
   }
 }
-
 
 export default ClienteLogin;
