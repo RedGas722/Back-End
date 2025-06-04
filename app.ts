@@ -222,6 +222,7 @@ app.use('/CartRemove', CartRemove);
 app.use('/CartClear', CartClear);
 app.use('/CartTotal', CartTotal)
 
+app.use('/prueba', ProductoRepository.resetearDescuentosDePrueba);
 //PROFILE
 app.use('/Profile', profile);
 

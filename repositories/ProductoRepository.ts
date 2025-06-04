@@ -140,6 +140,28 @@ class ProductoRepository {
             );
         }
     }
+
+        static async resetearDescuentosDePrueba() {
+        // Aquí buscas productos con descuento sin importar la fecha
+        const [productosConDescuento] = await db.execute(
+            `SELECT id_producto FROM producto WHERE descuento > 0`
+        );
+        const productos = productosConDescuento as { id_producto: number }[];
+
+        // Resetear descuento de todos esos productos
+        const sqlReset = `
+            UPDATE producto
+            SET descuento = 0
+            WHERE descuento > 0
+        `;
+        await db.execute(sqlReset);
+
+        // Actualizar categoría
+        for (const prod of productos) {
+            await this.cambiarOfertasASinCategoriaSiCorresponde(prod.id_producto);
+        }
+    }
+
 }
 
 export default ProductoRepository;
