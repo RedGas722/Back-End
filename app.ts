@@ -221,8 +221,9 @@ app.use('/CartUpdateQuantity', CartUpdateQuantity);
 app.use('/CartRemove', CartRemove);
 app.use('/CartClear', CartClear);
 app.use('/CartTotal', CartTotal)
+import prueba from './routes/Producto/Prueba';
 
-app.use('/prueba', ProductoRepository.resetearDescuentosDePrueba);
+app.use('/prueba', prueba);
 //PROFILE
 app.use('/Profile', profile);
 
