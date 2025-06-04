@@ -66,14 +66,14 @@ class ProductoRepository {
         return this.convertirImagenBase64(rows as any[]);
     }
 
-    // Update Producto con imagen
+    // Update Producto con imagen (sin actualizar categoría aquí)
     static async update(producto: Producto, nombre_producto: string) {
         const sql = 'UPDATE producto SET nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, stock = ?, descuento = ?, fecha_descuento = ?, imagen = ? WHERE nombre_producto = ?';
         const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.descuento, producto.fecha_descuento, producto.imagen, nombre_producto];
         return db.execute(sql, values);
     }
 
-    // Update Producto sin imagen
+    // Update Producto sin imagen (sin actualizar categoría aquí)
     static async updateNI(productoNI: ProductoNI, nombre_producto: string) {
         const sql = 'UPDATE producto SET nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, stock = ?, descuento = ?, fecha_descuento = ? WHERE nombre_producto = ?';
         const values = [productoNI.nombre_producto, productoNI.descripcion_producto, productoNI.precio_producto, productoNI.stock, productoNI.descuento, productoNI.fecha_descuento, nombre_producto];
@@ -87,17 +87,69 @@ class ProductoRepository {
         return db.execute(sql, values);
     }
 
-    // Resetear descuentos cuyo plazo ha vencido
+    // Resetear descuentos cuyo plazo ha vencido y actualizar categorías
     static async resetearDescuentos(fechaActual: string) {
-        const sql = `
+        // 1. Obtener productos con descuento vencido
+        const [productosConDescuento] = await db.execute(
+            `SELECT id_producto FROM producto WHERE descuento > 0 AND fecha_descuento = ?`,
+            [fechaActual]
+        );
+        const productos = productosConDescuento as { id_producto: number }[];
+
+        // 2. Resetear descuento
+        const sqlReset = `
             UPDATE producto
             SET descuento = 0
             WHERE descuento > 0 AND fecha_descuento = ?
         `;
-        const values = [fechaActual];
-        return db.execute(sql, values);
-    }
+        await db.execute(sqlReset, [fechaActual]);
 
+        // 3. Actualizar categoría de cada producto
+        for (const prod of productos) {
+            await this.actualizarCategoriaPorDescuento(prod.id_producto, 0);
+        }
+    }
+    // Método para actualizar la categoría relacionada del producto según el descuento
+    // Si descuento > 0 asigna la categoría "Ofertas" (ajusta el id según tu DB)
+    // Si descuento == 0 elimina la relación con "Ofertas" y reasigna o deja sin categoría
+    static async actualizarCategoriaPorDescuento(id_producto: number, descuento: number) {
+        const ID_CATEGORIA_OFERTAS = 3; // Ajustar según tu base de datos
+
+        if (descuento > 0) {
+            // Asignar categoría "Ofertas" si no existe ya
+            const [rows] = await db.execute(
+                'SELECT * FROM se_encuentra WHERE id_producto = ? AND id_categoria = ?',
+                [id_producto, ID_CATEGORIA_OFERTAS]
+            );
+            const rel = rows as any[];
+            if (rel.length === 0) {
+                await db.execute(
+                    'INSERT INTO se_encuentra (id_producto, id_categoria) VALUES (?, ?)',
+                    [id_producto, ID_CATEGORIA_OFERTAS]
+                );
+            }
+        } else {
+            // Descuento 0 -> eliminar categoría "Ofertas"
+            await db.execute(
+                'DELETE FROM se_encuentra WHERE id_producto = ? AND id_categoria = ?',
+                [id_producto, ID_CATEGORIA_OFERTAS]
+            );
+
+            // Opcional: reasignar categoría "Sin categoría" si no tiene ninguna
+            const [rowsCat] = await db.execute(
+                'SELECT * FROM se_encuentra WHERE id_producto = ?',
+                [id_producto]
+            );
+            const categorias = rowsCat as any[];
+            if (categorias.length === 0) {
+                const ID_CATEGORIA_SIN_CATEGORIA = 1; // Ajustar según DB
+                await db.execute(
+                    'INSERT INTO se_encuentra (id_producto, id_categoria) VALUES (?, ?)',
+                    [id_producto, ID_CATEGORIA_SIN_CATEGORIA]
+                );
+            }
+        }
+    }
 }
 
 export default ProductoRepository;

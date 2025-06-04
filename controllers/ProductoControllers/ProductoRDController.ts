@@ -1,4 +1,3 @@
-// cron/actualizarDescuentos.ts
 import cron from 'node-cron';
 import ProductoServices from '../../services/ProductoServices';
 
