@@ -10,6 +10,14 @@ import AdministradorUpdate from './routes/Administrador/AdministradorUpdate';
 import AdministradorGet from "./routes/Administrador/AdministradorGet";
 import AdministradorDelete from "./routes/Administrador/AdministradorDelete";
 
+//import cart
+import CartAdd from './routes/Cart/CartAdd';
+import CartGet from './routes/Cart/CartGet';
+import CartRemove from './routes/Cart/CartRemove';
+import CartClear from './routes/Cart/CartClear';
+import CartTotal from './routes/Cart/CartTotal';
+import CartUpdateQuantity from './routes/Cart/CartUpdateQuantity';
+
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
 import CategoriaUpdate from './routes/Categoria/CategoriaUpdate';
@@ -27,6 +35,9 @@ import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
 import ClienteDataUpdate from "./routes/Cliente/ClienteDataUpdate";
 import ClienteGet from "./routes/Cliente/ClienteGet";
 import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
+
+//import cliente servicios
+import ClienteServicesAdd from "./routes/ClienteServices/ClienteServicesAdd";
 
 //import contrato
 import ContratoRegister from './routes/Contrato/ContratoRegister';
@@ -95,19 +106,15 @@ import CapturarPago from './routes/Pagos/CapturarPago';
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
 import SeEncuentraUpdate from './routes/SeEncuentra/SeEncuentraUpdate';
 
-//import cart
-import CartAdd from './routes/Cart/CartAdd';
-import CartGet from './routes/Cart/CartGet';
-import CartRemove from './routes/Cart/CartRemove';
-import CartClear from './routes/Cart/CartClear';
-import CartTotal from './routes/Cart/CartTotal';
-import CartUpdateQuantity from './routes/Cart/CartUpdateQuantity';
+
 
 //import profile
 import profile from './routes/profile';
+import ClienteServices from "./services/ClienteServices";
 
 dotenv.config();
-const app = express().use(bodyParser.json());
+const app = express();
+app.use(bodyParser.json()); 
 
 app.use(cors({
   origin: [
@@ -120,56 +127,65 @@ app.use(cors({
 //--------------- RUTAS -------------------//
 
 //ADMINISTRADOR
-app.use('/AdminRegister', AdministradorRegister);
-app.use('/AdminLogin', AdministradorLogin);
 app.use('/AdminGet', AdministradorGet);
+app.use('/AdminLogin', AdministradorLogin);
 app.use('/AdminUpdate', AdministradorUpdate);
 app.use('/AdminDelete', AdministradorDelete);
+app.use('/AdminRegister', AdministradorRegister);
+
+//CART
+app.use('/CartAdd', CartAdd);
+app.use('/CartGet', CartGet);
+app.use('/CartClear', CartClear);
+app.use('/CartTotal', CartTotal);
+app.use('/CartRemove', CartRemove);
+app.use('/CartUpdateQuantity', CartUpdateQuantity);
 
 //CATEGORIA
-app.use('/CategoriaRegister', CategoriaRegister);
 app.use('/CategoriaGet', CategoriaGet);
 app.use('/CategoriaGetAll', CategoriaGetAll)
 app.use('/CategoriaUpdate', CategoriaUpdate);
 app.use('/CategoriaDelete', CategoriaDelete);
+app.use('/CategoriaRegister', CategoriaRegister);
 
 //CLIENTE
-app.use('/ClienteRegister', ClienteRegister);
+app.use('/ClienteGet', ClienteGet);
 app.use('/ClienteLogin', ClienteLogin);
 app.use('/ClienteEmail', ClienteEmail);
-app.use('/ClienteChangePassword', ClienteChangePassword);
 app.use('/ClienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
-app.use('/ClienteDataUpdate', ClienteDataUpdate);
-app.use('/ClienteGet', ClienteGet);
 app.use('/ClienteGetAll', ClienteGetAll);
+app.use('/ClienteRegister', ClienteRegister);
+app.use('/ClienteDataUpdate', ClienteDataUpdate);
+app.use('/ClienteChangePassword', ClienteChangePassword);
+
+//CLIENTE SERVIVICIOS
+app.use('/ClienteServicesAdd', ClienteServicesAdd);
 
 //CONTRATO
-app.use('/ContratoRegister', ContratoRegister);
 app.use('/ContratoGet', ContratoGet);
 app.use('/ContratoGetAll', ContratoGetAll);
 app.use('/ContratoUpdate', ContratoUpdate);
 app.use('/ContratoDelete', ContratoDelete);
-app.use('/ContratoGet', ContratoGet)
-app.use('/ContratoGetAll', ContratoGetAll)
+app.use('/ContratoRegister', ContratoRegister);
 
 //IA
 app.use('/Diagnostic', Diagnostic);
 
 //EMPLEADO
-app.use('/EmpleadoRegister', EmpleadoRegister);
+app.use('/EmpleadoGet', EmpleadoGet);
 app.use('/EmpleadoLogin', EmpleadoLogin);
 app.use('/EmpleadoUpdate', EmpleadoUpdate);
-app.use('/EmpleadoDataUpdate', EmpleadoDataUpdate);
-app.use('/EmpleadoDelete', EmpleadoDelete);
-app.use('/EmpleadoGet', EmpleadoGet);
 app.use('/EmpleadoGetAll', EmpleadoGetAll);
+app.use('/EmpleadoDelete', EmpleadoDelete);
+app.use('/EmpleadoRegister', EmpleadoRegister);
+app.use('/EmpleadoDataUpdate', EmpleadoDataUpdate);
 
 //FACTURA
-app.use('/FacturaRegister', FacturaRegister);
-app.use('/FacturaUpdate', FacturaUpdate);
 app.use('/FacturaGet', FacturaGet);
+app.use('/FacturaUpdate', FacturaUpdate);
 app.use('/FacturaGetAll', FacturaGetAll);
+app.use('/FacturaRegister', FacturaRegister);
 
 
 //PEDIDO PRODUCTO
@@ -179,47 +195,39 @@ app.use('/PedidoProductoRegister', PedidoProductoRegister);
 app.use('/PedidoServicioRegister', PedidoServicioRegister);
 
 //PRODUCTO
-app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoGet', ProductoGet);
-app.use('/ProductoUpdate', ProductoUpdate);
-app.use('/ProductoUpdateNI', ProductoUpdateNI);
-app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoGetAll', ProductoGetAll);
-app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
+app.use('/ProductoUpdate', ProductoUpdate);
+app.use('/ProductoDelete', ProductoDelete);
+app.use('/ProductoRegister', ProductoRegister);
+app.use('/ProductoUpdateNI', ProductoUpdateNI);
 app.use('/ProductoFilterByName', ProductoFilterByName);
+app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
 
 //SERVICIO
-app.use('/ServicioRegister', ServicioRegister);
+app.use('/ServicioGet', ServicioGet);
 app.use('/ServicioUpdate', ServicioUpdate);
 app.use('/ServicioDelete', ServicioDelete);
-app.use('/ServicioGet', ServicioGet);
 app.use('/ServicioGetAll', ServicioGetAll);
+app.use('/ServicioRegister', ServicioRegister);
 
 //TECNICO
-app.use('/TecnicoRegister', TecnicoRegister);
+app.use('/TecnicoGet', TecnicoGet);
 app.use('/TecnicoLogin', TecnicoLogin);
 app.use('/TecnicoUpdate', TecnicoUpdate);
+app.use('/TecnicoDelete', TecnicoDelete);
+app.use('/TecnicoGetAll', TecnicoGetAll);
+app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoDataUpdate', TecnicoDataUpdate);
 app.use('/TecnicoDataUpdateNI', TecnicoDataUpdateNI);
-app.use('/TecnicoDelete', TecnicoDelete);
-app.use('/TecnicoGet', TecnicoGet);
-app.use('/TecnicoGetAll', TecnicoGetAll);
 
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
 app.use('/CapturarPago', CapturarPago);
 
 //SE ENCUENTRA
-app.use('/SeEncuentraRegister', SeEncuentraRegister);
 app.use('/SeEncuentraUpdate', SeEncuentraUpdate);
-
-//CART
-app.use('/CartAdd', CartAdd);
-app.use('/CartGet', CartGet);
-app.use('/CartUpdateQuantity', CartUpdateQuantity);
-app.use('/CartRemove', CartRemove);
-app.use('/CartClear', CartClear);
-app.use('/CartTotal', CartTotal)
+app.use('/SeEncuentraRegister', SeEncuentraRegister);
 
 //PROFILE
 app.use('/Profile', profile);

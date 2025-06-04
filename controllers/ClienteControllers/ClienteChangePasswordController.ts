@@ -4,11 +4,11 @@ import ClienteServices from "../../services/ClienteServices";
 let ClienteChangePassword = async (req: Request, res: Response) => {
     try {
 
-         const id  = req.body.id; 
+        const id  = req.body.id; 
 
         const { 
          contraseña_cliente
-       } = req.body;
+        } = req.body;
     
         // Verifica que los campos requeridos no estén vacíos
         if (!contraseña_cliente) {
