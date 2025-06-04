@@ -1,14 +1,11 @@
-import { Request, Response } from "express";
-import ProductoServices from "../../services/ProductoServices";
+// cron/actualizarDescuentos.ts
+import cron from 'node-cron';
+import ProductoServices from '../../services/ProductoServices';
 
-const ProductoResetearDescuentos = async (req: Request, res: Response) => {
-  try {
+export const iniciarTareaDescuentos = () => {
+  cron.schedule('0 0 * * *', async () => {
+    console.log('⏰ Ejecutando limpieza de descuentos vencidos...');
     await ProductoServices.ProductoResetearDescuentos();
-    return res.status(200).json({ status: 'Descuentos vencidos actualizados correctamente.' });
-  } catch (error: any) {
-    console.error("Error al resetear descuentos vencidos:", error);
-    return res.status(500).json({ error: 'Error interno del servidor' });
-  }
+    console.log('✅ Descuentos vencidos actualizados.');
+  });
 };
-
-export default ProductoResetearDescuentos;

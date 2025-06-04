@@ -68,7 +68,7 @@ import ProductoGetAllCategoria from './routes/Producto/ProductoGetAllCategoria';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoUpdate from './routes/Producto/ProductoUpdate';
 import ProductoUpdateNI from './routes/Producto/ProductoUpdateNI';
-import ProductoResetearDescuentos from './routes/Producto/ProductoRD';
+import { iniciarTareaDescuentos } from "./controllers/ProductoControllers/ProductoRDController";
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
@@ -188,7 +188,6 @@ app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoGetAll', ProductoGetAll);
 app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
 app.use('/ProductoFilterByName', ProductoFilterByName);
-app.use('/ProductoRD', ProductoResetearDescuentos);
 
 //SERVICIO
 app.use('/ServicioRegister', ServicioRegister);
@@ -235,3 +234,6 @@ app.listen(PORT, () => {
 }).on("error", (error) => {
   throw new Error(error.message);
 });
+
+// --------------- Contador para la actualizacion de descuentos -------------------//
+iniciarTareaDescuentos();
