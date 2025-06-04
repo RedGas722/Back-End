@@ -239,3 +239,4 @@ app.listen(PORT, () => {
 
 // --------------- Contador para la actualizacion de descuentos -------------------//
 iniciarTareaDescuentos();
+console.log("Iniciado el contador de descuentos");
