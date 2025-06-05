@@ -14,16 +14,25 @@ class SeEncuentraRepository {
   static async updateRelacion(seEncuentra: SeEncuentra) {
     const { id_categoria, id_producto } = seEncuentra;
 
-    // Primero verificamos si existe la relación para el producto
-    const sqlCheck = 'SELECT * FROM se_encuentra WHERE id_producto = ?';
-    const [rows]: any = await db.execute(sqlCheck, [id_producto]);
+    // Buscar relaciones que no estén en categoría "Ofertas"
+    const sqlCheck = `
+      SELECT se.* FROM se_encuentra se
+      JOIN categorias c ON se.id_categoria = c.id_categoria
+      WHERE se.id_producto = ? AND c.nombre != ?
+    `;
+    const [rows]: any = await db.execute(sqlCheck, [id_producto, 'Ofertas']);
 
     if (rows.length > 0) {
-      // Si existe, actualizamos la categoría
-      const sqlUpdate = 'UPDATE se_encuentra SET id_categoria = ? WHERE id_producto = ?';
-      return db.execute(sqlUpdate, [id_categoria, id_producto]);
+      // Actualizar esas filas (puede actualizar varias)
+      const sqlUpdate = `
+        UPDATE se_encuentra SET id_categoria = ?
+        WHERE id_producto = ? AND id_categoria IN (
+          SELECT c.id_categoria FROM categorias c WHERE c.nombre != ?
+        )
+      `;
+      return db.execute(sqlUpdate, [id_categoria, id_producto, 'Ofertas']);
     } else {
-      // Si no existe, insertamos nueva relación
+      // Si no existe ninguna relación que no sea "Ofertas", insertar la nueva relación
       return this.add(seEncuentra);
     }
   }
