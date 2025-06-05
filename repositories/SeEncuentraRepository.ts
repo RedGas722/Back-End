@@ -14,27 +14,29 @@ class SeEncuentraRepository {
   static async updateRelacion(seEncuentra: SeEncuentra) {
     const { id_categoria, id_producto } = seEncuentra;
 
-    // Buscar relaciones que no estén en categoría "Ofertas"
-    const sqlCheck = `
-      SELECT se.* FROM se_encuentra se
-      JOIN categorias c ON se.id_categoria = c.id_categoria
-      WHERE se.id_producto = ? AND c.nombre != ?
+    // Paso 1: Verificar si ya existe la relación exacta
+    const sqlCheckExists = `
+      SELECT * FROM se_encuentra
+      WHERE id_producto = ? AND id_categoria = ?
     `;
-    const [rows]: any = await db.execute(sqlCheck, [id_producto, 'Ofertas']);
+    const [existente]: any = await db.execute(sqlCheckExists, [id_producto, id_categoria]);
 
-    if (rows.length > 0) {
-      // Actualizar esas filas (puede actualizar varias)
-      const sqlUpdate = `
-        UPDATE se_encuentra SET id_categoria = ?
-        WHERE id_producto = ? AND id_categoria IN (
-          SELECT c.id_categoria FROM categorias c WHERE c.nombre != ?
-        )
-      `;
-      return db.execute(sqlUpdate, [id_categoria, id_producto, 'Ofertas']);
-    } else {
-      // Si no existe ninguna relación que no sea "Ofertas", insertar la nueva relación
-      return this.add(seEncuentra);
+    if (existente.length > 0) {
+      // Ya existe la relación exacta, no se necesita actualizar
+      return { message: 'La relación ya existe, no se realizó ninguna modificación.' };
     }
+
+    // Paso 2: Eliminar relación actual que no sea "Ofertas"
+    const sqlDelete = `
+      DELETE FROM se_encuentra
+      WHERE id_producto = ? AND id_categoria IN (
+        SELECT id_categoria FROM categorias WHERE nombre != ?
+      )
+    `;
+    await db.execute(sqlDelete, [id_producto, 'Ofertas']);
+
+    // Paso 3: Insertar nueva relación
+    return this.add(seEncuentra);
   }
 
   static async delete(seEncuentra: SeEncuentra) {
