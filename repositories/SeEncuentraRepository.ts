@@ -19,9 +19,9 @@ class SeEncuentraRepository {
       SELECT * FROM se_encuentra
       WHERE id_producto = ? AND id_categoria = ?
     `;
-    const [existente]: any = await db.execute(sqlCheckExists, [id_producto, id_categoria]);
+    const [rows]: any = await db.execute(sqlCheckExists, [id_producto, id_categoria]);
 
-    if (existente.length > 0) {
+    if (rows.length > 0) {
       // Ya existe la relación exacta, no se necesita actualizar
       return { message: 'La relación ya existe, no se realizó ninguna modificación.' };
     }
