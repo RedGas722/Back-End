@@ -28,6 +28,10 @@ class SeEncuentraServices {
     }
     }
 
+    static async SeEncuentraDelete(id_categoria: number, id_producto: number) {
+        return await SeEncuentraRepository.delete(id_categoria, id_producto);
+    }
+
 }
 
 export default SeEncuentraServices;

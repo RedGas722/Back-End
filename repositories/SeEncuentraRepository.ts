@@ -27,6 +27,15 @@ class SeEncuentraRepository {
       return this.add(seEncuentra);
     }
   }
+
+  static async delete(id_categoria: number, id_producto: number) {
+    const sql = `
+      DELETE se_encuentra FROM se_encuentra
+      WHERE id_categoria = ? AND id_producto = ?
+    `;
+    const values = [id_categoria, id_producto];
+    return db.execute(sql, values);
+  }
 }
 
 export default SeEncuentraRepository;
