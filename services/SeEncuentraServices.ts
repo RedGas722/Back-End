@@ -70,7 +70,6 @@ class SeEncuentraServices {
             throw error;
         }
     }
-
 }
 
 export default SeEncuentraServices;
