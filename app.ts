@@ -37,7 +37,9 @@ import ClienteGet from "./routes/Cliente/ClienteGet";
 import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
 
 //import cliente servicios
+import ClienteServicesGet from "./routes/ClienteServices/ClienteServicesGet";
 import ClienteServicesAdd from "./routes/ClienteServices/ClienteServicesAdd";
+import ClienteServicesDelete from "./routes/ClienteServices/ClienteServicesDelete";
 
 //import contrato
 import ContratoRegister from './routes/Contrato/ContratoRegister';
@@ -160,7 +162,9 @@ app.use('/ClienteDataUpdate', ClienteDataUpdate);
 app.use('/ClienteChangePassword', ClienteChangePassword);
 
 //CLIENTE SERVIVICIOS
+app.use('/ClienteServicesGet', ClienteServicesGet);
 app.use('/ClienteServicesAdd', ClienteServicesAdd);
+app.use('/ClienteServicesDelete', ClienteServicesDelete);
 
 //CONTRATO
 app.use('/ContratoGet', ContratoGet);
