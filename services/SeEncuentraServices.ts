@@ -5,8 +5,19 @@ import SeEncuentraRepository from "../repositories/SeEncuentraRepository";
 
 class SeEncuentraServices {
     // Register Producto
-    static async SeEncuentraRegister(SeEncuentra: SeEncuentra) {
-        return await SeEncuentraRepository.add(SeEncuentra);
+    static async SeEncuentraRegister(id_categoria: number, nombre_producto: string) {
+        try {
+            const producto = await ProductoRepository.getByName(nombre_producto);
+            if (!producto || producto.length === 0) {
+                return false;
+            }  
+            const id_producto = producto[0].id_producto;
+            const seEncuentra = new SeEncuentra(id_categoria, id_producto);
+            const [result]: any = await SeEncuentraRepository.add(seEncuentra);
+            return result;
+        } catch (error) {
+            throw error;
+        }
     }
 
     static async SeEncuentraUpdate(nombre_producto: string, id_categoria: number): Promise<boolean> {
