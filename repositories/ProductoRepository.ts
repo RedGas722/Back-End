@@ -30,14 +30,40 @@ class ProductoRepository {
     }
 
     static async getAll() {
-        const [rows] = await db.execute(`SELECT p.*, c.nombre_categoria
-        FROM producto p
-        JOIN se_encuentra se ON p.id_producto = se.id_producto
-        JOIN categoria c ON se.id_categoria = c.id_categoria;
-            `);
-        const productos = rows as any[];
-        return this.convertirImagenBase64(productos);
+        const [rows] = await db.execute(`
+            SELECT p.*, c.nombre_categoria
+            FROM producto p
+            JOIN se_encuentra se ON p.id_producto = se.id_producto
+            JOIN categoria c ON se.id_categoria = c.id_categoria;
+        `);
+
+        // Agrupar productos por ID
+        const productosMap = new Map<number, any>();
+
+        for (const row of rows as any[]) {
+            const id = row.id_producto;
+
+            if (!productosMap.has(id)) {
+                // Inicializar producto con categoría como array
+                productosMap.set(id, {
+                    ...row,
+                    categorias: [row.nombre_categoria],
+                });
+            } else {
+                // Agregar categoría adicional
+                productosMap.get(id).categorias.push(row.nombre_categoria);
+            }
+        }
+
+        // Convertir a array, eliminar campo duplicado `nombre_categoria`
+        const productosAgrupados = Array.from(productosMap.values()).map(p => {
+            delete p.nombre_categoria;
+            return p;
+        });
+
+        return this.convertirImagenBase64(productosAgrupados);
     }
+
 
     static async getAllProductoCategoria(nombre_categoria: string) {
         const sql = `
@@ -53,15 +79,40 @@ class ProductoRepository {
     }
 
     static async getByName(nombre_producto: string) {
-        const sql = `SELECT p.*, c.nombre_categoria 
-        FROM producto p
-        LEFT JOIN se_encuentra se ON p.id_producto = se.id_producto
-        LEFT JOIN categoria c ON se.id_categoria = c.id_categoria
-        WHERE p.nombre_producto = ?`;
+        const sql = `
+            SELECT p.*, c.nombre_categoria 
+            FROM producto p
+            LEFT JOIN se_encuentra se ON p.id_producto = se.id_producto
+            LEFT JOIN categoria c ON se.id_categoria = c.id_categoria
+            WHERE p.nombre_producto = ?
+        `;
         const values = [nombre_producto];
         const [rows] = await db.execute(sql, values);
-        return this.convertirImagenBase64(rows as any[]);
+
+        // Agrupar categorías por producto
+        const productosMap = new Map<number, any>();
+
+        for (const row of rows as any[]) {
+            const id = row.id_producto;
+
+            if (!productosMap.has(id)) {
+                productosMap.set(id, {
+                    ...row,
+                    categorias: [row.nombre_categoria],
+                });
+            } else {
+                productosMap.get(id).categorias.push(row.nombre_categoria);
+            }
+        }
+
+        const productosAgrupados = Array.from(productosMap.values()).map(p => {
+            delete p.nombre_categoria;
+            return p;
+        });
+
+        return this.convertirImagenBase64(productosAgrupados);
     }
+
 
     static async filterByName(nombre_producto: string) {
         const sql = "SELECT * FROM producto WHERE nombre_producto LIKE ?";
@@ -97,16 +148,22 @@ class ProductoRepository {
         const productos = productosConDescuento as { id_producto: number }[];
 
         // 2. Resetear descuento
-        const sqlReset = `
-            UPDATE producto
-            SET descuento = 0
-            WHERE descuento > 0 AND fecha_descuento = ?
-        `;
-        await db.execute(sqlReset, [fechaActual]);
+        await db.execute(
+            `UPDATE producto SET descuento = 0 WHERE descuento > 0 AND fecha_descuento = ?`,
+            [fechaActual]
+        );
 
-        // 3. Actualizar categoría de cada producto (solo si estaba en "Ofertas" y ahora descuento=0)
+        // 3. Eliminar relación con "Ofertas"
+        const idCategoriaOfertas = await this.obtenerIdCategoriaPorNombre('Ofertas');
+        if (!idCategoriaOfertas) {
+            throw new Error('Categoría "Ofertas" no encontrada.');
+        }
+
         for (const prod of productos) {
-            await this.cambiarOfertasASinCategoriaSiCorresponde(prod.id_producto);
+            await db.execute(
+                `DELETE FROM se_encuentra WHERE id_producto = ? AND id_categoria = ?`,
+                [prod.id_producto, idCategoriaOfertas]
+            );
         }
     }
 
@@ -141,24 +198,29 @@ class ProductoRepository {
         }
     }
 
-        static async resetearDescuentosDePrueba() {
-        // Aquí buscas productos con descuento sin importar la fecha
+    static async resetearDescuentosDePrueba() {
+        // 1. Obtener todos los productos que tienen descuento activo (> 0)
         const [productosConDescuento] = await db.execute(
             `SELECT id_producto FROM producto WHERE descuento > 0`
         );
         const productos = productosConDescuento as { id_producto: number }[];
 
-        // Resetear descuento de todos esos productos
-        const sqlReset = `
-            UPDATE producto
-            SET descuento = 0
-            WHERE descuento > 0
-        `;
-        await db.execute(sqlReset);
+        // 2. Resetear descuento a 0 para todos esos productos
+        await db.execute(
+            `UPDATE producto SET descuento = 0 WHERE descuento > 0`
+        );
 
-        // Actualizar categoría
+        // 3. Eliminar la relación con "Ofertas"
+        const idCategoriaOfertas = await this.obtenerIdCategoriaPorNombre('Ofertas');
+        if (!idCategoriaOfertas) {
+            throw new Error('Categoría "Ofertas" no encontrada.');
+        }
+
         for (const prod of productos) {
-            await this.cambiarOfertasASinCategoriaSiCorresponde(prod.id_producto);
+            await db.execute(
+                `DELETE FROM se_encuentra WHERE id_producto = ? AND id_categoria = ?`,
+                [prod.id_producto, idCategoriaOfertas]
+            );
         }
     }
 
