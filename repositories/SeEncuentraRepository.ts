@@ -30,7 +30,7 @@ class SeEncuentraRepository {
     const sqlDelete = `
       DELETE FROM se_encuentra
       WHERE id_producto = ? AND id_categoria IN (
-        SELECT id_categoria FROM categoria WHERE nombre != ?
+        SELECT id_categoria FROM categoria WHERE nombre_categoria != ?
       )
     `;
     await db.execute(sqlDelete, [id_producto, 'Ofertas']);
