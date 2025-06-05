@@ -55,11 +55,8 @@ class ProductoRepository {
             }
         }
 
-        // Convertir a array, eliminar campo duplicado `nombre_categoria`
-        const productosAgrupados = Array.from(productosMap.values()).map(p => {
-            delete p.nombre_categoria;
-            return p;
-        });
+        // Convertir a array y eliminar `nombre_categoria` con desestructuración
+        const productosAgrupados = Array.from(productosMap.values()).map(({ nombre_categoria, ...rest }) => rest);
 
         return this.convertirImagenBase64(productosAgrupados);
     }
@@ -105,10 +102,8 @@ class ProductoRepository {
             }
         }
 
-        const productosAgrupados = Array.from(productosMap.values()).map(p => {
-            delete p.nombre_categoria;
-            return p;
-        });
+        // Eliminar nombre_categoria con desestructuración
+        const productosAgrupados = Array.from(productosMap.values()).map(({ nombre_categoria, ...rest }) => rest);
 
         return this.convertirImagenBase64(productosAgrupados);
     }
