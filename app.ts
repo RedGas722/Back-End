@@ -96,6 +96,7 @@ import CapturarPago from './routes/Pagos/CapturarPago';
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
 import SeEncuentraUpdate from './routes/SeEncuentra/SeEncuentraUpdate';
 import SeEncuentraDelete from './routes/SeEncuentra/SeEncuentraDelete';
+import SeEncuentraGet from './routes/SeEncuentra/SeEncuentraGet';
 
 //import cart
 import CartAdd from './routes/Cart/CartAdd';
@@ -215,6 +216,7 @@ app.use('/CapturarPago', CapturarPago);
 app.use('/SeEncuentraRegister', SeEncuentraRegister);
 app.use('/SeEncuentraUpdate', SeEncuentraUpdate);
 app.use('/SeEncuentraDelete', SeEncuentraDelete);
+app.use('/SeEncuentraGet', SeEncuentraGet);
 
 //CART
 app.use('/CartAdd', CartAdd);
