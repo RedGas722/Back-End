@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import SeEncuentra from "../../Dto/SeEncuentraDto/SeEncuentra";
 import SeEncuentraServices from "../../services/SeEncuentraServices";
 
 let SeEncuentraUpdate = async (req: Request, res: Response) => {
@@ -12,8 +11,9 @@ let SeEncuentraUpdate = async (req: Request, res: Response) => {
 
     const resultado = await SeEncuentraServices.SeEncuentraUpdate(nombre_producto, id_categoria);
 
-    if (!resultado) {
-      return res.status(404).json({ error: "Producto o categoría no encontrados" });
+    if (resultado === false) {
+      // No hubo actualización porque los datos son iguales o no existe la relación
+      return res.status(200).json({ message: "No se actualizó porque los datos son iguales o la relación ya existe." });
     }
 
     return res.status(200).json({ status: "update ok" });

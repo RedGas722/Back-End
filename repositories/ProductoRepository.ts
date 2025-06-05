@@ -63,16 +63,29 @@ class ProductoRepository {
 
 
     static async getAllProductoCategoria(nombre_categoria: string) {
-        const sql = `
-            SELECT p.* FROM producto p
-            JOIN se_encuentra se ON p.id_producto = se.id_producto
-            JOIN categoria c ON se.id_categoria = c.id_categoria
-            WHERE c.nombre_categoria = ?
+    let sql = `
+        SELECT p.* FROM producto p
+        JOIN se_encuentra se ON p.id_producto = se.id_producto
+        JOIN categoria c ON se.id_categoria = c.id_categoria
+        WHERE c.nombre_categoria = ?
+    `;
+
+    const values = [nombre_categoria];
+
+    if (nombre_categoria !== 'Ofertas') {
+        sql += `
+        AND p.id_producto NOT IN (
+            SELECT se2.id_producto
+            FROM se_encuentra se2
+            JOIN categoria c2 ON se2.id_categoria = c2.id_categoria
+            WHERE c2.nombre_categoria = 'Ofertas'
+        )
         `;
-        const values = [nombre_categoria];
-        const [rows] = await db.execute(sql, values);
-        const productos = rows as any[];
-        return this.convertirImagenBase64(productos);
+    }
+
+    const [rows] = await db.execute(sql, values);
+    const productos = rows as any[];
+    return this.convertirImagenBase64(productos);
     }
 
     static async getByName(nombre_producto: string) {

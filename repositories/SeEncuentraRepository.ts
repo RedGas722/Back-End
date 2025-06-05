@@ -14,43 +14,53 @@ class SeEncuentraRepository {
   static async updateRelacion(seEncuentra: SeEncuentra) {
     const { id_categoria, id_producto } = seEncuentra;
 
-    // Paso 1: Verificar si ya existe la relación exacta
-    const sqlCheckExists = `
-      SELECT * FROM se_encuentra
-      WHERE id_producto = ? AND id_categoria = ?
-    `;
-    const [rows]: any = await db.execute(sqlCheckExists, [id_producto, id_categoria]);
+    try {
+      // Verificar si ya existe la relación exacta
+      const [rows]: any = await db.execute(
+        `SELECT * FROM se_encuentra WHERE id_producto = ? AND id_categoria = ?`,
+        [id_producto, id_categoria]
+      );
 
-    if (rows.length > 0) {
-      // Ya existe la relación exacta, no se necesita actualizar
-      return { message: 'La relación ya existe, no se realizó ninguna modificación.' };
+      if (!Array.isArray(rows)) {
+        throw new Error('El resultado de la verificación no es una lista de filas válida');
+      }
+
+      if (rows.length > 0) {
+        // Devuelve un array con objeto simulando affectedRows = 0 para que el service no falle
+        return [ { affectedRows: 0 }, undefined ];
+      }
+
+      // Eliminar relación actual que no sea "Ofertas"
+      const sqlDelete = `
+        DELETE FROM se_encuentra
+        WHERE id_producto = ? AND id_categoria IN (
+          SELECT id_categoria FROM categoria WHERE nombre_categoria != ?
+        )
+      `;
+      await db.execute(sqlDelete, [id_producto, 'Ofertas']);
+
+      // Insertar nueva relación y devolver resultado de add (que es [result, fields])
+      return this.add(seEncuentra);
+
+    } catch (error) {
+      console.error('Error en updateRelacion:', error);
+      throw new Error('No se pudo actualizar la relación producto-categoría.');
     }
-
-    // Paso 2: Eliminar relación actual que no sea "Ofertas"
-    const sqlDelete = `
-      DELETE FROM se_encuentra
-      WHERE id_producto = ? AND id_categoria IN (
-        SELECT id_categoria FROM categoria WHERE nombre_categoria != ?
-      )
-    `;
-    await db.execute(sqlDelete, [id_producto, 'Ofertas']);
-
-    // Paso 3: Insertar nueva relación
-    return this.add(seEncuentra);
   }
 
+  // Eliminar relación
   static async delete(seEncuentra: SeEncuentra) {
     const sql = 'DELETE FROM se_encuentra WHERE id_categoria = ? AND id_producto = ?';
     const values = [seEncuentra.id_categoria, seEncuentra.id_producto];
     return db.execute(sql, values);
   }
 
+  // Obtener relación
   static async get(seEncuentra: SeEncuentra) {
     const sql = 'SELECT * FROM se_encuentra WHERE id_categoria = ? AND id_producto = ?';
     const values = [seEncuentra.id_categoria, seEncuentra.id_producto];
     return db.execute(sql, values);
   }
-
 }
 
 export default SeEncuentraRepository;

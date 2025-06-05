@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import SeEncuentra from "../../Dto/SeEncuentraDto/SeEncuentra";
 import SeEncuentraServices from "../../services/SeEncuentraServices";
 
 let SeEncuentraRegister = async (req: Request, res: Response) => {
