@@ -4,13 +4,9 @@ import SeEncuentraServices from "../../services/SeEncuentraServices";
 let SeEncuentraDelete = async (req: Request, res: Response) => {
     try {
         const id_categoria = Number(req.query.id_categoria);
-        const id_producto = Number(req.query.id_producto);
+        const nombre_producto = String(req.query.nombre_producto);
 
-        if (isNaN(id_categoria) || isNaN(id_producto)) {
-        return res.status(400).json({ error: "id_categoria y id_producto deben ser números válidos" });
-        }
-
-        await SeEncuentraServices.SeEncuentraDelete(id_categoria, id_producto);
+        const resultado = await SeEncuentraServices.SeEncuentraDelete(id_categoria, nombre_producto);
 
         return res.status(200).json({ status: 'delete ok' });
     } catch (error: any) {

@@ -28,23 +28,16 @@ class SeEncuentraRepository {
     }
   }
 
-  static async delete(id_categoria: number, id_producto: number) {
-    const sql = `
-      DELETE se_encuentra FROM se_encuentra
-      WHERE id_categoria = ? AND id_producto = ?
-    `;
-    const values = [id_categoria, id_producto];
+  static async delete(seEncuentra: SeEncuentra) {
+    const sql = 'DELETE FROM se_encuentra WHERE id_categoria = ? AND id_producto = ?';
+    const values = [seEncuentra.id_categoria, seEncuentra.id_producto];
     return db.execute(sql, values);
   }
 
-  static async get(id_categoria: number, id_producto: number) {
-    const sql = `
-      SELECT * FROM se_encuentra
-      WHERE id_categoria = ? AND id_producto = ?
-    `;
-    const values = [id_categoria, id_producto];
-    const [rows]: any = await db.execute(sql, values);
-    return rows;
+  static async get(seEncuentra: SeEncuentra) {
+    const sql = 'SELECT * FROM se_encuentra WHERE id_categoria = ? AND id_producto = ?';
+    const values = [seEncuentra.id_categoria, seEncuentra.id_producto];
+    return db.execute(sql, values);
   }
 
 }
