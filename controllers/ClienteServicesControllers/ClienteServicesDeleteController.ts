@@ -3,14 +3,13 @@ import ClienteServices from "../../services/ClienteServicesInfo/ClienteServices"
 
 const ClienteServicesDeleteController = async (req: Request, res: Response) => {
   try {
-    const Userid = req.body.id;
-    console.log(Userid);
+    const { userId } = req.body;
     
-    if (!Userid) {
-      return res.status(400).json({ status: "Missing required fields", Userid });
+    if (!userId) {
+      return res.status(400).json({ status: "Missing required fields", userId });
     }
 
-    const deleted = await ClienteServices.removeServiceInfo(Userid);
+    const deleted = await ClienteServices.removeServiceInfo(userId);
 
     return res.status(200).json({ status: "Service info Deleted", deleted });
   } catch (error: any) {

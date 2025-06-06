@@ -1,15 +1,10 @@
 import { Request, Response } from "express";
 import ClienteServices from "../../services/ClienteServicesInfo/ClienteServices";
 
-const ClienteServicesGetController = async (req: Request, res: Response) => {
+const ClienteServicesGetAllController = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.body;
 
-    if (!userId) {
-      return res.status(400).json({ status: "Missing required fields", userId });
-    }
-
-    const get = await ClienteServices.getServicesInfo(userId);
+    const get = await ClienteServices.getAllServicesInfo();
 
     return res.status(200).json({ status: "Service info get", get });
   } catch (error: any) {
@@ -18,4 +13,4 @@ const ClienteServicesGetController = async (req: Request, res: Response) => {
   }
 };
 
-export default ClienteServicesGetController;
+export default ClienteServicesGetAllController;
