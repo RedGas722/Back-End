@@ -1,5 +1,5 @@
 import Categoria from "../Dto/CategoriaDto/CategoriaDto";
-import CategoriaRepository from "../repositories/CategoriaRepositoryDto";
+import CategoriaRepository from "../repositories/CategoriaRepository";
 
 
 
