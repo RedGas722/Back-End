@@ -4,6 +4,7 @@
 ## Instrucciones
 ### Copie y pegue las siguentes lineas de codigo en su terminal
 npm install
+npm install ioredis
 npm install @google-cloud/vertexai
 npm install @types/google-cloud__vertexai --save-dev 
 npm install @google/generative-ai
