@@ -22,8 +22,8 @@ const PagoPaypal = async ({ cantidad, referencia, email }: PagoPaypalParams) => 
       email_address: email
     },
     application_context: {
-      return_url: "http://localhost:5173/Shopping/Confirmacion",
-      cancel_url: "http://localhost:5173/Shopping/Cancelado"
+      return_url: "https://red-gas-kevins-projects-666a0731.vercel.app/Shopping/Confirmacion",
+      cancel_url: "https://red-gas-kevins-projects-666a0731.vercel.app/Shopping/Cancelado"
     }
   };
 
