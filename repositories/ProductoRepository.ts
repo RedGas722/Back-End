@@ -13,16 +13,6 @@ class ProductoRepository {
         });
     }
 
-    private static async obtenerIdCategoriaPorNombre(nombre_categoria: string): Promise<number | null> {
-        const sql = 'SELECT id_categoria FROM categoria WHERE nombre_categoria = ? LIMIT 1';
-        const [rows] = await db.execute(sql, [nombre_categoria]);
-        const resultados = rows as any[];
-        if (resultados.length > 0) {
-            return resultados[0].id_categoria;
-        }
-        return null;
-    }
-
     static async add(producto: Producto) {
         const sql = 'INSERT INTO producto (nombre_producto, descripcion_producto, precio_producto, stock, descuento, fecha_descuento, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)';
         const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.descuento, producto.fecha_descuento, producto.imagen];
@@ -161,46 +151,20 @@ class ProductoRepository {
             [fechaActual]
         );
 
-        // 3. Eliminar relación con "Ofertas"
-        const idCategoriaOfertas = await this.obtenerIdCategoriaPorNombre('Ofertas');
-        if (!idCategoriaOfertas) {
-            throw new Error('Categoría "Ofertas" no encontrada.');
-        }
-
+        // 3. Eliminar solo la relación con la categoría "Ofertas"
         for (const prod of productos) {
             await db.execute(
-                `DELETE FROM se_encuentra WHERE id_producto = ? AND id_categoria = ?`,
-                [prod.id_producto, idCategoriaOfertas]
+                `
+                DELETE FROM se_encuentra 
+                WHERE id_producto = ? 
+                AND id_categoria = (
+                    SELECT id_categoria FROM categoria WHERE nombre_categoria = 'Ofertas' LIMIT 1
+                )
+                `,
+                [prod.id_producto]
             );
         }
     }
-
-    static async resetearDescuentosDePrueba() {
-        // 1. Obtener todos los productos que tienen descuento activo (> 0)
-        const [productosConDescuento] = await db.execute(
-            `SELECT id_producto FROM producto WHERE descuento > 0`
-        );
-        const productos = productosConDescuento as { id_producto: number }[];
-
-        // 2. Resetear descuento a 0 para todos esos productos
-        await db.execute(
-            `UPDATE producto SET descuento = 0 WHERE descuento > 0`
-        );
-
-        // 3. Eliminar la relación con "Ofertas"
-        const idCategoriaOfertas = await this.obtenerIdCategoriaPorNombre('Ofertas');
-        if (!idCategoriaOfertas) {
-            throw new Error('Categoría "Ofertas" no encontrada.');
-        }
-
-        for (const prod of productos) {
-            await db.execute(
-                `DELETE FROM se_encuentra WHERE id_producto = ? AND id_categoria = ?`,
-                [prod.id_producto, idCategoriaOfertas]
-            );
-        }
-    }
-
 }
 
 export default ProductoRepository;
