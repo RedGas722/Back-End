@@ -8,7 +8,7 @@ class AdministradorRepository {
 
     // Insert Administrador
     static async add(administrador: Administrador) {
-        const sql = 'INSERT INTO Administrador (nombre_admin, correo_admin, telefono_admin, contraseña_admin) VALUES (?, ?, ?, ?)';
+        const sql = 'INSERT INTO administrador (nombre_admin, correo_admin, telefono_admin, contraseña_admin) VALUES (?, ?, ?, ?)';
         const values = [administrador.nombre_admin, administrador.correo_admin, administrador.telefono_admin, administrador.contraseña_admin];
         return db.execute(sql, values);
     }

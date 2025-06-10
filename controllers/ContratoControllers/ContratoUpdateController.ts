@@ -13,7 +13,7 @@ const ContratoUpdate = async (req: Request, res: Response) => {
       id_admin,
       id_empleado,
     } = req.body;
-
+;
   
     const contrato = new Contrato(
       fecha_contrato,
