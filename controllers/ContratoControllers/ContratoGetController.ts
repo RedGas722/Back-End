@@ -6,7 +6,9 @@ let ContratoGet = async (req: Request, res: Response) => {
         const { id_empleado } = req.query;
 
         if (!id_empleado) {
-            return res.status(400).json({ status: 'Missing required fields' });
+            const response = { status: 'Missing required fields' };
+            console.log("Respuesta enviada al front:", response);
+            return res.status(400).json(response);
         }
 
         const idEmpleado = parseInt(id_empleado as string);
@@ -14,13 +16,17 @@ let ContratoGet = async (req: Request, res: Response) => {
         const contrato = await ContratoServices.ContratoGet(idEmpleado);
 
         if (!contrato) {
-            return res.status(404).json({ status: 'Contrato not found' });
+            const response = { status: 'Contrato not found' };
+            console.log("Respuesta enviada al front:", response);
+            return res.status(404).json(response);
         }
 
-        return res.status(200).json({ status: 'get ok', data: contrato });
+        const response = { status: 'get ok', data: contrato };
+        return res.status(200).json(response);
     } catch (error: any) {
         console.error("Error en la obtención del contrato:", error);
-        return res.status(500).json({ status: 'Internal server error', error: error.message });
+        const response = { status: 'Internal server error', error: error.message };
+        return res.status(500).json(response);
     }
 };
 

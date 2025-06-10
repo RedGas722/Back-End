@@ -6,7 +6,7 @@ const ContratoDataUpdate = async (req: Request, res: Response) => {
   try {
     // Extraemos los campos que envía el frontend
     const { contrato, id_empleado } = req.body;
-
+    console.log('Body recibido en ContratoDataUpdate:', req.body);
     if (
       !contrato ||
       contrato.fecha_contrato === undefined ||

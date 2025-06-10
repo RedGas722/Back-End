@@ -76,7 +76,15 @@ class TecnicoRepository {
         if (result[0].length > 0) {
             const isPasswordValid = await bcrypt.compare(auth.contraseña_tecnico, result[0][0].contraseña_tecnico);
             if (isPasswordValid) {
-                return { logged: true, status: "Successful authentication", id: result[0][0].id_tecnico, name: result[0][0].nombre_tecnico, email: result[0][0].correo_tecnico, telefono: result[0][0].telefono_tecnico};
+                return {
+                    logged: true,
+                    status: "Successful authentication",
+                    id: result[0][0].id_tecnico,
+                    name: result[0][0].nombre_tecnico,
+                    email: result[0][0].correo_tecnico,
+                    telefono: result[0][0].telefono_tecnico,
+                    tipo_usuario: "tecnico" // <-- aquí se indica el tipo de usuario
+                };
             }
             return { logged: false, status: "Invalid username or password" };
         }

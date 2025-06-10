@@ -66,7 +66,16 @@ class EmpleadoRepository {
         if (result[0].length > 0) {
             const isPasswordValid = await bcrypt.compare(auth.contraseña_empleado, result[0][0].contraseña_empleado);
             if (isPasswordValid) {
-                return { logged: true, status: "Successful authentication", id: result[0][0].id_empleado, name: result[0][0].nombre_empleado, email: result[0][0].correo_empleado, telefono: result[0][0].telefono_empleado, direccion: result[0][0].direccion_empleado };
+                return {
+                    logged: true,
+                    status: "Successful authentication",
+                    id: result[0][0].id_empleado,
+                    name: result[0][0].nombre_empleado,
+                    email: result[0][0].correo_empleado,
+                    telefono: result[0][0].telefono_empleado,
+                    direccion: result[0][0].direccion_empleado,
+                    tipo_usuario: "empleado" // <-- aquí se indica el tipo de usuario
+                };
             }
             return { logged: false, status: "Invalid username or password" };
         }
