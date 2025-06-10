@@ -83,7 +83,6 @@ class TecnicoRepository {
                     name: result[0][0].nombre_tecnico,
                     email: result[0][0].correo_tecnico,
                     telefono: result[0][0].telefono_tecnico,
-                    tipo_usuario: "tecnico" // <-- aquí se indica el tipo de usuario
                 };
             }
             return { logged: false, status: "Invalid username or password" };

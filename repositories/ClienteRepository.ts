@@ -65,7 +65,6 @@ class ClienteRepository {
               email: result[0][0].correo_cliente,
               telefono: result[0][0].telefono_cliente,
               direccion: result[0][0].direccion_cliente,
-              tipo_usuario: "cliente" // <-- aquí se indica el tipo de usuario
             };
           }
           return {logged: false, status: "Invalid username or password" };

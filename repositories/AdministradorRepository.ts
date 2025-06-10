@@ -65,7 +65,6 @@ class AdministradorRepository {
                     name: result[0][0].nombre_admin,
                     email: result[0][0].correo_admin,
                     telefono: result[0][0].telefono_admin,
-                    tipo_usuario: "administrador" // <-- aquí se indica el tipo de usuario
                 };
             }
             return { logged: false, status: "Invalid username or password" };
