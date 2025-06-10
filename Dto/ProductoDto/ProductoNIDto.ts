@@ -4,7 +4,7 @@ class ProductoNI {
     private _precio_producto: number;
     private _stock: number;
     private _descuento: number;
-    private _fecha_descuento: Date;
+    private _fecha_descuento: string;
 
     constructor(
         nombre_producto: string,
@@ -12,7 +12,7 @@ class ProductoNI {
         precio_producto: number,
         stock: number,
         descuento: number,
-        fecha_descuento: Date
+        fecha_descuento: string
     ) {
         this._nombre_producto = nombre_producto;
         this._descripcion_producto = descripcion_producto;
@@ -43,7 +43,7 @@ class ProductoNI {
         return this._descuento;
     }
 
-    get fecha_descuento(): Date {
+    get fecha_descuento(): string {
         return this._fecha_descuento;
     }
 
@@ -68,7 +68,7 @@ class ProductoNI {
         this._descuento = descuento;
     }
 
-    set fecha_descuento(fecha_descuento: Date) {
+    set fecha_descuento(fecha_descuento: string) {
         this._fecha_descuento = fecha_descuento;
     }
 }

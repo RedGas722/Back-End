@@ -148,14 +148,14 @@ class ProductoRepository {
     }
 
     static async resetearDescuentos(fechaActual: string) {
-        // 1. Obtener productos con descuento vencido
+        // 1. Obtener productos con descuento vencido exactamente en la fechaActual
         const [productosConDescuento] = await db.execute(
             `SELECT id_producto FROM producto WHERE descuento > 0 AND fecha_descuento = ?`,
             [fechaActual]
         );
         const productos = productosConDescuento as { id_producto: number }[];
 
-        // 2. Resetear descuento
+        // 2. Resetear descuento en esos productos
         await db.execute(
             `UPDATE producto SET descuento = 0 WHERE descuento > 0 AND fecha_descuento = ?`,
             [fechaActual]
@@ -171,37 +171,6 @@ class ProductoRepository {
             await db.execute(
                 `DELETE FROM se_encuentra WHERE id_producto = ? AND id_categoria = ?`,
                 [prod.id_producto, idCategoriaOfertas]
-            );
-        }
-    }
-
-    // Cambiar relación de "Ofertas" a "Sin Categoría" solo si descuento es 0 y producto está en "Ofertas"
-    static async cambiarOfertasASinCategoriaSiCorresponde(id_producto: number) {
-        const idCategoriaOfertas = await this.obtenerIdCategoriaPorNombre('Ofertas');
-        const idCategoriaSinCategoria = await this.obtenerIdCategoriaPorNombre('Sin Categoría');
-
-        if (!idCategoriaOfertas || !idCategoriaSinCategoria) {
-            throw new Error('No se encontraron las categorías necesarias.');
-        }
-
-        // Verificar si está en "Ofertas"
-        const [rows] = await db.execute(
-            'SELECT * FROM se_encuentra WHERE id_producto = ? AND id_categoria = ?',
-            [id_producto, idCategoriaOfertas]
-        );
-        const rel = rows as any[];
-
-        if (rel.length > 0) {
-            // Eliminar "Ofertas"
-            await db.execute(
-                'DELETE FROM se_encuentra WHERE id_producto = ? AND id_categoria = ?',
-                [id_producto, idCategoriaOfertas]
-            );
-
-            // Asignar "Sin Categoría"
-            await db.execute(
-                'INSERT INTO se_encuentra (id_producto, id_categoria) VALUES (?, ?)',
-                [id_producto, idCategoriaSinCategoria]
             );
         }
     }
