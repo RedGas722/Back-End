@@ -16,27 +16,16 @@ let ClienteLogin = async (req: Request, res: Response) => {
     const login = await ClienteServices.ClienteLogin(new AuthCliente(correo_cliente, contraseña_cliente));
 
     if (login.logged) {
-      const tipo_usuario = "cliente";
       return res.status(200).json({
         status: login.status,
-<<<<<<< HEAD
-=======
-        tipo_usuario,
->>>>>>> bdfbb8b44e54b933d54dbbdb67f4fb08a0f35f6f
         token: generateToken({
           id: login.id,
           name: login.name,
           email: login.email,
           telefono: login.telefono,
-<<<<<<< HEAD
           direccion: login.direccion
         },
           process.env.KEY_TOKEN, 5)
-=======
-          direccion: login.direccion,
-          tipo_usuario // también en el payload del token
-        }, process.env.KEY_TOKEN, 5)
->>>>>>> bdfbb8b44e54b933d54dbbdb67f4fb08a0f35f6f
       });
     }
 
