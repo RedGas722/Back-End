@@ -16,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
+    "epayco-sdk-node": "^1.4.3",
     "express": "^4.19.2",
     "express-typescript": "file:",
     "express-validator": "^7.2.1",
