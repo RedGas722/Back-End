@@ -108,14 +108,14 @@ import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
 import CapturarPago from './routes/Pagos/CapturarPago';
+import ConfirmacionPagoPsE from './routes/Pagos/ConfirmacionPagoPse';
+import PagoPSE from './routes/Pagos/PagoPse';
 
 //import se encuentra
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
 import SeEncuentraDelete from './routes/SeEncuentra/SeEncuentraDelete';
 import SeEncuentraGet from './routes/SeEncuentra/SeEncuentraGet';
 import SeEncuentraUpdate from './routes/SeEncuentra/SeEncuentraUpdate';
-
-
 
 //import profile
 import profile from './routes/profile';
@@ -238,6 +238,8 @@ app.use('/TecnicoDataUpdateNI', TecnicoDataUpdateNI);
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
 app.use('/CapturarPago', CapturarPago);
+app.use('/ConfirmacionPagoPsE', ConfirmacionPagoPsE);
+app.use('/PagoPSE', PagoPSE);
 
 //SE ENCUENTRA
 app.use('/SeEncuentraRegister', SeEncuentraRegister);
