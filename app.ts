@@ -127,7 +127,7 @@ app.use(bodyParser.json());
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://red-gas-kevins-projects-666a0731.vercel.app'
+    'https://redgas-one.vercel.app'
   ],
   credentials: true,
 }));
