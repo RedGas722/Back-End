@@ -17,7 +17,7 @@ const AdministradorGet = async (req: Request, res: Response) => {
 
     // Retorna un array en 'data' aunque no se encuentre
     return res.status(200).json({
-      status: 'success',
+      status: 'get ok',
       data: admin ? [admin] : []
     });
 
