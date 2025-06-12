@@ -35,8 +35,6 @@ export const obtenerBancosPSE = async () => {
 // Crear transacción PSE
 export const crearPagoPSE = async (pseData: any) => {
     try {
-        // Validación previa (como ya lo pusimos antes)
-
         const pseRequest = {
             bank: String(pseData.bank),
             invoice: String(pseData.invoice),
@@ -52,17 +50,18 @@ export const crearPagoPSE = async (pseData: any) => {
             last_name: String(pseData.last_name),
             email: String(pseData.email),
             country: String(pseData.country),
-            cellphone: String(pseData.cell_phone),
+            cellphone: String(pseData.cellphone),  // <-- corregido aquí el campo correcto
             url_response: String(pseData.url_response),
             url_confirmation: String(pseData.url_confirmation),
             method_confirmation: String(pseData.method_confirmation),
             extra1: String(pseData.extra1),
-            ip: "181.129.0.1"
+            ip: "181.129.0.1" // aún IP dummy
         };
+
+        console.log("🟡 Enviando a ePayco:", JSON.stringify(pseRequest, null, 2));
 
         const response = await epayco.bank.create(pseRequest);
         return response;
-
     } catch (error: any) {
         console.error("Error completo al crear pago PSE:", JSON.stringify(error, null, 2));
         throw error;
