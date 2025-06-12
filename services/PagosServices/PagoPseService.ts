@@ -2,7 +2,7 @@ import ePayco from 'epayco-sdk-node';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// Inicializamos una única vez el cliente ePayco
+// Inicializamos ePayco para el resto de operaciones
 const epayco = new ePayco({
     apiKey: process.env.EPAYCO_PUBLIC_KEY!,
     privateKey: process.env.EPAYCO_PRIVATE_KEY!,
@@ -10,19 +10,41 @@ const epayco = new ePayco({
     test: process.env.EPAYCO_TEST === 'true'
 });
 
-// Obtener listado de bancos PSE (con REST directo, no SDK)
+// Obtener listado de bancos PSE desde API REST
 export const obtenerBancosPSE = async () => {
     try {
-        const response = await fetch(`https://api.secure.payco.co/restpagos/pse/banks?public_key=${process.env.EPAYCO_PUBLIC_KEY}`);
-        const bancos = await response.json();
+        const url = `https://api.secure.payco.co/restpagos/pse/banks?public_key=${process.env.EPAYCO_PUBLIC_KEY}`;
+        console.log("Consultando bancos PSE en:", url);
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            // Si ePayco responde con error HTTP (400, 403, 500, etc)
+            console.error(`Error HTTP desde ePayco: ${response.status} ${response.statusText}`);
+            const errorText = await response.text();
+            console.error("Respuesta de error:", errorText);
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const text = await response.text();
+        console.log("Respuesta cruda de ePayco:", text);
+
+        let bancos;
+        try {
+            bancos = JSON.parse(text);
+        } catch (jsonError) {
+            console.error("Error al parsear JSON:", jsonError);
+            throw new Error("La respuesta de ePayco no es JSON válido.");
+        }
+
         return bancos;
     } catch (error) {
-        console.error("Error al obtener bancos PSE:", error);
+        console.error("Error general al obtener bancos PSE:", error);
         throw error;
     }
 };
 
-// Crear transacción PSE (aquí sí podemos seguir usando el SDK)
+// Crear transacción PSE usando SDK
 export const crearPagoPSE = async (pseData: any) => {
     try {
         const response = await epayco.bank.create(pseData);
@@ -52,7 +74,6 @@ export const procesarConfirmacionPSE = async (confirmData: any) => {
     console.log("Monto:", x_amount);
     console.log("Moneda:", x_currency_code);
 
-    // Lógica de negocio para actualizar la base de datos
     switch (parseInt(x_response)) {
         case 1:
             console.log("✔ Pago aprobado");
