@@ -110,6 +110,7 @@ import PagoPaypal from './routes/Pagos/PagoPaypal';
 import CapturarPago from './routes/Pagos/CapturarPago';
 import ConfirmacionPagoPsE from './routes/Pagos/ConfirmacionPagoPse';
 import PagoPSE from './routes/Pagos/PagoPse';
+import ListarBancosPsE from './routes/Pagos/ListarBancosPsE';
 
 //import se encuentra
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
@@ -240,6 +241,7 @@ app.use('/PagoPaypal', PagoPaypal);
 app.use('/CapturarPago', CapturarPago);
 app.use('/ConfirmacionPagoPsE', ConfirmacionPagoPsE);
 app.use('/PagoPSE', PagoPSE);
+app.use('/ListarBancosPsE', ListarBancosPsE);
 
 //SE ENCUENTRA
 app.use('/SeEncuentraRegister', SeEncuentraRegister);
