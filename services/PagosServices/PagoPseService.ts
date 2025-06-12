@@ -55,7 +55,7 @@ export const crearPagoPSE = async (pseData: any) => {
             last_name: String(pseData.last_name),
             email: String(pseData.email),
             country: String(pseData.country),
-            cellphone: String(pseData.cellphone ?? '').replace(/\D/g, '').slice(0,15),
+            cell_phone: String(pseData.cellphone ?? '').replace(/\D/g, '').slice(0,15),
             url_response: String(pseData.url_response),
             url_confirmation: String(pseData.url_confirmation),
             method_confirmation: String(pseData.method_confirmation),
