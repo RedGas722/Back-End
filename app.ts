@@ -111,6 +111,7 @@ import CapturarPago from './routes/Pagos/CapturarPago';
 import ConfirmacionPagoPsE from './routes/Pagos/ConfirmacionPagoPse';
 import PagoPSE from './routes/Pagos/PagoPse';
 import ListarBancosPsE from './routes/Pagos/ListarBancosPsE';
+import ObtenerEstadoPago from './routes/Pagos/ObtenerEstadoPago';
 
 //import se encuentra
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
@@ -242,6 +243,7 @@ app.use('/CapturarPago', CapturarPago);
 app.use('/ConfirmacionPagoPsE', ConfirmacionPagoPsE);
 app.use('/PagoPSE', PagoPSE);
 app.use('/ListarBancosPsE', ListarBancosPsE);
+app.use('/ObtenerEstadoPago', ObtenerEstadoPago);
 
 //SE ENCUENTRA
 app.use('/SeEncuentraRegister', SeEncuentraRegister);
