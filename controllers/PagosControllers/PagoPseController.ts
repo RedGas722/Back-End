@@ -3,8 +3,6 @@ import { crearPagoPSE } from '../../services/PagosServices/PagoPseService';
 
 export const generarPagoPSE = async (req: Request, res: Response) => {
     try {
-        console.log("📝 Body recibido:", JSON.stringify(req.body, null, 2));
-
         const { bank, invoice, value, doc_type, doc_number, type_person, name, email, telefono, direccion } = req.body;
 
         const pseData = {

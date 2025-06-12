@@ -63,8 +63,6 @@ export const crearPagoPSE = async (pseData: any) => {
             ip: "181.129.0.1"
         };
 
-        console.log("🟡 Enviando a ePayco:", JSON.stringify(pseRequest, null, 2));
-
         const response = await epayco.bank.create(pseRequest);
         return response;
     } catch (error: any) {
