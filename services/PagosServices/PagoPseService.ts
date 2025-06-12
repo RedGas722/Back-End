@@ -1,6 +1,5 @@
 import ePayco from 'epayco-sdk-node';
 import dotenv from 'dotenv';
-import fetch from 'node-fetch'; // <= recuerda instalarlo si aún no lo tienes: npm install node-fetch
 dotenv.config();
 
 // Inicializamos una única vez el cliente ePayco
