@@ -3,8 +3,14 @@ import { crearPagoPSE } from '../../services/PagosServices/PagoPseService';
 
 export const generarPagoPSE = async (req: Request, res: Response) => {
     try {
+        // Campos que vienen del frontend:
         const { bank, invoice, value, doc_type, doc_number, type_person } = req.body;
-        const { name, email, telefono, direccion } = req.body;
+
+        // Campos que fueron inyectados por verifyToken:
+        const name = req.body.name;
+        const email = req.body.email;
+        const telefono = req.body.telefono;
+        const direccion = req.body.direccion;
 
         const pseData = {
             bank,
@@ -21,7 +27,7 @@ export const generarPagoPSE = async (req: Request, res: Response) => {
             last_name: "N/A",
             email,
             country: 'CO',
-            cell_phone: telefono, // aquí lo mandamos así, el service lo transformará
+            cell_phone: telefono,
             url_response: 'https://redgas-one.vercel.app/Shopping/ConfirmacionPsE',
             url_confirmation: 'https://redgas.onrender.com/ConfirmacionPagoPSE',
             method_confirmation: 'POST',
