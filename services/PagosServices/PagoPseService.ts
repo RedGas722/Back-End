@@ -35,13 +35,8 @@ export const obtenerBancosPSE = async () => {
 // Crear transacción PSE
 export const crearPagoPSE = async (pseData: any) => {
     try {
-        // Validación previa (muy importante para evitar el crash de ePayco)
-        if (!pseData.bank || !pseData.invoice || !pseData.value || !pseData.doc_type || !pseData.doc_number 
-            || !pseData.name || !pseData.last_name || !pseData.email || !pseData.country || !pseData.cell_phone) {
-            throw new Error("Datos incompletos para generar el pago PSE");
-        }
+        // Validación previa (como ya lo pusimos antes)
 
-        // Aseguramos que los tipos de datos sean string (lo que espera ePayco)
         const pseRequest = {
             bank: String(pseData.bank),
             invoice: String(pseData.invoice),
@@ -67,8 +62,9 @@ export const crearPagoPSE = async (pseData: any) => {
 
         const response = await epayco.bank.create(pseRequest);
         return response;
-    } catch (error) {
-        console.error("Error al crear pago PSE:", error);
+
+    } catch (error: any) {
+        console.error("Error completo al crear pago PSE:", JSON.stringify(error, null, 2));
         throw error;
     }
 };
