@@ -1,5 +1,6 @@
 import ePayco from 'epayco-sdk-node';
 import dotenv from 'dotenv';
+import fetch from 'node-fetch'; // <= recuerda instalarlo si aún no lo tienes: npm install node-fetch
 dotenv.config();
 
 // Inicializamos una única vez el cliente ePayco
@@ -7,13 +8,14 @@ const epayco = new ePayco({
     apiKey: process.env.EPAYCO_PUBLIC_KEY!,
     privateKey: process.env.EPAYCO_PRIVATE_KEY!,
     lang: 'ES',
-    test: process.env.EPAYCO_TEST === 'true'  // ✅ así lees también si estás en test desde .env
+    test: process.env.EPAYCO_TEST === 'true'
 });
 
-// Obtener listado de bancos PSE
+// Obtener listado de bancos PSE (con REST directo, no SDK)
 export const obtenerBancosPSE = async () => {
     try {
-        const bancos = await epayco.bank.pseBanks();
+        const response = await fetch(`https://api.secure.payco.co/restpagos/pse/banks?public_key=${process.env.EPAYCO_PUBLIC_KEY}`);
+        const bancos = await response.json();
         return bancos;
     } catch (error) {
         console.error("Error al obtener bancos PSE:", error);
@@ -21,7 +23,7 @@ export const obtenerBancosPSE = async () => {
     }
 };
 
-// Crear transacción PSE
+// Crear transacción PSE (aquí sí podemos seguir usando el SDK)
 export const crearPagoPSE = async (pseData: any) => {
     try {
         const response = await epayco.bank.create(pseData);
@@ -51,7 +53,7 @@ export const procesarConfirmacionPSE = async (confirmData: any) => {
     console.log("Monto:", x_amount);
     console.log("Moneda:", x_currency_code);
 
-    // Lógica de negocio para actualizar la base de datos (aún pendiente)
+    // Lógica de negocio para actualizar la base de datos
     switch (parseInt(x_response)) {
         case 1:
             console.log("✔ Pago aprobado");
@@ -69,4 +71,4 @@ export const procesarConfirmacionPSE = async (confirmData: any) => {
             console.log("Estado desconocido");
             break;
     }
-}
+};
