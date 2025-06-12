@@ -35,6 +35,11 @@ export const obtenerBancosPSE = async () => {
 // Crear transacción PSE
 export const crearPagoPSE = async (pseData: any) => {
     try {
+        // Validación previa al request
+        if (!pseData.cellphone || pseData.cellphone.length < 7) {
+            throw new Error("Teléfono inválido o vacío, no se puede procesar el pago.");
+        }
+
         const pseRequest = {
             bank: String(pseData.bank),
             invoice: String(pseData.invoice),
@@ -50,12 +55,12 @@ export const crearPagoPSE = async (pseData: any) => {
             last_name: String(pseData.last_name),
             email: String(pseData.email),
             country: String(pseData.country),
-            cellphone: String(pseData.cellphone),  // <-- corregido aquí el campo correcto
+            cellphone: String(pseData.cellphone ?? '').replace(/\D/g, '').slice(0,15),
             url_response: String(pseData.url_response),
             url_confirmation: String(pseData.url_confirmation),
             method_confirmation: String(pseData.method_confirmation),
             extra1: String(pseData.extra1),
-            ip: "181.129.0.1" // aún IP dummy
+            ip: "181.129.0.1"
         };
 
         console.log("🟡 Enviando a ePayco:", JSON.stringify(pseRequest, null, 2));
