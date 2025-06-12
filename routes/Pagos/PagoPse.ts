@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { generarPagoPSE } from '../../controllers/PagosControllers/PagoPseController';
+import { PagoPSE } from '../../controllers/PagosControllers/PagoPseController';
 import verifyToken from "../../middleware/VerifyToken";
 
 const router = Router();
 
-router.post('/', verifyToken, generarPagoPSE);
+router.post('/', verifyToken, PagoPSE);
 
 export default router;

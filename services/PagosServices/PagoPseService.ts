@@ -35,7 +35,30 @@ export const obtenerBancosPSE = async () => {
 // Crear transacción PSE
 export const crearPagoPSE = async (pseData: any) => {
     try {
-        const response = await epayco.bank.create(pseData);
+        const pseRequest = {
+            bank: pseData.bank,
+            invoice: pseData.invoice,
+            description: pseData.description,
+            value: pseData.value,
+            tax: pseData.tax,
+            tax_base: pseData.tax_base,
+            currency: pseData.currency,
+            type_person: pseData.type_person,
+            doc_type: pseData.doc_type,
+            doc_number: pseData.doc_number,
+            name: pseData.name,
+            last_name: pseData.last_name,
+            email: pseData.email,
+            country: pseData.country,
+            cellphone: pseData.cell_phone,  // aquí transformamos el campo
+            url_response: pseData.url_response,
+            url_confirmation: pseData.url_confirmation,
+            method_confirmation: pseData.method_confirmation,
+            extra1: pseData.extra1,
+            ip: "181.129.0.1" // usar una IP dummy de momento (puedes mejorar esto luego)
+        };
+
+        const response = await epayco.bank.create(pseRequest);
         return response;
     } catch (error) {
         console.error("Error al crear pago PSE:", error);

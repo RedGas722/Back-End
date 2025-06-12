@@ -21,9 +21,9 @@ export const generarPagoPSE = async (req: Request, res: Response) => {
             last_name: "N/A",
             email,
             country: 'CO',
-            cell_phone: telefono,
-            url_response: 'https://redgas-one.vercel.app/Shopping/ConfirmacionPsE',  // frontend a donde redirige al terminar el pago
-            url_confirmation: 'https://redgas.onrender.com/ConfirmacionPagoPSE',  // webhook para la confirmación
+            cell_phone: telefono, // aquí lo mandamos así, el service lo transformará
+            url_response: 'https://redgas-one.vercel.app/Shopping/ConfirmacionPsE',
+            url_confirmation: 'https://redgas.onrender.com/ConfirmacionPagoPSE',
             method_confirmation: 'POST',
             extra1: direccion
         };
