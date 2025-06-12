@@ -22,7 +22,7 @@ const PagoPaypal = async ({ cantidad, referencia, email }: PagoPaypalParams) => 
       email_address: email
     },
     application_context: {
-      return_url: "https://redgas-one.vercel.app/Shopping/Confirmacion",
+      return_url: "https://redgas-one.vercel.app/Shopping/ConfirmacionPayPal",
       cancel_url: "https://redgas-one.vercel.app/Shopping/Cancelado"
     }
   };

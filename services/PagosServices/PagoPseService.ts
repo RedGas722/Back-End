@@ -2,19 +2,37 @@ import ePayco from 'epayco-sdk-node';
 import dotenv from 'dotenv';
 dotenv.config();
 
+// Inicializamos una única vez el cliente ePayco
 const epayco = new ePayco({
     apiKey: process.env.EPAYCO_PUBLIC_KEY!,
     privateKey: process.env.EPAYCO_PRIVATE_KEY!,
     lang: 'ES',
-    test: true
+    test: process.env.EPAYCO_TEST === 'true'  // ✅ así lees también si estás en test desde .env
 });
 
-// Servicio para crear el pago PSE
-export const crearPagoPSE = async (pseData: any) => {
-    return await epayco.bank.create(pseData);
+// Obtener listado de bancos PSE
+export const obtenerBancosPSE = async () => {
+    try {
+        const bancos = await epayco.bank.pseBank();
+        return bancos;
+    } catch (error) {
+        console.error("Error al obtener bancos PSE:", error);
+        throw error;
+    }
 };
 
-// Servicio para procesar la confirmación del pago PSE (webhook)
+// Crear transacción PSE
+export const crearPagoPSE = async (pseData: any) => {
+    try {
+        const response = await epayco.bank.create(pseData);
+        return response;
+    } catch (error) {
+        console.error("Error al crear pago PSE:", error);
+        throw error;
+    }
+};
+
+// Procesar la confirmación (webhook de ePayco)
 export const procesarConfirmacionPSE = async (confirmData: any) => {
     const {
         x_transaction_id,
@@ -25,7 +43,7 @@ export const procesarConfirmacionPSE = async (confirmData: any) => {
         x_currency_code
     } = confirmData;
 
-    console.log("Confirmación recibida de ePayco:");
+    console.log("✅ Confirmación recibida de ePayco:");
     console.log("ID transacción:", x_transaction_id);
     console.log("Referencia:", x_ref_payco);
     console.log("Estado:", x_response);
@@ -33,24 +51,19 @@ export const procesarConfirmacionPSE = async (confirmData: any) => {
     console.log("Monto:", x_amount);
     console.log("Moneda:", x_currency_code);
 
-    // Aquí iría la lógica para actualizar el estado del pago en la base de datos.
-    // Ejemplo básico:
+    // Lógica de negocio para actualizar la base de datos (aún pendiente)
     switch (parseInt(x_response)) {
         case 1:
-            console.log("Pago aprobado");
-            // actualizar pago como aprobado en la DB
+            console.log("✔ Pago aprobado");
             break;
         case 2:
-            console.log("Pago rechazado");
-            // actualizar pago como rechazado en la DB
+            console.log("❌ Pago rechazado");
             break;
         case 3:
-            console.log("Pago pendiente");
-            // actualizar pago como pendiente en la DB
+            console.log("⌛ Pago pendiente");
             break;
         case 4:
-            console.log("Pago fallido");
-            // actualizar pago como fallido en la DB
+            console.log("⚠ Pago fallido");
             break;
         default:
             console.log("Estado desconocido");
