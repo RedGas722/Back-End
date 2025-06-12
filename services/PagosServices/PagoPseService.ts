@@ -13,7 +13,7 @@ const epayco = new ePayco({
 // Obtener listado de bancos PSE
 export const obtenerBancosPSE = async () => {
     try {
-        const bancos = await epayco.bank.pseBank();
+        const bancos = await epayco.bank.pseBanks();
         return bancos;
     } catch (error) {
         console.error("Error al obtener bancos PSE:", error);
