@@ -13,13 +13,15 @@ class PedidoServicioRepository {
     // Get Pedido
     static async getAll() {
         const sql = 'SELECT * FROM pedido_servicio';
-        return db.execute(sql);
+        const [rows] = await db.execute(sql);
+        return rows;
     }
 
     static async getById(id_factura: number) {
         const sql = 'SELECT * FROM pedido_servicio WHERE id_factura = ?';
         const values = [id_factura];
-        return db.execute(sql, values);
+        const [rows]: any = await db.execute(sql, values);
+        return rows[0];
     }
 
     // Update Pedido

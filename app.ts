@@ -72,9 +72,13 @@ import FacturaGetAll from "./routes/Factura/FacturaGetAll";
 
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
+import PedidoProductoGet from './routes/PedidoProducto/PedidoProductoGet';
+import PedidoProductoGetAll from './routes/PedidoProducto/PedidoProductoGetAll';
 
 //import pedidoServicio
 import PedidoServicioRegister from './routes/PedidoServicio/PedidoServicioRegister';
+import PedidoServicioGet from './routes/PedidoServicio/PedidoServicioGet';
+import PedidoServicioGetAll from './routes/PedidoServicio/PedidoServicioGetAll';
 
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
@@ -206,9 +210,13 @@ app.use('/FacturaRegister', FacturaRegister);
 
 //PEDIDO PRODUCTO
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
+app.use('/PedidoProductoGet', PedidoProductoGet);
+app.use('/PedidoProductoGetAll', PedidoProductoGetAll);
 
 //PEDIDO SERVICIO
 app.use('/PedidoServicioRegister', PedidoServicioRegister);
+app.use('/PedidoServicioGet', PedidoServicioGet);
+app.use('/PedidoServicioGetAll', PedidoServicioGetAll);
 
 //PRODUCTO
 app.use('/ProductoGet', ProductoGet);
