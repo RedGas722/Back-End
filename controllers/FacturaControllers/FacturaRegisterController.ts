@@ -8,9 +8,10 @@ let FacturaRegister = async (req: Request, res: Response) => {
     const {
         fecha_factura,
         id_cliente,
-        id_empleado
+        id_empleado,
+        total
     } = req.body;
-    const registerFactura = await FacturaServices.FacturaRegister(new Factura(fecha_factura, id_cliente, id_empleado));
+    const registerFactura = await FacturaServices.FacturaRegister(new Factura(fecha_factura, id_cliente, id_empleado, total));
     return res.status(201).json(
       { status: 'register ok'}
     );
