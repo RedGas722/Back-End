@@ -82,7 +82,7 @@ import PedidoServicioGetAll from './routes/PedidoServicio/PedidoServicioGetAll';
 
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
-import ProductoFilterByName from './routes/Producto/ProductoFilterByName';
+import ProductoGetById from './routes/Producto/ProductoGetById';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
 import ProductoGetAllCategoria from './routes/Producto/ProductoGetAllCategoria';
@@ -225,8 +225,8 @@ app.use('/ProductoUpdate', ProductoUpdate);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoUpdateNI', ProductoUpdateNI);
-app.use('/ProductoFilterByName', ProductoFilterByName);
 app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
+app.use('/ProductoGetById', ProductoGetById);
 
 //SERVICIO
 app.use('/ServicioGet', ServicioGet);
