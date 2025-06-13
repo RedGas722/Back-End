@@ -13,6 +13,10 @@ class ProductoServices {
         return await ProductoRepository.getByName(nombre_producto);
     }
 
+    static async ProductoGetbyId(id_producto: number) {
+        return await ProductoRepository.getById(id_producto);
+    }
+
     // Update Producto
     static async ProductoUpdate(producto: Producto, nombre_producto: string) {
         return await ProductoRepository.update(producto, nombre_producto);
@@ -37,10 +41,6 @@ class ProductoServices {
     static async getAllProductoCategoria(nombre_categoria: string) {
         return await ProductoRepository.getAllProductoCategoria(nombre_categoria);
 
-    }
-
-    static async ProductoFilterByName(nombre_producto: string) {
-        return await ProductoRepository.filterByName(nombre_producto);
     }
 
     // Resetear descuentos vencidos

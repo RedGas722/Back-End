@@ -7,7 +7,7 @@ const epayco = new ePayco({
     apiKey: process.env.EPAYCO_PUBLIC_KEY!,
     privateKey: process.env.EPAYCO_PRIVATE_KEY!,
     lang: 'ES',
-    test: process.env.EPAYCO_TEST === 'true'
+    test: process.env.EPAYCO_TEST === 'false'
 });
 
 // Listado local de bancos PSE (actualizado a junio 2025)
@@ -56,9 +56,6 @@ export const crearPagoPSE = async (pseData: any) => {
             email: String(pseData.email),
             country: String(pseData.country),
             cell_phone: String(pseData.cellphone ?? '').replace(/\D/g, '').slice(0,15),
-            url_response: String(pseData.url_response),
-            url_confirmation: String(pseData.url_confirmation),
-            method_confirmation: String(pseData.method_confirmation),
             extra1: String(pseData.extra1),
             ip: "181.129.0.1"
         };
@@ -69,6 +66,25 @@ export const crearPagoPSE = async (pseData: any) => {
         console.error("Error completo al crear pago PSE:", JSON.stringify(error, null, 2));
         throw error;
     }
+};
+
+export const consultarEstadoPago = async (refPayco: string) => {
+  if (!refPayco) throw new Error("Referencia Payco no proporcionada");
+
+  const url = `https://secure.epayco.co/validation/v1/reference/${refPayco}`;
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Error en la consulta: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+
+  if (!data || !data.data) {
+    throw new Error("Datos no encontrados en la respuesta de ePayco");
+  }
+
+  return data.data;
 };
 
 // Procesar la confirmación (webhook de ePayco)

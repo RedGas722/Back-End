@@ -20,14 +20,12 @@ export const generarPagoPSE = async (req: Request, res: Response) => {
             last_name: "N/A",
             email,
             country: 'CO',
-            cellphone: telefono,  // <-- aquí el cambio importante
-            url_response: 'https://redgas-one.vercel.app/Shopping/ConfirmacionPsE',
-            url_confirmation: 'https://redgas.onrender.com/ConfirmacionPagoPSE',
-            method_confirmation: 'POST',
+            cellphone: telefono, 
             extra1: direccion
         };
 
         const transaction = await crearPagoPSE(pseData);
+        console.log("Transacción generada:", transaction);
         res.json(transaction);
     } catch (error: any) {
         console.error("Error al generar transacción PSE:", JSON.stringify(error, null, 2));

@@ -72,13 +72,17 @@ import FacturaGetAll from "./routes/Factura/FacturaGetAll";
 
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
+import PedidoProductoGet from './routes/PedidoProducto/PedidoProductoGet';
+import PedidoProductoGetAll from './routes/PedidoProducto/PedidoProductoGetAll';
 
 //import pedidoServicio
 import PedidoServicioRegister from './routes/PedidoServicio/PedidoServicioRegister';
+import PedidoServicioGet from './routes/PedidoServicio/PedidoServicioGet';
+import PedidoServicioGetAll from './routes/PedidoServicio/PedidoServicioGetAll';
 
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
-import ProductoFilterByName from './routes/Producto/ProductoFilterByName';
+import ProductoGetById from './routes/Producto/ProductoGetById';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
 import ProductoGetAllCategoria from './routes/Producto/ProductoGetAllCategoria';
@@ -111,6 +115,7 @@ import CapturarPago from './routes/Pagos/CapturarPago';
 import ConfirmacionPagoPsE from './routes/Pagos/ConfirmacionPagoPse';
 import PagoPSE from './routes/Pagos/PagoPse';
 import ListarBancosPsE from './routes/Pagos/ListarBancosPsE';
+import ObtenerEstadoPago from './routes/Pagos/ObtenerEstadoPago';
 
 //import se encuentra
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
@@ -205,9 +210,13 @@ app.use('/FacturaRegister', FacturaRegister);
 
 //PEDIDO PRODUCTO
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
+app.use('/PedidoProductoGet', PedidoProductoGet);
+app.use('/PedidoProductoGetAll', PedidoProductoGetAll);
 
 //PEDIDO SERVICIO
 app.use('/PedidoServicioRegister', PedidoServicioRegister);
+app.use('/PedidoServicioGet', PedidoServicioGet);
+app.use('/PedidoServicioGetAll', PedidoServicioGetAll);
 
 //PRODUCTO
 app.use('/ProductoGet', ProductoGet);
@@ -216,8 +225,8 @@ app.use('/ProductoUpdate', ProductoUpdate);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoUpdateNI', ProductoUpdateNI);
-app.use('/ProductoFilterByName', ProductoFilterByName);
 app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
+app.use('/ProductoGetById', ProductoGetById);
 
 //SERVICIO
 app.use('/ServicioGet', ServicioGet);
@@ -242,6 +251,7 @@ app.use('/CapturarPago', CapturarPago);
 app.use('/ConfirmacionPagoPsE', ConfirmacionPagoPsE);
 app.use('/PagoPSE', PagoPSE);
 app.use('/ListarBancosPsE', ListarBancosPsE);
+app.use('/ObtenerEstadoPago', ObtenerEstadoPago);
 
 //SE ENCUENTRA
 app.use('/SeEncuentraRegister', SeEncuentraRegister);
