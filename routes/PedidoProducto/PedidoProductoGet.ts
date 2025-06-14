@@ -3,7 +3,7 @@ import PedidoProductoGet from "../../controllers/PedidoProductoControllers/Pedid
 const router = express.Router();
 
 
-router.post('/', PedidoProductoGet);
+router.get('/', PedidoProductoGet);
 
 
 export default router;

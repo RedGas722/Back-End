@@ -21,7 +21,7 @@ class PedidoProductoRepository {
         const sql = 'SELECT * FROM pedido_producto WHERE id_factura = ?';
         const values = [id_factura];
         const [rows]: any = await db.execute(sql, values);
-        return rows[0];
+        return rows;
     }
 
     // Update Pedido
