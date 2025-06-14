@@ -25,7 +25,7 @@ let ClienteLogin = async (req: Request, res: Response) => {
           telefono: login.telefono,
           direccion: login.direccion
         },
-          process.env.KEY_TOKEN, 5)
+          process.env.KEY_TOKEN)
       });
     }
 
