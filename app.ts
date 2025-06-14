@@ -126,6 +126,9 @@ import SeEncuentraUpdate from './routes/SeEncuentra/SeEncuentraUpdate';
 //import profile
 import profile from './routes/profile';
 
+//import
+import RefreshToken from './routes/Token/TokenRefresh';
+
 dotenv.config();
 const app = express();
 app.use(bodyParser.json()); 
@@ -269,6 +272,9 @@ app.use('/CartTotal', CartTotal)
 
 //PROFILE
 app.use('/Profile', profile);
+
+//Refresh Token
+app.use('/renewToken', RefreshToken);
 
 //--------------- INICIALIZAR SERVIDOR -------------------//
 

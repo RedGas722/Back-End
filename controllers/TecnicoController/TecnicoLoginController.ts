@@ -17,7 +17,7 @@ let TecnicoLogin = async (req: Request, res: Response) => {
           name: loginTecnico.name,
           email: loginTecnico.email,
           telefono: loginTecnico.telefono,
-        }, process.env.KEY_TOKEN, 5)
+        }, process.env.KEY_TOKEN)
       });
     }
     return res.status(401).json({
