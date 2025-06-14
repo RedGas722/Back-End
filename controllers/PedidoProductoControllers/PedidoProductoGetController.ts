@@ -15,7 +15,7 @@ let PedidoProductoGet = async (req: Request, res: Response) => {
             return res.status(400).json({ status: 'Invalid id_factura format' });
         }
 
-        const pedido_producto = await PedidoProductoServices.PedidoProductoGet(idFacturaNumber);
+        const pedido_producto = await PedidoProductoServices.PedidoProductoGetById(idFacturaNumber);
 
         if (!pedido_producto) {
             return res.status(404).json({ status: 'Pedido_producto not found' });
