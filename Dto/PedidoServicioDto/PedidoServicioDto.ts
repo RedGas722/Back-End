@@ -1,16 +1,19 @@
 class Pedido {
     private _id_servicio: number | null;
-    private _id_factura: number | null;
-    private _estado_pedido: string;
+    private _id_cliente: number | null;
+    private _id_tecnico: number | null;
+    private _firma: Buffer;
 
     constructor(
         id_servicio: number | null,
-        id_factura: number | null,
-        estado_pedido: string
+        id_cliente: number | null,
+        id_tecnico: number | null,
+        firma: Buffer
     ) {
         this._id_servicio = id_servicio;
-        this._id_factura = id_factura;
-        this._estado_pedido = estado_pedido;
+        this._id_cliente = id_cliente;
+        this._id_tecnico = id_tecnico;
+        this._firma = firma;
     }
 
     // Getters
@@ -18,12 +21,16 @@ class Pedido {
         return this._id_servicio;
     }
 
-    get id_factura(): number | null {
-        return this._id_factura;
+    get id_cliente(): number | null {
+        return this._id_cliente;
     }
 
-    get estado_pedido(): string {
-        return this._estado_pedido;
+    get id_tecnico(): number | null {
+        return this._id_tecnico;
+    }
+
+    get firma(): Buffer {
+        return this._firma;
     }
 
     // Setters
@@ -31,15 +38,19 @@ class Pedido {
         this._id_servicio = id_servicio;
     }
 
-    set id_factura(id_factura: number | null) {
-        this._id_factura = id_factura;
+    set id_cliente(id_cliente: number | null) {
+        this._id_cliente = id_cliente;
     }
 
-    set estado_pedido(estado_pedido : string){
-        this._estado_pedido = estado_pedido;
+    set id_tecnico(id_tecnico: number | null) {
+        this._id_tecnico = id_tecnico;
     }
 
-    
+    set firma(firma: Buffer) {
+        this._firma = firma;
+    }
+
+
 }
 
 export default Pedido;

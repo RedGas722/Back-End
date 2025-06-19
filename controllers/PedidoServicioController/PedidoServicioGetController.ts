@@ -1,22 +1,21 @@
 import { Request, Response } from "express";
-import PedidoProductoServices from "../../services/PedidoProductoServices";
 import PedidoServicioServices from "../../services/PedidoServicioServices";
 
 let PedidoServicioGet = async (req: Request, res: Response) => {
     try {
-        const { id_factura } = req.query;
+        const { id_cliente } = req.query;
 
-        if (!id_factura) {
+        if (!id_cliente) {
             return res.status(400).json({ status: 'Missing required fields' });
         }
 
-        const idFacturaNumber = Number(Array.isArray(id_factura) ? id_factura[0] : id_factura);
+        const idClienteNumber = Number(Array.isArray(id_cliente) ? id_cliente[0] : id_cliente);
 
-        if (isNaN(idFacturaNumber)) {
-            return res.status(400).json({ status: 'Invalid id_factura format' });
+        if (isNaN(idClienteNumber)) {
+            return res.status(400).json({ status: 'Invalid id_cliente format' });
         }
 
-        const pedido_servicio = await PedidoServicioServices.PedidoServicioGet(idFacturaNumber);
+        const pedido_servicio = await PedidoServicioServices.PedidoServicioGet(idClienteNumber);
 
         if (!pedido_servicio) {
             return res.status(404).json({ status: 'Pedido_servicio not found' });
