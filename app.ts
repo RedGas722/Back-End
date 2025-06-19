@@ -100,10 +100,14 @@ import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
 import TecnicoUpdate from './routes/Tecnico/TecnicoUpdate';
 import TecnicoDataUpdate from './routes/Tecnico/TecnicoDataUpdate';
 import TecnicoDataUpdateNI from './routes/Tecnico/TecnicoDataUpdateNI';
-
 import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
 import TecnicoGet from './routes/Tecnico/TecnicoGet';
 import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
+
+//import tecnico servicios
+import TecnicoServicesAdd from "./routes/TecnicoServices/TecnicoServicesAdd";
+import TecnicoServicesGet from "./routes/TecnicoServices/TecnicoServicesGet";
+// import ClienteServicesDelete from "./routes/TecnicoServices/TecnicoServicesDelete";
 
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
@@ -201,7 +205,6 @@ app.use('/FacturaUpdate', FacturaUpdate);
 app.use('/FacturaGetAll', FacturaGetAll);
 app.use('/FacturaRegister', FacturaRegister);
 
-
 //PEDIDO PRODUCTO
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
 
@@ -234,6 +237,11 @@ app.use('/TecnicoGetAll', TecnicoGetAll);
 app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoDataUpdate', TecnicoDataUpdate);
 app.use('/TecnicoDataUpdateNI', TecnicoDataUpdateNI);
+
+//TECNICO SERVIVICIOS
+app.use('/TecnicoServicesGet', TecnicoServicesGet);
+app.use('/TecnicoServicesAdd', TecnicoServicesAdd);
+// app.use('/TecnicoServicesDelete', TecnicoServicesDelete);
 
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
