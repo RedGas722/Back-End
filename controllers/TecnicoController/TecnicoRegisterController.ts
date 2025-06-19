@@ -30,7 +30,7 @@ let TecnicoRegister = async (req: Request, res: Response) => {
       ) 
     );
 
-    return res.status(201).json({ status: 'register ok'});
+    return res.status(201).json({ status: 'register ok', data: registerTecnico });
   } catch (error: any) {
     console.error("Error in registration:", error);
 
