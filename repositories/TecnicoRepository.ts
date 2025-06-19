@@ -10,10 +10,11 @@ class TecnicoRepository {
     static async add(tecnico: Tecnico) {
         const sql = `
             INSERT INTO tecnico 
-            (nombre_tecnico, correo_tecnico, telefono_tecnico, contraseña_tecnico, imagen) 
-            VALUES (?, ?, ?, ?, ?)
+            (cc, nombre_tecnico, correo_tecnico, telefono_tecnico, contraseña_tecnico, imagen) 
+            VALUES (?, ?, ?, ?, ?, ?)
         `;
         const values = [
+            tecnico.cc,
             tecnico.nombre_tecnico,
             tecnico.correo_tecnico,
             tecnico.telefono_tecnico,
@@ -25,23 +26,23 @@ class TecnicoRepository {
 
     // Update Tecnico
     static async update(tecnico: Tecnico, correo_tecnico: string) {
-        const sql = 'UPDATE tecnico SET nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ?, contraseña_tecnico = ? , imagen = ? WHERE correo_tecnico = ?';
-        const values = [tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, tecnico.imagen, correo_tecnico];
+        const sql = 'UPDATE tecnico SET cc = ?, nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ?, contraseña_tecnico = ? , imagen = ? WHERE correo_tecnico = ?';
+        const values = [tecnico.cc, tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, tecnico.imagen, correo_tecnico];
         return db.execute(sql, values);
     }
 
     
     // Update Tecnico sin contraseña (DataUpdate)
     static async DataUpdate(tecnico: Tecnico, correo_tecnico: string) {
-        const sql = 'UPDATE tecnico SET nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ?, imagen = ? WHERE correo_tecnico = ?';
-        const values = [tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, tecnico.imagen, correo_tecnico];
+        const sql = 'UPDATE tecnico SET cc = ?, nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ?, imagen = ? WHERE correo_tecnico = ?';
+        const values = [tecnico.cc, tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, tecnico.imagen, correo_tecnico];
         return db.execute(sql, values);
     }
 
     // Update Tecnico sin Imagen (DataUpdateNI)
     static async DataUpdateNI(tecnico: TecnicoNI, correo_tecnico: string) {
-        const sql = 'UPDATE tecnico SET nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ? WHERE correo_tecnico = ?';
-        const values = [tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, correo_tecnico];
+        const sql = 'UPDATE tecnico SET cc = ?, nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ? WHERE correo_tecnico = ?';
+        const values = [tecnico.cc, tecnico.nombre_tecnico, tecnico.correo_tecnico, tecnico.telefono_tecnico, correo_tecnico];
         return db.execute(sql, values);
     }
 
@@ -80,6 +81,7 @@ class TecnicoRepository {
                     logged: true,
                     status: "Successful authentication",
                     id: result[0][0].id_tecnico,
+                    cc: result[0][0].cc,
                     name: result[0][0].nombre_tecnico,
                     email: result[0][0].correo_tecnico,
                     telefono: result[0][0].telefono_tecnico,

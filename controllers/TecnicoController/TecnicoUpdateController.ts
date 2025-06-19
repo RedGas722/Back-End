@@ -10,6 +10,7 @@ let TecnicoUpdate = async (req: Request, res: Response) => {
   try {
 
     const {
+        cc,
         nombre_tecnico,
         nuevo_correo_tecnico,
         contrasena_tecnico,
@@ -24,6 +25,7 @@ let TecnicoUpdate = async (req: Request, res: Response) => {
 
     const updateTecnico = await TecnicoServices.TecnicoUpdate(
       new Tecnico(
+        cc,
         nombre_tecnico,
         nuevo_correo_tecnico,
         telefono_tecnico,
@@ -33,7 +35,7 @@ let TecnicoUpdate = async (req: Request, res: Response) => {
       correo_tecnico as string
     );
 
-    return res.status(201).json({ status: 'register ok'});
+    return res.status(201).json({ status: 'update ok'});
   } catch (error: any) {
     console.error("Error in registration:", error);
 

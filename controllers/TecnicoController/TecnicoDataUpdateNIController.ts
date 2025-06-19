@@ -5,6 +5,7 @@ import TecnicoNI from "../../Dto/TecnicoDto/TecnicoNIDto";
 let TecnicoDataUpdateNI = async (req: Request, res: Response) => {
   try {
     const {
+      cc,
       nombre_tecnico,
       nuevo_correo_tecnico,
       telefono_tecnico,
@@ -13,6 +14,7 @@ let TecnicoDataUpdateNI = async (req: Request, res: Response) => {
 
     const updateTecnico = await TecnicoServices.TecnicoDataUpdateNI(
       new TecnicoNI(
+        cc,
         nombre_tecnico,
         nuevo_correo_tecnico,
         telefono_tecnico

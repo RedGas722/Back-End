@@ -5,6 +5,7 @@ import EmpleadoServices from "../../services/EmpleadoServices";
 let EmpleadoUpdate = async (req: Request, res: Response) => {
   try {
      const {
+        cc,
         nombre_empleado,
         nuevo_correo_empleado,
         telefono_empleado,
@@ -20,6 +21,7 @@ let EmpleadoUpdate = async (req: Request, res: Response) => {
 
     const updateEmpleado = await EmpleadoServices.EmpleadoUpdate(
       new Empleado(
+        cc,
         nombre_empleado,
         nuevo_correo_empleado,
         telefono_empleado,

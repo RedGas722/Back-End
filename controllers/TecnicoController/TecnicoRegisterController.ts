@@ -9,6 +9,7 @@ const upload = multer({ storage: storage })
 let TecnicoRegister = async (req: Request, res: Response) => {
   try {
     const {
+        cc,
         nombre_tecnico,
         correo_tecnico,
         telefono_tecnico,
@@ -22,6 +23,7 @@ let TecnicoRegister = async (req: Request, res: Response) => {
 
     const registerTecnico = await TecnicoServices.TecnicoRegister(
       new Tecnico(
+        cc,
         nombre_tecnico,
         correo_tecnico,
         telefono_tecnico,

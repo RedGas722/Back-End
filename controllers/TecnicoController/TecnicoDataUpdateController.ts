@@ -10,6 +10,7 @@ let TecnicoUpdate = async (req: Request, res: Response) => {
   try {
 
     const {
+        cc,
         nombre_tecnico,
         nuevo_correo_tecnico,
         telefono_tecnico,
@@ -23,6 +24,7 @@ let TecnicoUpdate = async (req: Request, res: Response) => {
 
     const updateTecnico = await TecnicoServices.TecnicoDataUpdate(
       new Tecnico(
+        cc,
         nombre_tecnico,
         nuevo_correo_tecnico,
         telefono_tecnico,

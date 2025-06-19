@@ -5,6 +5,7 @@ import DataEmpleado from "../../Dto/EmpleadoDto/DataEmpleadoDto";
 let EmpleadoDataUpdate = async (req: Request, res: Response) => {
   try {
      const {
+        cc,
         nombre_empleado,
         nuevo_correo_empleado,
         telefono_empleado,
@@ -19,6 +20,7 @@ let EmpleadoDataUpdate = async (req: Request, res: Response) => {
 
     const updateEmpleado = await EmpleadoServices.EmpleadoDataUpdate(
       new DataEmpleado(
+        cc,
         nombre_empleado,
         nuevo_correo_empleado,
         telefono_empleado,

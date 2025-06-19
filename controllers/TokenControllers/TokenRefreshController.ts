@@ -5,6 +5,7 @@ export const renewTokenController = (req: Request, res: Response) => {
     try {
         const userData = {
             id: req.body.id,
+            cc: req.body.cc,
             name: req.body.name,
             email: req.body.email,
             telefono: req.body.telefono,
