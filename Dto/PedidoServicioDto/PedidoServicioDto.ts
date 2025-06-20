@@ -2,18 +2,18 @@ class Pedido {
     private _id_servicio: number | null;
     private _id_cliente: number | null;
     private _id_tecnico: number | null;
-    private _firma: Buffer;
+    private _estado_pedido: string;
 
     constructor(
         id_servicio: number | null,
         id_cliente: number | null,
         id_tecnico: number | null,
-        firma: Buffer
+        estado_pedido: string
     ) {
         this._id_servicio = id_servicio;
         this._id_cliente = id_cliente;
         this._id_tecnico = id_tecnico;
-        this._firma = firma;
+        this._estado_pedido = estado_pedido;
     }
 
     // Getters
@@ -29,8 +29,8 @@ class Pedido {
         return this._id_tecnico;
     }
 
-    get firma(): Buffer {
-        return this._firma;
+    get estado_pedido(): string {
+        return this._estado_pedido;
     }
 
     // Setters
@@ -46,8 +46,8 @@ class Pedido {
         this._id_tecnico = id_tecnico;
     }
 
-    set firma(firma: Buffer) {
-        this._firma = firma;
+    set estado_pedido(estado_pedido: string) {
+        this._estado_pedido = estado_pedido;
     }
 
 

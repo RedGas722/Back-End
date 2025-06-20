@@ -3,19 +3,10 @@ import PedidoServicio from "../Dto/PedidoServicioDto/PedidoServicioDto";
 
 class PedidoServicioRepository {
 
-    private static convertirImagenBase64(pedidos: any[]) {
-        return pedidos.map(pedido => {
-            if (pedido.firma && pedido.firma instanceof Buffer) {
-                pedido.firma = pedido.firma.toString('base64');
-            }
-            return pedido;
-        });
-    }
-
     // Insert Pedido
     static async add(pedidoServicio: PedidoServicio) {
-        const sql = 'INSERT INTO pedido_servicio (id_servicio, id_cliente, id_tecnico, firma) VALUES (?, ?, ?, ?)';
-        const values = [pedidoServicio.id_servicio, pedidoServicio.id_cliente, pedidoServicio.id_tecnico, pedidoServicio.firma];
+        const sql = 'INSERT INTO pedido_servicio (id_servicio, id_cliente, id_tecnico, estado_pedido) VALUES (?, ?, ?, ?)';
+        const values = [pedidoServicio.id_servicio, pedidoServicio.id_cliente, pedidoServicio.id_tecnico, pedidoServicio.estado_pedido];
         return db.execute(sql, values);
     }
 
@@ -23,14 +14,14 @@ class PedidoServicioRepository {
     static async getAll() {
         const sql = 'SELECT * FROM pedido_servicio';
         const [rows]: any = await db.execute(sql);
-        return this.convertirImagenBase64(rows);
+        return [rows][0];
     }
 
     static async getById(id_cliente: number) {
         const sql = 'SELECT * FROM pedido_servicio WHERE id_cliente = ?';
         const values = [id_cliente];
         const [rows]: any = await db.execute(sql, values);
-        return this.convertirImagenBase64(rows);
+        return [rows][0];
     }
 
     // // Update Pedido

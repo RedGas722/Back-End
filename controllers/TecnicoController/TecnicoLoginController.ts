@@ -14,6 +14,7 @@ let TecnicoLogin = async (req: Request, res: Response) => {
         status: 'login ok',
         token: generateToken({
           id: loginTecnico.id,
+          cc: loginTecnico.cc,
           name: loginTecnico.name,
           email: loginTecnico.email,
           telefono: loginTecnico.telefono,

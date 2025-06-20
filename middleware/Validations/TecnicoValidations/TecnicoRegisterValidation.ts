@@ -3,6 +3,10 @@ import { Request, Response, NextFunction } from 'express';
 
 // Validaciones para el registro de un técnico
 export const tecnicoRegisterValidation: ValidationChain[] = [
+  check('cc_tecnico')
+    .isLength({ min:1, max: 15})
+    .withMessage('El campo de la cedula debe tener entre 1 y 15 caracteres'),
+    
   check('nombre_tecnico')
     .isLength({ min: 1, max: 255 })
     .withMessage('El campo "nombre_tecnico" es obligatorio y debe tener entre 1 y 255 caracteres.'),

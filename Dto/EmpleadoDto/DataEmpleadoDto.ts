@@ -1,17 +1,18 @@
 class DataEmpleado {
+    private _cc_empleado: number;
     private _nombre_empleado: string;
     private _correo_empleado: string;
     private _telefono_empleado: string;
     private _direccion_empleado: string;
 
     constructor(
-       
+        cc_empleado: number,
         nombre_empleado: string,
         correo_empleado: string,
         telefono_empleado: string,
         direccion_empleado: string,
     ) {
-       
+        this._cc_empleado = cc_empleado;
         this._nombre_empleado = nombre_empleado;
         this._correo_empleado = correo_empleado;
         this._telefono_empleado = telefono_empleado;
@@ -20,6 +21,9 @@ class DataEmpleado {
 
     // Getters
   
+    get cc_empleado(): number {
+        return this._cc_empleado;
+    }
 
     get nombre_empleado(): string {
         return this._nombre_empleado;
@@ -40,6 +44,9 @@ class DataEmpleado {
 
     // Setters
  
+    set cc_empleado(cc_empleado: number) {
+        this._cc_empleado = cc_empleado;
+    }
 
     set nombre_empleado(nombre_empleado: string) {
         this._nombre_empleado = nombre_empleado;

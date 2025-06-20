@@ -5,6 +5,7 @@ import EmpleadoServices from "../../services/EmpleadoServices";
 let EmpleadoRegister = async (req: Request, res: Response) => {
   try {
     const {
+        cc_empleado,
         nombre_empleado,
         correo_empleado,
         telefono_empleado,
@@ -12,13 +13,9 @@ let EmpleadoRegister = async (req: Request, res: Response) => {
         contraseña_empleado,
     } = req.body;
 
-    // Verifica que los campos requeridos no estén vacíos
-    if (!nombre_empleado || !correo_empleado || !contraseña_empleado) {
-      return res.status(400).json({ status: 'Missing required fields' });
-    }
-
     const registerEmpleado = await EmpleadoServices.EmpleadoRegister(
       new Empleado(
+        cc_empleado,
         nombre_empleado,
         correo_empleado,
         telefono_empleado,
@@ -27,7 +24,7 @@ let EmpleadoRegister = async (req: Request, res: Response) => {
       )
     );
 
-    return res.status(201).json({ status: 'register ok', data: registerEmpleado });
+    return res.status(201).json({ status: 'register ok'});
   } catch (error: any) {
     console.error("Error en el registro:", error);
     if (error && error.code == "ER_DUP_ENTRY") {

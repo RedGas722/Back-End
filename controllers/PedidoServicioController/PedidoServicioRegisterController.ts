@@ -7,20 +7,15 @@ const PedidoServicioRegister = async (req: Request, res: Response) => {
     const {
       id_servicio,
       id_cliente,
-      id_tecnico
+      id_tecnico,
+      estado_pedido
     } = req.body;
-
-    if (!req.file) {
-      return res.status(400).json({ error: 'No se ha enviado ningún archivo de imagen.' });
-    }
-
-    const imagenBuffer = req.file.buffer;
 
     const pedidoServicio = new Pedido(
       id_servicio,
       id_cliente,
       id_tecnico,
-      imagenBuffer
+      estado_pedido
     );
 
     await PedidoServicioServices.PedidoServicioRegister(pedidoServicio);
