@@ -1,11 +1,11 @@
 class TecnicoNI {
-  private _cc: number;
+  private _cc_tecnico: number;
   private _nombre_tecnico: string;
   private _correo_tecnico: string;
   private _telefono_tecnico: string;
 
-  constructor(cc: number, nombre_tecnico: string, correo_tecnico: string, telefono_tecnico: string) {
-    this._cc = cc;
+  constructor(cc_tecnico: number, nombre_tecnico: string, correo_tecnico: string, telefono_tecnico: string) {
+    this._cc_tecnico = cc_tecnico;
     this._nombre_tecnico = nombre_tecnico;
     this._correo_tecnico = correo_tecnico;
     this._telefono_tecnico = telefono_tecnico;
@@ -13,8 +13,8 @@ class TecnicoNI {
 
   // Getters
 
-  get cc(): number {
-    return this._cc;
+  get cc_tecnico(): number {
+    return this._cc_tecnico;
   }
 
   get nombre_tecnico(): string {
@@ -31,8 +31,8 @@ class TecnicoNI {
 
   // Setters
 
-  set cc(cc: number) {
-    this._cc = cc;
+  set cc_tecnico(cc_tecnico: number) {
+    this._cc_tecnico = cc_tecnico;
   }
 
   set nombre_tecnico(nombre_tecnico: string) {

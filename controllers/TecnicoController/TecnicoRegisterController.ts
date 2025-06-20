@@ -9,7 +9,7 @@ const upload = multer({ storage: storage })
 let TecnicoRegister = async (req: Request, res: Response) => {
   try {
     const {
-        cc,
+        cc_tecnico,
         nombre_tecnico,
         correo_tecnico,
         telefono_tecnico,
@@ -23,7 +23,7 @@ let TecnicoRegister = async (req: Request, res: Response) => {
 
     const registerTecnico = await TecnicoServices.TecnicoRegister(
       new Tecnico(
-        cc,
+        cc_tecnico,
         nombre_tecnico,
         correo_tecnico,
         telefono_tecnico,
@@ -32,7 +32,7 @@ let TecnicoRegister = async (req: Request, res: Response) => {
       ) 
     );
 
-    return res.status(201).json({ status: 'register ok', data: registerTecnico });
+    return res.status(201).json({ status: 'register ok'});
   } catch (error: any) {
     console.error("Error in registration:", error);
 

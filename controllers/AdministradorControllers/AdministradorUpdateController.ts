@@ -20,7 +20,7 @@ let AdministradorUpdate = async (req: Request, res: Response) => {
       const UpdateAdministrador = await AdministradorServices.AdministradorUpdate( new Administrador(nombre_admin, correo_admin, telefono_admin, contraseña_admin), new_correo_admin as string);
       {
          return res.status(200).json(
-            { status: 'resgister ok' }
+            { status: 'update ok' }
          );
       }
    } catch (error: any){

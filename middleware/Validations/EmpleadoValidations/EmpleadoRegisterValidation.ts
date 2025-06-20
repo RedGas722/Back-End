@@ -2,7 +2,7 @@ import { check, validationResult, ValidationChain } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 
 export const empleadoRegisterValidation: ValidationChain[] = [
-  check('cc')
+  check('cc_empleado')
     .isLength({ min:1, max: 15})
     .withMessage('La cedula debe tener entre 1 y 15 caracteres'),
 

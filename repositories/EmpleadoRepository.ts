@@ -10,11 +10,11 @@ class EmpleadoRepository {
     static async add(empleado: Empleado) {
         const sql = `
             INSERT INTO empleado 
-            (cc, nombre_empleado, correo_empleado, telefono_empleado, direccion_empleado, contraseña_empleado) 
+            (cc_empleado, nombre_empleado, correo_empleado, telefono_empleado, direccion_empleado, contraseña_empleado) 
             VALUES (?, ?, ?, ?, ?, ?)
         `;
         const values = [
-            empleado.cc,
+            empleado.cc_empleado,
             empleado.nombre_empleado,
             empleado.correo_empleado,
             empleado.telefono_empleado,
@@ -41,14 +41,14 @@ class EmpleadoRepository {
 
     // Update Empleado
     static async update(empleado: Empleado, correo_empleado: string) {
-        const sql = 'UPDATE empleado SET cc = ?, nombre_empleado = ?, correo_empleado = ?, telefono_empleado = ?, direccion_empleado = ?, contraseña_empleado = ? WHERE correo_empleado = ?';
-        const values = [empleado.cc, empleado.nombre_empleado, empleado.correo_empleado, empleado.telefono_empleado, empleado.direccion_empleado, empleado.contraseña_empleado, correo_empleado];
+        const sql = 'UPDATE empleado SET cc_empleado = ?, nombre_empleado = ?, correo_empleado = ?, telefono_empleado = ?, direccion_empleado = ?, contraseña_empleado = ? WHERE correo_empleado = ?';
+        const values = [empleado.cc_empleado, empleado.nombre_empleado, empleado.correo_empleado, empleado.telefono_empleado, empleado.direccion_empleado, empleado.contraseña_empleado, correo_empleado];
         return db.execute(sql, values);
     }
 
     static async dataUpdate(dataEmpleado: DataEmpleado, correo_empleado: string) {
-        const sql = 'UPDATE empleado SET cc = ?, nombre_empleado = ?, correo_empleado = ?, telefono_empleado = ?, direccion_empleado = ? WHERE correo_empleado = ?';
-        const values = [dataEmpleado.cc, dataEmpleado.nombre_empleado, dataEmpleado.correo_empleado, dataEmpleado.telefono_empleado, dataEmpleado.direccion_empleado, correo_empleado];
+        const sql = 'UPDATE empleado SET cc_empleado = ?, nombre_empleado = ?, correo_empleado = ?, telefono_empleado = ?, direccion_empleado = ? WHERE correo_empleado = ?';
+        const values = [dataEmpleado.cc_empleado, dataEmpleado.nombre_empleado, dataEmpleado.correo_empleado, dataEmpleado.telefono_empleado, dataEmpleado.direccion_empleado, correo_empleado];
         return db.execute(sql, values);
     }
 
@@ -71,7 +71,7 @@ class EmpleadoRepository {
                     logged: true,
                     status: "Successful authentication",
                     id: result[0][0].id_empleado,
-                    cc: result[0][0].cc,
+                    cc: result[0][0].cc_empleado,
                     name: result[0][0].nombre_empleado,
                     email: result[0][0].correo_empleado,
                     telefono: result[0][0].telefono_empleado,

@@ -5,22 +5,17 @@ import DataEmpleado from "../../Dto/EmpleadoDto/DataEmpleadoDto";
 let EmpleadoDataUpdate = async (req: Request, res: Response) => {
   try {
      const {
-        cc,
+        cc_empleado,
         nombre_empleado,
         nuevo_correo_empleado,
         telefono_empleado,
         direccion_empleado,
         correo_empleado
     } = req.body;
-
-    // Verifica que los campos requeridos no estén vacíos
-    if (!nombre_empleado || !nuevo_correo_empleado || !direccion_empleado || !telefono_empleado || !correo_empleado) {
-      return res.status(400).json({ status: 'Missing required fields' });
-    }
-
+    
     const updateEmpleado = await EmpleadoServices.EmpleadoDataUpdate(
       new DataEmpleado(
-        cc,
+        cc_empleado,
         nombre_empleado,
         nuevo_correo_empleado,
         telefono_empleado,
@@ -29,7 +24,7 @@ let EmpleadoDataUpdate = async (req: Request, res: Response) => {
       correo_empleado as string
     );
     return res.status(201).json(
-      { status: 'update ok', data: updateEmpleado }
+      { status: 'update ok'}
     );
 
   } catch (error: any) {
