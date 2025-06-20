@@ -12,7 +12,9 @@ export const renewTokenController = (req: Request, res: Response) => {
             direccion: req.body.direccion
         };
 
-        const newToken = refreshTokenService(userData);
+        const recordarme = req.body.recordarme === true;
+
+        const newToken = refreshTokenService(userData, recordarme);
         res.json({ token: newToken });
     } catch (error) {
         console.error('Error al renovar token:', error);
