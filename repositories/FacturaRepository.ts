@@ -5,9 +5,12 @@ class FacturaRepository {
 
     // Insert Factura
     static async add(factura: Factura) {
-        const sql = 'INSERT INTO factura (id_cliente, id_empleado, fecha_factura) VALUES (?, ?, ?)';
-        const values = [factura.id_cliente, factura.id_empleado, factura.fecha_factura];
-        return db.execute(sql, values);
+        const sql = 'INSERT INTO factura (id_cliente, id_empleado, fecha_factura, total) VALUES (?, ?, ?, ?)';
+        const values = [factura.id_cliente, factura.id_empleado, factura.fecha_factura, factura.total];
+        
+        const [result]: any = await db.execute(sql, values);  // <-- destructuramos el result
+        
+        return result.insertId;  // <-- retornamos solo el id generado
     }
 
     // Get Factura

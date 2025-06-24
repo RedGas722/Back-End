@@ -3,16 +3,12 @@ import TecnicoServices from "../../services/TecnicoServicesInfo/TecnicoServices"
 
 const TecnicoServicesAddController = async (req: Request, res: Response) => {
   try {
-   //  const id = req.body.id;
-   //  const name = req.body.name; 
-   //  const phone = req.body.telefono;
-   //  const email = req.body.email
+    const id = req.body.id;
+    const name = req.body.name; 
+    const phone = req.body.telefono;
+    const email = req.body.email
 
-    const {
-      id,
-      name,
-      phone, 
-      email, 
+    const { 
       userId 
    } = req.body;
 

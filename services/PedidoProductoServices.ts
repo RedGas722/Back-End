@@ -9,6 +9,14 @@ class PedidoProductoServices {
         return await PedidoProductoRepository.add(pedidoProducto);
     }
 
+    static async PedidoProductoGetById(id_factura: number) {
+        return await PedidoProductoRepository.getById(id_factura);
+    }
+
+    static async PedidoProductoGetAll() {
+        return await PedidoProductoRepository.getAll();
+    }
+
 }
 
 export default PedidoProductoServices;

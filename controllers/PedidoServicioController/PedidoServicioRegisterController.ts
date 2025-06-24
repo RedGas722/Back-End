@@ -1,26 +1,38 @@
 import { Request, Response } from "express";
-import PedidoServicio from "../../Dto/PedidoServicioDto/PedidoServicioDto";
+import Pedido from "../../Dto/PedidoServicioDto/PedidoServicioDto";
 import PedidoServicioServices from "../../services/PedidoServicioServices";
 
-
-let PedidoServicioRegister = async (req: Request, res: Response) => {
+const PedidoServicioRegister = async (req: Request, res: Response) => {
   try {
     const {
       id_servicio,
-      id_factura,
-      estado_pedido
+      id_cliente,
+      id_tecnico
     } = req.body;
-    const registerPedidoServicio = await PedidoServicioServices.PedidoServicioRegister(new PedidoServicio(id_servicio, id_factura, estado_pedido))
-    return res.status(201).json(
-      { status: 'register ok'}
-    );
-  } catch (error: any) {
-    if (error && error.code == "ER_DUP_ENTRY") {
-      return res.status(500).json({ errorInfo: error.sqlMessage }
-      );
-    }
-  }
-}
 
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se ha enviado ningún archivo de imagen.' });
+    }
+
+    const imagenBuffer = req.file.buffer;
+
+    const pedidoServicio = new Pedido(
+      id_servicio,
+      id_cliente,
+      id_tecnico,
+      imagenBuffer
+    );
+
+    await PedidoServicioServices.PedidoServicioRegister(pedidoServicio);
+
+    return res.status(201).json({ status: 'register ok' });
+
+  } catch (error: any) {
+    if (error.code === "ER_DUP_ENTRY") {
+      return res.status(500).json({ errorInfo: error.sqlMessage });
+    }
+    return res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
 
 export default PedidoServicioRegister;

@@ -9,6 +9,8 @@ npm install node-cron
 npm install @google/generative-ai
 npm install @google-cloud/vertexai
 npm install @types/google-cloud__vertexai --save-dev 
+npm install epayco-sdk-node
+npm install node-cron
 ### Cree un archivo de variables de entorno .env en él ponga las siguientes variables
 - **DB_HOST:** localhost
 - **DB_DATABASE:** nombreBaseDeDatos
@@ -17,4 +19,6 @@ npm install @types/google-cloud__vertexai --save-dev
 ### Abra una terminal y ejecute tsc -w para el modo observador de Typescript
 ### Abra otra terminal y ejecute node ./dist/app para ejecutar el servidor
 ### node-cron para gestionar el tiempo de los descuentos
+
+### pagos pse
 

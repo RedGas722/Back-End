@@ -3,6 +3,6 @@ import TecnicoServicesAddController  from "../../controllers/TecnicoServicesCont
 import verifyToken from "../../middleware/VerifyToken";
 const router = Router();
 
-router.post("/", TecnicoServicesAddController);
+router.post("/", verifyToken, TecnicoServicesAddController);
 
 export default router;

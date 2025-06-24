@@ -12,7 +12,12 @@ let TecnicoLogin = async (req: Request, res: Response) => {
     if (loginTecnico.logged) {
       return res.status(200).json({
         status: 'login ok',
-        token: generateToken({id: loginTecnico.id, name: loginTecnico.name, email: loginTecnico.email, telefono: loginTecnico.telefono}, process.env.KEY_TOKEN, 15)
+        token: generateToken({
+          id: loginTecnico.id,
+          name: loginTecnico.name,
+          email: loginTecnico.email,
+          telefono: loginTecnico.telefono,
+        }, process.env.KEY_TOKEN)
       });
     }
     return res.status(401).json({

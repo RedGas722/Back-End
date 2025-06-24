@@ -112,11 +112,11 @@ class ProductoRepository {
     }
 
 
-    static async filterByName(nombre_producto: string) {
-        const sql = "SELECT * FROM producto WHERE nombre_producto LIKE ?";
-        const values = [`%${nombre_producto}%`];
-        const [rows] = await db.execute(sql, values);
-        return this.convertirImagenBase64(rows as any[]);
+    static async getById(id_producto: number) {
+        const sql = 'SELECT * FROM producto WHERE id_producto = ?';
+        const [rows]: any = await db.execute(sql, [id_producto]);
+        if (rows.length === 0) return null;
+        return rows[0];
     }
 
     static async update(producto: Producto, nombre_producto: string) {

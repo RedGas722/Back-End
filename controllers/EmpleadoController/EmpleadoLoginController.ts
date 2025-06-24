@@ -13,7 +13,14 @@ let EmpleadoLogin = async (req: Request, res: Response) => {
     if (loginEmpleado.logged) {
       return res.status(200).json({
         status: 'login ok',
-        token: generateToken({id: loginEmpleado.id, name: loginEmpleado.name, email: loginEmpleado.email, telefono: loginEmpleado.telefono, direccion:loginEmpleado.direccion}, process.env.KEY_TOKEN, 5)});
+        token: generateToken({
+          id: loginEmpleado.id,
+          name: loginEmpleado.name,
+          email: loginEmpleado.email,
+          telefono: loginEmpleado.telefono,
+          direccion: loginEmpleado.direccion,
+        }, process.env.KEY_TOKEN)
+      });
     }
 
     // Si las credenciales son incorrectas

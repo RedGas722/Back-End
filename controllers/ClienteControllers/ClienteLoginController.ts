@@ -25,7 +25,7 @@ let ClienteLogin = async (req: Request, res: Response) => {
           telefono: login.telefono,
           direccion: login.direccion
         },
-          process.env.KEY_TOKEN, 5)
+          process.env.KEY_TOKEN)
       });
     }
 
@@ -35,8 +35,11 @@ let ClienteLogin = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      status: "Internal server error",
+      error: error instanceof Error ? error.message : String(error)
+    });
   }
 }
-
 
 export default ClienteLogin;

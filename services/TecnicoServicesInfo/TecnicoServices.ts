@@ -7,6 +7,23 @@ async function getServicesInfo(techId: number): Promise<string | null> {
   return data ?? null;
 }
 
+// obtener todos los servicios de los clientes
+async function getAllServicesInfo(): Promise<any[]> {
+  const keys = await redisTechnicianServices.keys("ServicesInfoTecnico:*");
+  const data = await Promise.all(
+    keys.map(async (key) => {
+      const value = await redisTechnicianServices.get(key);
+      const userId = key.split(":")[1];
+      return {
+        userId,
+        ...JSON.parse(value ?? "{}"),
+      };
+    })
+  );
+
+  return data;
+}
+
 // agregar información de servicios de un tecnico
 async function addToServicesInfo(techId: number, techName: string, techPhone: string, techEmail: string, userid: number ): Promise<boolean> {
   const existing = await getServicesInfo(techId);
@@ -26,15 +43,16 @@ async function addToServicesInfo(techId: number, techName: string, techPhone: st
   return true;
 }
 
-// // eliminar la información de servicios de un cliente
-// async function removeServiceInfo(userId: number): Promise<void> {
-//   await redisTechnicianServices.del(`ServicesInfoCliente:${Id}`);
-// }
+// eliminar la información de servicios de un cliente
+async function removeServiceInfo(techId: number): Promise<void> {
+  await redisTechnicianServices.del(`ServicesInfoCliente:${techId}`);
+}
 
 export const tecnicoServices = {
   getServicesInfo,
+  getAllServicesInfo,
   addToServicesInfo,
-//   removeServiceInfo,
+  removeServiceInfo,
 };
 
 export default tecnicoServices;

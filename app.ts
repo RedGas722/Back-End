@@ -72,13 +72,17 @@ import FacturaGetAll from "./routes/Factura/FacturaGetAll";
 
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
+import PedidoProductoGet from './routes/PedidoProducto/PedidoProductoGet';
+import PedidoProductoGetAll from './routes/PedidoProducto/PedidoProductoGetAll';
 
 //import pedidoServicio
 import PedidoServicioRegister from './routes/PedidoServicio/PedidoServicioRegister';
+import PedidoServicioGet from './routes/PedidoServicio/PedidoServicioGet';
+import PedidoServicioGetAll from './routes/PedidoServicio/PedidoServicioGetAll';
 
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
-import ProductoFilterByName from './routes/Producto/ProductoFilterByName';
+import ProductoGetById from './routes/Producto/ProductoGetById';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
 import ProductoGetAllCategoria from './routes/Producto/ProductoGetAllCategoria';
@@ -107,11 +111,16 @@ import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 //import tecnico servicios
 import TecnicoServicesAdd from "./routes/TecnicoServices/TecnicoServicesAdd";
 import TecnicoServicesGet from "./routes/TecnicoServices/TecnicoServicesGet";
-// import ClienteServicesDelete from "./routes/TecnicoServices/TecnicoServicesDelete";
+import TecnicoServicesGetAll from "./routes/TecnicoServices/TecnicoServicesGetAll";
+import TecnicoServicesDelete from "./routes/TecnicoServices/TecnicoServicesDelete";
 
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
 import CapturarPago from './routes/Pagos/CapturarPago';
+import ConfirmacionPagoPsE from './routes/Pagos/ConfirmacionPagoPse';
+import PagoPSE from './routes/Pagos/PagoPse';
+import ListarBancosPsE from './routes/Pagos/ListarBancosPsE';
+import ObtenerEstadoPago from './routes/Pagos/ObtenerEstadoPago';
 
 //import se encuentra
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
@@ -119,10 +128,11 @@ import SeEncuentraDelete from './routes/SeEncuentra/SeEncuentraDelete';
 import SeEncuentraGet from './routes/SeEncuentra/SeEncuentraGet';
 import SeEncuentraUpdate from './routes/SeEncuentra/SeEncuentraUpdate';
 
-
-
 //import profile
 import profile from './routes/profile';
+
+//import
+import RefreshToken from './routes/Token/TokenRefresh';
 
 dotenv.config();
 const app = express();
@@ -131,7 +141,7 @@ app.use(bodyParser.json());
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://red-gas-kevins-projects-666a0731.vercel.app'
+    'https://redgas-one.vercel.app'
   ],
   credentials: true,
 }));
@@ -207,9 +217,13 @@ app.use('/FacturaRegister', FacturaRegister);
 
 //PEDIDO PRODUCTO
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
+app.use('/PedidoProductoGet', PedidoProductoGet);
+app.use('/PedidoProductoGetAll', PedidoProductoGetAll);
 
 //PEDIDO SERVICIO
 app.use('/PedidoServicioRegister', PedidoServicioRegister);
+app.use('/PedidoServicioGet', PedidoServicioGet);
+app.use('/PedidoServicioGetAll', PedidoServicioGetAll);
 
 //PRODUCTO
 app.use('/ProductoGet', ProductoGet);
@@ -218,8 +232,8 @@ app.use('/ProductoUpdate', ProductoUpdate);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoUpdateNI', ProductoUpdateNI);
-app.use('/ProductoFilterByName', ProductoFilterByName);
 app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
+app.use('/ProductoGetById', ProductoGetById);
 
 //SERVICIO
 app.use('/ServicioGet', ServicioGet);
@@ -241,11 +255,16 @@ app.use('/TecnicoDataUpdateNI', TecnicoDataUpdateNI);
 //TECNICO SERVIVICIOS
 app.use('/TecnicoServicesGet', TecnicoServicesGet);
 app.use('/TecnicoServicesAdd', TecnicoServicesAdd);
-// app.use('/TecnicoServicesDelete', TecnicoServicesDelete);
+app.use('/TecnicoServicesGetAll', TecnicoServicesGetAll);
+app.use('/TecnicoServicesDelete', TecnicoServicesDelete);
 
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
 app.use('/CapturarPago', CapturarPago);
+app.use('/ConfirmacionPagoPsE', ConfirmacionPagoPsE);
+app.use('/PagoPSE', PagoPSE);
+app.use('/ListarBancosPsE', ListarBancosPsE);
+app.use('/ObtenerEstadoPago', ObtenerEstadoPago);
 
 //SE ENCUENTRA
 app.use('/SeEncuentraRegister', SeEncuentraRegister);
@@ -263,6 +282,9 @@ app.use('/CartTotal', CartTotal)
 
 //PROFILE
 app.use('/Profile', profile);
+
+//Refresh Token
+app.use('/renewToken', RefreshToken);
 
 //--------------- INICIALIZAR SERVIDOR -------------------//
 
