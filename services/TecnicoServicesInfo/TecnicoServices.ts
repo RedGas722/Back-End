@@ -45,7 +45,7 @@ async function addToServicesInfo(techId: number, techName: string, techPhone: st
 
 // eliminar la información de servicios de un cliente
 async function removeServiceInfo(techId: number): Promise<void> {
-  await redisTechnicianServices.del(`ServicesInfoCliente:${techId}`);
+  await redisTechnicianServices.del(`ServicesInfoTecnico:${techId}`);
 }
 
 export const tecnicoServices = {
