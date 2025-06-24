@@ -7,7 +7,7 @@ const epayco = new ePayco({
     apiKey: process.env.EPAYCO_PUBLIC_KEY!,
     privateKey: process.env.EPAYCO_PRIVATE_KEY!,
     lang: 'ES',
-    test: process.env.EPAYCO_TEST === 'false'
+    test: process.env.EPAYCO_TEST === 'true'
 });
 
 // Listado local de bancos PSE (actualizado a junio 2025)
