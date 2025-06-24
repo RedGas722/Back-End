@@ -7,6 +7,10 @@ export const tecnicoUpdateValidation: ValidationChain[] = [
     .isEmail()
     .withMessage('El campo "nuevo_correo_tecnico" debe ser un correo válido si se proporciona.'),
 
+    check('cc_tecnico')
+    .isLength({ min: 1, max: 15 })
+    .withMessage('El campo "cc" debe tener entre 1 y 15 caracteres.'),
+  
   check('nombre_tecnico')
     .optional()
     .isLength({ min: 1, max: 255 })

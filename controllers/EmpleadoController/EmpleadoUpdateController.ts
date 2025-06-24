@@ -5,6 +5,7 @@ import EmpleadoServices from "../../services/EmpleadoServices";
 let EmpleadoUpdate = async (req: Request, res: Response) => {
   try {
      const {
+        cc_empleado,
         nombre_empleado,
         nuevo_correo_empleado,
         telefono_empleado,
@@ -13,13 +14,9 @@ let EmpleadoUpdate = async (req: Request, res: Response) => {
         correo_empleado
     } = req.body;
 
-    // Verifica que los campos requeridos no estén vacíos
-    if (!nombre_empleado || !correo_empleado || !contraseña_empleado) {
-      return res.status(400).json({ status: 'Missing required fields' });
-    }
-
     const updateEmpleado = await EmpleadoServices.EmpleadoUpdate(
       new Empleado(
+        cc_empleado,
         nombre_empleado,
         nuevo_correo_empleado,
         telefono_empleado,
@@ -29,7 +26,7 @@ let EmpleadoUpdate = async (req: Request, res: Response) => {
       correo_empleado as string
     );
     return res.status(201).json(
-      { status: 'update ok', data: updateEmpleado }
+      { status: 'update ok'}
     );
 
   } catch (error: any) {

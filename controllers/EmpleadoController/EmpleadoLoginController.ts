@@ -15,6 +15,7 @@ let EmpleadoLogin = async (req: Request, res: Response) => {
         status: 'login ok',
         token: generateToken({
           id: loginEmpleado.id,
+          cc: loginEmpleado.cc,
           name: loginEmpleado.name,
           email: loginEmpleado.email,
           telefono: loginEmpleado.telefono,

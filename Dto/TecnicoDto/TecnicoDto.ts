@@ -1,5 +1,6 @@
 class Tecnico {
 
+    private _cc_tecnico: number;
     private _nombre_tecnico: string;
     private _correo_tecnico: string;
     private _telefono_tecnico: string;
@@ -7,12 +8,14 @@ class Tecnico {
     private _imagen: Buffer;
 
     constructor(
+        cc_tecnico: number,
         nombre_tecnico: string,
         correo_tecnico: string,
         telefono_tecnico: string,
         contraseña_tecnico: string,
         imagen: Buffer
     ) {
+        this._cc_tecnico = cc_tecnico;
         this._nombre_tecnico = nombre_tecnico;
         this._correo_tecnico = correo_tecnico;
         this._telefono_tecnico = telefono_tecnico;
@@ -21,6 +24,11 @@ class Tecnico {
     }
 
     // Getters
+
+    get cc_tecnico(): number {
+        return this._cc_tecnico;
+    }
+
     get nombre_tecnico(): string {
         return this._nombre_tecnico;
     }
@@ -42,6 +50,11 @@ class Tecnico {
     }
 
     // Setters
+
+    set cc_tecnico(cc_tecnico: number) {
+        this._cc_tecnico = cc_tecnico;
+    }
+
     set nombre_tecnico(nombre_tecnico: string) {
         this._nombre_tecnico = nombre_tecnico;
     }
