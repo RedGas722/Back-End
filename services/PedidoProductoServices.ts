@@ -17,6 +17,10 @@ class PedidoProductoServices {
         return await PedidoProductoRepository.getAll();
     }
 
+    static async getAllPaginated(page: number, limit: number) {
+        return await PedidoProductoRepository.getAllPaginated(page, limit);
+    }
+
 }
 
 export default PedidoProductoServices;

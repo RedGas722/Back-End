@@ -18,6 +18,10 @@ class CategoriaServices {
     static async GetAllCategorias() {
         return await CategoriaRepository.getAll();
     }
+
+    static async getAllPaginated(page: number, limit: number) {
+        return await CategoriaRepository.getAllPaginated(page, limit);
+    }
     
     //Categoria Update
     static async CategoriaUpdate(categoria: Categoria, nombre_categoria: string) {
@@ -32,8 +36,6 @@ class CategoriaServices {
     static async CategoriaByName(nombre_categoria: string) {
         return await CategoriaRepository.getByName(nombre_categoria);
     }
-
-
 }
 
 export default CategoriaServices;

@@ -38,12 +38,17 @@ class EmpleadoServices {
     }
     
     static async EmpleadoGetAll(){
-        return await EmpleadoRepository.ClienteGetAll();
+        return await EmpleadoRepository.EmpleadoGetAll();
     }
 
     static async GetEmpleado(correo_empleado: string) {
         return await EmpleadoRepository.getByCorreo(correo_empleado);
     }
+
+    static async getAllPaginated(page: number, limit: number) {
+        return await EmpleadoRepository.getAllPaginated(page, limit);
+    }
+
 }
 
 export default EmpleadoServices;

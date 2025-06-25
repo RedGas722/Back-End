@@ -19,6 +19,27 @@ class ClienteRepository {
         return rows;
     }
 
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const offset = (page - 1) * limit;
+
+        const sql = `SELECT * FROM cliente ORDER BY id_cliente DESC LIMIT ? OFFSET ?`;
+        const countSql = `SELECT COUNT(*) as total FROM cliente`;
+
+        const [rows] = await db.execute(sql, [limit, offset]);
+        const [countRows]: any = await db.execute(countSql);
+
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        return {
+            currentPage: page,
+            totalPages,
+            totalItems,
+            itemsPerPage: limit,
+            data: rows,
+        };
+    }
+
     // Get Cliente by email
     static async getByEmail(correo_cliente: string) {
         const sql = 'SELECT * FROM cliente WHERE correo_cliente = ?';

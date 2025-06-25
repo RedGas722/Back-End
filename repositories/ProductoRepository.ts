@@ -72,10 +72,65 @@ class ProductoRepository {
         )
         `;
     }
+        const [rows] = await db.execute(sql, values);
+        const productos = rows as any[];
+        return this.convertirImagenBase64(productos);
+    }
 
-    const [rows] = await db.execute(sql, values);
-    const productos = rows as any[];
-    return this.convertirImagenBase64(productos);
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const offset = (page - 1) * limit;
+
+        // Obtener productos con categorías (paginado)
+        const [rows] = await db.execute(
+            `
+            SELECT p.*, c.nombre_categoria
+            FROM producto p
+            JOIN se_encuentra se ON p.id_producto = se.id_producto
+            JOIN categoria c ON se.id_categoria = c.id_categoria
+            ORDER BY p.id_producto DESC
+            LIMIT ? OFFSET ?
+            `,
+            [limit, offset]
+        );
+
+        // Agrupar productos por ID
+        const productosMap = new Map<number, any>();
+
+        for (const row of rows as any[]) {
+            const id = row.id_producto;
+
+            if (!productosMap.has(id)) {
+                productosMap.set(id, {
+                    ...row,
+                    categorias: [row.nombre_categoria],
+                });
+            } else {
+                productosMap.get(id).categorias.push(row.nombre_categoria);
+            }
+        }
+
+        const productosAgrupados = Array.from(productosMap.values()).map(({ nombre_categoria, ...rest }) => rest);
+
+        const productosFinales = this.convertirImagenBase64(productosAgrupados);
+
+        // Obtener total productos
+        const [countRows]: any = await db.execute(`
+            SELECT COUNT(DISTINCT p.id_producto) as total 
+            FROM producto p
+            JOIN se_encuentra se ON p.id_producto = se.id_producto
+            JOIN categoria c ON se.id_categoria = c.id_categoria
+        `);
+
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        return {
+            currentPage: page,
+            totalPages,
+            totalItems,
+            itemsPerPage: limit,
+            data: productosFinales,
+        };
     }
 
     static async getByName(nombre_producto: string) {

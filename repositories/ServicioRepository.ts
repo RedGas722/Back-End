@@ -17,6 +17,27 @@ class ServicioRepository {
         return rows;
     }
 
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const offset = (page - 1) * limit;
+
+        const sql = `SELECT * FROM servicio ORDER BY id_servicio DESC LIMIT ? OFFSET ?`;
+        const countSql = `SELECT COUNT(*) as total FROM servicio`;
+
+        const [rows] = await db.execute(sql, [limit, offset]);
+        const [countRows]: any = await db.execute(countSql);
+
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        return {
+            currentPage: page,
+            totalPages,
+            totalItems,
+            itemsPerPage: limit,
+            data: rows,
+        };
+    }
+
     static async getByName(nombre_servicio: string) {
         const sql = 'SELECT * FROM servicio WHERE nombre_servicio = ?';
         const values = [nombre_servicio];

@@ -68,6 +68,27 @@ class TecnicoRepository {
             return rows; 
         }
 
+        static async getAllPaginated(page: number = 1, limit: number = 10) {
+            const offset = (page - 1) * limit;
+
+            const sql = `SELECT * FROM tecnico ORDER BY id_tecnico DESC LIMIT ? OFFSET ?`;
+            const countSql = `SELECT COUNT(*) as total FROM tecnico`;
+
+            const [rows] = await db.execute(sql, [limit, offset]);
+            const [countRows]: any = await db.execute(countSql);
+
+            const totalItems = countRows[0].total;
+            const totalPages = Math.ceil(totalItems / limit);
+
+            return {
+                currentPage: page,
+                totalPages,
+                totalItems,
+                itemsPerPage: limit,
+                data: rows,
+            };
+        }
+
     // Get Tecnico
     static async login(auth: AuthTecnico) {
         const sql = 'SELECT * FROM tecnico WHERE correo_tecnico=?';

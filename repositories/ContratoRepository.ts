@@ -17,6 +17,27 @@ class ContratoRepository {
         return rows;
     }
 
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const offset = (page - 1) * limit;
+
+        const sql = `SELECT * FROM contrato ORDER BY id_contrato DESC LIMIT ? OFFSET ?`;
+        const countSql = `SELECT COUNT(*) as total FROM contrato`;
+
+        const [rows] = await db.execute(sql, [limit, offset]);
+        const [countRows]: any = await db.execute(countSql);
+
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        return {
+            currentPage: page,
+            totalPages,
+            totalItems,
+            itemsPerPage: limit,
+            data: rows,
+        };
+    }
+
     static async getById(id_empleado: number) {
         const sql = 'SELECT * FROM contrato WHERE id_empleado = ?';
         const [rows]: any = await db.execute(sql, [id_empleado]);

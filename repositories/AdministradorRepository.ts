@@ -20,6 +20,29 @@ class AdministradorRepository {
         return rows;
     }
 
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const offset = (page - 1) * limit;
+
+        // Obtener admins paginados
+        const [rows] = await db.execute(
+            `SELECT * FROM administrador ORDER BY id_admin DESC LIMIT ? OFFSET ?`,
+            [limit, offset]
+        );
+
+        // Obtener total de admins
+        const [countRows]: any = await db.execute(`SELECT COUNT(*) as total FROM administrador`);
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        return {
+            currentPage: page,
+            totalPages,
+            totalItems,
+            itemsPerPage: limit,
+            data: rows,
+        };
+    }
+
     static async getByEmail(correo_admin: string) {
         const sql = 'SELECT * FROM administrador WHERE correo_admin = ?';
         const values = [correo_admin];
