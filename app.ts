@@ -231,10 +231,7 @@ app.use('/FacturaGet', FacturaGet);
 app.use('/FacturaUpdate', FacturaUpdate);
 app.use('/FacturaGetAll', FacturaGetAll);
 app.use('/FacturaRegister', FacturaRegister);
-<<<<<<< HEAD
-=======
 app.use('/FacturaGetAllPaginated', FacturaGetAllPaginated);
->>>>>>> 3469f67893838082306bcf9f0d26264c191e9ea5
 
 //PEDIDO PRODUCTO
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
