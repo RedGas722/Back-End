@@ -131,6 +131,12 @@ class ProductoRepository {
         return db.execute(sql, values);
     }
 
+    static async updateStock(stock: number, id_producto: number) {
+        const sql = 'UPDATE producto SET stock = ? WHERE id_producto = ?';
+        const values = [stock, id_producto];
+        return db.execute(sql, values);
+    }
+
     static async delete(nombre_producto: string) {
         const sql = 'DELETE FROM producto WHERE nombre_producto = ?';
         const values = [nombre_producto];
@@ -140,14 +146,14 @@ class ProductoRepository {
     static async resetearDescuentos(fechaActual: string) {
         // 1. Obtener productos con descuento vencido exactamente en la fechaActual
         const [productosConDescuento] = await db.execute(
-            `SELECT id_producto FROM producto WHERE descuento > 0 AND fecha_descuento = ?`,
+            `SELECT id_producto FROM producto WHERE descuento > 0 AND DATE(fecha_descuento) = ?`,
             [fechaActual]
         );
         const productos = productosConDescuento as { id_producto: number }[];
 
         // 2. Resetear descuento en esos productos
         await db.execute(
-            `UPDATE producto SET descuento = 0 WHERE descuento > 0 AND fecha_descuento = ?`,
+            `UPDATE producto SET descuento = 0 WHERE descuento > 0 AND DATE(fecha_descuento) = ?`,
             [fechaActual]
         );
 

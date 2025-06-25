@@ -27,6 +27,11 @@ class ProductoServices {
         return await ProductoRepository.updateNI(productoNI, nombre_producto);
     }
 
+    // Update ProductoStock
+    static async ProductoUpdateStock(stock:number, id_producto: number) {
+        return await ProductoRepository.updateStock(stock, id_producto);
+    }
+
     // Delete Producto
     static async ProductoDelete(nombre_producto: string) {
         return await ProductoRepository.delete(nombre_producto);

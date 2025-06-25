@@ -89,6 +89,7 @@ import ProductoGetAllCategoria from './routes/Producto/ProductoGetAllCategoria';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoUpdate from './routes/Producto/ProductoUpdate';
 import ProductoUpdateNI from './routes/Producto/ProductoUpdateNI';
+import ProductoUpdateStock from './routes/Producto/ProductoUpdateStock'
 import { iniciarTareaDescuentos } from "./controllers/ProductoControllers/ProductoRDController";
 
 // import servicio
@@ -228,6 +229,7 @@ app.use('/ProductoUpdate', ProductoUpdate);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoUpdateNI', ProductoUpdateNI);
+app.use('/ProductoUpdateStock', ProductoUpdateStock)
 app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
 app.use('/ProductoGetById', ProductoGetById);
 
