@@ -19,13 +19,18 @@ class ServicioServices {
     static async ServicioGet(nombre_servicio: string) {
         return await ServicioRepository.getByName(nombre_servicio);
     }
+
     static async ServicioDelete(nombre_servicio: string) {
         return await ServicioRepository.delete(nombre_servicio);
     }
+
     static async ServicioGetAll() {
         return await ServicioRepository.getAll();
     }
 
+    static async getAllPaginated(page: number, limit: number) {
+        return await ServicioRepository.getAllPaginated(page, limit);
+    }
 }
 
 export default ServicioServices;

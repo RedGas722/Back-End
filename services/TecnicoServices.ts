@@ -42,13 +42,18 @@ class TecnicoServices {
     static async TecnicoDelete(correo_tecnico : string) {
         return await TecnicoRepository.delete(correo_tecnico); 
     }
+
     static async getbyEmail(correo_tecnico: string) {
         return await TecnicoRepository.getByEmail(correo_tecnico);
     }
+
     static async getAllTecnicos() {
         return await TecnicoRepository.getAll(); 
     }
-    
+
+    static async getAllPaginated(page: number, limit: number) {
+        return await TecnicoRepository.getAllPaginated(page, limit);
+    }
 }
 
 

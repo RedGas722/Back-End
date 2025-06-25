@@ -40,6 +40,10 @@ class AdministradorServices {
     static async AdministradorGetAll() {
         return await AdministradorRepository.getAll();
     }
+
+    static async getAllPaginated(page: number, limit: number) {
+        return await AdministradorRepository.getAllPaginated(page, limit);
+    }
 }
 
 export default AdministradorServices;

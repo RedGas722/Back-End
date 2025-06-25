@@ -17,6 +17,27 @@ class PedidoProductoRepository {
         return rows;
     }
 
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const offset = (page - 1) * limit;
+
+        const sql = `SELECT * FROM pedido_producto ORDER BY id_pedidoProducto DESC LIMIT ? OFFSET ?`;
+        const countSql = `SELECT COUNT(*) as total FROM pedido_producto`;
+
+        const [rows] = await db.execute(sql, [limit, offset]);
+        const [countRows]: any = await db.execute(countSql);
+
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        return {
+            currentPage: page,
+            totalPages,
+            totalItems,
+            itemsPerPage: limit,
+            data: rows,
+        };
+    }
+
     static async getById(id_factura: number) {
         const sql = 'SELECT * FROM pedido_producto WHERE id_factura = ?';
         const values = [id_factura];

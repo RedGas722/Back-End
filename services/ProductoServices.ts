@@ -27,6 +27,11 @@ class ProductoServices {
         return await ProductoRepository.updateNI(productoNI, nombre_producto);
     }
 
+    // Update ProductoStock
+    static async ProductoUpdateStock(stock:number, id_producto: number) {
+        return await ProductoRepository.updateStock(stock, id_producto);
+    }
+
     // Delete Producto
     static async ProductoDelete(nombre_producto: string) {
         return await ProductoRepository.delete(nombre_producto);
@@ -43,12 +48,15 @@ class ProductoServices {
 
     }
 
+    static async getAllPaginated(page: number, limit: number) {
+        return await ProductoRepository.getAllPaginated(page, limit);
+    }
+
     // Resetear descuentos vencidos
     static async ProductoResetearDescuentos() {
         const hoy = new Date().toISOString().slice(0, 10); // formato YYYY-MM-DD
         return await ProductoRepository.resetearDescuentos(hoy);
     }
-
 }
 
 export default ProductoServices;

@@ -30,8 +30,13 @@ class ContratoServices {
     static async ContratoGet(id_empleado: number) {
         return await ContratoRepository.getById(id_empleado);
     }
+
     static async ContratoGetAll() {
         return await ContratoRepository.getAll();
+    }
+
+    static async getAllPaginated(page: number, limit: number) {
+        return await ContratoRepository.getAllPaginated(page, limit);
     }
 
 }
