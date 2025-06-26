@@ -195,7 +195,7 @@ class ProductoRepository {
     }
 
     static async getAllNames() {
-        const sql = 'SELECT nombre_producto FROM producto';
+        const sql = 'SELECT id_producto, nombre_producto FROM producto';
         const [rows]: any = await db.execute(sql);
         return rows;
     }

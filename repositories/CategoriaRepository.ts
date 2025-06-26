@@ -51,7 +51,7 @@ class CategoriaRepository {
     }
 
     static async getAllNames() {
-        const sql = 'SELECT nombre_categoria FROM categoria';
+        const sql = 'SELECT id_categoria, nombre_categoria FROM categoria';
         const [rows]: any = await db.execute(sql);
         return rows;
     }

@@ -97,7 +97,7 @@ class TecnicoRepository {
         }
 
         static async getAllEmails() {
-            const sql = 'SELECT correo_tecnico FROM tecnico';
+            const sql = 'SELECT id_tecnico, correo_tecnico FROM tecnico';
             const [rows]: any = await db.execute(sql);
             return rows;
         }

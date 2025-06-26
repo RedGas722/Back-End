@@ -53,7 +53,7 @@ class ServicioRepository {
     }
 
     static async getAllNames() {
-        const sql = 'SELECT nombre_servicio FROM servicio';
+        const sql = 'SELECT id_servicio, nombre_servicio FROM servicio';
         const [rows]: any = await db.execute(sql);
         return rows;
     }

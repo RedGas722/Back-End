@@ -56,7 +56,7 @@ class ClienteRepository {
     }
 
     static async getAllEmails() {
-        const sql = 'SELECT correo_cliente FROM cliente';
+        const sql = 'SELECT id_cliente, correo_cliente FROM cliente';
         const [rows]: any = await db.execute(sql);
         return rows;
     }

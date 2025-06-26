@@ -68,7 +68,7 @@ class EmpleadoRepository {
         }
 
         static async getAllEmails() {
-            const sql = 'SELECT correo_empleado FROM empleado';
+            const sql = 'SELECT id_empleado, correo_empleado FROM empleado';
             const [rows]: any = await db.execute(sql);
             return rows;
         }

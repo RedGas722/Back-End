@@ -56,7 +56,7 @@ class AdministradorRepository {
     }
 
     static async getAllEmails() {
-        const sql = 'SELECT correo_admin FROM administrador';
+        const sql = 'SELECT id_admin, correo_admin FROM administrador';
         const [rows]: any = await db.execute(sql);
         return rows;
     }
