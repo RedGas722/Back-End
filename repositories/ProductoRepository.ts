@@ -78,20 +78,21 @@ class ProductoRepository {
     }
 
     static async getAllPaginated(page: number = 1, limit: number = 10) {
-        const offset = (page - 1) * limit;
+        const safePage = parseInt(String(page), 10) || 1;
+        const safeLimit = parseInt(String(limit), 10) || 10;
+        const offset = (safePage - 1) * safeLimit;
 
-        // Obtener productos con categorías (paginado)
-        const [rows] = await db.execute(
-            `
+        // Interpolar LIMIT y OFFSET directamente en la consulta
+        const sql = `
             SELECT p.*, c.nombre_categoria
             FROM producto p
             JOIN se_encuentra se ON p.id_producto = se.id_producto
             JOIN categoria c ON se.id_categoria = c.id_categoria
             ORDER BY p.id_producto DESC
-            LIMIT ? OFFSET ?
-            `,
-            [limit, offset]
-        );
+            LIMIT ${safeLimit} OFFSET ${offset}
+        `;
+
+        const [rows] = await db.query(sql); // usamos .query en lugar de .execute
 
         // Agrupar productos por ID
         const productosMap = new Map<number, any>();
@@ -110,10 +111,9 @@ class ProductoRepository {
         }
 
         const productosAgrupados = Array.from(productosMap.values()).map(({ nombre_categoria, ...rest }) => rest);
-
         const productosFinales = this.convertirImagenBase64(productosAgrupados);
 
-        // Obtener total productos
+        // Obtener total productos (sin paginar)
         const [countRows]: any = await db.execute(`
             SELECT COUNT(DISTINCT p.id_producto) as total 
             FROM producto p
@@ -122,13 +122,13 @@ class ProductoRepository {
         `);
 
         const totalItems = countRows[0].total;
-        const totalPages = Math.ceil(totalItems / limit);
+        const totalPages = Math.ceil(totalItems / safeLimit);
 
         return {
-            currentPage: page,
+            currentPage: safePage,
             totalPages,
             totalItems,
-            itemsPerPage: limit,
+            itemsPerPage: safeLimit,
             data: productosFinales,
         };
     }

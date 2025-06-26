@@ -17,24 +17,28 @@ class CategoriaRepository {
     }
 
     static async getAllPaginated(page: number = 1, limit: number = 10) {
-        const offset = (page - 1) * limit;
+        const safePage = parseInt(String(page), 10) || 1;
+        const safeLimit = parseInt(String(limit), 10) || 10;
+        const offset = (safePage - 1) * safeLimit;
 
-        // Obtener categorías paginadas
-        const [rows] = await db.execute(
-            `SELECT * FROM categoria ORDER BY id_categoria DESC LIMIT ? OFFSET ?`,
-            [limit, offset]
-        );
+        const sql = `
+            SELECT * FROM categoria
+            ORDER BY id_categoria DESC
+            LIMIT ${safeLimit} OFFSET ${offset}
+        `;
+
+        const [rows] = await db.query(sql);
 
         // Obtener total de categorías
         const [countRows]: any = await db.execute(`SELECT COUNT(*) as total FROM categoria`);
         const totalItems = countRows[0].total;
-        const totalPages = Math.ceil(totalItems / limit);
+        const totalPages = Math.ceil(totalItems / safeLimit);
 
         return {
-            currentPage: page,
+            currentPage: safePage,
             totalPages,
             totalItems,
-            itemsPerPage: limit,
+            itemsPerPage: safeLimit,
             data: rows,
         };
     }

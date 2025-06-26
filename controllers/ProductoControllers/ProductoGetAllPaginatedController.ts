@@ -6,7 +6,6 @@ const ProductoGetAllPaginated = async (req: Request, res: Response) => {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const categorias = await CategoriaServices.GetAllCategorias();
-
     try {
         const resultado = await ProductoServices.getAllPaginated(page, limit);
         return res.status(201).json(
