@@ -96,6 +96,12 @@ class TecnicoRepository {
             };
         }
 
+        static async getAllEmails() {
+            const sql = 'SELECT correo_tecnico FROM tecnico';
+            const [rows]: any = await db.execute(sql);
+            return rows;
+        }
+
     // Get Tecnico
     static async login(auth: AuthTecnico) {
         const sql = 'SELECT * FROM tecnico WHERE correo_tecnico=?';

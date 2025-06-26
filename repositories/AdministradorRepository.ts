@@ -55,6 +55,12 @@ class AdministradorRepository {
         return rows[0]; 
     }
 
+    static async getAllEmails() {
+        const sql = 'SELECT correo_admin FROM administrador';
+        const [rows]: any = await db.execute(sql);
+        return rows;
+    }
+
     // Update Administrador
     static async update(administrador: Administrador, new_correo_admin: string) {
         const sql = 'UPDATE administrador SET nombre_admin = ?, correo_admin = ?, telefono_admin = ?, contraseña_admin = ? WHERE correo_admin = ?';

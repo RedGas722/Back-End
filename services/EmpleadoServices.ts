@@ -49,6 +49,10 @@ class EmpleadoServices {
         return await EmpleadoRepository.getAllPaginated(page, limit);
     }
 
+    static async getAllEmails() {
+        return await EmpleadoRepository.getAllEmails();
+    }
+
 }
 
 export default EmpleadoServices;

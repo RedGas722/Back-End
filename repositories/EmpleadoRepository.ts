@@ -67,6 +67,12 @@ class EmpleadoRepository {
             };
         }
 
+        static async getAllEmails() {
+            const sql = 'SELECT correo_empleado FROM empleado';
+            const [rows]: any = await db.execute(sql);
+            return rows;
+        }
+
     // Update Empleado
     static async update(empleado: Empleado, correo_empleado: string) {
         const sql = 'UPDATE empleado SET cc_empleado = ?, nombre_empleado = ?, correo_empleado = ?, telefono_empleado = ?, direccion_empleado = ?, contraseña_empleado = ? WHERE correo_empleado = ?';

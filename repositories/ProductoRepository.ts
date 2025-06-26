@@ -82,44 +82,64 @@ class ProductoRepository {
         const safeLimit = parseInt(String(limit), 10) || 10;
         const offset = (safePage - 1) * safeLimit;
 
-        // Interpolar LIMIT y OFFSET directamente en la consulta
-        const sql = `
-            SELECT p.*, c.nombre_categoria
+        // Paso 1: Obtener los productos paginados (IDs únicos)
+        const [productosRows]: any = await db.execute(
+            `SELECT DISTINCT p.id_producto, p.nombre_producto, p.descripcion_producto, p.precio_producto, p.stock_producto, p.imagen_producto
             FROM producto p
-            JOIN se_encuentra se ON p.id_producto = se.id_producto
-            JOIN categoria c ON se.id_categoria = c.id_categoria
             ORDER BY p.id_producto DESC
-            LIMIT ${safeLimit} OFFSET ${offset}
-        `;
+            LIMIT ? OFFSET ?`,
+            [safeLimit, offset]
+        );
 
-        const [rows] = await db.query(sql); // usamos .query en lugar de .execute
+        const productos = productosRows as any[];
 
-        // Agrupar productos por ID
-        const productosMap = new Map<number, any>();
-
-        for (const row of rows as any[]) {
-            const id = row.id_producto;
-
-            if (!productosMap.has(id)) {
-                productosMap.set(id, {
-                    ...row,
-                    categorias: [row.nombre_categoria],
-                });
-            } else {
-                productosMap.get(id).categorias.push(row.nombre_categoria);
-            }
+        if (productos.length === 0) {
+            return {
+            currentPage: safePage,
+            totalPages: 0,
+            totalItems: 0,
+            itemsPerPage: safeLimit,
+            data: [],
+            };
         }
 
-        const productosAgrupados = Array.from(productosMap.values()).map(({ nombre_categoria, ...rest }) => rest);
-        const productosFinales = this.convertirImagenBase64(productosAgrupados);
+        const productoIds = productos.map(p => p.id_producto);
 
-        // Obtener total productos (sin paginar)
-        const [countRows]: any = await db.execute(`
-            SELECT COUNT(DISTINCT p.id_producto) as total 
-            FROM producto p
-            JOIN se_encuentra se ON p.id_producto = se.id_producto
+        // Paso 2: Obtener todas las categorías asociadas a los productos de esta página
+        const [categoriasRows]: any = await db.query(
+            `SELECT se.id_producto, c.nombre_categoria
+            FROM se_encuentra se
             JOIN categoria c ON se.id_categoria = c.id_categoria
-        `);
+            WHERE se.id_producto IN (${productoIds.map(() => '?').join(',')})`,
+            productoIds
+        );
+
+        // Paso 3: Agrupar categorías por producto
+        const categoriasMap = new Map<number, string[]>();
+
+        for (const row of categoriasRows as any[]) {
+            const id = row.id_producto;
+
+            if (!categoriasMap.has(id)) {
+            categoriasMap.set(id, []);
+            }
+
+            const categorias = categoriasMap.get(id)!;
+            categorias.push(row.nombre_categoria);
+        }
+
+        // Paso 4: Unir productos con sus categorías
+        const productosFinales = productos.map(producto => ({
+            ...producto,
+            categorias: categoriasMap.get(producto.id_producto) || [],
+        }));
+
+        const productosConImagen = this.convertirImagenBase64(productosFinales);
+
+        // Paso 5: Obtener el total real de productos (sin paginación)
+        const [countRows]: any = await db.execute(
+            `SELECT COUNT(DISTINCT id_producto) as total FROM producto`
+        );
 
         const totalItems = countRows[0].total;
         const totalPages = Math.ceil(totalItems / safeLimit);
@@ -129,9 +149,9 @@ class ProductoRepository {
             totalPages,
             totalItems,
             itemsPerPage: safeLimit,
-            data: productosFinales,
+            data: productosConImagen,
         };
-    }
+        }
 
     static async getByName(nombre_producto: string) {
         const sql = `
@@ -172,6 +192,12 @@ class ProductoRepository {
         const [rows]: any = await db.execute(sql, [id_producto]);
         if (rows.length === 0) return null;
         return rows[0];
+    }
+
+    static async getAllNames() {
+        const sql = 'SELECT nombre_producto FROM producto';
+        const [rows]: any = await db.execute(sql);
+        return rows;
     }
 
     static async update(producto: Producto, nombre_producto: string) {

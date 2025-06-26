@@ -57,6 +57,10 @@ class ProductoServices {
         const hoy = new Date().toISOString().slice(0, 10); // formato YYYY-MM-DD
         return await ProductoRepository.resetearDescuentos(hoy);
     }
+
+    static async getAllNames() {
+        return await ProductoRepository.getAllNames();
+    }
 }
 
 export default ProductoServices;

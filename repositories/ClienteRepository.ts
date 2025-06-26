@@ -55,6 +55,11 @@ class ClienteRepository {
         return rows[0];
     }
 
+    static async getAllEmails() {
+        const sql = 'SELECT correo_cliente FROM cliente';
+        const [rows]: any = await db.execute(sql);
+        return rows;
+    }
 
     // Update Cliente
     static async update(cliente: Cliente, correo_cliente: string){

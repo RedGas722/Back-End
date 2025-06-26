@@ -50,6 +50,12 @@ class CategoriaRepository {
         return rows[0]; 
     }
 
+    static async getAllNames() {
+        const sql = 'SELECT nombre_categoria FROM categoria';
+        const [rows]: any = await db.execute(sql);
+        return rows;
+    }
+
     // Update Categoria
     static async update(categoria: Categoria, nombre_categoria: string) {
         const sql = 'UPDATE categoria SET nombre_categoria = ? WHERE nombre_categoria = ?';

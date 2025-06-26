@@ -52,6 +52,12 @@ class ServicioRepository {
         return rows;
     }
 
+    static async getAllNames() {
+        const sql = 'SELECT nombre_servicio FROM servicio';
+        const [rows]: any = await db.execute(sql);
+        return rows;
+    }
+
     // Update Servicio
     static async update(servicio: Servicio, nuevo_nombre_servicio: string) {
         const sql = 'UPDATE servicio SET nombre_servicio = ?, descripcion_servicio = ?, precio_servicio = ? WHERE nombre_servicio = ?';

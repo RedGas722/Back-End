@@ -31,6 +31,10 @@ class ServicioServices {
     static async getAllPaginated(page: number, limit: number) {
         return await ServicioRepository.getAllPaginated(page, limit);
     }
+
+    static async getAllNames() {
+        return await ServicioRepository.getAllNames();
+    }
 }
 
 export default ServicioServices;

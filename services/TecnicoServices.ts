@@ -54,6 +54,10 @@ class TecnicoServices {
     static async getAllPaginated(page: number, limit: number) {
         return await TecnicoRepository.getAllPaginated(page, limit);
     }
+
+    static async getAllEmails() {
+        return await TecnicoRepository.getAllEmails();
+    }
 }
 
 

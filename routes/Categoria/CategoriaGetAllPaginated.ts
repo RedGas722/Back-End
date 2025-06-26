@@ -1,5 +1,5 @@
 import express from "express";
-import CategoriaGetAllPaginated from "../../controllers/CategoriaControllers/CategoriaGetAllPaginated";
+import CategoriaGetAllPaginated from "../../controllers/CategoriaControllers/CategoriaGetAllPaginatedController";
 
 const router = express.Router();
 

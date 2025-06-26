@@ -36,6 +36,10 @@ class CategoriaServices {
     static async CategoriaByName(nombre_categoria: string) {
         return await CategoriaRepository.getByName(nombre_categoria);
     }
+
+    static async getAllNames() {
+        return await CategoriaRepository.getAllNames();
+    }
 }
 
 export default CategoriaServices;
