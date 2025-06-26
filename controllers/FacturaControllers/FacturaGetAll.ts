@@ -3,10 +3,6 @@ import FacturaServices from "../../services/FacturaServices";
 
 let FacturaGetAll = async (req: Request, res: Response) => {
   try {
-    const {
-    
-    } = req.query;
-    
     const FacturaGetAll = await FacturaServices.FacturaGetAll();
     return res.status(201).json(
         { status: 'Consult ok', data: FacturaGetAll}

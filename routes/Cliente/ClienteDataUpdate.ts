@@ -1,5 +1,5 @@
 import express from "express";
-import ClienteDataUpdate from "../../controllers/ClienteControllers/ClienteDataUpdate";
+import ClienteDataUpdate from "../../controllers/ClienteControllers/ClienteDataUpdateController";
 const router = express.Router();
 
 

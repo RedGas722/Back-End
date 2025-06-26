@@ -1,5 +1,5 @@
 import express from "express";
-import CategoriaGetAll from "../../controllers/CategoriaControllers/CategoriaGetAll";
+import CategoriaGetAll from "../../controllers/CategoriaControllers/CategoriaGetAllController";
 const router = express.Router();
 
 

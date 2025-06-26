@@ -72,11 +72,86 @@ class ProductoRepository {
         )
         `;
     }
-
-    const [rows] = await db.execute(sql, values);
-    const productos = rows as any[];
-    return this.convertirImagenBase64(productos);
+        const [rows] = await db.execute(sql, values);
+        const productos = rows as any[];
+        return this.convertirImagenBase64(productos);
     }
+
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const safePage = parseInt(String(page), 10) || 1;
+        const safeLimit = parseInt(String(limit), 10) || 10;
+        const offset = (safePage - 1) * safeLimit;
+
+        // Paso 1: Obtener los productos paginados (IDs únicos)
+        const [productosRows]: any = await db.execute(
+            `SELECT DISTINCT p.id_producto, p.nombre_producto, p.descripcion_producto, p.precio_producto, p.stock_producto, p.imagen_producto
+            FROM producto p
+            ORDER BY p.id_producto DESC
+            LIMIT ? OFFSET ?`,
+            [safeLimit, offset]
+        );
+
+        const productos = productosRows as any[];
+
+        if (productos.length === 0) {
+            return {
+            currentPage: safePage,
+            totalPages: 0,
+            totalItems: 0,
+            itemsPerPage: safeLimit,
+            data: [],
+            };
+        }
+
+        const productoIds = productos.map(p => p.id_producto);
+
+        // Paso 2: Obtener todas las categorías asociadas a los productos de esta página
+        const [categoriasRows]: any = await db.query(
+            `SELECT se.id_producto, c.nombre_categoria
+            FROM se_encuentra se
+            JOIN categoria c ON se.id_categoria = c.id_categoria
+            WHERE se.id_producto IN (${productoIds.map(() => '?').join(',')})`,
+            productoIds
+        );
+
+        // Paso 3: Agrupar categorías por producto
+        const categoriasMap = new Map<number, string[]>();
+
+        for (const row of categoriasRows as any[]) {
+            const id = row.id_producto;
+
+            if (!categoriasMap.has(id)) {
+            categoriasMap.set(id, []);
+            }
+
+            const categorias = categoriasMap.get(id)!;
+            categorias.push(row.nombre_categoria);
+        }
+
+        // Paso 4: Unir productos con sus categorías
+        const productosFinales = productos.map(producto => ({
+            ...producto,
+            categorias: categoriasMap.get(producto.id_producto) || [],
+        }));
+
+        const productosConImagen = this.convertirImagenBase64(productosFinales);
+
+        // Paso 5: Obtener el total real de productos (sin paginación)
+        const [countRows]: any = await db.execute(
+            `SELECT COUNT(DISTINCT id_producto) as total FROM producto`
+        );
+
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / safeLimit);
+
+        return {
+            currentPage: safePage,
+            totalPages,
+            totalItems,
+            itemsPerPage: safeLimit,
+            data: productosConImagen,
+        };
+        }
 
     static async getByName(nombre_producto: string) {
         const sql = `
@@ -119,6 +194,12 @@ class ProductoRepository {
         return rows[0];
     }
 
+    static async getAllNames() {
+        const sql = 'SELECT nombre_producto FROM producto';
+        const [rows]: any = await db.execute(sql);
+        return rows;
+    }
+
     static async update(producto: Producto, nombre_producto: string) {
         const sql = 'UPDATE producto SET nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, stock = ?, descuento = ?, fecha_descuento = ?, imagen = ? WHERE nombre_producto = ?';
         const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.descuento, producto.fecha_descuento, producto.imagen, nombre_producto];
@@ -131,6 +212,12 @@ class ProductoRepository {
         return db.execute(sql, values);
     }
 
+    static async updateStock(stock: number, id_producto: number) {
+        const sql = 'UPDATE producto SET stock = ? WHERE id_producto = ?';
+        const values = [stock, id_producto];
+        return db.execute(sql, values);
+    }
+
     static async delete(nombre_producto: string) {
         const sql = 'DELETE FROM producto WHERE nombre_producto = ?';
         const values = [nombre_producto];
@@ -140,14 +227,14 @@ class ProductoRepository {
     static async resetearDescuentos(fechaActual: string) {
         // 1. Obtener productos con descuento vencido exactamente en la fechaActual
         const [productosConDescuento] = await db.execute(
-            `SELECT id_producto FROM producto WHERE descuento > 0 AND fecha_descuento = ?`,
+            `SELECT id_producto FROM producto WHERE descuento > 0 AND DATE(fecha_descuento) = ?`,
             [fechaActual]
         );
         const productos = productosConDescuento as { id_producto: number }[];
 
         // 2. Resetear descuento en esos productos
         await db.execute(
-            `UPDATE producto SET descuento = 0 WHERE descuento > 0 AND fecha_descuento = ?`,
+            `UPDATE producto SET descuento = 0 WHERE descuento > 0 AND DATE(fecha_descuento) = ?`,
             [fechaActual]
         );
 

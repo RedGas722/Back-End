@@ -16,11 +16,44 @@ class CategoriaRepository {
         return rows;
     }
 
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const safePage = parseInt(String(page), 10) || 1;
+        const safeLimit = parseInt(String(limit), 10) || 10;
+        const offset = (safePage - 1) * safeLimit;
+
+        const sql = `
+            SELECT * FROM categoria
+            ORDER BY id_categoria DESC
+            LIMIT ${safeLimit} OFFSET ${offset}
+        `;
+
+        const [rows] = await db.query(sql);
+
+        // Obtener total de categorías
+        const [countRows]: any = await db.execute(`SELECT COUNT(*) as total FROM categoria`);
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / safeLimit);
+
+        return {
+            currentPage: safePage,
+            totalPages,
+            totalItems,
+            itemsPerPage: safeLimit,
+            data: rows,
+        };
+    }
+
     static async getByName(nombre_categoria: string) {
         const sql = 'SELECT * FROM categoria WHERE nombre_categoria = ?';
         const values = [nombre_categoria];
         const [rows]:any = await db.execute(sql, values);
         return rows[0]; 
+    }
+
+    static async getAllNames() {
+        const sql = 'SELECT nombre_categoria FROM categoria';
+        const [rows]: any = await db.execute(sql);
+        return rows;
     }
 
     // Update Categoria

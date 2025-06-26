@@ -5,14 +5,12 @@ import PedidoServicioServices from "../../services/PedidoServicioServices";
 const PedidoServicioRegister = async (req: Request, res: Response) => {
   try {
     const {
-      id_servicio,
       id_cliente,
       id_tecnico,
       estado_pedido
     } = req.body;
 
     const pedidoServicio = new Pedido(
-      id_servicio,
       id_cliente,
       id_tecnico,
       estado_pedido
