@@ -267,7 +267,7 @@ app.use('/ProductoUpdateStock', ProductoUpdateStock);
 app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
 app.use('/ProductoGetAllPaginated', ProductoGetAllPaginated);
 app.use('/ProductoGetById', ProductoGetById);
-app.use('/ProductoGetAll', ProductoGetAllNames);
+app.use('/ProductoGetAllNames', ProductoGetAllNames);
 
 //SERVICIO
 app.use('/ServicioGet', ServicioGet);

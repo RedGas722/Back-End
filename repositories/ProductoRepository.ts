@@ -82,75 +82,64 @@ class ProductoRepository {
         const safeLimit = parseInt(String(limit), 10) || 10;
         const offset = (safePage - 1) * safeLimit;
 
-        // Paso 1: Obtener los productos paginados (IDs únicos)
-        const [productosRows]: any = await db.execute(
-            `SELECT DISTINCT p.id_producto, p.nombre_producto, p.descripcion_producto, p.precio_producto, p.stock_producto, p.imagen_producto
+        const sql = `
+            SELECT 
+            p.id_producto,
+            p.nombre_producto,
+            p.descripcion_producto,
+            p.precio_producto,
+            p.stock,
+            p.imagen,
+            p.descuento,
+            p.fecha_descuento,
+            GROUP_CONCAT(c.nombre_categoria) AS categorias
             FROM producto p
+            LEFT JOIN se_encuentra se ON p.id_producto = se.id_producto
+            LEFT JOIN categoria c ON se.id_categoria = c.id_categoria
+            GROUP BY p.id_producto
             ORDER BY p.id_producto DESC
-            LIMIT ? OFFSET ?`,
-            [safeLimit, offset]
-        );
+            LIMIT ${safeLimit} OFFSET ${offset}
+        `;
 
-        const productos = productosRows as any[];
+        const countSql = `SELECT COUNT(DISTINCT id_producto) as total FROM producto`;
 
-        if (productos.length === 0) {
-            return {
-            currentPage: safePage,
-            totalPages: 0,
-            totalItems: 0,
-            itemsPerPage: safeLimit,
-            data: [],
+        try {
+            const [rows]: any = await db.query(sql);
+            const [countRows]: any = await db.query(countSql);
+
+            type ProductoRow = {
+            id_producto: number;
+            nombre_producto: string;
+            descripcion_producto: string;
+            precio_producto: number;
+            stock: number;
+            imagen: Buffer | string | null;
+            descuento: number;
+            fecha_descuento: string | null;
+            categorias: string | null;
             };
-        }
 
-        const productoIds = productos.map(p => p.id_producto);
+            const productosFinales = (rows as ProductoRow[]).map(p => ({
+            ...p,
+            categorias: p.categorias ? p.categorias.split(',') : [],
+            }));
 
-        // Paso 2: Obtener todas las categorías asociadas a los productos de esta página
-        const [categoriasRows]: any = await db.query(
-            `SELECT se.id_producto, c.nombre_categoria
-            FROM se_encuentra se
-            JOIN categoria c ON se.id_categoria = c.id_categoria
-            WHERE se.id_producto IN (${productoIds.map(() => '?').join(',')})`,
-            productoIds
-        );
+            const productosConImagen = this.convertirImagenBase64(productosFinales);
 
-        // Paso 3: Agrupar categorías por producto
-        const categoriasMap = new Map<number, string[]>();
+            const totalItems = countRows[0].total;
+            const totalPages = Math.ceil(totalItems / safeLimit);
 
-        for (const row of categoriasRows as any[]) {
-            const id = row.id_producto;
-
-            if (!categoriasMap.has(id)) {
-            categoriasMap.set(id, []);
-            }
-
-            const categorias = categoriasMap.get(id)!;
-            categorias.push(row.nombre_categoria);
-        }
-
-        // Paso 4: Unir productos con sus categorías
-        const productosFinales = productos.map(producto => ({
-            ...producto,
-            categorias: categoriasMap.get(producto.id_producto) || [],
-        }));
-
-        const productosConImagen = this.convertirImagenBase64(productosFinales);
-
-        // Paso 5: Obtener el total real de productos (sin paginación)
-        const [countRows]: any = await db.execute(
-            `SELECT COUNT(DISTINCT id_producto) as total FROM producto`
-        );
-
-        const totalItems = countRows[0].total;
-        const totalPages = Math.ceil(totalItems / safeLimit);
-
-        return {
+            return {
             currentPage: safePage,
             totalPages,
             totalItems,
             itemsPerPage: safeLimit,
             data: productosConImagen,
-        };
+            };
+        } catch (error) {
+            console.error("Error al obtener productos paginados:", error);
+            throw error;
+        }
         }
 
     static async getByName(nombre_producto: string) {
@@ -212,9 +201,9 @@ class ProductoRepository {
         return db.execute(sql, values);
     }
 
-    static async updateStock(stock: number, id_producto: number) {
-        const sql = 'UPDATE producto SET stock = ? WHERE id_producto = ?';
-        const values = [stock, id_producto];
+    static async updateStock(descontar: number, id_producto: number) {
+        const sql = 'UPDATE producto SET stock = stock - ? WHERE id_producto = ? AND stock >= ?';
+        const values = [descontar, id_producto, descontar];
         return db.execute(sql, values);
     }
 

@@ -33,7 +33,6 @@ class AdministradorServices {
         return await AdministradorRepository.delete(correo_admin);
     }
     static async AdministradorGet(correo_admin: string){
-
         return await AdministradorRepository.getByEmail(correo_admin);
     }
 

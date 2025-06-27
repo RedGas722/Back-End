@@ -5,7 +5,6 @@ const AdministradorGet = async (req: Request, res: Response) => {
   try {
     const { correo_admin } = req.query;
 
-    // Validación del query param
     if (!correo_admin || typeof correo_admin !== 'string') {
       return res.status(400).json({
         status: 'error',
@@ -15,10 +14,16 @@ const AdministradorGet = async (req: Request, res: Response) => {
 
     const admin = await AdministradorServices.AdministradorGet(correo_admin);
 
-    // Retorna un array en 'data' aunque no se encuentre
+    if (!admin) {
+      return res.status(404).json({
+        status: 'not found',
+        error: `No se encontró ningún administrador con el correo: ${correo_admin}`
+      });
+    }
+
     return res.status(200).json({
       status: 'get ok',
-      data: admin ? [admin] : []
+      data: admin
     });
 
   } catch (error: any) {
