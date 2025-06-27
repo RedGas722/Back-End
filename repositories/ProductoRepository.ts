@@ -72,11 +72,75 @@ class ProductoRepository {
         )
         `;
     }
-
-    const [rows] = await db.execute(sql, values);
-    const productos = rows as any[];
-    return this.convertirImagenBase64(productos);
+        const [rows] = await db.execute(sql, values);
+        const productos = rows as any[];
+        return this.convertirImagenBase64(productos);
     }
+
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const safePage = parseInt(String(page), 10) || 1;
+        const safeLimit = parseInt(String(limit), 10) || 10;
+        const offset = (safePage - 1) * safeLimit;
+
+        const sql = `
+            SELECT 
+            p.id_producto,
+            p.nombre_producto,
+            p.descripcion_producto,
+            p.precio_producto,
+            p.stock,
+            p.imagen,
+            p.descuento,
+            p.fecha_descuento,
+            GROUP_CONCAT(c.nombre_categoria) AS categorias
+            FROM producto p
+            LEFT JOIN se_encuentra se ON p.id_producto = se.id_producto
+            LEFT JOIN categoria c ON se.id_categoria = c.id_categoria
+            GROUP BY p.id_producto
+            ORDER BY p.id_producto DESC
+            LIMIT ${safeLimit} OFFSET ${offset}
+        `;
+
+        const countSql = `SELECT COUNT(DISTINCT id_producto) as total FROM producto`;
+
+        try {
+            const [rows]: any = await db.query(sql);
+            const [countRows]: any = await db.query(countSql);
+
+            type ProductoRow = {
+            id_producto: number;
+            nombre_producto: string;
+            descripcion_producto: string;
+            precio_producto: number;
+            stock: number;
+            imagen: Buffer | string | null;
+            descuento: number;
+            fecha_descuento: string | null;
+            categorias: string | null;
+            };
+
+            const productosFinales = (rows as ProductoRow[]).map(p => ({
+            ...p,
+            categorias: p.categorias ? p.categorias.split(',') : [],
+            }));
+
+            const productosConImagen = this.convertirImagenBase64(productosFinales);
+
+            const totalItems = countRows[0].total;
+            const totalPages = Math.ceil(totalItems / safeLimit);
+
+            return {
+            currentPage: safePage,
+            totalPages,
+            totalItems,
+            itemsPerPage: safeLimit,
+            data: productosConImagen,
+            };
+        } catch (error) {
+            console.error("Error al obtener productos paginados:", error);
+            throw error;
+        }
+        }
 
     static async getByName(nombre_producto: string) {
         const sql = `
@@ -119,6 +183,12 @@ class ProductoRepository {
         return rows[0];
     }
 
+    static async getAllNames() {
+        const sql = 'SELECT id_producto, nombre_producto FROM producto';
+        const [rows]: any = await db.execute(sql);
+        return rows;
+    }
+
     static async update(producto: Producto, nombre_producto: string) {
         const sql = 'UPDATE producto SET nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, stock = ?, descuento = ?, fecha_descuento = ?, imagen = ? WHERE nombre_producto = ?';
         const values = [producto.nombre_producto, producto.descripcion_producto, producto.precio_producto, producto.stock, producto.descuento, producto.fecha_descuento, producto.imagen, nombre_producto];
@@ -131,6 +201,12 @@ class ProductoRepository {
         return db.execute(sql, values);
     }
 
+    static async updateStock(descontar: number, id_producto: number) {
+        const sql = 'UPDATE producto SET stock = stock - ? WHERE id_producto = ? AND stock >= ?';
+        const values = [descontar, id_producto, descontar];
+        return db.execute(sql, values);
+    }
+
     static async delete(nombre_producto: string) {
         const sql = 'DELETE FROM producto WHERE nombre_producto = ?';
         const values = [nombre_producto];
@@ -140,14 +216,14 @@ class ProductoRepository {
     static async resetearDescuentos(fechaActual: string) {
         // 1. Obtener productos con descuento vencido exactamente en la fechaActual
         const [productosConDescuento] = await db.execute(
-            `SELECT id_producto FROM producto WHERE descuento > 0 AND fecha_descuento = ?`,
+            `SELECT id_producto FROM producto WHERE descuento > 0 AND DATE(fecha_descuento) = ?`,
             [fechaActual]
         );
         const productos = productosConDescuento as { id_producto: number }[];
 
         // 2. Resetear descuento en esos productos
         await db.execute(
-            `UPDATE producto SET descuento = 0 WHERE descuento > 0 AND fecha_descuento = ?`,
+            `UPDATE producto SET descuento = 0 WHERE descuento > 0 AND DATE(fecha_descuento) = ?`,
             [fechaActual]
         );
 

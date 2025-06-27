@@ -24,7 +24,9 @@ class FacturaServices {
     static async FacturaGetAll() {
         return await FacturaRepository.getAll();
     }
-
+    static async getAllPaginated(page: number, limit: number) {
+        return await FacturaRepository.getAllPaginated(page, limit);
+    }
 }
 
 export default FacturaServices;

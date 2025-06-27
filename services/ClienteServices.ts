@@ -56,6 +56,15 @@ class ClienteServices {
     static async GetAllClientes() {
         return await ClienteRepository.getAll();
     }
+
+    static async getAllPaginated(page: number, limit: number) {
+        return await ClienteRepository.getAllPaginated(page, limit);
+    }
+
+     static async getAllEmails() {
+        return await ClienteRepository.getAllEmails();
+    }
+
 }
 
 

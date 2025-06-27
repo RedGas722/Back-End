@@ -33,12 +33,19 @@ class AdministradorServices {
         return await AdministradorRepository.delete(correo_admin);
     }
     static async AdministradorGet(correo_admin: string){
-
         return await AdministradorRepository.getByEmail(correo_admin);
     }
 
     static async AdministradorGetAll() {
         return await AdministradorRepository.getAll();
+    }
+
+    static async getAllPaginated(page: number, limit: number) {
+        return await AdministradorRepository.getAllPaginated(page, limit);
+    }
+
+    static async getAllEmails() {
+        return await AdministradorRepository.getAllEmails();
     }
 }
 

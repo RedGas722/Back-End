@@ -17,10 +17,44 @@ class ServicioRepository {
         return rows;
     }
 
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const safePage = parseInt(String(page), 10) || 1;
+        const safeLimit = parseInt(String(limit), 10) || 10;
+        const offset = (safePage - 1) * safeLimit;
+
+        const sql = `
+            SELECT * FROM servicio
+            ORDER BY id_servicio DESC
+            LIMIT ${safeLimit} OFFSET ${offset}
+        `;
+
+        const countSql = `SELECT COUNT(*) as total FROM servicio`;
+
+        const [rows] = await db.query(sql);
+        const [countRows]: any = await db.execute(countSql);
+
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / safeLimit);
+
+        return {
+            currentPage: safePage,
+            totalPages,
+            totalItems,
+            itemsPerPage: safeLimit,
+            data: rows,
+        };
+    }
+
     static async getByName(nombre_servicio: string) {
         const sql = 'SELECT * FROM servicio WHERE nombre_servicio = ?';
         const values = [nombre_servicio];
         const [rows] = await db.execute(sql, values);
+        return rows;
+    }
+
+    static async getAllNames() {
+        const sql = 'SELECT id_servicio, nombre_servicio FROM servicio';
+        const [rows]: any = await db.execute(sql);
         return rows;
     }
 

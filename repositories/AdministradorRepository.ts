@@ -20,11 +20,45 @@ class AdministradorRepository {
         return rows;
     }
 
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const safePage = parseInt(String(page), 10) || 1;
+        const safeLimit = parseInt(String(limit), 10) || 10;
+        const offset = (safePage - 1) * safeLimit;
+
+        // Interpolamos los valores directamente en la consulta
+        const sql = `
+            SELECT * FROM administrador
+            ORDER BY id_admin DESC
+            LIMIT ${safeLimit} OFFSET ${offset}
+        `;
+
+        const [rows] = await db.query(sql);
+
+        // Obtener total de admins
+        const [countRows]: any = await db.execute(`SELECT COUNT(*) as total FROM administrador`);
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / safeLimit);
+
+        return {
+            currentPage: safePage,
+            totalPages,
+            totalItems,
+            itemsPerPage: safeLimit,
+            data: rows,
+        };
+    }
+
     static async getByEmail(correo_admin: string) {
         const sql = 'SELECT * FROM administrador WHERE correo_admin = ?';
         const values = [correo_admin];
         const [rows]:any = await db.execute(sql, values);
         return rows[0]; 
+    }
+
+    static async getAllEmails() {
+        const sql = 'SELECT id_admin, correo_admin FROM administrador';
+        const [rows]: any = await db.execute(sql);
+        return rows;
     }
 
     // Update Administrador

@@ -25,7 +25,7 @@ async function getAllServicesInfo(): Promise<any[]> {
 }
 
 // agregar información de servicios de un cliente
-async function addToServicesInfo(userId: number, userName: string, userPhone: string, userAddress: string, item: string): Promise<boolean> {
+async function addToServicesInfo(userId: number, userName: string, userPhone: string, userAddress: string, userEmail: string, item: string): Promise<boolean> {
   const existing = await getServicesInfo(userId);
 
   if (existing) {
@@ -36,6 +36,7 @@ async function addToServicesInfo(userId: number, userName: string, userPhone: st
     userName,
     userPhone,
     userAddress,
+    userEmail,
     item,
   });
 

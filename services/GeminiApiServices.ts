@@ -10,12 +10,14 @@ export const obtenerDiagnostico = async (input: string): Promise<string> => {
   Dado el siguiente input del usuario, responde solo con un objeto JSON válido que contenga:
   - El campo "input" con el texto original
   - Una "etiqueta" entre: "Instalación", "Reparación", "Mantenimiento", "Consulta"
-  - Un arreglo "posibles_soluciones" con soluciones posibles
-  - Solo devuelve las soluciones más probables
-  - Si son más de 5, devuelve solo las 5 más probables
+  - Un arreglo "posibles_soluciones" con soluciones posibles en este formato:
+  respuesta:
+  1: {titulo: "titulo de la solución", descripcion: "descripción de la solución"}
+  2: {titulo: "titulo de la solución", descripcion: "descripción de la solución"}
+  ...
+  - Si hay menos de 5 soluciones, devuelve todas las que existan
   - No incluyas ningún texto adicional, solo el JSON
-  - No respondas nada que sea un tema fuera de los gasodomésticos
-  - Si es un tema fuera de los gasodomésticos, responde con un JSON vacío
+  - Si es un tema fuera de los gasodomésticos, responde con un con un status de error 400
 
   Entrada del usuario:
   "${input}"

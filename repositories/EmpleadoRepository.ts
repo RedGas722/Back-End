@@ -34,8 +34,42 @@ class EmpleadoRepository {
             return rows[0];
         }
 
-        static async ClienteGetAll(){
+        static async EmpleadoGetAll(){
             const [rows] = await db.query('SELECT * FROM empleado');
+            return rows;
+        }
+
+        static async getAllPaginated(page: number = 1, limit: number = 10) {
+            const safePage = parseInt(String(page), 10) || 1;
+            const safeLimit = parseInt(String(limit), 10) || 10;
+            const offset = (safePage - 1) * safeLimit;
+            
+            const sql = `
+                SELECT * FROM empleado
+                ORDER BY id_empleado DESC
+                LIMIT ${safeLimit} OFFSET ${offset}
+            `;
+
+            const countSql = `SELECT COUNT(*) as total FROM empleado`;
+
+            const [rows] = await db.query(sql);
+            const [countRows]: any = await db.execute(countSql);
+
+            const totalItems = countRows[0].total;
+            const totalPages = Math.ceil(totalItems / safeLimit);
+
+            return {
+                currentPage: safePage,
+                totalPages,
+                totalItems,
+                itemsPerPage: safeLimit,
+                data: rows,
+            };
+        }
+
+        static async getAllEmails() {
+            const sql = 'SELECT id_empleado, correo_empleado FROM empleado';
+            const [rows]: any = await db.execute(sql);
             return rows;
         }
 

@@ -11,6 +11,8 @@ import AdministradorDataUpdate from './routes/Administrador/AdministradorDataUpd
 import AdministradorGet from "./routes/Administrador/AdministradorGet";
 import AdministradorGetAll from "./routes/Administrador/AdministradorGetAll";
 import AdministradorDelete from "./routes/Administrador/AdministradorDelete";
+import AdministradorGetAllPaginated from "./routes/Administrador/AdministradorGetAllPaginated";
+import AdministradorGetAllEmails from "./routes/Administrador/AdministradorGetAllEmails";
 
 //import cart
 import CartAdd from './routes/Cart/CartAdd';
@@ -26,6 +28,8 @@ import CategoriaUpdate from './routes/Categoria/CategoriaUpdate';
 import CategoriaDelete from './routes/Categoria/CategoriaDelete';
 import CategoriaGet from './routes/Categoria/CategoriaGet';
 import CategoriaGetAll from './routes/Categoria/CategoriaGetAll';
+import CategoriaGetAllPaginated from './routes/Categoria/CategoriaGetAllPaginated';
+import CategoriaGetAllNames from './routes/Categoria/CategoriaGetAllNames';
 
 //import cliente
 import ClienteRegister from './routes/Cliente/ClienteRegister';
@@ -37,6 +41,8 @@ import ClienteUpdate from "./routes/Cliente/ClienteUpdate";
 import ClienteDataUpdate from "./routes/Cliente/ClienteDataUpdate";
 import ClienteGet from "./routes/Cliente/ClienteGet";
 import ClienteGetAll from "./routes/Cliente/ClienteGetAll";
+import ClienteGetAllPaginated from "./routes/Cliente/ClienteGetAllPaginated";
+import ClienteGetAllEmails from "./routes/Cliente/ClienteGetAllEmails";
 
 //import cliente servicios
 import ClienteServicesGet from "./routes/ClienteServices/ClienteServicesGet";
@@ -51,6 +57,7 @@ import ContratoDataUpdate from './routes/Contrato/ContratoDataUpdate';
 import ContratoDelete from "./routes/Contrato/ContratoDelete";
 import ContratoGet from "./routes/Contrato/ContratoGet";  
 import ContratoGetAll from "./routes/Contrato/ContratoGetAll";    
+import ContratoGetAllPaginated from "./routes/Contrato/ContratoGetAllPaginated";
 
 //import ia
 import Diagnostic from "./routes/IA/Diagnostic";
@@ -63,22 +70,27 @@ import EmpleadoDataUpdate from './routes/Empleado/EmpleadoDataUpdate';
 import EmpleadoDelete from './routes/Empleado/EmpleadoDelete';
 import EmpleadoGet from './routes/Empleado/EmpleadoGet';
 import EmpleadoGetAll from './routes/Empleado/EmpleadoGetAll';
+import EmpleadoGetAllPaginated from './routes/Empleado/EmpleadoGetAllPaginated';
+import EmpleadoGetAllEmails from './routes/Empleado/EmpleadoGetAllEmails';
 
 //import factura
 import FacturaRegister from './routes/Factura/FacturaRegister';
 import FacturaUpdate from './routes/Factura/FacturaUpdate';
 import FacturaGet from './routes/Factura/FacturaGet';
 import FacturaGetAll from "./routes/Factura/FacturaGetAll";
+import FacturaGetAllPaginated from "./routes/Factura/FacturaGetAllPaginated";
 
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
 import PedidoProductoGet from './routes/PedidoProducto/PedidoProductoGet';
 import PedidoProductoGetAll from './routes/PedidoProducto/PedidoProductoGetAll';
+import PedidoProductoGetAllPaginated from './routes/PedidoProducto/PedidoProductoGetAllPaginated';
 
 //import pedidoServicio
 import PedidoServicioRegister from './routes/PedidoServicio/PedidoServicioRegister';
 import PedidoServicioGet from './routes/PedidoServicio/PedidoServicioGet';
 import PedidoServicioGetAll from './routes/PedidoServicio/PedidoServicioGetAll';
+import PedidoServicioGetAllPaginated from './routes/PedidoServicio/PedidoServicioGetAllPaginated';
 
 //import producto
 import ProductoRegister from './routes/Producto/ProductoRegister';
@@ -86,10 +98,13 @@ import ProductoGetById from './routes/Producto/ProductoGetById';
 import ProductoGet from './routes/Producto/ProductoGet';
 import ProductoGetAll from './routes/Producto/ProductoGetAll';
 import ProductoGetAllCategoria from './routes/Producto/ProductoGetAllCategoria';
+import ProductoGetAllPaginated from './routes/Producto/ProductoGetAllPaginated';
 import ProductoDelete from './routes/Producto/ProductoDelete';
 import ProductoUpdate from './routes/Producto/ProductoUpdate';
 import ProductoUpdateNI from './routes/Producto/ProductoUpdateNI';
+import ProductoUpdateStock from './routes/Producto/ProductoUpdateStock'
 import { iniciarTareaDescuentos } from "./controllers/ProductoControllers/ProductoRDController";
+import ProductoGetAllNames from "./routes/Producto/ProductoGetAllNames";
 
 // import servicio
 import ServicioRegister from './routes/Servicio/ServicioRegister';
@@ -97,6 +112,8 @@ import ServicioGet from './routes/Servicio/ServicioGet';
 import ServicioGetAll from './routes/Servicio/ServicioGetAll';
 import ServicioUpdate from './routes/Servicio/ServicioUpdate';
 import ServicioDelete from './routes/Servicio/ServicioDelete';
+import ServicioGetAllPaginated from './routes/Servicio/ServicioGetAllPaginated';
+import ServicioGetAllNames from './routes/Servicio/ServicioGetAllNames';
 
 //import tecnico
 import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
@@ -104,10 +121,17 @@ import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
 import TecnicoUpdate from './routes/Tecnico/TecnicoUpdate';
 import TecnicoDataUpdate from './routes/Tecnico/TecnicoDataUpdate';
 import TecnicoDataUpdateNI from './routes/Tecnico/TecnicoDataUpdateNI';
-
 import TecnicoDelete from './routes/Tecnico/TecnicoDelete';
 import TecnicoGet from './routes/Tecnico/TecnicoGet';
 import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
+import TecnicoGetAllPaginated from './routes/Tecnico/TecnicoGetAllPaginated';
+import TecnicoGetAllEmails from './routes/Tecnico/TecnicoGetAllEmails';
+
+//import tecnico servicios
+import TecnicoServicesAdd from "./routes/TecnicoServices/TecnicoServicesAdd";
+import TecnicoServicesGet from "./routes/TecnicoServices/TecnicoServicesGet";
+import TecnicoServicesGetAll from "./routes/TecnicoServices/TecnicoServicesGetAll";
+import TecnicoServicesDelete from "./routes/TecnicoServices/TecnicoServicesDelete";
 
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
@@ -148,9 +172,11 @@ app.use('/AdminGet', AdministradorGet);
 app.use('/AdminGetAll', AdministradorGetAll);
 app.use('/AdminLogin', AdministradorLogin);
 app.use('/AdminUpdate', AdministradorUpdate);
-app.use ('/AdminDataUpdate', AdministradorDataUpdate)
+app.use('/AdminDataUpdate', AdministradorDataUpdate)
 app.use('/AdminDelete', AdministradorDelete);
 app.use('/AdminRegister', AdministradorRegister);
+app.use('/AdminGetAllPaginated', AdministradorGetAllPaginated);
+app.use('/AdminGetAllEmails', AdministradorGetAllEmails);
 
 //CART
 app.use('/CartAdd', CartAdd);
@@ -166,6 +192,8 @@ app.use('/CategoriaGetAll', CategoriaGetAll)
 app.use('/CategoriaUpdate', CategoriaUpdate);
 app.use('/CategoriaDelete', CategoriaDelete);
 app.use('/CategoriaRegister', CategoriaRegister);
+app.use('/CategoriaGetAllPaginated', CategoriaGetAllPaginated);
+app.use('/CategoriaGetAllNames', CategoriaGetAllNames);
 
 //CLIENTE
 app.use('/ClienteGet', ClienteGet);
@@ -174,9 +202,11 @@ app.use('/ClienteEmail', ClienteEmail);
 app.use('/ClienteDelete', ClienteDelete);
 app.use('/ClienteUpdate', ClienteUpdate);
 app.use('/ClienteGetAll', ClienteGetAll);
+app.use('/ClienteGetAllPaginated', ClienteGetAllPaginated);
 app.use('/ClienteRegister', ClienteRegister);
 app.use('/ClienteDataUpdate', ClienteDataUpdate);
 app.use('/ClienteChangePassword', ClienteChangePassword);
+app.use('/ClienteGetAllEmails', ClienteGetAllEmails);
 
 //CLIENTE SERVIVICIOS
 app.use('/ClienteServicesGet', ClienteServicesGet);
@@ -191,6 +221,7 @@ app.use('/ContratoUpdate', ContratoUpdate);
 app.use('/ContratoDataUpdate', ContratoDataUpdate);
 app.use('/ContratoDelete', ContratoDelete);
 app.use('/ContratoRegister', ContratoRegister);
+app.use('/ContratoGetAllPaginated', ContratoGetAllPaginated);
 
 //IA
 app.use('/Diagnostic', Diagnostic);
@@ -203,23 +234,27 @@ app.use('/EmpleadoGetAll', EmpleadoGetAll);
 app.use('/EmpleadoDelete', EmpleadoDelete);
 app.use('/EmpleadoRegister', EmpleadoRegister);
 app.use('/EmpleadoDataUpdate', EmpleadoDataUpdate);
+app.use('/EmpleadoGetAllPaginated', EmpleadoGetAllPaginated);
+app.use('/EmpleadoGetAllEmails', EmpleadoGetAllEmails);
 
 //FACTURA
 app.use('/FacturaGet', FacturaGet);
 app.use('/FacturaUpdate', FacturaUpdate);
 app.use('/FacturaGetAll', FacturaGetAll);
 app.use('/FacturaRegister', FacturaRegister);
-
+app.use('/FacturaGetAllPaginated', FacturaGetAllPaginated);
 
 //PEDIDO PRODUCTO
 app.use('/PedidoProductoRegister', PedidoProductoRegister);
 app.use('/PedidoProductoGet', PedidoProductoGet);
 app.use('/PedidoProductoGetAll', PedidoProductoGetAll);
+app.use('/PedidoProductoGetAllPaginated', PedidoProductoGetAllPaginated);
 
 //PEDIDO SERVICIO
 app.use('/PedidoServicioRegister', PedidoServicioRegister);
 app.use('/PedidoServicioGet', PedidoServicioGet);
 app.use('/PedidoServicioGetAll', PedidoServicioGetAll);
+app.use('/PedidoServicioGetAllPaginated', PedidoServicioGetAllPaginated);
 
 //PRODUCTO
 app.use('/ProductoGet', ProductoGet);
@@ -228,8 +263,11 @@ app.use('/ProductoUpdate', ProductoUpdate);
 app.use('/ProductoDelete', ProductoDelete);
 app.use('/ProductoRegister', ProductoRegister);
 app.use('/ProductoUpdateNI', ProductoUpdateNI);
+app.use('/ProductoUpdateStock', ProductoUpdateStock);
 app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
+app.use('/ProductoGetAllPaginated', ProductoGetAllPaginated);
 app.use('/ProductoGetById', ProductoGetById);
+app.use('/ProductoGetAllNames', ProductoGetAllNames);
 
 //SERVICIO
 app.use('/ServicioGet', ServicioGet);
@@ -237,6 +275,8 @@ app.use('/ServicioUpdate', ServicioUpdate);
 app.use('/ServicioDelete', ServicioDelete);
 app.use('/ServicioGetAll', ServicioGetAll);
 app.use('/ServicioRegister', ServicioRegister);
+app.use('/ServicioGetAllPaginated', ServicioGetAllPaginated);
+app.use('/ServicioGetAllNames', ServicioGetAllNames);
 
 //TECNICO
 app.use('/TecnicoGet', TecnicoGet);
@@ -247,6 +287,14 @@ app.use('/TecnicoGetAll', TecnicoGetAll);
 app.use('/TecnicoRegister', TecnicoRegister);
 app.use('/TecnicoDataUpdate', TecnicoDataUpdate);
 app.use('/TecnicoDataUpdateNI', TecnicoDataUpdateNI);
+app.use('/TecnicoGetAllPaginated', TecnicoGetAllPaginated);
+app.use('/TecnicoGetAllEmails', TecnicoGetAllEmails);
+
+//TECNICO SERVIVICIOS
+app.use('/TecnicoServicesGet', TecnicoServicesGet);
+app.use('/TecnicoServicesAdd', TecnicoServicesAdd);
+app.use('/TecnicoServicesGetAll', TecnicoServicesGetAll);
+app.use('/TecnicoServicesDelete', TecnicoServicesDelete);
 
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
