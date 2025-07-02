@@ -17,6 +17,7 @@ export const obtenerDiagnostico = async (input: string): Promise<string> => {
   ...
   - Si hay menos de 5 soluciones, devuelve todas las que existan
   - No incluyas ningún texto adicional, solo el JSON
+  - Asocia cada input con el tema de gasodomesticos
   - Si es un tema fuera de los gasodomésticos, responde con un con un status de error 400
 
   Entrada del usuario:
