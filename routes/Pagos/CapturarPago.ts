@@ -1,5 +1,5 @@
 import express from "express";
-import CapturarPago from "../../controllers/PagosControllers/CapturarPago";
+import CapturarPago from "../../controllers/PagosControllers/CapturarPagoController";
 
 const router = express.Router();
 
