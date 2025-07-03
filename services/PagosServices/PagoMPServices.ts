@@ -31,7 +31,6 @@ const PagoMercadoPago = async ({ cantidad, referencia, email }: PagoMercadoPagoP
       pending: "https://redgas-one.vercel.app/Shopping/Pendiente"
     },
   };
-  console.log("URLs:", preference.back_urls);
   const result = await createPreference({
     config: mercadoPagoClient,
     body: preference,
