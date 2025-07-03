@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import PagosService from "../../services/PagosServices/PagoPaypalService";
+import PagosService from "../../services/PagosServices/PagoPaypalServices";
 
 const CapturarPago = async (req: Request, res: Response) => {
   try {

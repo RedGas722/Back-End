@@ -135,7 +135,9 @@ import TecnicoServicesDelete from "./routes/TecnicoServices/TecnicoServicesDelet
 
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
-import CapturarPago from './routes/Pagos/CapturarPago';
+import CapturarPago from './routes/Pagos/CapturarPagoPayPal';
+import PagoMP from './routes/Pagos/PagoMP'; 
+import CapturarPagoMP from './routes/Pagos/CapturarPagoMP';
 
 //import se encuentra
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
@@ -295,6 +297,8 @@ app.use('/TecnicoServicesDelete', TecnicoServicesDelete);
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
 app.use('/CapturarPago', CapturarPago);
+app.use('/PagoMP', PagoMP);
+app.use('/CapturarPagoMP', CapturarPagoMP);
 
 //SE ENCUENTRA
 app.use('/SeEncuentraRegister', SeEncuentraRegister);
