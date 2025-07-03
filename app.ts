@@ -135,11 +135,9 @@ import TecnicoServicesDelete from "./routes/TecnicoServices/TecnicoServicesDelet
 
 //import pago
 import PagoPaypal from './routes/Pagos/PagoPaypal'; 
-import CapturarPago from './routes/Pagos/CapturarPago';
-import ConfirmacionPagoPsE from './routes/Pagos/ConfirmacionPagoPse';
-import PagoPSE from './routes/Pagos/PagoPse';
-import ListarBancosPsE from './routes/Pagos/ListarBancosPsE';
-import ObtenerEstadoPago from './routes/Pagos/ObtenerEstadoPago';
+import CapturarPago from './routes/Pagos/CapturarPagoPayPal';
+import PagoMP from './routes/Pagos/PagoMP'; 
+import CapturarPagoMP from './routes/Pagos/CapturarPagoMP';
 
 //import se encuentra
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
@@ -299,10 +297,8 @@ app.use('/TecnicoServicesDelete', TecnicoServicesDelete);
 //PAGO
 app.use('/PagoPaypal', PagoPaypal);
 app.use('/CapturarPago', CapturarPago);
-app.use('/ConfirmacionPagoPsE', ConfirmacionPagoPsE);
-app.use('/PagoPSE', PagoPSE);
-app.use('/ListarBancosPsE', ListarBancosPsE);
-app.use('/ObtenerEstadoPago', ObtenerEstadoPago);
+app.use('/PagoMP', PagoMP);
+app.use('/CapturarPagoMP', CapturarPagoMP);
 
 //SE ENCUENTRA
 app.use('/SeEncuentraRegister', SeEncuentraRegister);
