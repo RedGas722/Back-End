@@ -54,6 +54,13 @@ class FacturaRepository {
         return rows;
     }
 
+    static async getByClient(id_cliente: number) {
+        const sql = 'SELECT * FROM factura WHERE id_cliente = ?';
+        const values = [id_cliente];
+        const [rows] = await db.execute(sql, values);
+        return rows;
+    }
+
     // Update Factura
     static async update(estado_factura: string, id_factura: number) {
         const sql = 'UPDATE factura SET estado_factura = ? WHERE id_factura = ?';

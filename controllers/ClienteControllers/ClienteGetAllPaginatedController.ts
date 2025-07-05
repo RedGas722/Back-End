@@ -3,7 +3,7 @@ import ClienteServices from "../../services/ClienteServices";
 
 const ClienteGetAllPaginated = async (req: Request, res: Response) => {
     const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
+    const limit = parseInt(req.query.limit as string) || 15;
 
     try {
         const data = await ClienteServices.getAllPaginated(page, limit);
