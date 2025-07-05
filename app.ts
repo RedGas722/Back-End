@@ -79,6 +79,7 @@ import FacturaUpdate from './routes/Factura/FacturaUpdate';
 import FacturaGet from './routes/Factura/FacturaGet';
 import FacturaGetAll from "./routes/Factura/FacturaGetAll";
 import FacturaGetAllPaginated from "./routes/Factura/FacturaGetAllPaginated";
+import FacturaGetByClient from './routes/Factura/FacturaGetByClient';
 
 //import pedidoProducto
 import PedidoProductoRegister from './routes/PedidoProducto/PedidoProductoRegister';
@@ -237,6 +238,7 @@ app.use('/EmpleadoGetAllEmails', EmpleadoGetAllEmails);
 
 //FACTURA
 app.use('/FacturaGet', FacturaGet);
+app.use('/FacturaGetByClient', FacturaGetByClient);
 app.use('/FacturaUpdate', FacturaUpdate);
 app.use('/FacturaGetAll', FacturaGetAll);
 app.use('/FacturaRegister', FacturaRegister);
