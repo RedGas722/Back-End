@@ -21,6 +21,8 @@ import CartRemove from './routes/Cart/CartRemove';
 import CartClear from './routes/Cart/CartClear';
 import CartTotal from './routes/Cart/CartTotal';
 import CartUpdateQuantity from './routes/Cart/CartUpdateQuantity';
+import CartGetByEmail from './routes/Cart/CartGetByEmail';
+import CartClearByEmail from './routes/Cart/CartClearByEmail';
 
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
@@ -317,6 +319,8 @@ app.use('/CartUpdateQuantity', CartUpdateQuantity);
 app.use('/CartRemove', CartRemove);
 app.use('/CartClear', CartClear);
 app.use('/CartTotal', CartTotal)
+app.use('/CartGetByEmail', CartGetByEmail);
+app.use('/CartClearByEmail', CartClearByEmail);
 
 //PROFILE
 app.use('/Profile', profile);

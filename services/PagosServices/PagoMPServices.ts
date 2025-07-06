@@ -41,11 +41,10 @@ interface PagoMercadoPagoParams {
     const id_factura = facturaData.data.id_factura;
 
     // Obtener carrito por email
-    const resCart = await fetch("https://redgas.onrender.com/CartGetByEmail", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
+    const resCart = await fetch(`https://redgas.onrender.com/CartGetByEmail?correo_cliente=${email}`, {
+    method: "GET", // como es query param, debe ser GET
+    headers: { "Content-Type": "application/json" }
+  });
 
     const cartData = await resCart.json();
 
@@ -73,10 +72,9 @@ interface PagoMercadoPagoParams {
     }
 
     // Limpiar carrito
-    await fetch("https://redgas.onrender.com/CartClearByEmail", {
+    await fetch(`https://redgas.onrender.com/CartClearByEmail?correo_cliente=${email}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
     });
   };
 
