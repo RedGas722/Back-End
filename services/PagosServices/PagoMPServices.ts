@@ -11,6 +11,77 @@ interface PagoMercadoPagoParams {
   direccion?: string;
 }
 
+  const ProcesarPagoYGenerarFactura = async (payment_id: string) => {
+    const pago = await ConsultarPagoMercadoPago(payment_id);
+
+    if (pago.status !== "approved") return;
+
+    const email = pago.payer?.email;
+    const total = pago.transaction_amount;
+
+    // Obtener cliente por email
+    const clienteRes = await fetch(`https://redgas.onrender.com/ClienteGet?correo_cliente=${email}`);
+    const clienteData = await clienteRes.json();
+    if (!clienteData?.data?.id_cliente) throw new Error("Cliente no encontrado");
+
+    const id_cliente = clienteData.data.id_cliente;
+
+    // Obtener empleado virtual
+    const resEmpleado = await fetch("https://redgas.onrender.com/EmpleadoGet?correo_empleado=virtual@gmail.com");
+    const dataEmpleado = await resEmpleado.json();
+    const id_empleado = dataEmpleado.data.id_empleado;
+
+    // Registrar factura
+    const fecha_factura = new Date().toISOString().split("T")[0];
+    const facturaRes = await fetch("https://redgas.onrender.com/FacturaRegister", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fecha_factura, id_cliente, id_empleado, total }),
+    });
+
+    const facturaData = await facturaRes.json();
+    const id_factura = facturaData.data.id_factura;
+
+    // Obtener carrito por email
+    const resCart = await fetch("https://redgas.onrender.com/CartGetByEmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+
+    const cartData = await resCart.json();
+
+    // Registrar productos y actualizar stock
+    for (const item of cartData) {
+      await fetch("https://redgas.onrender.com/PedidoProductoRegister", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id_factura,
+          id_producto: item.productId,
+          estado_pedido: "aprobado",
+          cantidad_producto: item.quantity,
+        }),
+      });
+
+      await fetch("https://redgas.onrender.com/ProductoUpdateStock", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id_producto: item.productId,
+          stock: item.quantity,
+        }),
+      });
+    }
+
+    // Limpiar carrito
+    await fetch("https://redgas.onrender.com/CartClearByEmail", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+  };
+
 const PagoMercadoPago = async ({ cantidad, referencia, email }: PagoMercadoPagoParams) => {
   const preference = {
     items: [
@@ -51,5 +122,6 @@ const ConsultarPagoMercadoPago = async (payment_id: string) => {
 
 export default {
   PagoMercadoPago,
-  ConsultarPagoMercadoPago
+  ConsultarPagoMercadoPago,
+  ProcesarPagoYGenerarFactura
 };

@@ -139,6 +139,7 @@ import PagoPaypal from './routes/Pagos/PagoPaypal';
 import CapturarPago from './routes/Pagos/CapturarPagoPayPal';
 import PagoMP from './routes/Pagos/PagoMP'; 
 import CapturarPagoMP from './routes/Pagos/CapturarPagoMP';
+import WebhookMPRoute from './routes/Pagos/WebHookMP';
 
 //import se encuentra
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
@@ -301,6 +302,7 @@ app.use('/PagoPaypal', PagoPaypal);
 app.use('/CapturarPago', CapturarPago);
 app.use('/PagoMP', PagoMP);
 app.use('/CapturarPagoMP', CapturarPagoMP);
+app.use("/webhook-mercadopago", WebhookMPRoute);
 
 //SE ENCUENTRA
 app.use('/SeEncuentraRegister', SeEncuentraRegister);
