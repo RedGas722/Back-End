@@ -9,10 +9,13 @@ const WebhookPaypalController = async (req: Request, res: Response) => {
         const eventType = body.event_type;
         const resource = body.resource;
 
-        if (eventType === "CHECKOUT.ORDER.APPROVED" || eventType === "PAYMENT.CAPTURE.COMPLETED") {
+        console.log("Evento recibido:", eventType);
+        console.log("Resource:", JSON.stringify(resource, null, 2));
+
+        if (eventType === "PAYMENT.CAPTURE.COMPLETED") {
             const referencia = resource?.invoice_id || resource?.custom_id || `REF-${Date.now()}`;
-            const cantidad = resource?.amount?.value || resource?.purchase_units?.[0]?.amount?.value || "0";
-            const email = resource?.payer?.email_address || resource?.payer?.payer_info?.email;
+            const cantidad = resource?.amount?.value || "0";
+            const email = resource?.payer?.email_address;
 
             if (!email || !cantidad) throw new Error("Datos insuficientes en el webhook");
 
