@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import PagoPaypalServices from "../../services/PagosServices/PagoPaypalServices";
 
 const WebhookPaypalController = async (req: Request, res: Response) => {
+    console.log("🔔 Webhook recibido en PayPal");
+    console.log("Raw body:", JSON.stringify(req.body, null, 2));
   try {
     const body = req.body;
     const eventType = body.event_type;
