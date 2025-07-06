@@ -13,12 +13,10 @@ interface PagoMercadoPagoParams {
 
   const ProcesarPagoYGenerarFactura = async (payment_id: string) => {
     const pago = await ConsultarPagoMercadoPago(payment_id);
-    console.log(pago)
     if (pago.status !== "approved") return;
 
     const email = pago.payer?.email;
     const total = pago.transaction_amount;
-    console.log("Procesando pago para el cliente:", email, "con total:", total);
     // Obtener cliente por email
     const clienteRes = await fetch(`https://redgas.onrender.com/ClienteGet?correo_cliente=${email}`);
     const clienteData = await clienteRes.json();
