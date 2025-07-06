@@ -179,8 +179,14 @@ class ProductoRepository {
     static async getById(id_producto: number) {
         const sql = 'SELECT * FROM producto WHERE id_producto = ?';
         const [rows]: any = await db.execute(sql, [id_producto]);
+
         if (rows.length === 0) return null;
-        return rows[0];
+
+        const producto = rows[0];
+
+        // Reutilizar el método existente
+        const [productoConImagen] = this.convertirImagenBase64([producto]);
+        return productoConImagen;
     }
 
     static async getAllNames() {

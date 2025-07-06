@@ -45,7 +45,6 @@ class ProductoServices {
 
     static async getAllProductoCategoria(nombre_categoria: string) {
         return await ProductoRepository.getAllProductoCategoria(nombre_categoria);
-
     }
 
     static async getAllPaginated(page: number, limit: number) {

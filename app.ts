@@ -21,6 +21,8 @@ import CartRemove from './routes/Cart/CartRemove';
 import CartClear from './routes/Cart/CartClear';
 import CartTotal from './routes/Cart/CartTotal';
 import CartUpdateQuantity from './routes/Cart/CartUpdateQuantity';
+import CartGetByEmail from './routes/Cart/CartGetByEmail';
+import CartClearByEmail from './routes/Cart/CartClearByEmail';
 
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
@@ -139,6 +141,8 @@ import PagoPaypal from './routes/Pagos/PagoPaypal';
 import CapturarPago from './routes/Pagos/CapturarPagoPayPal';
 import PagoMP from './routes/Pagos/PagoMP'; 
 import CapturarPagoMP from './routes/Pagos/CapturarPagoMP';
+import WebhookMPRoute from './routes/Pagos/WebHookMP';
+import WebHookPayPal from './routes/Pagos/WebHookPayPal';
 
 //import se encuentra
 import SeEncuentraRegister from './routes/SeEncuentra/SeEncuentraRegister';
@@ -301,6 +305,8 @@ app.use('/PagoPaypal', PagoPaypal);
 app.use('/CapturarPago', CapturarPago);
 app.use('/PagoMP', PagoMP);
 app.use('/CapturarPagoMP', CapturarPagoMP);
+app.use("/webhook-mercadopago", WebhookMPRoute);
+app.use("/webhook-paypal", WebHookPayPal);
 
 //SE ENCUENTRA
 app.use('/SeEncuentraRegister', SeEncuentraRegister);
@@ -315,6 +321,8 @@ app.use('/CartUpdateQuantity', CartUpdateQuantity);
 app.use('/CartRemove', CartRemove);
 app.use('/CartClear', CartClear);
 app.use('/CartTotal', CartTotal)
+app.use('/CartGetByEmail', CartGetByEmail);
+app.use('/CartClearByEmail', CartClearByEmail);
 
 //PROFILE
 app.use('/Profile', profile);
