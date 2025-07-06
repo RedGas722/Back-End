@@ -66,65 +66,80 @@ const CapturarPago = async (orderID: string) => {
   return data;
 };
 
-const ProcesarPagoYGenerarFacturaPayPal = async ({ referencia, email, cantidad }: PagoPaypalParams) => {
-  // 1. Obtener cliente por email
-  const clienteRes = await fetch(`https://redgas.onrender.com/ClienteGet?correo_cliente=${email}`)
-  const clienteData = await clienteRes.json()
-  if (!clienteData?.data?.id_cliente) throw new Error("Cliente no encontrado")
+  const ProcesarPagoYGenerarFacturaPayPal = async ({ referencia, email, cantidad }: PagoPaypalParams) => {
+    // 1. Obtener cliente por email
+    const clienteRes = await fetch(`https://redgas.onrender.com/ClienteGet?correo_cliente=${email}`);
+    const clienteData = await clienteRes.json();
+    if (!clienteData?.data?.id_cliente) throw new Error("Cliente no encontrado");
 
-  const id_cliente = clienteData.data.id_cliente
+    const id_cliente = clienteData.data.id_cliente;
 
-  // 2. Obtener empleado virtual
-  const resEmpleado = await fetch("https://redgas.onrender.com/EmpleadoGet?correo_empleado=virtual@gmail.com")
-  const dataEmpleado = await resEmpleado.json()
-  const id_empleado = dataEmpleado.data.id_empleado
+    // 2. Obtener empleado virtual
+    const resEmpleado = await fetch("https://redgas.onrender.com/EmpleadoGet?correo_empleado=virtual@gmail.com");
+    const dataEmpleado = await resEmpleado.json();
+    if (!dataEmpleado?.data?.id_empleado) throw new Error("Empleado virtual no encontrado");
 
-  // 3. Registrar factura
-  const fecha_factura = new Date().toISOString().split("T")[0]
-  const facturaRes = await fetch("https://redgas.onrender.com/FacturaRegister", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ fecha_factura, id_cliente, id_empleado, cantidad, referencia }),
-  })
-  const facturaData = await facturaRes.json()
-  const id_factura = facturaData.data.id_factura
+    const id_empleado = dataEmpleado.data.id_empleado;
 
-  // 4. Obtener carrito por email
-  const resCart = await fetch(`https://redgas.onrender.com/CartGetByEmail?correo_cliente=${email}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  })
-  const cartData = await resCart.json()
-
-  // 5. Registrar productos y actualizar stock
-  for (const item of cartData) {
-    await fetch("https://redgas.onrender.com/PedidoProductoRegister", {
+    // 3. Registrar factura
+    const fecha_factura = new Date().toISOString().split("T")[0];
+    const facturaRes = await fetch("https://redgas.onrender.com/FacturaRegister", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id_factura,
-        id_producto: item.productId,
-        estado_pedido: "aprobado",
-        cantidad_producto: item.quantity,
+        fecha_factura,
+        id_cliente,
+        id_empleado,
+        total: parseFloat(cantidad), // CORREGIDO
+        referencia
       }),
-    })
+    });
 
-    await fetch("https://redgas.onrender.com/ProductoUpdateStock", {
-      method: "PUT",
+    const facturaData = await facturaRes.json();
+    if (!facturaData?.data?.id_factura) throw new Error("No se pudo generar la factura");
+
+    const id_factura = facturaData.data.id_factura;
+
+    // 4. Obtener carrito por email
+    const resCart = await fetch(`https://redgas.onrender.com/CartGetByEmail?correo_cliente=${email}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id_producto: item.productId,
-        stock: item.quantity,
-      }),
-    })
-  }
+    });
+    const cartData = await resCart.json();
 
-  // 6. Limpiar carrito
-  await fetch(`https://redgas.onrender.com/CartClearByEmail?correo_cliente=${email}`, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-  })
-}
+    if (!Array.isArray(cartData) || cartData.length === 0) {
+      throw new Error("El carrito está vacío");
+    }
+
+    // 5. Registrar productos y actualizar stock
+    for (const item of cartData) {
+      await fetch("https://redgas.onrender.com/PedidoProductoRegister", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id_factura,
+          id_producto: item.productId,
+          estado_pedido: "aprobado",
+          cantidad_producto: item.quantity,
+        }),
+      });
+
+      await fetch("https://redgas.onrender.com/ProductoUpdateStock", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id_producto: item.productId,
+          stock: item.quantity,
+        }),
+      });
+    }
+
+    // 6. Limpiar carrito
+    await fetch(`https://redgas.onrender.com/CartClearByEmail?correo_cliente=${email}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+  };
 
 export default {
   PagoPaypal,
