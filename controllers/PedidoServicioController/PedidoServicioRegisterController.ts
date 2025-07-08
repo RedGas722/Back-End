@@ -7,12 +7,16 @@ const PedidoServicioRegister = async (req: Request, res: Response) => {
     const {
       id_cliente,
       id_tecnico,
+      total,
+      descripcion,
       estado_pedido
     } = req.body;
 
     const pedidoServicio = new Pedido(
       id_cliente,
       id_tecnico,
+      total,
+      descripcion,
       estado_pedido
     );
 

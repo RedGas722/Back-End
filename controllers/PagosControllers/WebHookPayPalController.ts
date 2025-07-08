@@ -3,9 +3,6 @@ import PagoPaypalServices from "../../services/PagosServices/PagoPaypalServices"
 
 const WebhookPaypalController = async (req: Request, res: Response) => {
   try {
-    console.log("📩 Webhook recibido en PayPal");
-    console.log("Raw body:", JSON.stringify(req.body, null, 2));
-
     const body = req.body;
 
     const eventType = body.event_type;
@@ -19,9 +16,6 @@ const WebhookPaypalController = async (req: Request, res: Response) => {
       const cantidad = resource?.amount?.value;
       const email = resource?.payer?.email_address || resource?.payment_source?.paypal?.email_address;
       const referencia = resource?.invoice_id || resource?.custom_id || `REF-${Date.now()}`;
-
-      console.log("📌 Estado de la captura:", status);
-      console.log("📧 Email:", email, "💲 Cantidad:", cantidad);
 
       if (status !== "COMPLETED") {
         console.log("⚠️ Pago aún no completado, estado:", status);
