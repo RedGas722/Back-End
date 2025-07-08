@@ -19,7 +19,7 @@ const WebhookPaypalController = async (req: Request, res: Response) => {
     if (!email || !cantidad) {
       throw new Error("❌ Datos insuficientes en el webhook");
     }
-
+    console.log(eventType, status, cantidad, email, referencia);
     if (eventType === "PAYMENT.CAPTURE.PENDING") {
       console.log("⏳ Pago pendiente recibido. Generando factura de inmediato...");
 
