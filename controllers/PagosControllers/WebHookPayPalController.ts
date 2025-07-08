@@ -23,12 +23,6 @@ const WebhookPaypalController = async (req: Request, res: Response) => {
       console.log("📌 Estado de la orden:", status);
       console.log("📧 Email:", email, "💲 Cantidad:", cantidad);
 
-      if (status !== "COMPLETED") {
-        console.log("⚠️ Orden aún no completada, estado:", status);
-        return res.sendStatus(200);
-      }
-
-
       if (!email || !cantidad) {
         throw new Error("Datos insuficientes en el webhook");
       }
