@@ -155,6 +155,8 @@ import profile from './routes/profile';
 
 //import
 import RefreshToken from './routes/Token/TokenRefresh';
+import GenerateTokenRecovery from './routes/Token/GenerateTokenRecovery';
+import ValidateTokenRecovery from './routes/Token/ValidateTokenRecovery';
 
 dotenv.config();
 const app = express();
@@ -329,6 +331,8 @@ app.use('/Profile', profile);
 
 //Refresh Token
 app.use('/renewToken', RefreshToken);
+app.use('/GenerateTokenRecovery', GenerateTokenRecovery);
+app.use('/ValidateTokenRecovery', ValidateTokenRecovery);
 
 //--------------- INICIALIZAR SERVIDOR -------------------//
 
