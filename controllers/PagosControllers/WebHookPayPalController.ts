@@ -6,8 +6,9 @@ const WebhookPaypalController = async (req: Request, res: Response) => {
     const body = req.body;
     const eventType = body.event_type;
     const resource = body.resource;
-
+    
     console.log("🔔 Evento recibido:", eventType);
+    console.log("📦 Resource:", JSON.stringify(resource, null, 2));
 
     const status = resource?.status;
     const cantidad = resource?.amount?.value;
