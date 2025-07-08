@@ -7,32 +7,32 @@ const WebhookPaypalController = async (req: Request, res: Response) => {
     console.log("Raw body:", JSON.stringify(req.body, null, 2));
 
     const body = req.body;
-
     const eventType = body.event_type;
     const resource = body.resource;
 
     console.log("🔔 Evento recibido:", eventType);
 
-    // Solo manejamos capturas de pago completadas
-    if (eventType === "PAYMENT.CAPTURE.COMPLETED") {
+    // Usar el evento CHECKOUT.ORDER.APPROVED
+    if (eventType === "CHECKOUT.ORDER.APPROVED") {
       const status = resource?.status;
-      const cantidad = resource?.amount?.value;
-      const email = resource?.payer?.email_address || resource?.payment_source?.paypal?.email_address;
-      const referencia = resource?.invoice_id || resource?.custom_id || `REF-${Date.now()}`;
+      const email = resource?.payer?.email_address;
+      const referencia =
+        resource?.purchase_units?.[0]?.custom_id || `REF-${Date.now()}`;
+      const cantidad = resource?.purchase_units?.[0]?.amount?.value;
 
-      console.log("📌 Estado de la captura:", status);
+      console.log("📌 Estado de la orden:", status);
       console.log("📧 Email:", email, "💲 Cantidad:", cantidad);
 
-      if (status !== "COMPLETED") {
-        console.log("⚠️ Pago aún no completado, estado:", status);
-        return res.sendStatus(200); // no error, pero no procesamos aún
+      if (status !== "APPROVED") {
+        console.log("⚠️ Orden aún no aprobada, estado:", status);
+        return res.sendStatus(200);
       }
 
       if (!email || !cantidad) {
         throw new Error("Datos insuficientes en el webhook");
       }
 
-      // Procesar y generar factura solo si está completado y los datos están completos
+      // Procesar y generar factura
       await PagoPaypalServices.ProcesarPagoYGenerarFacturaPayPal({
         referencia,
         email,
@@ -42,7 +42,7 @@ const WebhookPaypalController = async (req: Request, res: Response) => {
       return res.sendStatus(200);
     }
 
-    // Ignorar eventos no relevantes
+    // Ignorar otros eventos
     console.log("ℹ️ Evento ignorado:", eventType);
     return res.sendStatus(204);
   } catch (error) {
