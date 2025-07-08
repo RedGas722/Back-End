@@ -47,6 +47,10 @@ class AdministradorServices {
     static async getAllEmails() {
         return await AdministradorRepository.getAllEmails();
     }
+
+    static async AdminEmail(correo_admin: string) {
+        return await AdministradorRepository.email(correo_admin);
+    }
 }
 
 export default AdministradorServices;

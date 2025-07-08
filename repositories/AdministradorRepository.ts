@@ -51,8 +51,8 @@ class AdministradorRepository {
     static async getByEmail(correo_admin: string) {
         const sql = 'SELECT * FROM administrador WHERE correo_admin = ?';
         const values = [correo_admin];
-        const [rows]:any = await db.execute(sql, values);
-        return rows[0]; 
+        const [rows]: any = await db.execute(sql, values);
+        return rows[0];
     }
 
     static async getAllEmails() {
@@ -107,10 +107,26 @@ class AdministradorRepository {
     }
 
     // Data Update sin contraseña
- static async AdministradorDataUpdate(administrador: AdministradorDataDto, correo_admin: string) {
+    static async AdministradorDataUpdate(administrador: AdministradorDataDto, correo_admin: string) {
         const sql = 'UPDATE administrador SET nombre_admin = ?, correo_admin = ?, telefono_admin = ? WHERE correo_admin = ?';
         const values = [administrador.nombre_admin, administrador.correo_admin, administrador.telefono_admin, correo_admin];
         return db.execute(sql, values);
+    }
+
+    static async email(correo_admin: string) {
+        const sql = 'SELECT * FROM administrador WHERE correo_admin=?';
+        const values = [correo_admin];
+        const result: any = await db.execute(sql, values);
+        if (result[0].length > 0) {
+            return {
+                logged: true,
+                status: "Successful authentication",
+                id: result[0][0].id_admin,
+                name: result[0][0].nombre_admin,
+                email: result[0][0].correo_admin
+            };
+        }
+        return { logged: false, status: "Invalid email" };
     }
 }
 

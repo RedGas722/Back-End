@@ -53,6 +53,10 @@ class EmpleadoServices {
         return await EmpleadoRepository.getAllEmails();
     }
 
+    static async EmpleadoEmail(correo_empleado: string) {
+        return await EmpleadoRepository.email(correo_empleado);
+    }
+
 }
 
 export default EmpleadoServices;

@@ -31,7 +31,7 @@ class TecnicoRepository {
         return db.execute(sql, values);
     }
 
-    
+
     // Update Tecnico sin contraseña (DataUpdate)
     static async DataUpdate(tecnico: Tecnico, correo_tecnico: string) {
         const sql = 'UPDATE tecnico SET cc_tecnico = ?, nombre_tecnico = ?, correo_tecnico = ?, telefono_tecnico = ?, imagen = ? WHERE correo_tecnico = ?';
@@ -55,52 +55,52 @@ class TecnicoRepository {
 
     // Get Tecnico 
 
-        static async getByEmail(correo_tecnico: string){
-            const sql = 'SELECT * FROM tecnico WHERE correo_tecnico = ?';
-            const values = [correo_tecnico];
-            const [rows] = await db.execute(sql, values);
-            return rows; 
-        }
+    static async getByEmail(correo_tecnico: string) {
+        const sql = 'SELECT * FROM tecnico WHERE correo_tecnico = ?';
+        const values = [correo_tecnico];
+        const [rows] = await db.execute(sql, values);
+        return rows;
+    }
 
-        static async getAll() {
-            const sql = 'SELECT * FROM tecnico';
-            const [rows] = await db.execute(sql);
-            return rows; 
-        }
+    static async getAll() {
+        const sql = 'SELECT * FROM tecnico';
+        const [rows] = await db.execute(sql);
+        return rows;
+    }
 
-        static async getAllPaginated(page: number = 1, limit: number = 10) {
-            const safePage = parseInt(String(page), 10) || 1;
-            const safeLimit = parseInt(String(limit), 10) || 10;
-            const offset = (safePage - 1) * safeLimit;
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const safePage = parseInt(String(page), 10) || 1;
+        const safeLimit = parseInt(String(limit), 10) || 10;
+        const offset = (safePage - 1) * safeLimit;
 
-            const sql = `
+        const sql = `
                 SELECT * FROM tecnico
                 ORDER BY id_tecnico DESC
                 LIMIT ${safeLimit} OFFSET ${offset}
             `;
 
-            const countSql = `SELECT COUNT(*) as total FROM tecnico`;
+        const countSql = `SELECT COUNT(*) as total FROM tecnico`;
 
-            const [rows] = await db.query(sql);
-            const [countRows]: any = await db.execute(countSql);
+        const [rows] = await db.query(sql);
+        const [countRows]: any = await db.execute(countSql);
 
-            const totalItems = countRows[0].total;
-            const totalPages = Math.ceil(totalItems / safeLimit);
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / safeLimit);
 
-            return {
-                currentPage: safePage,
-                totalPages,
-                totalItems,
-                itemsPerPage: safeLimit,
-                data: rows,
-            };
-        }
+        return {
+            currentPage: safePage,
+            totalPages,
+            totalItems,
+            itemsPerPage: safeLimit,
+            data: rows,
+        };
+    }
 
-        static async getAllEmails() {
-            const sql = 'SELECT id_tecnico, correo_tecnico FROM tecnico';
-            const [rows]: any = await db.execute(sql);
-            return rows;
-        }
+    static async getAllEmails() {
+        const sql = 'SELECT id_tecnico, correo_tecnico FROM tecnico';
+        const [rows]: any = await db.execute(sql);
+        return rows;
+    }
 
     // Get Tecnico
     static async login(auth: AuthTecnico) {
@@ -125,6 +125,23 @@ class TecnicoRepository {
         }
         return { logged: false, status: "Invalid username or password" };
     }
+
+    static async email(correo_tecnico: string) {
+        const sql = 'SELECT * FROM tecnico WHERE correo_tecnico=?';
+        const values = [correo_tecnico];
+        const result: any = await db.execute(sql, values);
+        if (result[0].length > 0) {
+            return {
+                logged: true,
+                status: "Successful authentication",
+                id: result[0][0].id_tecnico,
+                name: result[0][0].nombre_tecnico,
+                email: result[0][0].correo_tecnico,
+            };
+        }
+        return { logged: false, status: "Invalid email" };
+    }
+
 }
 
 

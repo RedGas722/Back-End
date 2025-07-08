@@ -62,14 +62,14 @@ class ClienteRepository {
     }
 
     // Update Cliente
-    static async update(cliente: Cliente, correo_cliente: string){
+    static async update(cliente: Cliente, correo_cliente: string) {
         const sql = 'UPDATE cliente SET nombre_cliente = ?, correo_cliente = ?, telefono_cliente = ?, direccion_cliente = ?, contraseña_cliente = ? WHERE correo_cliente = ?';
         const values = [cliente.nombre_cliente, cliente.correo_cliente, cliente.telefono_cliente, cliente.direccion_cliente, cliente.contraseña_cliente, correo_cliente];
         return db.execute(sql, values);
     }
 
     // Update DataCliente 
-    static async updateData(dataCliente: DataCliente, correo_cliente: string){
+    static async updateData(dataCliente: DataCliente, correo_cliente: string) {
         const sql = 'UPDATE cliente SET nombre_cliente = ?, correo_cliente = ?, telefono_cliente = ?, direccion_cliente = ? WHERE correo_cliente = ?';
         const values = [dataCliente.nombre_cliente, dataCliente.correo_cliente, dataCliente.telefono_cliente, dataCliente.direccion_cliente, correo_cliente];
         return db.execute(sql, values);
@@ -83,24 +83,24 @@ class ClienteRepository {
     }
 
     // login
-    static async login(auth: AuthCliente){
+    static async login(auth: AuthCliente) {
         const sql = 'SELECT * FROM cliente WHERE correo_cliente=?';
         const values = [auth.correo_cliente];
         const result: any = await db.execute(sql, values);
-        if (result[0].length > 0){
-          const isPasswordValid = await bcrypt.compare(auth.contraseña_cliente, result[0][0].contraseña_cliente);
-          if (isPasswordValid){
-            return {
-              logged: true,
-              status: "Successful authentication",
-              id: result[0][0].id_cliente,
-              name: result[0][0].nombre_cliente,
-              email: result[0][0].correo_cliente,
-              telefono: result[0][0].telefono_cliente,
-              direccion: result[0][0].direccion_cliente,
-            };
-          }
-          return {logged: false, status: "Invalid username or password" };
+        if (result[0].length > 0) {
+            const isPasswordValid = await bcrypt.compare(auth.contraseña_cliente, result[0][0].contraseña_cliente);
+            if (isPasswordValid) {
+                return {
+                    logged: true,
+                    status: "Successful authentication",
+                    id: result[0][0].id_cliente,
+                    name: result[0][0].nombre_cliente,
+                    email: result[0][0].correo_cliente,
+                    telefono: result[0][0].telefono_cliente,
+                    direccion: result[0][0].direccion_cliente,
+                };
+            }
+            return { logged: false, status: "Invalid username or password" };
         }
         return { logged: false, status: "Invalid username or password" };
     }
@@ -110,13 +110,13 @@ class ClienteRepository {
         const values = [correo_cliente];
         const result: any = await db.execute(sql, values);
         if (result[0].length > 0) {
-            return { 
-                logged: true, 
-                status: "Successful authentication", 
-                id: result[0][0].id_cliente, 
-                name: result[0][0].nombre_cliente, 
-                email: result[0][0].correo_cliente, 
-                telefono: result[0][0].telefono_cliente };
+            return {
+                logged: true,
+                status: "Successful authentication",
+                id: result[0][0].id_cliente,
+                name: result[0][0].nombre_cliente,
+                email: result[0][0].correo_cliente,
+            };
         }
         return { logged: false, status: "Invalid email" };
     }

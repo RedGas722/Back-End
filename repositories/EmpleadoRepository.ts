@@ -22,56 +22,56 @@ class EmpleadoRepository {
             empleado.contraseña_empleado
         ];
 
-            return db.execute(sql,values);
+        return db.execute(sql, values);
     }
 
-        //Get Empleado 
+    //Get Empleado 
 
-        static async getByCorreo(correo_empleado: string) {
-            const sql = 'SELECT * FROM empleado WHERE correo_empleado = ?';
-            const values = [correo_empleado];
-            const [rows]:any = await db.execute(sql, values);
-            return rows[0];
-        }
+    static async getByCorreo(correo_empleado: string) {
+        const sql = 'SELECT * FROM empleado WHERE correo_empleado = ?';
+        const values = [correo_empleado];
+        const [rows]: any = await db.execute(sql, values);
+        return rows[0];
+    }
 
-        static async EmpleadoGetAll(){
-            const [rows] = await db.query('SELECT * FROM empleado');
-            return rows;
-        }
+    static async EmpleadoGetAll() {
+        const [rows] = await db.query('SELECT * FROM empleado');
+        return rows;
+    }
 
-        static async getAllPaginated(page: number = 1, limit: number = 10) {
-            const safePage = parseInt(String(page), 10) || 1;
-            const safeLimit = parseInt(String(limit), 10) || 10;
-            const offset = (safePage - 1) * safeLimit;
-            
-            const sql = `
+    static async getAllPaginated(page: number = 1, limit: number = 10) {
+        const safePage = parseInt(String(page), 10) || 1;
+        const safeLimit = parseInt(String(limit), 10) || 10;
+        const offset = (safePage - 1) * safeLimit;
+
+        const sql = `
                 SELECT * FROM empleado
                 ORDER BY id_empleado DESC
                 LIMIT ${safeLimit} OFFSET ${offset}
             `;
 
-            const countSql = `SELECT COUNT(*) as total FROM empleado`;
+        const countSql = `SELECT COUNT(*) as total FROM empleado`;
 
-            const [rows] = await db.query(sql);
-            const [countRows]: any = await db.execute(countSql);
+        const [rows] = await db.query(sql);
+        const [countRows]: any = await db.execute(countSql);
 
-            const totalItems = countRows[0].total;
-            const totalPages = Math.ceil(totalItems / safeLimit);
+        const totalItems = countRows[0].total;
+        const totalPages = Math.ceil(totalItems / safeLimit);
 
-            return {
-                currentPage: safePage,
-                totalPages,
-                totalItems,
-                itemsPerPage: safeLimit,
-                data: rows,
-            };
-        }
+        return {
+            currentPage: safePage,
+            totalPages,
+            totalItems,
+            itemsPerPage: safeLimit,
+            data: rows,
+        };
+    }
 
-        static async getAllEmails() {
-            const sql = 'SELECT id_empleado, correo_empleado FROM empleado';
-            const [rows]: any = await db.execute(sql);
-            return rows;
-        }
+    static async getAllEmails() {
+        const sql = 'SELECT id_empleado, correo_empleado FROM empleado';
+        const [rows]: any = await db.execute(sql);
+        return rows;
+    }
 
     // Update Empleado
     static async update(empleado: Empleado, correo_empleado: string) {
@@ -116,15 +116,32 @@ class EmpleadoRepository {
         }
         return { logged: false, status: "Invalid username or password" };
     }
-        // Get Tecnico by email
-    
-            static async getByEmail(correo_empleado: string){
-                const sql = 'SELECT * FROM empleado WHERE correo_empleado = ?';
-                const values = [correo_empleado];
-                const [rows] = await db.execute(sql, values);
-                console.log(rows); 
-                return rows; 
-            }
+    // Get Tecnico by email
+
+    static async getByEmail(correo_empleado: string) {
+        const sql = 'SELECT * FROM empleado WHERE correo_empleado = ?';
+        const values = [correo_empleado];
+        const [rows] = await db.execute(sql, values);
+        console.log(rows);
+        return rows;
+    }
+
+    static async email(correo_empleado: string) {
+        const sql = 'SELECT * FROM empleado WHERE correo_empleado=?';
+        const values = [correo_empleado];
+        const result: any = await db.execute(sql, values);
+        if (result[0].length > 0) {
+            return {
+                logged: true,
+                status: "Successful authentication",
+                id: result[0][0].id_empleado,
+                name: result[0][0].nombre_empleado,
+                email: result[0][0].correo_empleado,
+            };
+        }
+        return { logged: false, status: "Invalid email" };
+    }
+
 }
 
 export default EmpleadoRepository;

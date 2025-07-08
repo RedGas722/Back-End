@@ -13,6 +13,7 @@ import AdministradorGetAll from "./routes/Administrador/AdministradorGetAll";
 import AdministradorDelete from "./routes/Administrador/AdministradorDelete";
 import AdministradorGetAllPaginated from "./routes/Administrador/AdministradorGetAllPaginated";
 import AdministradorGetAllEmails from "./routes/Administrador/AdministradorGetAllEmails";
+import AdministradorEmail from "./routes/Administrador/AdminEmail";
 
 //import cart
 import CartAdd from './routes/Cart/CartAdd';
@@ -74,6 +75,7 @@ import EmpleadoGet from './routes/Empleado/EmpleadoGet';
 import EmpleadoGetAll from './routes/Empleado/EmpleadoGetAll';
 import EmpleadoGetAllPaginated from './routes/Empleado/EmpleadoGetAllPaginated';
 import EmpleadoGetAllEmails from './routes/Empleado/EmpleadoGetAllEmails';
+import EmpleadoEmail from './routes/Empleado/EmpleadoEmail';
 
 //import factura
 import FacturaRegister from './routes/Factura/FacturaRegister';
@@ -129,6 +131,7 @@ import TecnicoGet from './routes/Tecnico/TecnicoGet';
 import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 import TecnicoGetAllPaginated from './routes/Tecnico/TecnicoGetAllPaginated';
 import TecnicoGetAllEmails from './routes/Tecnico/TecnicoGetAllEmails';
+import TecnicoEmail from './routes/Tecnico/TecnicoEmail';
 
 //import tecnico servicios
 import TecnicoServicesAdd from "./routes/TecnicoServices/TecnicoServicesAdd";
@@ -182,6 +185,7 @@ app.use('/AdminDelete', AdministradorDelete);
 app.use('/AdminRegister', AdministradorRegister);
 app.use('/AdminGetAllPaginated', AdministradorGetAllPaginated);
 app.use('/AdminGetAllEmails', AdministradorGetAllEmails);
+app.use('/AdminEmail', AdministradorEmail);
 
 //CART
 app.use('/CartAdd', CartAdd);
@@ -241,6 +245,7 @@ app.use('/EmpleadoRegister', EmpleadoRegister);
 app.use('/EmpleadoDataUpdate', EmpleadoDataUpdate);
 app.use('/EmpleadoGetAllPaginated', EmpleadoGetAllPaginated);
 app.use('/EmpleadoGetAllEmails', EmpleadoGetAllEmails);
+app.use('/EmpleadoEmail', EmpleadoEmail);
 
 //FACTURA
 app.use('/FacturaGet', FacturaGet);
@@ -295,6 +300,7 @@ app.use('/TecnicoDataUpdate', TecnicoDataUpdate);
 app.use('/TecnicoDataUpdateNI', TecnicoDataUpdateNI);
 app.use('/TecnicoGetAllPaginated', TecnicoGetAllPaginated);
 app.use('/TecnicoGetAllEmails', TecnicoGetAllEmails);
+app.use('/TecnicoEmail', TecnicoEmail);
 
 //TECNICO SERVIVICIOS
 app.use('/TecnicoServicesGet', TecnicoServicesGet);

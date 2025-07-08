@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
 import dotenv from "dotenv";
-import ClienteServices from "../../services/ClienteServices";
 import generateToken from "../../Helpers/generateToken";
+import EmpleadoServices from "../../services/EmpleadoServices";
 dotenv.config();
 
 
-let ClienteEmail = async (req: Request, res: Response) => {
+let EmpleadoEmail = async (req: Request, res: Response) => {
   try {
     const {
-      correo_cliente
+      correo_empleado
     } = req.body;
 
-    const email = await ClienteServices.ClienteEmail(correo_cliente as string);
+    const email = await EmpleadoServices.EmpleadoEmail(correo_empleado as string);
     
     if (email.logged) {
       return res.status(200).json({
@@ -34,4 +34,4 @@ let ClienteEmail = async (req: Request, res: Response) => {
 }
 
 
-export default ClienteEmail;
+export default EmpleadoEmail;

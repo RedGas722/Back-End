@@ -58,6 +58,11 @@ class TecnicoServices {
     static async getAllEmails() {
         return await TecnicoRepository.getAllEmails();
     }
+
+    static async TecnicoEmail(correo_tecnico: string) {
+        return await TecnicoRepository.email(correo_tecnico);
+    }
+
 }
 
 
