@@ -53,17 +53,17 @@ class ProductoRepository {
 
 
     static async getAllProductoCategoria(nombre_categoria: string) {
-    let sql = `
+        let sql = `
         SELECT p.* FROM producto p
         JOIN se_encuentra se ON p.id_producto = se.id_producto
         JOIN categoria c ON se.id_categoria = c.id_categoria
         WHERE c.nombre_categoria = ?
     `;
 
-    const values = [nombre_categoria];
+        const values = [nombre_categoria];
 
-    if (nombre_categoria !== 'Ofertas') {
-        sql += `
+        if (nombre_categoria !== 'Ofertas') {
+            sql += `
         AND p.id_producto NOT IN (
             SELECT se2.id_producto
             FROM se_encuentra se2
@@ -71,7 +71,7 @@ class ProductoRepository {
             WHERE c2.nombre_categoria = 'Ofertas'
         )
         `;
-    }
+        }
         const [rows] = await db.execute(sql, values);
         const productos = rows as any[];
         return this.convertirImagenBase64(productos);
@@ -108,20 +108,20 @@ class ProductoRepository {
             const [countRows]: any = await db.query(countSql);
 
             type ProductoRow = {
-            id_producto: number;
-            nombre_producto: string;
-            descripcion_producto: string;
-            precio_producto: number;
-            stock: number;
-            imagen: Buffer | string | null;
-            descuento: number;
-            fecha_descuento: string | null;
-            categorias: string | null;
+                id_producto: number;
+                nombre_producto: string;
+                descripcion_producto: string;
+                precio_producto: number;
+                stock: number;
+                imagen: Buffer | string | null;
+                descuento: number;
+                fecha_descuento: string | null;
+                categorias: string | null;
             };
 
             const productosFinales = (rows as ProductoRow[]).map(p => ({
-            ...p,
-            categorias: p.categorias ? p.categorias.split(',') : [],
+                ...p,
+                categorias: p.categorias ? p.categorias.split(',') : [],
             }));
 
             const productosConImagen = this.convertirImagenBase64(productosFinales);
@@ -130,17 +130,17 @@ class ProductoRepository {
             const totalPages = Math.ceil(totalItems / safeLimit);
 
             return {
-            currentPage: safePage,
-            totalPages,
-            totalItems,
-            itemsPerPage: safeLimit,
-            data: productosConImagen,
+                currentPage: safePage,
+                totalPages,
+                totalItems,
+                itemsPerPage: safeLimit,
+                data: productosConImagen,
             };
         } catch (error) {
             console.error("Error al obtener productos paginados:", error);
             throw error;
         }
-        }
+    }
 
     static async getByName(nombre_producto: string) {
         const sql = `
@@ -247,6 +247,36 @@ class ProductoRepository {
             );
         }
     }
+
+    static async buscarPorNombreParcial(query: string) {
+        const sql = `
+    SELECT 
+      p.id_producto,
+      p.nombre_producto,
+      p.descripcion_producto,
+      p.precio_producto,
+      p.stock,
+      p.imagen,
+      p.descuento,
+      p.fecha_descuento,
+      GROUP_CONCAT(c.nombre_categoria) AS categorias
+    FROM producto p
+    LEFT JOIN se_encuentra se ON p.id_producto = se.id_producto
+    LEFT JOIN categoria c ON c.id_categoria = se.id_categoria
+    WHERE LOWER(p.nombre_producto) LIKE LOWER(CONCAT('%', ?, '%'))
+    GROUP BY p.id_producto
+  `;
+
+        const [rows]: any = await db.execute(sql, [query]);
+
+        const productosFormateados = rows.map((producto: any) => ({
+            ...producto,
+            categorias: producto.categorias ? producto.categorias.split(',') : []
+        }));
+
+        return this.convertirImagenBase64(productosFormateados);
+    }
+
 }
 
 export default ProductoRepository;

@@ -112,6 +112,7 @@ import ProductoUpdateNI from './routes/Producto/ProductoUpdateNI';
 import ProductoUpdateStock from './routes/Producto/ProductoUpdateStock'
 import { iniciarTareaDescuentos } from "./controllers/ProductoControllers/ProductoRDController";
 import ProductoGetAllNames from "./routes/Producto/ProductoGetAllNames";
+import ProductoGetPartialName from "./routes/Producto/ProductoGetPartialName";
 
 //import tecnico
 import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
@@ -275,6 +276,7 @@ app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
 app.use('/ProductoGetAllPaginated', ProductoGetAllPaginated);
 app.use('/ProductoGetById', ProductoGetById);
 app.use('/ProductoGetAllNames', ProductoGetAllNames);
+app.use('/ProductoGetPartialName', ProductoGetPartialName);
 
 //TECNICO
 app.use('/TecnicoGet', TecnicoGet);
