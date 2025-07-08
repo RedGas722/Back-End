@@ -24,19 +24,45 @@ async function getAllServicesInfo(): Promise<any[]> {
    return data;
 }
 
-// agregar información de servicios de un cliente
-async function addToServicesInfo(userId: number, descriptionTech: string, totalPrice: number, state: string, item: string): Promise<boolean> {
-   await getServicesInfo(userId);
+async function addToServicesInfo(
+  userId: number,
+  descriptionTech: string,
+  totalPrice: number,
+  state: string,
+  item: string
+): Promise<boolean> {
 
-   const infoUser = JSON.stringify({
-      descriptionTech,
-      totalPrice,
-      state,
-      item,
-   });
+  const existingRaw = await redisHistorialServices.get(`ServicesInfoCliente:${userId}`);
 
-   await redisHistorialServices.set(`ServicesInfoCliente:${userId}`, infoUser);
-   return true;
+  let servicesInfo: any[] = [];
+
+  if (existingRaw) {
+    try {
+      const parsed = JSON.parse(existingRaw);
+      servicesInfo = Array.isArray(parsed) ? parsed : [parsed];
+    } catch (e) {
+      servicesInfo = [];
+    }
+  }
+
+  const newEntry = {
+    descriptionTech,
+    totalPrice,
+    state,
+    item,
+  };
+
+  console.log("🆕 Nuevo entry a guardar:", newEntry);
+
+  servicesInfo.push(newEntry);
+
+  // Guardar en Redis
+  const result = await redisHistorialServices.set(
+    `ServicesInfoCliente:${userId}`,
+    JSON.stringify(servicesInfo)
+  );
+
+  return true;
 }
 
 // eliminar la información de servicios de un cliente
