@@ -142,6 +142,12 @@ class TecnicoRepository {
         return { logged: false, status: "Invalid email" };
     }
 
+    static async changePassword(id_tecnico: number, contraseña_tecnico: string) {
+        const sql = 'UPDATE tecnico SET contraseña_tecnico = ? WHERE id_tecnico = ?';
+        const values = [contraseña_tecnico, id_tecnico];
+        return db.execute(sql, values);
+    }
+
 }
 
 

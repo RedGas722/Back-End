@@ -128,6 +128,12 @@ class AdministradorRepository {
         }
         return { logged: false, status: "Invalid email" };
     }
+
+    static async changePassword(id_admin: number, contraseña_admin: string) {
+        const sql = 'UPDATE administrador SET contraseña_admin = ? WHERE id_admin = ?';
+        const values = [contraseña_admin, id_admin];
+        return db.execute(sql, values);
+    }
 }
 
 export default AdministradorRepository;

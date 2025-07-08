@@ -142,6 +142,12 @@ class EmpleadoRepository {
         return { logged: false, status: "Invalid email" };
     }
 
+    static async changePassword(id_empleado: number, contraseña_empleado: string) {
+        const sql = 'UPDATE empleado SET contraseña_empleado = ? WHERE id_empleado = ?';
+        const values = [contraseña_empleado, id_empleado];
+        return db.execute(sql, values);
+    }
+
 }
 
 export default EmpleadoRepository;
