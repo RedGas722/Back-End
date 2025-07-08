@@ -54,6 +54,11 @@ import ClienteServicesAdd from "./routes/ClienteServices/ClienteServicesAdd";
 import ClienteServicesGetAll from "./routes/ClienteServices/ClienteServicesGetAll";
 import ClienteServicesDelete from "./routes/ClienteServices/ClienteServicesDelete";
 
+//import cliente servicios
+import ClienteHistorialServicesGet from "./routes/ClienteHistorialServices/ClienteHitorialServicesGet";
+import ClienteHistorialServicesAdd from "./routes/ClienteHistorialServices/ClienteHitorialServicesAdd";
+import ClienteHistorialServicesDelete from "./routes/ClienteHistorialServices/ClienteHitorialServicesDelete";
+
 //import contrato
 import ContratoRegister from './routes/Contrato/ContratoRegister';
 import ContratoUpdate from './routes/Contrato/ContratoUpdate';
@@ -189,6 +194,8 @@ app.use('/CartGet', CartGet);
 app.use('/CartClear', CartClear);
 app.use('/CartTotal', CartTotal);
 app.use('/CartRemove', CartRemove);
+app.use('/CartGetByEmail', CartGetByEmail);
+app.use('/CartClearByEmail', CartClearByEmail);
 app.use('/CartUpdateQuantity', CartUpdateQuantity);
 
 //CATEGORIA
@@ -218,6 +225,11 @@ app.use('/ClienteServicesGet', ClienteServicesGet);
 app.use('/ClienteServicesAdd', ClienteServicesAdd);
 app.use('/ClienteServicesGetAll', ClienteServicesGetAll);
 app.use('/ClienteServicesDelete', ClienteServicesDelete);
+
+//CLIENTE HISORIAL DEL SERVIVICIO
+app.use('/ClienteHistorialServicesAdd', ClienteHistorialServicesAdd);
+app.use('/ClienteHistorialServicesGet', ClienteHistorialServicesGet);
+app.use('/ClienteHistorialServicesDelete', ClienteHistorialServicesDelete);
 
 //CONTRATO
 app.use('/ContratoGet', ContratoGet);
@@ -311,16 +323,6 @@ app.use('/SeEncuentraRegister', SeEncuentraRegister);
 app.use('/SeEncuentraDelete', SeEncuentraDelete);
 app.use('/SeEncuentraGet', SeEncuentraGet);
 app.use('/SeEncuentraUpdate', SeEncuentraUpdate);
-
-//CART
-app.use('/CartAdd', CartAdd);
-app.use('/CartGet', CartGet);
-app.use('/CartUpdateQuantity', CartUpdateQuantity);
-app.use('/CartRemove', CartRemove);
-app.use('/CartClear', CartClear);
-app.use('/CartTotal', CartTotal)
-app.use('/CartGetByEmail', CartGetByEmail);
-app.use('/CartClearByEmail', CartClearByEmail);
 
 //PROFILE
 app.use('/Profile', profile);
