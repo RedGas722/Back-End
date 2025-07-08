@@ -113,15 +113,6 @@ import ProductoUpdateStock from './routes/Producto/ProductoUpdateStock'
 import { iniciarTareaDescuentos } from "./controllers/ProductoControllers/ProductoRDController";
 import ProductoGetAllNames from "./routes/Producto/ProductoGetAllNames";
 
-// import servicio
-import ServicioRegister from './routes/Servicio/ServicioRegister';
-import ServicioGet from './routes/Servicio/ServicioGet';
-import ServicioGetAll from './routes/Servicio/ServicioGetAll';
-import ServicioUpdate from './routes/Servicio/ServicioUpdate';
-import ServicioDelete from './routes/Servicio/ServicioDelete';
-import ServicioGetAllPaginated from './routes/Servicio/ServicioGetAllPaginated';
-import ServicioGetAllNames from './routes/Servicio/ServicioGetAllNames';
-
 //import tecnico
 import TecnicoRegister from './routes/Tecnico/TecnicoRegister'
 import TecnicoLogin from './routes/Tecnico/TecnicoLogin';
@@ -284,15 +275,6 @@ app.use('/ProductoGetAllCategoria', ProductoGetAllCategoria);
 app.use('/ProductoGetAllPaginated', ProductoGetAllPaginated);
 app.use('/ProductoGetById', ProductoGetById);
 app.use('/ProductoGetAllNames', ProductoGetAllNames);
-
-//SERVICIO
-app.use('/ServicioGet', ServicioGet);
-app.use('/ServicioUpdate', ServicioUpdate);
-app.use('/ServicioDelete', ServicioDelete);
-app.use('/ServicioGetAll', ServicioGetAll);
-app.use('/ServicioRegister', ServicioRegister);
-app.use('/ServicioGetAllPaginated', ServicioGetAllPaginated);
-app.use('/ServicioGetAllNames', ServicioGetAllNames);
 
 //TECNICO
 app.use('/TecnicoGet', TecnicoGet);

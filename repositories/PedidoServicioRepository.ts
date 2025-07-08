@@ -5,8 +5,8 @@ class PedidoServicioRepository {
 
     // Insert Pedido
     static async add(pedidoServicio: PedidoServicio) {
-        const sql = 'INSERT INTO pedido_servicio (id_cliente, id_tecnico, estado_pedido) VALUES (?, ?, ?)';
-        const values = [pedidoServicio.id_cliente, pedidoServicio.id_tecnico, pedidoServicio.estado_pedido];
+        const sql = 'INSERT INTO pedido_servicio (id_cliente, id_tecnico, total, descripcion, estado_pedido) VALUES (?, ?, ?, ?, ?)';
+        const values = [pedidoServicio.id_cliente, pedidoServicio.id_tecnico, pedidoServicio.total, pedidoServicio.descripcion, pedidoServicio.estado_pedido];
         return db.execute(sql, values);
     }
 
