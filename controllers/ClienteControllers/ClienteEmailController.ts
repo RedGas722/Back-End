@@ -20,8 +20,7 @@ let ClienteEmail = async (req: Request, res: Response) => {
           id: email.id, 
           name: email.name, 
           email: email.email, 
-          telefono: email.telefono
-        }, process.env.KEY_TOKEN, 15)
+        }, process.env.KEY_TOKEN, 10)
       });
     }
 

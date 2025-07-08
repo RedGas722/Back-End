@@ -47,6 +47,15 @@ class AdministradorServices {
     static async getAllEmails() {
         return await AdministradorRepository.getAllEmails();
     }
+
+    static async AdminEmail(correo_admin: string) {
+        return await AdministradorRepository.email(correo_admin);
+    }
+
+    static async AdminChangePassword(id_admin: number, contraseña_admin: string) {
+        contraseña_admin = await generateHash(contraseña_admin);
+        return await AdministradorRepository.changePassword(id_admin, contraseña_admin);
+    }
 }
 
 export default AdministradorServices;

@@ -53,6 +53,14 @@ class EmpleadoServices {
         return await EmpleadoRepository.getAllEmails();
     }
 
+    static async EmpleadoEmail(correo_empleado: string) {
+        return await EmpleadoRepository.email(correo_empleado);
+    }
+
+    static async EmpleadoChangePassword(id_empleado: number, contraseña_empleado: string) {
+        contraseña_empleado = await generateHash(contraseña_empleado);
+        return await EmpleadoRepository.changePassword(id_empleado, contraseña_empleado);
+    }
 }
 
 export default EmpleadoServices;

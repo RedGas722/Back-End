@@ -10,7 +10,7 @@ class TecnicoServices {
     static async TecnicoRegister(tecnico: Tecnico) {
         try {
             tecnico.contraseña_tecnico = await generateHash(tecnico.contraseña_tecnico);
-            return await TecnicoRepository.add(tecnico); 
+            return await TecnicoRepository.add(tecnico);
         } catch (error) {
             console.error("Error in the register service:", error);
             throw error;
@@ -19,28 +19,28 @@ class TecnicoServices {
 
     // Tecnico Login
     static async login(auth: AuthTecnico) {
-        return await TecnicoRepository.login(auth); 
+        return await TecnicoRepository.login(auth);
     }
 
     // Tecnico Update
-    static async TecnicoUpdate(tecnico: Tecnico, correo_tecnico: string) { 
+    static async TecnicoUpdate(tecnico: Tecnico, correo_tecnico: string) {
         tecnico.contraseña_tecnico = await generateHash(tecnico.contraseña_tecnico);
-        return await TecnicoRepository.update(tecnico, correo_tecnico); 
+        return await TecnicoRepository.update(tecnico, correo_tecnico);
     }
 
     // Tecnico Data Update
-    static async TecnicoDataUpdate(tecnico: Tecnico, correo_tecnico: string) { 
-        return await TecnicoRepository.DataUpdate(tecnico, correo_tecnico); 
+    static async TecnicoDataUpdate(tecnico: Tecnico, correo_tecnico: string) {
+        return await TecnicoRepository.DataUpdate(tecnico, correo_tecnico);
     }
 
     // Tecnico Data Update NI
-    static async TecnicoDataUpdateNI(tecnico: TecnicoNI, correo_tecnico: string) { 
-        return await TecnicoRepository.DataUpdateNI(tecnico, correo_tecnico); 
+    static async TecnicoDataUpdateNI(tecnico: TecnicoNI, correo_tecnico: string) {
+        return await TecnicoRepository.DataUpdateNI(tecnico, correo_tecnico);
     }
 
     // Tecnico Delete
-    static async TecnicoDelete(correo_tecnico : string) {
-        return await TecnicoRepository.delete(correo_tecnico); 
+    static async TecnicoDelete(correo_tecnico: string) {
+        return await TecnicoRepository.delete(correo_tecnico);
     }
 
     static async getbyEmail(correo_tecnico: string) {
@@ -48,7 +48,7 @@ class TecnicoServices {
     }
 
     static async getAllTecnicos() {
-        return await TecnicoRepository.getAll(); 
+        return await TecnicoRepository.getAll();
     }
 
     static async getAllPaginated(page: number, limit: number) {
@@ -57,6 +57,15 @@ class TecnicoServices {
 
     static async getAllEmails() {
         return await TecnicoRepository.getAllEmails();
+    }
+
+    static async TecnicoEmail(correo_tecnico: string) {
+        return await TecnicoRepository.email(correo_tecnico);
+    }
+
+    static async TecnicoChangePassword(id_tecnico: number, contraseña_tecnico: string) {
+        contraseña_tecnico = await generateHash(contraseña_tecnico);
+        return await TecnicoRepository.changePassword(id_tecnico, contraseña_tecnico);
     }
 }
 
