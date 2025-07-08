@@ -60,6 +60,10 @@ class ProductoServices {
     static async getAllNames() {
         return await ProductoRepository.getAllNames();
     }
+
+    static async ProductoGetPartialName(query: string) {
+        return await ProductoRepository.buscarPorNombreParcial(query);
+    }
 }
 
 export default ProductoServices;
