@@ -295,7 +295,6 @@ app.use('/TecnicoDataUpdate', TecnicoDataUpdate);
 app.use('/TecnicoDataUpdateNI', TecnicoDataUpdateNI);
 app.use('/TecnicoGetAllPaginated', TecnicoGetAllPaginated);
 app.use('/TecnicoGetAllEmails', TecnicoGetAllEmails);
-app.use('/TecnicoEmail', TecnicoEmail);
 
 //TECNICO SERVIVICIOS
 app.use('/TecnicoServicesGet', TecnicoServicesGet);
