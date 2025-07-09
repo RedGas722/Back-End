@@ -9,7 +9,6 @@ const WebhookPaypalController = async (req: Request, res: Response) => {
 
     // Usar el evento CHECKOUT.ORDER.APPROVED
     if (eventType === "CHECKOUT.ORDER.APPROVED") {
-      const status = resource?.status;
       const email = resource?.payer?.email_address;
       const referencia =
         resource?.purchase_units?.[0]?.custom_id || `REF-${Date.now()}`;
