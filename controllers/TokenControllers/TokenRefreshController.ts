@@ -9,7 +9,8 @@ export const renewTokenController = (req: Request, res: Response) => {
             name: req.body.name,
             email: req.body.email,
             telefono: req.body.telefono,
-            direccion: req.body.direccion
+            direccion: req.body.direccion,
+            tipo_usuario: req.body.tipo_usuario
         };
 
         const recordarme = req.body.recordarme === true;
