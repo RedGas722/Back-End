@@ -59,14 +59,6 @@ class TecnicoServices {
         return await TecnicoRepository.getAllEmails();
     }
 
-    static async TecnicoEmail(correo_tecnico: string) {
-        return await TecnicoRepository.email(correo_tecnico);
-    }
-
-    static async TecnicoChangePassword(id_tecnico: number, contraseña_tecnico: string) {
-        contraseña_tecnico = await generateHash(contraseña_tecnico);
-        return await TecnicoRepository.changePassword(id_tecnico, contraseña_tecnico);
-    }
 }
 
 

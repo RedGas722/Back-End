@@ -81,8 +81,6 @@ import EmpleadoGet from './routes/Empleado/EmpleadoGet';
 import EmpleadoGetAll from './routes/Empleado/EmpleadoGetAll';
 import EmpleadoGetAllPaginated from './routes/Empleado/EmpleadoGetAllPaginated';
 import EmpleadoGetAllEmails from './routes/Empleado/EmpleadoGetAllEmails';
-import EmpleadoEmail from './routes/Empleado/EmpleadoEmail';
-import EmpleadoChangePassword from './routes/Empleado/EmpleadoChangePassword';
 
 //import factura
 import FacturaRegister from './routes/Factura/FacturaRegister';
@@ -130,8 +128,6 @@ import TecnicoGet from './routes/Tecnico/TecnicoGet';
 import TecnicoGetAll from './routes/Tecnico/TecnicoGetAll';
 import TecnicoGetAllPaginated from './routes/Tecnico/TecnicoGetAllPaginated';
 import TecnicoGetAllEmails from './routes/Tecnico/TecnicoGetAllEmails';
-import TecnicoEmail from './routes/Tecnico/TecnicoEmail';
-import TecnicoChangePassword from './routes/Tecnico/TecnicoChangePassword';
 
 //import tecnico servicios
 import TecnicoServicesAdd from "./routes/TecnicoServices/TecnicoServicesAdd";
@@ -253,8 +249,6 @@ app.use('/EmpleadoRegister', EmpleadoRegister);
 app.use('/EmpleadoDataUpdate', EmpleadoDataUpdate);
 app.use('/EmpleadoGetAllPaginated', EmpleadoGetAllPaginated);
 app.use('/EmpleadoGetAllEmails', EmpleadoGetAllEmails);
-app.use('/EmpleadoEmail', EmpleadoEmail);
-app.use('/EmpleadoChangePassword', EmpleadoChangePassword);
 
 //FACTURA
 app.use('/FacturaGet', FacturaGet);
@@ -302,7 +296,6 @@ app.use('/TecnicoDataUpdateNI', TecnicoDataUpdateNI);
 app.use('/TecnicoGetAllPaginated', TecnicoGetAllPaginated);
 app.use('/TecnicoGetAllEmails', TecnicoGetAllEmails);
 app.use('/TecnicoEmail', TecnicoEmail);
-app.use('/TecnicoChangePassword', TecnicoChangePassword);
 
 //TECNICO SERVIVICIOS
 app.use('/TecnicoServicesGet', TecnicoServicesGet);

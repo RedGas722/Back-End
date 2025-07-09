@@ -127,29 +127,6 @@ class TecnicoRepository {
         return { logged: false, status: "Invalid username or password" };
     }
 
-    static async email(correo_tecnico: string) {
-        const sql = 'SELECT * FROM tecnico WHERE correo_tecnico=?';
-        const values = [correo_tecnico];
-        const result: any = await db.execute(sql, values);
-        if (result[0].length > 0) {
-            return {
-                logged: true,
-                status: "Successful authentication",
-                id: result[0][0].id_tecnico,
-                name: result[0][0].nombre_tecnico,
-                email: result[0][0].correo_tecnico,
-                tipo_usuario: result[0][0].tipo_usuario
-            };
-        }
-        return { logged: false, status: "Invalid email" };
-    }
-
-    static async changePassword(id_tecnico: number, contraseña_tecnico: string) {
-        const sql = 'UPDATE tecnico SET contraseña_tecnico = ? WHERE id_tecnico = ?';
-        const values = [contraseña_tecnico, id_tecnico];
-        return db.execute(sql, values);
-    }
-
 }
 
 

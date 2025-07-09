@@ -127,29 +127,6 @@ class EmpleadoRepository {
         return rows;
     }
 
-    static async email(correo_empleado: string) {
-        const sql = 'SELECT * FROM empleado WHERE correo_empleado=?';
-        const values = [correo_empleado];
-        const result: any = await db.execute(sql, values);
-        if (result[0].length > 0) {
-            return {
-                logged: true,
-                status: "Successful authentication",
-                id: result[0][0].id_empleado,
-                name: result[0][0].nombre_empleado,
-                email: result[0][0].correo_empleado,
-                tipo_usuario: result[0][0].tipo_usuario
-            };
-        }
-        return { logged: false, status: "Invalid email" };
-    }
-
-    static async changePassword(id_empleado: number, contraseña_empleado: string) {
-        const sql = 'UPDATE empleado SET contraseña_empleado = ? WHERE id_empleado = ?';
-        const values = [contraseña_empleado, id_empleado];
-        return db.execute(sql, values);
-    }
-
 }
 
 export default EmpleadoRepository;
