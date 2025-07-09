@@ -20,6 +20,7 @@ let EmpleadoLogin = async (req: Request, res: Response) => {
           email: loginEmpleado.email,
           telefono: loginEmpleado.telefono,
           direccion: loginEmpleado.direccion,
+          tipo_usuario: loginEmpleado.tipo_usuario
         }, process.env.KEY_TOKEN)
       });
     }

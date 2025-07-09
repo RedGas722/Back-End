@@ -99,6 +99,7 @@ class AdministradorRepository {
                     name: result[0][0].nombre_admin,
                     email: result[0][0].correo_admin,
                     telefono: result[0][0].telefono_admin,
+                    tipo_usuario: result[0][0].tipo_usuario
                 };
             }
             return { logged: false, status: "Invalid username or password" };
@@ -123,7 +124,8 @@ class AdministradorRepository {
                 status: "Successful authentication",
                 id: result[0][0].id_admin,
                 name: result[0][0].nombre_admin,
-                email: result[0][0].correo_admin
+                email: result[0][0].correo_admin,
+                tipo_usuario: result[0][0].tipo_usuario
             };
         }
         return { logged: false, status: "Invalid email" };

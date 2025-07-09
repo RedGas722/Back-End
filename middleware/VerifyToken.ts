@@ -5,7 +5,7 @@ dotenv.config();
 
 
 interface JwtPayload {
-    data: {id: number, cc:number, name: string, email: string, telefono: string, direccion: string},
+    data: {id: number, cc:number, name: string, email: string, telefono: string, direccion: string, tipo_usuario: string},
     exp: number,
     iat: number
 }
@@ -28,6 +28,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
             req.body.email = decoded.data.email;
             req.body.telefono = decoded.data.telefono;
             req.body.direccion = decoded.data.direccion;
+            req.body.tipo_usuario = decoded.data.tipo_usuario;
             return next()
         } catch (error) {
             return res.status(403).json(

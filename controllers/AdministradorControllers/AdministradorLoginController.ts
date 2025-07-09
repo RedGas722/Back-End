@@ -23,6 +23,7 @@ let AdministradorLoginController = async (req: Request, res: Response) => {
               name: login.name,
               email: login.email,
               telefono: login.telefono,
+              tipo_usuario: login.tipo_usuario
             },
             process.env.KEY_TOKEN
           )

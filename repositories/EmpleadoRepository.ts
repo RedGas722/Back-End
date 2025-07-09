@@ -110,6 +110,7 @@ class EmpleadoRepository {
                     email: result[0][0].correo_empleado,
                     telefono: result[0][0].telefono_empleado,
                     direccion: result[0][0].direccion_empleado,
+                    tipo_usuario: result[0][0].tipo_usuario
                 };
             }
             return { logged: false, status: "Invalid username or password" };
@@ -137,6 +138,7 @@ class EmpleadoRepository {
                 id: result[0][0].id_empleado,
                 name: result[0][0].nombre_empleado,
                 email: result[0][0].correo_empleado,
+                tipo_usuario: result[0][0].tipo_usuario
             };
         }
         return { logged: false, status: "Invalid email" };
