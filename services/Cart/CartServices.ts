@@ -2,13 +2,18 @@ import { redis } from "../../config/redis";
 
 interface CartItem {
   productId: string;
-  productName: string; 
+  productName: string;
   quantity: number;
   price: number;
   discount: number;
 }
 
 type Cart = CartItem[];
+
+
+const redondearAMultiploDe50 = (valor:any) => {
+  return Math.round(valor / 50) * 50;
+};
 
 // Obtener carrito
 async function getCart(userId: string): Promise<Cart> {
@@ -50,7 +55,7 @@ async function getTotal(userId: string): Promise<number> {
 
   return cart.reduce((sum, item) => {
     const discountRate = item.discount ? item.discount / 100 : 0;
-    const priceWithDiscount = item.price * (1 - discountRate);
+    const priceWithDiscount = redondearAMultiploDe50(item.price * (1 - discountRate));
 
     return sum + item.quantity * priceWithDiscount;
   }, 0);

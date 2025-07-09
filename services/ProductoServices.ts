@@ -28,7 +28,7 @@ class ProductoServices {
     }
 
     // Update ProductoStock
-    static async ProductoUpdateStock(stock:number, id_producto: number) {
+    static async ProductoUpdateStock(stock: number, id_producto: number) {
         return await ProductoRepository.updateStock(stock, id_producto);
     }
 
@@ -43,8 +43,8 @@ class ProductoServices {
         return await ProductoRepository.getAll();
     }
 
-    static async getAllProductoCategoria(nombre_categoria: string) {
-        return await ProductoRepository.getAllProductoCategoria(nombre_categoria);
+    static async getAllProductoCategoria(nombre_categoria: string, page: number, limit: number) {
+        return await ProductoRepository.getAllProductoCategoria(nombre_categoria, page, limit);
     }
 
     static async getAllPaginated(page: number, limit: number) {

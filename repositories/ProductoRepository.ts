@@ -52,29 +52,79 @@ class ProductoRepository {
     }
 
 
-    static async getAllProductoCategoria(nombre_categoria: string) {
-        let sql = `
-        SELECT p.* FROM producto p
+    static async getAllProductoCategoria(nombre_categoria: string, page: number = 1, limit: number = 10) {
+        const safePage = parseInt(String(page), 10) || 1;
+        const safeLimit = parseInt(String(limit), 10) || 10;
+        const offset = (safePage - 1) * safeLimit;
+
+        let baseSql = `
+        FROM producto p
         JOIN se_encuentra se ON p.id_producto = se.id_producto
         JOIN categoria c ON se.id_categoria = c.id_categoria
         WHERE c.nombre_categoria = ?
     `;
 
-        const values = [nombre_categoria];
-
+        // Excluir productos de categoría "Ofertas" si la categoría buscada no es "Ofertas"
         if (nombre_categoria !== 'Ofertas') {
-            sql += `
-        AND p.id_producto NOT IN (
-            SELECT se2.id_producto
-            FROM se_encuentra se2
-            JOIN categoria c2 ON se2.id_categoria = c2.id_categoria
-            WHERE c2.nombre_categoria = 'Ofertas'
-        )
+            baseSql += `
+            AND p.id_producto NOT IN (
+                SELECT se2.id_producto
+                FROM se_encuentra se2
+                JOIN categoria c2 ON se2.id_categoria = c2.id_categoria
+                WHERE c2.nombre_categoria = 'Ofertas'
+            )
         `;
         }
-        const [rows] = await db.execute(sql, values);
-        const productos = rows as any[];
-        return this.convertirImagenBase64(productos);
+
+        // Consulta de productos paginada
+        const dataSql = `
+        SELECT 
+            p.id_producto,
+            p.nombre_producto,
+            p.descripcion_producto,
+            p.precio_producto,
+            p.stock,
+            p.imagen,
+            p.descuento,
+            p.fecha_descuento,
+            GROUP_CONCAT(c.nombre_categoria) AS categorias
+        ${baseSql}
+        GROUP BY p.id_producto
+        ORDER BY p.id_producto DESC
+        LIMIT ? OFFSET ?
+    `;
+
+        // Consulta de total de productos para paginador
+        const countSql = `
+        SELECT COUNT(DISTINCT p.id_producto) as total
+        ${baseSql}
+    `;
+
+        const values = [nombre_categoria];
+        try {
+            const [dataRows]: any = await db.query(dataSql, [...values, safeLimit, offset]);
+            const [countRows]: any = await db.query(countSql, values);
+
+            const productos = (dataRows as any[]).map(p => ({
+                ...p,
+                categorias: p.categorias ? p.categorias.split(',') : [],
+            }));
+
+            const productosConImagen = this.convertirImagenBase64(productos);
+            const totalItems = countRows[0].total;
+            const totalPages = Math.ceil(totalItems / safeLimit);
+
+            return {
+                currentPage: safePage,
+                totalPages,
+                totalItems,
+                itemsPerPage: safeLimit,
+                data: productosConImagen,
+            };
+        } catch (error) {
+            console.error("Error al obtener productos por categoría con paginación:", error);
+            throw error;
+        }
     }
 
     static async getAllPaginated(page: number = 1, limit: number = 10) {
