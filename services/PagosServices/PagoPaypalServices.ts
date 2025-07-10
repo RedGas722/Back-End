@@ -3,9 +3,17 @@ import getAccessToken from "../../Helpers/generateTokenPaypal";
 interface PagoPaypalParams {
   cantidad: string;
   referencia: string;
-  email: string; // solo para mostrar en PayPal
-  id_cliente: number; // obligatorio ahora
+  email: string;
+  id_cliente: number;
   id_producto?: number | null;
+}
+
+interface CarritoItem {
+  productId: number;
+  productName: string;
+  quantity: number;
+  price: number;
+  discount: number;
 }
 
 const PagoPaypal = async ({ cantidad, referencia, email, id_cliente, id_producto }: PagoPaypalParams) => {
@@ -19,10 +27,10 @@ const PagoPaypal = async ({ cantidad, referencia, email, id_cliente, id_producto
         currency_code: "USD",
         value: cantidad
       },
-      custom_id: `${id_cliente}-${id_producto ?? 'null'}` // ✅ Aquí está el custom_id
+      custom_id: `${id_cliente}-${id_producto ?? 'null'}`
     }],
     payer: {
-      email_address: email // este es solo decorativo para PayPal
+      email_address: email
     },
     application_context: {
       return_url: "https://redgas-one.vercel.app/Shopping/ConfirmacionPayPal",
@@ -81,8 +89,6 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
   // 1. Obtener empleado virtual
   const resEmpleado = await fetch("https://redgas.onrender.com/EmpleadoGet?correo_empleado=virtual@gmail.com");
   const dataEmpleado = await resEmpleado.json();
-  if (!dataEmpleado?.data?.id_empleado) throw new Error("Empleado virtual no encontrado");
-
   const id_empleado = dataEmpleado.data.id_empleado;
 
   // 2. Registrar factura
@@ -100,16 +106,15 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
   });
 
   const facturaData = await facturaRes.json();
-  if (!facturaData?.data?.id_factura) throw new Error("No se pudo generar la factura");
-
   const id_factura = facturaData.data.id_factura;
 
+  // 3. Lógica individual o carrito completo
+  const resCart = await fetch(`https://redgas.onrender.com/CartGetByIdCliente?id_cliente=${id_cliente}`);
+  const cartData: CarritoItem[] = await resCart.json();
+
   if (id_producto) {
-    // 3A. Registrar solo un producto individual
-    const productoRes = await fetch(`https://redgas.onrender.com/ProductoGetById?id_producto=${id_producto}`);
-    const productoData = await productoRes.json();
-    const producto = productoData?.data;
-    if (!producto) throw new Error("Producto no encontrado");
+    const producto = cartData.find(item => item.productId === id_producto);
+    const cantidad_producto = producto?.quantity ?? 1;
 
     await fetch("https://redgas.onrender.com/PedidoProductoRegister", {
       method: "POST",
@@ -118,7 +123,7 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
         id_factura,
         id_producto,
         estado_pedido: "aprobado",
-        cantidad_producto: 1
+        cantidad_producto
       }),
     });
 
@@ -127,22 +132,22 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id_producto,
-        stock: 1
+        stock: cantidad_producto
       }),
     });
 
-  } else {
-    // 3B. Registrar todo el carrito del cliente
-    const resCart = await fetch(`https://redgas.onrender.com/CartGetByIdCliente?id_cliente=${id_cliente}`, {
-      method: "GET",
+    // Limpiar solo ese producto del carrito
+    await fetch("https://redgas.onrender.com/CartRemove", {
+      method: "DELETE",
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id_cliente,
+        productId: id_producto
+      })
     });
-    const cartData = await resCart.json();
 
-    if (!Array.isArray(cartData) || cartData.length === 0) {
-      throw new Error("El carrito está vacío");
-    }
-
+  } else {
+    // Registrar todos los productos del carrito
     for (const item of cartData) {
       await fetch("https://redgas.onrender.com/PedidoProductoRegister", {
         method: "POST",
@@ -151,7 +156,7 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
           id_factura,
           id_producto: item.productId,
           estado_pedido: "aprobado",
-          cantidad_producto: item.quantity,
+          cantidad_producto: item.quantity
         }),
       });
 
@@ -160,32 +165,19 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id_producto: item.productId,
-          stock: item.quantity,
+          stock: item.quantity
         }),
       });
     }
 
-    // 4. Limpiar carrito
-    if (id_producto) {
-      // Si fue compra individual, eliminar solo ese producto del carrito
-      await fetch("https://redgas.onrender.com/CartRemove", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: id_cliente,
-          productId: id_producto
-        })
-      });
-    } else {
-      // Si fue compra de todo el carrito, limpiarlo completo
-      await fetch("https://redgas.onrender.com/CartClear", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: id_cliente
-        })
-      });
-    }
+    // Limpiar carrito completo
+    await fetch("https://redgas.onrender.com/CartClear", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id_cliente
+      })
+    });
   }
 };
 
