@@ -125,7 +125,7 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
       body: JSON.stringify({
         id_factura,
         id_producto,
-        estado_pedido: "aprobado",
+        estado_pedido: `aprobado//${producto?.discount ?? 0}`,
         cantidad_producto
       }),
     });
@@ -158,7 +158,7 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
         body: JSON.stringify({
           id_factura,
           id_producto: item.productId,
-          estado_pedido: "aprobado",
+          estado_pedido: `aprobado//${item?.discount ?? 0}`,
           cantidad_producto: item.quantity
         }),
       });

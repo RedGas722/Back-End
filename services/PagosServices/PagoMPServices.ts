@@ -116,7 +116,7 @@ const ProcesarPagoYGenerarFactura = async (payment_id: string) => {
       body: JSON.stringify({
         id_factura,
         id_producto,
-        estado_pedido: "aprobado",
+        estado_pedido: `aprobado//${productoEnCarrito?.discount ?? 0}`,
         cantidad_producto: cantidad,
       }),
     });
@@ -147,7 +147,7 @@ const ProcesarPagoYGenerarFactura = async (payment_id: string) => {
         body: JSON.stringify({
           id_factura,
           id_producto: item.productId,
-          estado_pedido: "aprobado",
+          estado_pedido: `aprobado//${item?.discount ?? 0}`,
           cantidad_producto: item.quantity,
         }),
       });
