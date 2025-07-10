@@ -25,6 +25,7 @@ import CartTotal from './routes/Cart/CartTotal';
 import CartUpdateQuantity from './routes/Cart/CartUpdateQuantity';
 import CartGetByEmail from './routes/Cart/CartGetByEmail';
 import CartClearByEmail from './routes/Cart/CartClearByEmail';
+import CartGetNoToken from './routes/Cart/CartGetNoToken';
 
 //import categoria
 import CategoriaRegister from './routes/Categoria/CategoriaRegister';
@@ -193,6 +194,7 @@ app.use('/CartRemove', CartRemove);
 app.use('/CartGetByEmail', CartGetByEmail);
 app.use('/CartClearByEmail', CartClearByEmail);
 app.use('/CartUpdateQuantity', CartUpdateQuantity);
+app.use('/CartGetNoToken', CartGetNoToken);
 
 //CATEGORIA
 app.use('/CategoriaGet', CategoriaGet);

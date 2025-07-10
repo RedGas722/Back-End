@@ -109,12 +109,9 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
   const id_factura = facturaData.data.id_factura;
 
   // 3. Lógica individual o carrito completo
-  const resCart = await fetch("https://redgas.onrender.com/CartGet", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ id: id_cliente })
+  const resCart = await fetch(`https://redgas.onrender.com/CartGetNoToken?id=${id_cliente}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
   });
   const cartData: CarritoItem[] = await resCart.json();
 
