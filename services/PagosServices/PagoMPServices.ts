@@ -142,10 +142,26 @@ const ProcesarPagoYGenerarFactura = async (payment_id: string) => {
     }
 
     // Limpiar carrito
-    await fetch(`https://redgas.onrender.com/CartClearByIdCliente?id_cliente=${id_cliente}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
+    if (id_producto) {
+      // Si fue compra individual, eliminar solo ese producto del carrito
+      await fetch("https://redgas.onrender.com/CartRemove", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: id_cliente,
+          productId: id_producto
+        })
+      });
+    } else {
+      // Si fue compra de todo el carrito, limpiarlo completo
+      await fetch("https://redgas.onrender.com/CartClear", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: id_cliente
+        })
+      });
+    }
   }
 };
 
