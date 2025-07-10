@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import  cartServices  from "../../services/Cart/CartServices";
+import cartServices from "../../services/Cart/CartServices";
 
 export const CartGetController = async (req: Request, res: Response) => {
   try {
-    const clienteId = req.body.id;
+    const clienteId = (req.body.id || req.query.id);
+
     if (!clienteId) {
       return res.status(401).json({ message: "Cliente no autenticado" });
     }
