@@ -3,13 +3,23 @@ import PagosService from "../../services/PagosServices/PagoMPServices";
 
 const PagoMercadoPago = async (req: Request, res: Response) => {
   try {
-    const { cantidad, referencia } = req.body;
+    const {
+      cantidad,
+      referencia,
+      email,
+      name,
+      telefono,
+      direccion,
+      id_producto = null
+    } = req.body;
+    
+    const id_cliente = req.body.id; // Obtenemos el id del cliente desde el token
 
-    // El email y otros datos vienen del token (gracias a verifyToken)
-    const { email, name, telefono, direccion } = req.body;
-
-    if (!cantidad || !referencia || !email) {
-      return res.status(400).json({ error: "Faltan datos obligatorios (cantidad, referencia, email)" });
+    // Validaciones básicas
+    if (!cantidad || !referencia || !email || !id_cliente) {
+      return res.status(400).json({
+        error: "Faltan datos obligatorios (cantidad, referencia, email, id_cliente)"
+      });
     }
 
     const resultadoPago = await PagosService.PagoMercadoPago({
@@ -18,7 +28,9 @@ const PagoMercadoPago = async (req: Request, res: Response) => {
       email,
       nombre: name,
       telefono,
-      direccion
+      direccion,
+      id_cliente,
+      id_producto
     });
 
     return res.status(201).json({
@@ -26,6 +38,7 @@ const PagoMercadoPago = async (req: Request, res: Response) => {
       init_point: resultadoPago.init_point,
       data: resultadoPago,
     });
+
   } catch (error: any) {
     console.error("Error al procesar pago con MercadoPago:", error);
     return res.status(500).json({

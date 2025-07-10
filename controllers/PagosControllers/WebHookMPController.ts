@@ -5,7 +5,7 @@ const WebhookMPController = async (req: Request, res: Response) => {
   try {
     const { type, data } = req.body;
 
-    if (type === "payment" && data && data.id) {
+    if (type === "payment" && data?.id) {
       const payment_id = data.id;
 
       await PagosService.ProcesarPagoYGenerarFactura(payment_id);
