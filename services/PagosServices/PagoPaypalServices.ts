@@ -140,7 +140,7 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
     });
 
     // Limpiar solo ese producto del carrito
-    await fetch("https://redgas.onrender.com/CartRemove", {
+    await fetch("https://redgas.onrender.com/CartRemoveNoToken", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -174,12 +174,9 @@ const ProcesarPagoYGenerarFacturaPayPal = async ({
     }
 
     // Limpiar carrito completo
-    await fetch("https://redgas.onrender.com/CartClear", {
+    await fetch(`https://redgas.onrender.com/CartClearNoToken?id=${id_cliente}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: id_cliente
-      })
     });
   }
 };

@@ -3,7 +3,7 @@ import cartServices from "../../services/Cart/CartServices";
 
 export const CartClearController = async (req: Request, res: Response) => {
   try {
-    const clienteId = req.body.id;  
+    const clienteId = (req.body.id || req.query.id);  
     if (!clienteId) {
       return res.status(401).json({ message: "Cliente no autenticado" });
     }
